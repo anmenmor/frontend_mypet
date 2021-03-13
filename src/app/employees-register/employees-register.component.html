@@ -1,0 +1,11 @@
+<div class="register">
+    <form class="custom-form" method="post">
+        <h1>Register</h1>
+        <input type="text" [(ngModel)]="name" name="name" placeholder="name" required="required" /><br>
+        <input type="text" [(ngModel)]="surname" name="surname" placeholder="surname" required="required" /><br>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required="required" /><br>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required="required" /><br>
+        <input type="text" [(ngModel)]="work_shift" name="work_shift" placeholder="Work shift" required="required" /><br>
+        <button type="submit" (click)="register()">Register</button>
+    </form>
+</div>
