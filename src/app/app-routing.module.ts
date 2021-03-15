@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeesLoginComponent } from './employees-login/employees-login.component';
-import { EmployeesRegisterComponent } from  './employees-register/employees-register.component';
+import { EmployeesLoginComponent } from './components/employees/employees-login/employees-login.component';
+import { EmployeesRegisterComponent } from  './components/employees/employees-register/employees-register.component';
 
 
 const routes: Routes = [

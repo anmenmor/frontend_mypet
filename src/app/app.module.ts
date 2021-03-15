@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeesLoginComponent } from './employees-login/employees-login.component';
-import { EmployeesRegisterComponent } from './employees-register/employees-register.component';
+import { EmployeesLoginComponent } from './components/employees/employees-login/employees-login.component';
+import { EmployeesRegisterComponent } from './components/employees/employees-register/employees-register.component';
 
 @NgModule({
   declarations: [
