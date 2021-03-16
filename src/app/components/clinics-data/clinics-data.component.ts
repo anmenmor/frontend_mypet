@@ -9,6 +9,7 @@ import { ClinicsDataService } from "./clinics-data.service";
 export class ClinicsDataComponent {
   clinics = [] as any;
   clinic = [] as any;
+  clinicId = 0;
 
   constructor(private clinicsDataService: ClinicsDataService) {}
 
