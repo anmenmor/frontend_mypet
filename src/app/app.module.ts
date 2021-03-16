@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,9 +24,18 @@ import { ClinicsDataService } from './components/clinics-data/clinics-data.servi
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    HttpClientModule,
+  
   ],
-  providers: [ClinicsDataService],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+    },
+    ClinicsDataService
+],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
