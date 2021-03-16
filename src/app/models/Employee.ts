@@ -5,5 +5,6 @@ export class Employee {
     password: String;
     admin: Boolean;
     work_shift: String;
+    speciality_id: Number;
   }
   

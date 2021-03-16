@@ -14,17 +14,17 @@ export class AuthEmployeeService {
 
   // User registration
   register(employee: Employee): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/auth/registerEmployees', employee);
+    return this.http.post('http://127.0.0.1:8000/api/registerEmployee', employee);
   }
 
   // Login
   signin(employee: Employee): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/auth/loginEmployees', employee);
+    return this.http.post<any>('http://127.0.0.1:8000/api/loginEmployee', employee);
   }
 
   // Access user profile
   profileEmployee(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/auth/employee-profile');
+    return this.http.get('http://127.0.0.1:8000/api/employee');
   }
 
 }

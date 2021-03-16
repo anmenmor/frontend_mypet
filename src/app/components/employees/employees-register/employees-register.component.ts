@@ -23,7 +23,8 @@ export class EmployeesRegisterComponent implements OnInit {
         email: [''],
         password: [''],
         admin: [''],
-        work_shift: ['']
+        work_shift: [''],
+        speciality_id: ['']
       })
     }
   
