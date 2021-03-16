@@ -1,0 +1,24 @@
+<h1>Componente info clinicas test</h1>
+
+<button (click)="listAllClinics()">Lista todas las clinicas</button>
+<br /><br />
+<p>Introduce el ID de la clinica:</p>
+<input type="number" [(ngModel)]="clinicId" />
+<br /><br />
+<button (click)="listSingleClinic(clinicId)">Listar clinica:</button>
+
+<ul *ngFor="let item of clinics">
+  <li>Nombre: {{ item.name }}</li>
+  <li>Ciudad: {{ item.city }}</li>
+  <li>Dirección: {{ item.address }}</li>
+  <li>Teléfono: {{ item.phone }}</li>
+  <li>Email: {{ item.email }}</li>
+</ul>
+
+<ul>
+  <li>Nombre: {{ clinic.name }}</li>
+  <li>Ciudad: {{ clinic.city }}</li>
+  <li>Dirección: {{ clinic.address }}</li>
+  <li>Teléfono: {{ clinic.phone }}</li>
+  <li>Email: {{ clinic.email }}</li>
+</ul>
