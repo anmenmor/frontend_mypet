@@ -14,6 +14,7 @@ export class ClinicsDataComponent {
   constructor(private clinicsDataService: ClinicsDataService) {}
 
   listAllClinics() {
+    this.clearPreviousValues();
     this.clinicsDataService.listAllClinics().subscribe((data) => {
       for (const d of data as any) {
         this.clinics.push({
@@ -28,6 +29,7 @@ export class ClinicsDataComponent {
   }
 
   listSingleClinic(clinicId: number) {
+    this.clearPreviousValues();
     this.clinicsDataService.listSingleClinic(clinicId).subscribe(
       (data) =>
         (this.clinic = {
@@ -38,5 +40,10 @@ export class ClinicsDataComponent {
           email: (data as any).email,
         })
     );
+  }
+
+  clearPreviousValues(){
+    this.clinic = [];
+    this.clinics = [];
   }
 }
