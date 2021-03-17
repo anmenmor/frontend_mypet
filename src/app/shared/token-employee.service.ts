@@ -13,7 +13,7 @@ export class TokenEmployeeService {
 
   constructor() { }
 
-  handleData(token){
+  handleData(token: any){
     localStorage.setItem('auth_token', token);
   }
 
@@ -29,14 +29,14 @@ export class TokenEmployeeService {
        const payload = this.payload(token);
        if(payload){
          return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
-       }
+       }else return false;
      } else {
        console.log("if else");
         return false;
      }
   }
 
-  payload(token) {
+  payload(token: any) {
     const jwtPayload = token.split('.')[1];
     return JSON.parse(atob(jwtPayload));
   }

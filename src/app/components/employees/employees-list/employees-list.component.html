@@ -1,0 +1,36 @@
+<h1>Lista de empleados</h1>
+<button (click)="listAllEmployees()">Mostrar empleados</button>
+<br /><br />
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Complete name</th>
+        <th>Email</th>
+        <th>Work shift</th>
+        <th>Speciality id</th>
+    </tr>
+    <tr *ngFor="let employee of employees">
+        <td>{{employee.id}}</td>
+        <td>{{employee.name}} {{employee.surname}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.work_shif}}</td>
+        <td> {{employee.speciality_id}}</td>
+    </tr>
+</table>
+<!-- <ul *ngFor="let employee of employees">
+    <li>
+        Id: {{employee.id}}
+    </li>
+    <li>
+       Nombre y apellidos: {{employee.name}} {{employee.surname}}
+    </li>
+    <li>
+       Email: {{employee.email}}
+    </li>
+    <li>
+        Work shift: {{employee.work_shif}}
+    </li>
+    <li>
+        Speciality id: {{employee.speciality_id}}
+    </li>
+</ul> -->

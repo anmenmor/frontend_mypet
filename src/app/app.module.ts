@@ -12,13 +12,15 @@ import { EmployeesLoginComponent } from './components/employees/employees-login/
 import { EmployeesRegisterComponent } from './components/employees/employees-register/employees-register.component';
 import { ClinicsDataComponent } from './components/clinics-data/clinics-data.component';
 import { ClinicsDataService } from './components/clinics-data/clinics-data.service';
+import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesLoginComponent,
     EmployeesRegisterComponent,
-    ClinicsDataComponent
+    ClinicsDataComponent,
+    EmployeesListComponent
   ],
   imports: [
     BrowserModule,
