@@ -46,7 +46,7 @@ export class EmployeesLoginComponent implements OnInit {
 
   // Handle response
   responseHandler(data){
-    this.tokenEmployee.handleData(data.access_token);
+    this.tokenEmployee.handleData(data.token);
   }
 
 }
