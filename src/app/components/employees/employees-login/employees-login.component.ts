@@ -39,13 +39,13 @@ export class EmployeesLoginComponent implements OnInit {
         },() => {
           this.authState.setAuthState(true);
           this.loginForm.reset()
-          this.router.navigate(['profile']);
+          this.router.navigate(['employees']);
         }
       );
   }
 
   // Handle response
-  responseHandler(data){
+  responseHandler(data: any){
     this.tokenEmployee.handleData(data.token);
   }
 
