@@ -25,12 +25,13 @@ export class TokenEmployeeService {
   isValidToken(){
      const token = this.getToken();
 
-     if(token){
+     if(token !== 'undefined'){
        const payload = this.payload(token);
        if(payload){
          return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
        }
      } else {
+       console.log("if else");
         return false;
      }
   }
