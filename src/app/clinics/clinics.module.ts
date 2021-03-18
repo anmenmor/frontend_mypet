@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClinicsUpdateComponent } from './components/clinics-update/clinics-update.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ClinicsUpdateComponent],
   imports: [
     CommonModule
   ]
