@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthEmployeeService } from '../../../shared/auth-employee.service';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { of } from 'rxjs';
 
 @Component({
@@ -11,23 +11,27 @@ import { of } from 'rxjs';
 })
 export class EmployeesRegisterComponent implements OnInit {
     registerForm: FormGroup;
-    errors = null;
+    errors = [];
     workShifts: {id: string, name: string}[]=[];
     specialities: {id: string, name: string}[]=[];
+    submitted = false;
   
     constructor(
       public router: Router,
       public fb: FormBuilder,
       public authEmployeeService: AuthEmployeeService
     ) {
+     
+    }
+    ngOnInit() {
       this.registerForm = this.fb.group({
-        name: [''],
-        surname: [''],
-        email: [''],
-        password: [''],
-        admin: [''],
-        workShifts: [''],
-        specialities: ['']
+        name: ['', Validators.required],
+        surname: ['', Validators.required],
+        email: ['', Validators.email],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        admin: ['', Validators.required],
+        workShifts: ['', Validators.required],
+        specialities: ['', Validators.required]
       });
       of(this.getWorkShift()).subscribe(workShifts => {
         this.workShifts = workShifts;
@@ -37,20 +41,20 @@ export class EmployeesRegisterComponent implements OnInit {
         this.specialities = specialities;
         this.registerForm.controls.specialities.patchValue(this.specialities[0].id);
       });
-    }
- 
-  
-    ngOnInit() { }
+     }
   
     onSubmit() {
+      this.submitted = true;
       this.authEmployeeService.register(this.registerForm.value).subscribe(
         result => {
-          console.log(result)
+          console.log(result);
         },
         error => {
+          console.log(error);
           this.errors = error.error;
         },
         () => {
+
           this.registerForm.reset()
           this.router.navigate(['loginEmployee']);
         }
@@ -71,6 +75,14 @@ export class EmployeesRegisterComponent implements OnInit {
         { id: '197', name: 'cirugia' },
       ];
     }
+
+    onReset(){
+      this.submitted =false;
+      this.registerForm.reset();
+    }
+    // handleError(error){
+    //   this.error = error.error.errors;
+    // }
   
   }
 

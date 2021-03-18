@@ -14,6 +14,7 @@ import { ClinicsListComponent } from './clinics/components/clinics-list/clinics-
 import { ClinicsUpdateComponent } from './clinics/components/clinics-update/clinics-update.component';
 import { ClinicsDataService } from './clinics/services/clinics-data.service';
 import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
+import { NavbarClinicsComponent } from './components/navbar-clinics/navbar-clinics.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EmployeesListComponent } from './components/employees/employees-list/em
     EmployeesRegisterComponent,
     ClinicsListComponent,
     ClinicsUpdateComponent,
-    EmployeesListComponent
+    EmployeesListComponent,
+    NavbarClinicsComponent
   ],
   imports: [
     BrowserModule,

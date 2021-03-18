@@ -1,77 +1,85 @@
-<!-- <div class="register">
-    <form class="custom-form" method="post">
-        <h1>Register</h1>
-        <input type="text" [(ngModel)]="name" name="name" placeholder="name" required="required" /><br>
-        <input type="text" [(ngModel)]="surname" name="surname" placeholder="surname" required="required" /><br>
-        <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required="required" /><br>
-        <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required="required" /><br>
-        <input type="text" [(ngModel)]="admin" name="admin" placeholder="Admin" required="required" /><br>
-        <input type="text" [(ngModel)]="work_shift" name="work_shift" placeholder="Work shift" required="required" /><br>
-        <button type="submit" (click)="register()">Register</button>
-    </form>
-</div> -->
-<div class="auth-wrapper">
-  <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <h3 class="h3 mb-3 font-weight-normal text-center">Register Employees</h3>
-
-    <!-- Errors -->
-    <div *ngIf="errors?.name" class="alert alert-danger mt-3">
-      {{ errors?.name }}
+<div class="card w-50 mx-auto">
+<h6 class="card-header">Registro de empleado</h6>
+<div class="card-body">
+    <div>
+        {{errors}}
     </div>
-    <div *ngIf="errors?.email" class="alert alert-danger mt-3">
-      {{ errors?.email }}
-    </div>
-    <div *ngIf="errors?.password" class="alert alert-danger mt-3">
-      {{ errors?.password }}
-    </div>
-    <div *ngIf="errors?.password_confirmation" class="alert alert-danger mt-3">
-      {{ errors?.password_confirmation }}
-    </div>
-
-    <!-- Signup form -->
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label>Name</label>
+      <label>Nombre</label>
       <input type="text" class="form-control" formControlName="name" />
     </div>
+    <div *ngIf="submitted && registerForm.controls.name.errors" class="alert alert-danger" role="alert">
+      <div *ngIf="registerForm.controls.name.errors.required">
+        El nombre es obligatorio
+      </div>
+    </div>
+
     <div class="form-group">
-      <label>Surname </label>
+      <label>Apellidos </label>
       <input type="text" class="form-control" formControlName="surname" />
     </div>
     <div class="form-group">
-      <label>Email address </label>
+      <label>Correo electronico</label>
       <input type="email" class="form-control" formControlName="email" />
     </div>
     <div class="form-group">
-      <label>Password </label>
+      <label>Contraseña</label>
       <input type="password" class="form-control" formControlName="password" />
     </div>
-    <div class="form-group">
-        <label>Administrator </label>
-        <label>
-            <input type="radio" name="admin" formControlName="admin" [value]="true" />Yes
+    <div class="form-check-inline">
+        <label class="form-check-input" for="radio1">
+            <input type="radio" class="form-check-input" name="admin" formControlName="admin" [value]="true">Administrador
         </label>
-        <label>
-            <input type="radio" name="admin" formControlName="admin" [value]="false" />No
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-input" for="radio2">
+           <input type="radio" class="form-check-input" name="admin" formControlName="admin" [value]="false" checked> No administrador
         </label>
+        
+      </div>
+    <!-- <div class="form-group">
+      <label>Administrator </label>
+      <label>
+        <input type="radio" id="customRadio1" class="custom-control-input" name="admin" formControlName="admin" [value]="true"/>Yes
+      </label>
+      <label>
+        <input type="radio" id="customRadio1" class="custom-control-input" name="admin" formControlName="admin" [value]="false"/>No
+      </label>
+    </div> -->
+    <div class="form-group">
+     <label for="exampleFormControlSelect1">Turno de trabajo</label>
+      <!-- <label for="workShifts">Work shift</label> -->
+      <select class="form-control" formControlName="workShifts" >
+        <option
+          *ngFor="let workShift of workShifts; let i = index"
+          [value]="workShifts[i].id"
+        >
+          {{ workShifts[i].name }}
+        </option>
+      </select>
     </div>
     <div class="form-group">
-        <label for="workShifts">Work shift</label>
-        <select formControlName="workShifts" id="workShifts">
-          <option *ngFor="let workShift of workShifts; let i = index" [value]="workShifts[i].id">
-            {{workShifts[i].name}}
-          </option>
-        </select>
+      <label for="exampleFormControlSelect1">Especialidad</label>
+      <select class="form-control" formControlName="specialities">
+        <option
+          *ngFor="let speciality of specialities; let i = index"
+          [value]="specialities[i].id"
+        >
+          {{ specialities[i].name }}
+        </option>
+      </select>
     </div>
-    <div class="form-group">
-        <label for="specialities">Specialities</label>
-        <select formControlName="specialities" id="specialities">
-          <option *ngFor="let speciality of specialities; let i = index" [value]="specialities[i].id">
-            {{specialities[i].name}}
-          </option>
-        </select>
+    <div>
+      <button class="btn btn-block btn-primary">Register Employee</button>
+      <button
+        class="btn btn-block btn-secondary"
+        type="reset"
+        (click)="onReset()"
+      >
+        Cancel
+      </button>
     </div>
-    <button class="btn btn-block btn-primary">
-      Register Employee
-    </button>
   </form>
+</div>
 </div>

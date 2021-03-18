@@ -10,26 +10,26 @@ import { AuthStateService } from './shared/auth-state.service';
 })
 
 export class AppComponent implements OnInit {
-  isSignedIn: boolean;
+  // isSignedIn: boolean;
 
-  constructor(
-    private auth: AuthStateService,
-    public router: Router,
-    public tokenEmployee: TokenEmployeeService,
-  ) {
-  }
+  // constructor(
+  //   private auth: AuthStateService,
+  //   public router: Router,
+  //   public tokenEmployee: TokenEmployeeService,
+  // ) {
+  // }
 
   ngOnInit() {
-    this.auth.userAuthState.subscribe(val => {
-        this.isSignedIn = val;
-    });
+  //   this.auth.userAuthState.subscribe(val => {
+  //       this.isSignedIn = val;
+  //   });
   }
 
-  // Signout
-  signOut() {
-    this.auth.setAuthState(false);
-    this.tokenEmployee.removeToken();
-    this.router.navigate(['loginEmployee']);
-  }
+  // // Signout
+  // signOut() {
+  //   this.auth.setAuthState(false);
+  //   this.tokenEmployee.removeToken();
+  //   this.router.navigate(['loginEmployee']);
+  // }
 
 }
