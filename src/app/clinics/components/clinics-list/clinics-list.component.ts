@@ -2,11 +2,11 @@ import { Component } from "@angular/core";
 import { ClinicsDataService } from "../../services/clinics-data.service";
 
 @Component({
-  selector: "app-clinics-data",
-  templateUrl: "./clinics-data.component.html",
-  styleUrls: ["./clinics-data.component.css"],
+  selector: "app-clinics-list",
+  templateUrl: "./clinics-list.component.html",
+  styleUrls: ["./clinics-list.component.css"],
 })
-export class ClinicsDataComponent {
+export class ClinicsListComponent {
   clinics = [] as any;
   clinic = [] as any;
   clinicId = 0;
