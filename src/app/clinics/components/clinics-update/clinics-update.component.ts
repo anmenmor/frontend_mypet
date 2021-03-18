@@ -11,7 +11,6 @@ export class ClinicsUpdateComponent {
   postBody = new Clinic();
   clinicId = 0;
   htmlMsg!: String;
-  validInput = false;
 
   constructor(private clinicsDataService: ClinicsDataService) {}
 
