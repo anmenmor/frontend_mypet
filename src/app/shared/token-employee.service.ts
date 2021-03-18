@@ -24,8 +24,8 @@ export class TokenEmployeeService {
   // Verify the token
   isValidToken(){
      const token = this.getToken();
-
-     if(token !== 'undefined'){
+      // CAMBIO LINEA 28: De undefined a null por problemas - Fran
+     if(token !== null){
        const payload = this.payload(token);
        if(payload){
          return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
