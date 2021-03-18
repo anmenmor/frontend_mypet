@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ClinicsDataService } from "./clinics-data.service";
+import { ClinicsDataService } from "../../../services/clinics-data.service";
 
 @Component({
   selector: "app-clinics-data",
