@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeesLoginComponent } from './components/employees/employees-login/employees-login.component';
 import { EmployeesRegisterComponent } from  './components/employees/employees-register/employees-register.component';
-import { ClinicsDataComponent } from './components/clinics-data/clinics-data.component';
+import { ClinicsDataComponent } from './clinics/components/clinics-data/clinics-data.component';
 import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
 
 
