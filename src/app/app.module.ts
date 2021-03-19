@@ -15,6 +15,7 @@ import { ClinicsUpdateComponent } from './clinics/components/clinics-update/clin
 import { ClinicsDataService } from './clinics/services/clinics-data.service';
 import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
 import { VaccinesComponent } from './components/vaccines/vaccines.component';
+import { NavbarClinicsComponent } from './components/navbar-clinics/navbar-clinics.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { VaccinesComponent } from './components/vaccines/vaccines.component';
     ClinicsListComponent,
     ClinicsUpdateComponent,
     EmployeesListComponent,
-    VaccinesComponent
+    VaccinesComponent,
+    NavbarClinicsComponent
   ],
   imports: [
     BrowserModule,
