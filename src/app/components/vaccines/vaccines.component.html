@@ -1,0 +1,13 @@
+<h2>Listado de vacunas:</h2>
+<form #vaccineForm="ngForm" (ngSubmit)="createVaccine()">
+    <label>Nombre de la vacuna</label><br>
+    <input type="text" [(ngModel)]="newVaccineName" [ngModelOptions]="{standalone: true}" required><br><br>
+    <button type="submit">Añadir</button><br><br>
+</form>
+<ul >
+    <li *ngFor = "let vaccine of vaccines">
+        <span>id: </span>{{vaccine.id}}
+        <span>name: </span>{{vaccine.name}}
+        <span>available: </span>{{vaccine.available}}
+    </li>
+</ul>
