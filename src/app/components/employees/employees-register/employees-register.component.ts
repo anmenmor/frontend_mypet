@@ -25,14 +25,23 @@ export class EmployeesRegisterComponent implements OnInit {
     }
     ngOnInit() {
       this.registerForm = this.fb.group({
-        name: ['', Validators.required],
-        surname: ['', Validators.required],
-        email: ['', Validators.email],
-        password: ['', [Validators.required, Validators.minLength(6)]],
+        name: ['', [Validators.compose([
+          Validators.required,
+          Validators.pattern('[a-zA-Z]')])]],
+        surname: ['', [Validators.compose([
+          Validators.required,
+          Validators.pattern('[a-zA-Z ]')])]],
+        email: ['',  [Validators.compose([
+          Validators.required,
+          Validators.email])]],
+        password: ['', [Validators.compose([
+          Validators.required,
+          Validators.pattern('^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})')])]],
         admin: ['', Validators.required],
-        workShifts: ['', Validators.required],
-        specialities: ['', Validators.required]
+        workShifts: [''],
+        specialities: ['']
       });
+
       of(this.getWorkShift()).subscribe(workShifts => {
         this.workShifts = workShifts;
         this.registerForm.controls.workShifts.patchValue(this.workShifts[0].name);

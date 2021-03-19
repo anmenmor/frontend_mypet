@@ -1,7 +1,7 @@
 <div class="card w-50 mx-auto">
 <h6 class="card-header">Registro de empleado</h6>
 <div class="card-body">
-    <div>
+    <div *ngIf="submitted" class="alert alert-danger">
         {{errors}}
     </div>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -13,48 +13,66 @@
       <div *ngIf="registerForm.controls.name.errors.required">
         El nombre es obligatorio
       </div>
+      <div *ngIf="registerForm.controls.name.errors.pattern">
+        El nombre sólo debe contener letras
+      </div>
     </div>
 
     <div class="form-group">
       <label>Apellidos </label>
       <input type="text" class="form-control" formControlName="surname" />
     </div>
+    <div *ngIf="submitted && registerForm.controls.surname.errors" class="alert alert-danger" role="alert">
+        <div *ngIf="registerForm.controls.surname.errors.required">
+          Los apellidos son obligatorios
+        </div>
+        <div *ngIf="registerForm.controls.surname.errors.pattern">
+            Los apellidos deben tener un formato válido
+          </div>
+    
+      </div>
     <div class="form-group">
       <label>Correo electronico</label>
       <input type="email" class="form-control" formControlName="email" />
     </div>
+    <div *ngIf="submitted && registerForm.controls.email.errors" class="alert alert-danger" role="alert">
+        <div *ngIf="registerForm.controls.email.errors.required">
+          El email es obligatorio
+        </div>
+      </div>
     <div class="form-group">
       <label>Contraseña</label>
       <input type="password" class="form-control" formControlName="password" />
+    </div>
+    <div *ngIf="submitted && registerForm.controls.password.errors" class="alert alert-danger" role="alert">
+        <div *ngIf="registerForm.controls.password.errors.required">
+        La contraseña es obligatoria
+        </div>
+        <div *ngIf="registerForm.controls.password.errors.pattern">
+        La contraseña debe tener un mínimo de 6 caracteres (al menos una letra mayúscula, una minúscula y un número)
+        </div>
     </div>
     <div class="form-check-inline">
         <label class="form-check-input" for="radio1">
             <input type="radio" class="form-check-input" name="admin" formControlName="admin" [value]="true">Administrador
         </label>
-      </div>
+     </div>
       <div class="form-check-inline">
         <label class="form-check-input" for="radio2">
            <input type="radio" class="form-check-input" name="admin" formControlName="admin" [value]="false" checked> No administrador
         </label>
-        
       </div>
-    <!-- <div class="form-group">
-      <label>Administrator </label>
-      <label>
-        <input type="radio" id="customRadio1" class="custom-control-input" name="admin" formControlName="admin" [value]="true"/>Yes
-      </label>
-      <label>
-        <input type="radio" id="customRadio1" class="custom-control-input" name="admin" formControlName="admin" [value]="false"/>No
-      </label>
-    </div> -->
+      <div *ngIf="submitted && registerForm.controls.admin.errors" class="alert alert-danger" role="alert">
+        <div *ngIf="registerForm.controls.admin.errors.required">
+          Debe seleccionar una opción
+        </div>
+      </div>
+
     <div class="form-group">
      <label for="exampleFormControlSelect1">Turno de trabajo</label>
       <!-- <label for="workShifts">Work shift</label> -->
       <select class="form-control" formControlName="workShifts" >
-        <option
-          *ngFor="let workShift of workShifts; let i = index"
-          [value]="workShifts[i].id"
-        >
+        <option *ngFor="let workShift of workShifts; let i = index" [value]="workShifts[i].name" >
           {{ workShifts[i].name }}
         </option>
       </select>
@@ -62,10 +80,7 @@
     <div class="form-group">
       <label for="exampleFormControlSelect1">Especialidad</label>
       <select class="form-control" formControlName="specialities">
-        <option
-          *ngFor="let speciality of specialities; let i = index"
-          [value]="specialities[i].id"
-        >
+        <option *ngFor="let speciality of specialities; let i = index" [value]="specialities[i].id" >
           {{ specialities[i].name }}
         </option>
       </select>
