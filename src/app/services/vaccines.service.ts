@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Vaccine } from 'src/app/models/vaccine';
 import { Observable} from 'rxjs/internal/Observable';
 import {catchError} from 'rxjs/operators';
@@ -13,28 +13,11 @@ export class VaccinesService {
   private VACCINES_API_SERVER ="http://localhost:8000/api/vaccines";
   constructor(private http: HttpClient) {}
 
+
   listAllVaccines() : Observable<Vaccine[]> {
     return this.http.get<Vaccine[]>(this.VACCINES_API_SERVER);
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-      alert("Ha ocurrido un error inesperado. Intentelo de nuevo")
-    } else {
-      if (error.status == 409) {
-        alert("La vacuna ya existe");
-      } else {
-        console.error(
-          `Backend returned code ${error.status}, ` +
-          `body was: ${error.error}`);
-      } 
-    }
-
-    return throwError(
-      'Something bad happened; please try again later.');
-  }
 
   createVaccine(newVaccineName: string): Observable<Vaccine>{
     const body = {'name': newVaccineName};
@@ -45,6 +28,7 @@ export class VaccinesService {
           if (error.status == 409) {
             alert("La vacuna ya existe");
           } else {
+            alert("Algo ha ido mal, intentelo de nuevo mas tarde");
             console.error(
               `Backend returned code ${error.status}, ` +
               `body was: ${error.error}`);
@@ -54,4 +38,12 @@ export class VaccinesService {
       );  
   }
 
-}
+  changeAvailableOption(vaccine: Vaccine): Observable<Vaccine> {
+    const body = {'available': vaccine.available};
+    return this.http.put<Vaccine>(this.VACCINES_API_SERVER+"/"+vaccine.id, body)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        alert("Algo ha ido mal, intentelo de nuevo mas tarde");
+        return throwError('Something bad happened; please try again later.');
+      }))
+}}

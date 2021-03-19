@@ -6,8 +6,15 @@
 </form>
 <ul >
     <li *ngFor = "let vaccine of vaccines">
-        <span>id: </span>{{vaccine.id}}
-        <span>name: </span>{{vaccine.name}}
-        <span>available: </span>{{vaccine.available}}
+        {{vaccine.name}}
+            <label for="availableOption"></label>
+            <select (change)="changeAvailableOption(vaccine)"
+                name="availableOption" 
+                id="availableOption"
+                [(ngModel)]="vaccine.available">
+              <option *ngFor="let availableOption of availableOptions" [value]="availableOption.value">
+                {{availableOption.label}}<br>
+              </option>
+            </select>
     </li>
 </ul>
