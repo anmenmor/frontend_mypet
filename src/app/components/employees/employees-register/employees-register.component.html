@@ -2,7 +2,9 @@
 <h6 class="card-header">Registro de empleado</h6>
 <div class="card-body">
     <div *ngIf="submitted" class="alert alert-danger">
-        {{errors}}
+       <p *ngFor=" let error of errors;">
+        {{error}}
+       </p> 
     </div>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
@@ -37,7 +39,7 @@
     </div>
     <div *ngIf="submitted && registerForm.controls.email.errors" class="alert alert-danger" role="alert">
         <div *ngIf="registerForm.controls.email.errors.required">
-          El email es obligatorio
+          El correo electrónico es obligatorio
         </div>
       </div>
     <div class="form-group">
@@ -70,7 +72,6 @@
 
     <div class="form-group">
      <label for="exampleFormControlSelect1">Turno de trabajo</label>
-      <!-- <label for="workShifts">Work shift</label> -->
       <select class="form-control" formControlName="workShifts" >
         <option *ngFor="let workShift of workShifts; let i = index" [value]="workShifts[i].name" >
           {{ workShifts[i].name }}
