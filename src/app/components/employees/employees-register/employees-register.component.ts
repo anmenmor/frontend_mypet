@@ -11,7 +11,7 @@ import { of } from 'rxjs';
 })
 export class EmployeesRegisterComponent implements OnInit {
     registerForm: FormGroup;
-    errors = [];
+    errors: string [] = [];
     workShifts: {id: string, name: string}[]=[];
     specialities: {id: string, name: string}[]=[];
     submitted = false;
@@ -23,16 +23,25 @@ export class EmployeesRegisterComponent implements OnInit {
     ) {
      
     }
-    ngOnInit() {
+    ngOnInit(): void {
       this.registerForm = this.fb.group({
-        name: ['', Validators.required],
-        surname: ['', Validators.required],
-        email: ['', Validators.email],
-        password: ['', [Validators.required, Validators.minLength(6)]],
+        name: ['', [Validators.compose([
+          Validators.required,
+          Validators.pattern('[a-zA-Z]+')])]],
+        surname: ['', [Validators.compose([
+          Validators.required,
+          Validators.pattern('[a-zA-Z ]+')])]],
+        email: ['',  [Validators.compose([
+          Validators.required,
+          Validators.email])]],
+        password: ['', [Validators.compose([
+          Validators.required,
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,10}$')])]],
         admin: ['', Validators.required],
-        workShifts: ['', Validators.required],
-        specialities: ['', Validators.required]
+        workShifts: [''],
+        specialities: ['']
       });
+
       of(this.getWorkShift()).subscribe(workShifts => {
         this.workShifts = workShifts;
         this.registerForm.controls.workShifts.patchValue(this.workShifts[0].name);
@@ -43,36 +52,39 @@ export class EmployeesRegisterComponent implements OnInit {
       });
      }
   
-    onSubmit() {
+    onSubmit(): void {
       this.submitted = true;
       this.authEmployeeService.register(this.registerForm.value).subscribe(
         result => {
-          console.log(result);
+          alert('El empleado ha sido registrado correctamente!')
         },
         error => {
-          console.log(error);
-          this.errors = error.error;
+          if(error.status == 409){
+              this.errors.push('El email introducido ya existe.');
+          }else{
+            console.log(error);
+            this.errors.push(error.error.message[0]);
+          }
         },
         () => {
-
-          this.registerForm.reset()
+          this.registerForm.reset();
           this.router.navigate(['loginEmployee']);
         }
       )
     }
 
-    getWorkShift() {
+    getWorkShift(): any {
       return [
-        {id: '1',  name: 'tarde' },
-        {id: '2',  name: 'mañana' },
+        {id: '1',  name: 'Mañana' },
+        {id: '2',  name: 'Tarde' },
       ];
     }
 
-    getSpecilityId() {
+    getSpecilityId(): any {
       return [
-        { id: '106', name: 'dermatologia' },
-        { id: '115', name: 'cardiologia' },
-        { id: '197', name: 'cirugia' },
+        { id: '106', name: 'Dermatologia' },
+        { id: '115', name: 'Cardiologia' },
+        { id: '197', name: 'Cirugia' },
       ];
     }
 
