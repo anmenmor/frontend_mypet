@@ -6,6 +6,7 @@ import { ClinicsListComponent } from './clinics/components/clinics-list/clinics-
 import { ClinicsUpdateComponent } from './clinics/components/clinics-update/clinics-update.component';
 import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
 import { VaccinesComponent } from './components/vaccines/vaccines.component';
+import { CreatePetComponent } from './components/create-pet/create-pet.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'clinicsUpdate', component:ClinicsUpdateComponent, pathMatch: 'full'},
   {path: 'employees', component:EmployeesListComponent, pathMatch: 'full'},
   {path: 'vaccines', component:VaccinesComponent, pathMatch: 'full'},
+  {path: 'clients/:clientId/pets/createPet', component: CreatePetComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
