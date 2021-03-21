@@ -1,0 +1,35 @@
+<h2>Creación de mascota:</h2>
+<form [formGroup]="petForm" (ngSubmit)="createPet()">
+    <label>Nombre</label><br>
+    <input type="text" formControlName="name"><br><br>
+        <div *ngIf="submitted && petForm.controls.name.errors">
+          El nombre es obligatorio
+        </div>
+    <label>Sexo</label><br>
+    <input type="radio" value='Male' formControlName="sex" >Male
+    <input type="radio" value='Female' formControlName="sex">Female<br><br>
+    <div *ngIf="submitted && petForm.controls.sex.errors">
+        Debe seleccionar una opción
+      </div>
+    <label>Peso</label><br>
+    <input type="number" formControlName="weight" ><br>
+    <div *ngIf="submitted && petForm.controls.weight.errors">
+        El peso es obligatorio
+      </div>
+    <label>Edad</label><br>
+    <input type="number" formControlName="age"><br>
+    <div *ngIf="submitted && petForm.controls.age.errors">
+        La edad es obligatoria
+      </div>
+    <label>Especie</label><br>
+    <input type="text" formControlName="species"><br>
+    <div *ngIf="submitted && petForm.controls.species.errors">
+        La especie es obligatoria
+      </div>
+    <label>Raza</label><br>
+    <input type="text" formControlName="breed"><br><br>
+    <div *ngIf="submitted && petForm.controls.breed.errors">
+        La raza es obligatoria
+      </div>
+    <button type="submit">Añadir</button><br>
+</form>
