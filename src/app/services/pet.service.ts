@@ -24,5 +24,9 @@ export class PetService {
               return throwError('Something bad happened; please try again later.');
     })
   )};
+
+  listAllPets(clientId: number): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.PETS_API_SERVER, {params: {available: "true", client_id: clientId.toString()}});
+  };
   
 }

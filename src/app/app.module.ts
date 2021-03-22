@@ -17,6 +17,7 @@ import { EmployeesListComponent } from './components/employees/employees-list/em
 import { VaccinesComponent } from './components/vaccines/vaccines.component';
 import { NavbarClinicsComponent } from './components/navbar-clinics/navbar-clinics.component';
 import { CreatePetComponent } from './components/create-pet/create-pet.component';
+import { ListPetsComponent } from './components/list-pets/list-pets.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CreatePetComponent } from './components/create-pet/create-pet.component
     EmployeesListComponent,
     VaccinesComponent,
     NavbarClinicsComponent,
-    CreatePetComponent
+    CreatePetComponent,
+    ListPetsComponent
   ],
   imports: [
     BrowserModule,
