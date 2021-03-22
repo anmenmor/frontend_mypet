@@ -10,6 +10,12 @@
           <a class="nav-link" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" *ngIf="!isSignedIn" routerLink="/loginClients">Log in clients</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registerClients">Register clients</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" *ngIf="!isSignedIn" routerLink="/loginEmployee">Log in</a>
         </li>
         <li class="nav-item">
