@@ -20,8 +20,9 @@ export class ClinicsUpdateComponent {
       this.clinicsDataService
         .updateClinic(this.clinicId, this.postBody)
         .subscribe(
-          (data) => this.htmlMsg = "Datos de clinica modificados correctamente",
-          (exception) => this.htmlMsg = exception.error.message
+          (data) =>
+            (this.htmlMsg = "Datos de clinica modificados correctamente"),
+          (exception) => (this.htmlMsg = exception.error.message)
         );
     } else {
       this.htmlMsg = "Introduce un ID";
