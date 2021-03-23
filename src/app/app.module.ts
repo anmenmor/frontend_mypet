@@ -18,7 +18,7 @@ import { VaccinesComponent } from './components/vaccines/vaccines.component';
 import { NavbarClinicsComponent } from './components/navbar-clinics/navbar-clinics.component';
 import { CreatePetComponent } from './components/create-pet/create-pet.component';
 import { ListPetsComponent } from './components/list-pets/list-pets.component';
-import { ClientsLoginComponent } from './components/clients-login/clients-login.component';
+import { ClientsLoginComponent } from './components/clients/clients-login/clients-login.component';
 import { ClientsRegisterComponent } from './components/clients/clients-register/clients-register.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 import { ClientsEditComponent } from './components/clients/clients-edit/clients-edit.component';
