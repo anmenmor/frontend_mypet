@@ -9,6 +9,7 @@ import { of } from 'rxjs';
   templateUrl: './employees-register.component.html',
   styleUrls: ['./employees-register.component.css']
 })
+
 export class EmployeesRegisterComponent implements OnInit {
     registerForm: FormGroup;
     errors: string [] = [];

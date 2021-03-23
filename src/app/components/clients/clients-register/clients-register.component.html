@@ -1,1 +1,88 @@
-<p>clients-register works!</p>
+<div class="card w-50 mx-auto">
+    <h6 class="card-header">Registro de clientes</h6>
+    <div class="card-body">
+        <div *ngIf="submitted" class="alert alert-danger">
+           <p *ngFor=" let error of errors;">
+            {{error}}
+           </p> 
+        </div>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" class="form-control" formControlName="name" />
+        </div>
+        <div *ngIf="submitted && registerForm.controls.name.errors" class="alert alert-danger" role="alert">
+          <div *ngIf="registerForm.controls.name.errors.required">
+            El campo nombre es obligatorio
+          </div>
+          <div *ngIf="registerForm.controls.name.errors.pattern">
+            ¡El nombre sólo debe contener letras!
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label>Apellidos </label>
+          <input type="text" class="form-control" formControlName="surname" />
+        </div>
+        <div *ngIf="submitted && registerForm.controls.surname.errors" class="alert alert-danger" role="alert">
+            <div *ngIf="registerForm.controls.surname.errors.required">
+              El campo apellidos es obligatorio
+            </div>
+            <div *ngIf="registerForm.controls.surname.errors.pattern">
+                ¡Los apellidos sólo deben contener letras!
+              </div>
+        
+          </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" formControlName="email" />
+        </div>
+        <div *ngIf="submitted && registerForm.controls.email.errors" class="alert alert-danger" role="alert">
+            <div *ngIf="registerForm.controls.email.errors.required">
+              El campo email es obligatorio
+            </div>
+            <div *ngIf="submitted && loginForm.controls.email.errors" class="alert alert-danger" role="alert">
+                <div *ngIf="loginForm.controls.email.errors.required">
+                  Por favor, introduzca su correo electrónico
+                </div>
+              </div>
+          </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="password" />
+        </div>
+        <div *ngIf="submitted && registerForm.controls.password.errors" class="alert alert-danger" role="alert">
+            <div *ngIf="registerForm.controls.password.errors.required">
+            El campo password es obligatorio
+            </div>
+            <div *ngIf="registerForm.controls.password.errors.pattern">
+            El campo password debe contener un mínimo de 6 caracteres 
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Teléfono</label>
+            <input type="phone" class="form-control" formControlName="phone" />
+          </div>
+        <div *ngIf="submitted && registerForm.controls.phone.errors" class="alert alert-danger" role="alert">
+            <div *ngIf="registerForm.controls.phone.errors.required">
+              El campo teléfono es obligatorio
+            </div>
+            <div *ngIf="registerForm.controls.phone.errors.pattern">
+                ¡El campo teléfono sólo puede contener números!
+              </div>
+        
+          </div>
+        <div>
+          <button class="btn btn-block btn-primary">Registrar cliente</button>
+          <button
+            class="btn btn-block btn-secondary"
+            type="reset"
+            (click)="onReset()"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+    </div>
+    

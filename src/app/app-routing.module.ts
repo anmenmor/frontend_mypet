@@ -8,6 +8,9 @@ import { EmployeesListComponent } from './components/employees/employees-list/em
 import { VaccinesComponent } from './components/vaccines/vaccines.component';
 import { CreatePetComponent } from './components/create-pet/create-pet.component';
 import { ListPetsComponent } from './components/list-pets/list-pets.component';
+import { ClientsLoginComponent } from './components/clients/clients-login/clients-login.component';
+import { ClientsRegisterComponent } from  './components/clients/clients-register/clients-register.component';
+import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 
 
 const routes: Routes = [
@@ -18,7 +21,10 @@ const routes: Routes = [
   {path: 'employees', component:EmployeesListComponent, pathMatch: 'full'},
   {path: 'vaccines', component:VaccinesComponent, pathMatch: 'full'},
   {path: 'clients/:clientId/pets/createPet', component: CreatePetComponent, pathMatch: 'full'},
-  {path: 'clients/:clientId/pets', component: ListPetsComponent, pathMatch: 'full'}
+  {path: 'clients/:clientId/pets', component: ListPetsComponent, pathMatch: 'full'},
+  {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
+  {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
+  {path: 'clients', component:ClientsListComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
