@@ -5,4 +5,6 @@ import { Clients } from '../models/clients';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
-
+export class AuthClientsService {
+    
+}
