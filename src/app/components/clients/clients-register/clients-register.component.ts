@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 })
 
 export class ClientsRegisterComponent implements OnInit {
+
   registerForm: FormGroup;
   errors: string [] = [];
   submitted = false;
@@ -24,8 +25,6 @@ export class ClientsRegisterComponent implements OnInit {
    
   }
   
-
-
 
 ngOnInit(): void {
       this.registerForm = this.fb.group({
