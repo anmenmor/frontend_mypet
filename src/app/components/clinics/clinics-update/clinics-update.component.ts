@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Clinic } from "src/app/models/clinic.model";
-import { ClinicsDataService } from "../../services/clinics-data.service";
+import { ClinicsDataService } from "../../../services/clinics-data.service";
 
 @Component({
   selector: "app-clinics-update",
@@ -20,8 +20,9 @@ export class ClinicsUpdateComponent {
       this.clinicsDataService
         .updateClinic(this.clinicId, this.postBody)
         .subscribe(
-          (data) => this.htmlMsg = "Datos de clinica modificados correctamente",
-          (exception) => this.htmlMsg = exception.error.message
+          (data) =>
+            (this.htmlMsg = "Datos de clinica modificados correctamente"),
+          (exception) => (this.htmlMsg = exception.error.message)
         );
     } else {
       this.htmlMsg = "Introduce un ID";

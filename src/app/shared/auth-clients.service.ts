@@ -66,3 +66,8 @@ import { throwError } from 'rxjs/internal/observable/throwError';
     }
   
   }
+
+export class AuthClientsService {
+    
+}
+
