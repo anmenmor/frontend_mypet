@@ -10,9 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeesLoginComponent } from './components/employees/employees-login/employees-login.component';
 import { EmployeesRegisterComponent } from './components/employees/employees-register/employees-register.component';
-import { ClinicsListComponent } from './clinics/components/clinics-list/clinics-list.component';
-import { ClinicsUpdateComponent } from './clinics/components/clinics-update/clinics-update.component';
-import { ClinicsDataService } from './clinics/services/clinics-data.service';
+import { ClinicsListComponent } from './components/clinics/clinics-list/clinics-list.component';
+import { ClinicsUpdateComponent } from './components/clinics/clinics-update/clinics-update.component';
+import { ClinicsDataService } from './services/clinics-data.service';
 import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
 import { VaccinesComponent } from './components/vaccines/vaccines.component';
 import { NavbarClinicsComponent } from './components/navbar-clinics/navbar-clinics.component';
@@ -22,6 +22,7 @@ import { ClientsLoginComponent } from './components/clients/clients-login/client
 import { ClientsRegisterComponent } from './components/clients/clients-register/clients-register.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 import { ClientsEditComponent } from './components/clients/clients-edit/clients-edit.component';
+import { VaccinationsComponent } from './components/vaccinations/vaccinations.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ClientsEditComponent } from './components/clients/clients-edit/clients-
     ClientsLoginComponent,
     ClientsRegisterComponent,
     ClientsListComponent,
-    ClientsEditComponent
+    ClientsEditComponent,
+    VaccinationsComponent,
   ],
   imports: [
     BrowserModule,
