@@ -20,7 +20,7 @@ export class VaccinationsComponent {
       for (const d of data as any) {
         this.vaccinations.push({
           date: d.date,
-          done: d.done,
+          done: !!d.done,
           pet_id: d.pet_id,
           vaccine_id: d.vaccine_id
         });
@@ -35,7 +35,7 @@ export class VaccinationsComponent {
         for (const d of data as any) {
           this.vaccinations.push({
             date: d.date,
-            done: d.done,
+            done: !!d.done,
             pet_id: d.pet_id,
             vaccine_id: d.vaccine_id
           });
