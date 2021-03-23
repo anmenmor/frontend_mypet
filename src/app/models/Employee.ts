@@ -1,10 +1,12 @@
 export class Employee {
-    name: String;
-    surname: String;
-    email: String;
-    password: String;
-    admin: Boolean;
-    work_shift: String;
-    speciality_id: Number;
+    id: string;
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+    admin: boolean;
+    work_shift: string;
+    speciality_id: number;
+    available: boolean;
   }
   

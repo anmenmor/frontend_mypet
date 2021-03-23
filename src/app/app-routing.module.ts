@@ -12,6 +12,7 @@ import { ClientsLoginComponent } from './components/clients/clients-login/client
 import { ClientsRegisterComponent } from  './components/clients/clients-register/clients-register.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 import { VaccinationsComponent } from './components/vaccinations/vaccinations.component';
+import { EmployeesUpdateComponent} from  './components/employees/employees-update/employees-update.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
   {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
   {path: 'clients', component:ClientsListComponent, pathMatch: 'full'},
-  {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'}
+  {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
+  {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},
 ];
 
 @NgModule({

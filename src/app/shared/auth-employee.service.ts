@@ -13,6 +13,9 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 export class AuthEmployeeService {
 
   private REGISTER_EMPLOYEE_API_SERVER="http://127.0.0.1:8000/api/registerEmployee";
+  private LIST_EMPLOYEE_API_SERVER ="http://localhost:8000/api/employees";
+  private LOGIN_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/loginEmployee";
+
   constructor(private http: HttpClient) { }
 
   // User registration
@@ -36,9 +39,13 @@ export class AuthEmployeeService {
     );  
   }
 
+  listAllEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.LIST_EMPLOYEE_API_SERVER);
+  }
+
   // Login
   signin(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>('http://127.0.0.1:8000/api/loginEmployee', employee)
+    return this.http.post<Employee>(this.LOGIN_EMPLOYEE_API_SERVER, employee)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status == 400) {

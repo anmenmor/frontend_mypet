@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Employee } from 'src/app/models/Employee';
-import { EmployeesListService } from 'src/app/services/employees-list.service';
+import { AuthEmployeeService } from '../../../shared/auth-employee.service';
 
 
 @Component({
@@ -10,15 +10,24 @@ import { EmployeesListService } from 'src/app/services/employees-list.service';
 })
 export class EmployeesListComponent implements OnInit {
   employees: Employee[] | any;
+  employeeSelectedInList: Employee | any;
+  @Output() employeeSelectedEvent = new EventEmitter<Employee>();
 
-  constructor(private employeesListService: EmployeesListService) { }
+  constructor(private employeeService: AuthEmployeeService) { }
 
   ngOnInit(): void {
     this.listAllEmployees;
   }
   listAllEmployees(): void {
-    this.employeesListService.listAllEmployees().subscribe(data=>
+    this.employeeService.listAllEmployees().subscribe(data=>
       this.employees = data);
+  }
+
+  sendSelected(employee: Employee): void{
+    console.log(employee);
+    this.employeeSelectedInList =  employee;
+    this.employeeSelectedEvent.emit(employee);
+
   }
  
 

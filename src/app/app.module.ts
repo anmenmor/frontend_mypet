@@ -23,6 +23,7 @@ import { ClientsRegisterComponent } from './components/clients/clients-register/
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 import { ClientsEditComponent } from './components/clients/clients-edit/clients-edit.component';
 import { VaccinationsComponent } from './components/vaccinations/vaccinations.component';
+import { EmployeesUpdateComponent } from './components/employees/employees-update/employees-update.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { VaccinationsComponent } from './components/vaccinations/vaccinations.co
     ClientsListComponent,
     ClientsEditComponent,
     VaccinationsComponent,
+    EmployeesUpdateComponent,
   ],
   imports: [
     BrowserModule,
