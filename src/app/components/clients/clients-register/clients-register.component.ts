@@ -39,7 +39,7 @@ ngOnInit(): void {
           Validators.email])]],
         password: ['', [Validators.compose([
           Validators.required,
-          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,10}$')])]],
+          Validators.pattern('[a-zA-Z]+')])]],
         phone: ['', [Validators.compose([
             Validators.required,
             Validators.pattern('[0-9]+')])]]
@@ -72,8 +72,6 @@ ngOnInit(): void {
       this.submitted =false;
       this.registerForm.reset();
     }
-    // handleError(error){
-    //   this.error = error.error.errors;
-    // }
+    
   
   }
