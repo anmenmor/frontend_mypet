@@ -19,4 +19,8 @@ export class VaccinationsService {
     return this.http.get<Vaccination>(this.VACCINATION_API_SERVER + petId);
   }
 
+  updateVaccinationStatus(id: number, done: any) {
+    return this.http.put(this.VACCINATION_API_SERVER+id, done)
+  }
+
 }
