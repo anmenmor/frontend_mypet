@@ -1,0 +1,17 @@
+<h1>Modificar estado vacunanación</h1>
+<br><br>
+
+<label for="id">ID de la vacunación a editar: </label>
+<input type="number" name="id" [(ngModel)]="id"><br><br>
+
+<form #vaccinationUpdate = "ngForm" (ngSubmit) = "changeVaccinationStatus(vaccinationUpdate.value)" >
+    <label for="done">¿Ha sido vacunado?: </label>
+    <select [(ngModel)]="done" name="done">
+        <option value="1">Sí</option>
+        <option value="0">No</option>
+      </select><br><br>
+    <input type="submit" value="Guardar cambios">
+    <br><br>
+  </form>
+
+  <p [innerHTML]="htmlMsg"></p>
