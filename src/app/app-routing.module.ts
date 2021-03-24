@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'clients/:clientId/pets', component: ListPetsComponent, pathMatch: 'full'},
   {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
   {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
-  {path: 'clients', component:ClientsListComponent, pathMatch: 'full'},
+  {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},
   {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'}
 ];
 
