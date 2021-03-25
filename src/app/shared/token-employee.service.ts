@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class TokenEmployeeService {
 
   private issuer = {
-    login: 'http://127.0.0.1:8000/api/auth/loginEmployees',
-    register: 'http://127.0.0.1:8000/api/auth/registerEmployees'
+    login: 'http://127.0.0.1:8000/api/auth/loginEmployee',
+    register: 'http://127.0.0.1:8000/api/auth/registerEmployee'
   }
 
   constructor() { }
@@ -31,7 +31,6 @@ export class TokenEmployeeService {
          return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
        }else return false;
      } else {
-       console.log("if else");
         return false;
      }
   }

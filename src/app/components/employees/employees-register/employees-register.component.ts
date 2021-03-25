@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthEmployeeService } from '../../../shared/auth-employee.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { of } from 'rxjs';
+import { SpecialitiesService } from 'src/app/services/specialities.service';
+import { Specialities } from '../../../models/Specialities';
 
 @Component({
   selector: 'app-employees-register',
@@ -14,17 +16,20 @@ export class EmployeesRegisterComponent implements OnInit {
     registerForm: FormGroup;
     errors: string [] = [];
     workShifts: {id: string, name: string}[]=[];
-    specialities: {id: string, name: string}[]=[];
+    // specialities: {id: string, name: string}[]=[];
+    specialities: Specialities[] | any;
     submitted = false;
   
     constructor(
       public router: Router,
       public fb: FormBuilder,
-      public authEmployeeService: AuthEmployeeService
+      public authEmployeeService: AuthEmployeeService,
+      public specialitiesService: SpecialitiesService
     ) {
-     
+      console.log("Constructor");
     }
     ngOnInit(): void {
+      console.log("OnInit");
       this.registerForm = this.fb.group({
         name: ['', [Validators.compose([
           Validators.required,
@@ -47,7 +52,8 @@ export class EmployeesRegisterComponent implements OnInit {
         this.workShifts = workShifts;
         this.registerForm.controls.workShifts.patchValue(this.workShifts[0].name);
       });
-      of(this.getSpecilityId()).subscribe(specialities => {
+      this.getSpecilityId().then(specialities => {
+        console.log(specialities);
         this.specialities = specialities;
         this.registerForm.controls.specialities.patchValue(this.specialities[0].id);
       });
@@ -57,7 +63,7 @@ export class EmployeesRegisterComponent implements OnInit {
       this.submitted = true;
       this.authEmployeeService.register(this.registerForm.value).subscribe(
         result => {
-          alert('El empleado ha sido registrado correctamente!')
+          alert('El empleado ha sido registrado correctamente!');
         },
         error => {
           if(error.status == 409){
@@ -76,17 +82,27 @@ export class EmployeesRegisterComponent implements OnInit {
 
     getWorkShift(): any {
       return [
-        {id: '1',  name: 'Mañana' },
-        {id: '2',  name: 'Tarde' },
+        {name: 'Mañana' },
+        {name: 'Tarde' },
       ];
     }
 
-    getSpecilityId(): any {
-      return [
-        { id: '106', name: 'Dermatologia' },
-        { id: '115', name: 'Cardiologia' },
-        { id: '197', name: 'Cirugia' },
-      ];
+    //Como se hace una llamada a un servicio que llama a un servicio más arriba, al ser asíncronos no se esperan
+    //Por eso es necesario que la llamada al servicio de specialities() sea en forma de promesa
+    getSpecilityId(): Promise<any> {
+      return new Promise( resolve=> {
+        this.specialitiesService.specialities().subscribe(
+          data=>{
+            console.log(data);
+            this.specialities = Object.values(data)
+            .map(specialitiesDB => new Specialities(specialitiesDB));
+            console.log(this.specialities);
+            
+            resolve(this.specialities);
+          }
+  
+        );
+      });
     }
 
     onReset(){

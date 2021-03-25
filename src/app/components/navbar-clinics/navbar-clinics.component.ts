@@ -10,7 +10,7 @@ import { TokenClientsService } from 'src/app/shared/token-clients.service';
   styleUrls: ['./navbar-clinics.component.css']
 })
 export class NavbarClinicsComponent implements OnInit {
-  isSignedIn: boolean;
+  isSignedIn: boolean | any;
 
   constructor(
     private auth: AuthStateService,
@@ -22,6 +22,7 @@ export class NavbarClinicsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isSignedIn = false;
     this.auth.userAuthState.subscribe(val => {
         this.isSignedIn = val;
     });

@@ -1,0 +1,37 @@
+<div *ngIf="employeeDetails && edit" class="card w-50">
+    <form [formGroup]="updateForm" (ngSubmit)="update()">
+        <h4 class="card-header">Editar empleado:</h4>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input class="form-control" type="text" formControlName="name" value="{{ employeeDetails.name }}" />
+        </div>
+        <div class="form-group">
+            <label>Apellidos</label>
+            <input class="form-control" type="text" formControlName="surname" value="{{ employeeDetails.surname }}" />
+        </div>
+        <div class="form-group">
+            <label>Correo electronico</label>
+            <input class="form-control" type="email" formControlName="email" value="{{ employeeDetails.email }}" />
+        </div >
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Turno de trabajo</label>
+            <select class="form-control" formControlName="workShifts" >
+              <option *ngFor="let workShift of workShifts; let i = index" [value]="workShifts[i].name" >
+                {{ workShifts[i].name }}
+              </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Especialidad</label>
+            <select class="form-control" formControlName="specialities">
+              <option *ngFor="let speciality of specialities; let i = index" [value]="specialities[i].id" >
+                {{ specialities[i].name }}
+              </option>
+            </select>
+        </div>
+
+        <button>Guardar cambios</button>
+        <br />
+        <br />
+    </form>
+</div>

@@ -13,9 +13,13 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 export class AuthEmployeeService {
 
   private REGISTER_EMPLOYEE_API_SERVER="http://127.0.0.1:8000/api/registerEmployee";
+  private LIST_EMPLOYEE_API_SERVER ="http://localhost:8000/api/employees";
+  private LOGIN_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/loginEmployee";
+  private UPDATE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
+
   constructor(private http: HttpClient) { }
 
-  // User registration
+  // Employee registration
   register(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.REGISTER_EMPLOYEE_API_SERVER, employee)
     .pipe(
@@ -38,7 +42,7 @@ export class AuthEmployeeService {
 
   // Login
   signin(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>('http://127.0.0.1:8000/api/loginEmployee', employee)
+    return this.http.post<Employee>(this.LOGIN_EMPLOYEE_API_SERVER, employee)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status == 400) {
@@ -61,9 +65,27 @@ export class AuthEmployeeService {
     );  
   }
 
-  // Access user profile
+  // Access employee profile
   profileEmployee(): Observable<any> {
     return this.http.get('http://127.0.0.1:8000/api/employee');
+  }
+
+  //list Employees
+  listAllEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.LIST_EMPLOYEE_API_SERVER);
+  }
+
+  //Update employee
+  updateEmployee(employee: Employee): Observable<Employee> {
+    console.log("Actualizando empleado:" + employee.id);
+    console.log(employee);
+    return this.http.put<Employee>(this.UPDATE_EMPLOYEE_API_SERVER+employee.id, employee)
+    .pipe(
+      catchError((error: HttpErrorResponse) => { 
+        return throwError('Something bad happend, please try again later');
+      })
+    )
+     
   }
 
 }
