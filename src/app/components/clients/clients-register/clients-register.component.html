@@ -1,11 +1,7 @@
 <div class="card w-50 mx-auto">
     <h6 class="card-header">Registro de clientes</h6>
     <div class="card-body">
-        <div *ngIf="submitted" class="alert alert-danger">
-           <p *ngFor=" let error of errors;">
-            {{error}}
-           </p> 
-        </div>
+      
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label>Nombre</label>
@@ -41,12 +37,10 @@
             <div *ngIf="registerForm.controls.email.errors.required">
               El campo email es obligatorio
             </div>
-            <div *ngIf="submitted && loginForm.controls.email.errors" class="alert alert-danger" role="alert">
-                <div *ngIf="loginForm.controls.email.errors.required">
-                  Por favor, introduzca su correo electrónico
+            <div *ngIf="registerForm.controls.email.errors.pattern">
+                El campo email debe contener una dirección válida
                 </div>
-              </div>
-          </div>
+         </div>
         <div class="form-group">
           <label>Password</label>
           <input type="password" class="form-control" formControlName="password" />
@@ -56,7 +50,7 @@
             El campo password es obligatorio
             </div>
             <div *ngIf="registerForm.controls.password.errors.pattern">
-            El campo password debe contener un mínimo de 6 caracteres 
+            El campo password debe contener letras 
             </div>
         </div>
         <div class="form-group">
@@ -73,7 +67,7 @@
         
           </div>
         <div>
-          <button class="btn btn-block btn-primary">Registrar cliente</button>
+          <button class="btn btn-block btn-primary2">Registrar cliente</button>
           <button
             class="btn btn-block btn-secondary"
             type="reset"

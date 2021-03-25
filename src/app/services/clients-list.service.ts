@@ -7,10 +7,10 @@ import { Observable} from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class ClientsListService {
-  private CLIENTS_API_SERVER ="http://localhost:8000/api/clients";
+  private CLIENTS_API_SERVER ="http://localhost:8000/api/clientsList";
   constructor(private http: HttpClient) {}
 
-  listAllClients(): Observable<Clients[]> {
+  listClients(): Observable<Clients[]> {
     return this.http.get<Clients[]>(this.CLIENTS_API_SERVER);
   }
 

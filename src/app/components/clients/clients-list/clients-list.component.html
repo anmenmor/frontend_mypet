@@ -1,1 +1,19 @@
-<p>clients-list works!</p>
+<h1>Listado de Clientes</h1>
+<button (click)="listClients()">Mostrar clientes</button>
+<br /><br />
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Complete name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        
+    </tr>
+    <tr *ngFor="let client of clients">
+        <td>{{client.id}}</td>
+        <td>{{client.name}} {{client.surname}}</td>
+        <td>{{client.email}}</td>
+        <td>{{client.phone}}</td>
+       
+    </tr>
+</table>
