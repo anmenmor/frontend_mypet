@@ -17,7 +17,7 @@
             <label for="exampleFormControlSelect1">Turno de trabajo</label>
             <select class="form-control" formControlName="workShifts" >
               <option *ngFor="let workShift of workShifts; let i = index" [value]="workShifts[i].name" >
-                {{ employeeDetails.workShifts }}
+                {{ workShifts[i].name }}
               </option>
             </select>
         </div>

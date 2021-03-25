@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 import { Specialities } from '../../../models/Specialities';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-employees-update',
@@ -16,6 +17,7 @@ export class EmployeesUpdateComponent implements OnInit {
   employeeDetails: Employee | any;
   edit: boolean;
   specialities: Specialities[] | any;
+  workShifts: {id: string, name: string}[]=[];
  
 
   constructor(
@@ -55,9 +57,19 @@ export class EmployeesUpdateComponent implements OnInit {
           Validators.required,
           Validators.email])]],
         admin: ['', Validators.required],
-        workShifts: [this.employeeDetails.workShifts],
+        workShifts: [''],
         specialities: ['']
       });
+
+      of(this.getWorkShift()).subscribe(workShifts => {
+        this.workShifts = workShifts;
+        workShifts.forEach(element => {
+          if(element.name == this.employeeDetails.workShifts){
+            this.updateForm.controls.workShifts.patchValue(element.name);
+          }
+        });
+      });
+
       this.getSpecility().then(specialities => {
         specialities.forEach(element => {
           if(element.id === this.employeeDetails.specialities){
@@ -71,20 +83,11 @@ export class EmployeesUpdateComponent implements OnInit {
   }
   getWorkShift(): any {
     return [
-      { name: 'Mañana' },
-      { name: 'Tarde' },
+      { name: 'mañana' },
+      { name: 'tarde' },
     ];
   }
 
-  getSpecilityId(): any {
-    return [
-      { id: '12', name: 'Dermatologia' },
-      { id: '78', name: 'Cardiologia' },
-      { id: '157', name: 'Cirugia' },
-      { id: '165', name: 'Oftalmología' },
-      { id: '165', name: 'Oftalmología' },
-    ];
-  }
   update(): void{
     console.log(this.updateForm.value);
     this.employeeDetails.name = this.updateForm.value.name;
