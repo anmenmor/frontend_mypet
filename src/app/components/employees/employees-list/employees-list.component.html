@@ -3,21 +3,21 @@
 <button (click)="listAllEmployees()">Mostrar empleados</button>
 <br /><br />
 <table>
-    <tr>
+    <tr *ngIf ="submitted">
         <th>ID</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Email</th>
-        <th>Work shift</th>
-        <th>Speciality id</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Correo electronico</th>
+        <th>Turno de trabajo</th>
+        <th>Especialidad id</th>
     </tr>
     <tr *ngFor="let employee of employees">
         <td>{{employee.id}}</td>
         <td>{{employee.name}}</td>
         <td>{{employee.surname}}</td>
         <td>{{employee.email}}</td>
-        <td>{{employee.work_shift}}</td>
-        <td> {{employee.speciality_id}}</td>
+        <td>{{employee.workShifts}}</td>
+        <td> {{employee.specialities}}</td>
         <td>
         <button>Eliminar</button>
         <button (click)="sendSelected(employee)">Editar</button> 
