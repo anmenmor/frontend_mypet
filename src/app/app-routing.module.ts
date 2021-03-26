@@ -32,7 +32,7 @@ const routes: Routes = [
   {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},
   {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
   {path: 'vaccinationsUpdate', component:VaccinationUpdateComponent, pathMatch: 'full'},
-  {path: 'addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
+  {path: 'clients/:clientId/addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},
 ];
 
