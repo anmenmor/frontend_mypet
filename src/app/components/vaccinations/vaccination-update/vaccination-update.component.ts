@@ -19,7 +19,7 @@ export class VaccinationUpdateComponent {
     this.vaccinationService
       .updateVaccinationStatus(this.id, done)
       .subscribe(
-        (data) => (this.htmlMsg = "Datos de clinica modificados correctamente"),
+        (data) => (this.htmlMsg = "Estado de la vacunación modificado correctamente"),
         (exception) => (this.htmlMsg = exception.error.message)
       );
   }
