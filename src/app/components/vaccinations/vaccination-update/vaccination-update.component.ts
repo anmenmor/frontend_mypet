@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
 import { Vaccination } from "src/app/models/vaccination.model";
 import { VaccinationsService } from "src/app/services/vaccinations.service";
 
@@ -7,17 +10,34 @@ import { VaccinationsService } from "src/app/services/vaccinations.service";
   templateUrl: "./vaccination-update.component.html",
   styleUrls: ["./vaccination-update.component.css"],
 })
-export class VaccinationUpdateComponent {
-  constructor(private vaccinationService: VaccinationsService) {}
-
+export class VaccinationUpdateComponent implements OnInit{
+  private routeSub: Subscription = Subscription.EMPTY;
+  petId!: number;
   id!: number;
-  done!: boolean;
+  updateVaccination: any;
+  vaccinations: any;
   htmlMsg!: String;
 
-  changeVaccinationStatus(done: boolean) {
-    console.log(done);
+  constructor(private route: ActivatedRoute,private formBuilder: FormBuilder,private vaccinationService: VaccinationsService) {
+    this.updateVaccination = this.formBuilder.group({
+      done: false,
+    });
+  }
+
+  ngOnInit(){
+    this.routeSub = this.route.params.subscribe((params) => {
+      this.petId = params["petId"];
+    });
+    this.vaccinationService.listVaccinationByPetId(this.petId).subscribe((data) => (this.vaccinations = data));
+  }
+
+  onChange(id:number) {
+    this.id = id;
+}
+
+  onSubmit(done:boolean) {
     this.vaccinationService
-      .updateVaccinationStatus(this.id, done)
+      .updateVaccinationStatus(this.id,done)
       .subscribe(
         (data) => (this.htmlMsg = "Estado de la vacunación modificado correctamente"),
         (exception) => (this.htmlMsg = exception.error.message)
