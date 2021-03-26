@@ -1,23 +1,73 @@
-<h1>Actualizar datos clínica test</h1>
+<div class="container">
+  <h2>Actualizar datos clínica</h2>
+  <br /><br />
 
-<p>Introduce los nuevos datos de la clínica:</p>
+  <form [formGroup]="clinicUpdate" (ngSubmit)="onSubmit(clinicUpdate.value)">
+    <div class="form-group">
+      <label for="id">Elige la clínica a modificar</label>
+      <select class="custom-select" id="id" formControlName="id" (ngModelChange)="onChange($event)">
+        <option value="">Selecciona...</option>
+        <option *ngFor="let item of clinics" value="{{ item.id }}">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
+    <div *ngIf="clinic !== undefined">
+      <div class="form-group">
+        <label for="name">Nombre de la clínica</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          value="{{ clinic.name }}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="city">Ciudad</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          formControlName="city"
+          value="{{ clinic.city }}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="address">Dirección</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          formControlName="address"
+          value="{{ clinic.address }}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="phone">Teléfono de contacto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          formControlName="phone"
+          value="{{ clinic.phone }}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          value="{{ clinic.email }}"
+        />
+      </div>
 
-<label for="id">ID de la Clínica a editar: </label>
-<input type="number" name="id" [(ngModel)]="clinicId"><br><br>
-
-<form #clinicUpdate = "ngForm" (ngSubmit) = "onSubmit(clinicUpdate.value)" >
-    <label for="name">Nombre: </label>
-    <input type="text" name="name" ngModel><br><br>
-    <label for="city">Ciudad: </label>
-    <input type="text" name="city" ngModel><br><br>
-    <label for="address">Dirección: </label>
-    <input type="text" name="address" ngModel><br><br>
-    <label for="phone">Teléfono: </label>
-    <input type="text" name="phone" ngModel><br><br>
-    <label for="email">Correo electrónico: </label>
-    <input type="email" name="email" ngModel><br><br>
-    <input type="submit" value="Guardar cambios">
+      <button class="btn btn-primary" type="submit">Modificar datos</button>
+    </div>
   </form>
+  <br /><br />
 
-    <p [innerHTML]="htmlMsg"></p>
- 
+  <p [innerHTML]="htmlMsg"></p>
+</div>
