@@ -13,6 +13,7 @@ import { ClientsRegisterComponent } from  './components/clients/clients-register
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
 import { VaccinationsComponent } from './components/vaccinations/vaccination-list/vaccinations.component';
 import { VaccinationUpdateComponent } from './components/vaccinations/vaccination-update/vaccination-update.component';
+import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
 import { EmployeesUpdateComponent} from  './components/employees/employees-update/employees-update.component';
 
 
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},
   {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
   {path: 'vaccinationsUpdate', component:VaccinationUpdateComponent, pathMatch: 'full'},
+  {path: 'addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},
 ];
 

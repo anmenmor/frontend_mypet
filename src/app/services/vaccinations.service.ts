@@ -23,4 +23,8 @@ export class VaccinationsService {
     return this.http.put<Vaccination>(this.VACCINATION_API_SERVER+id, done)
   }
 
+  addVaccination(formData: Vaccination){
+    return this.http.post<Vaccination>(this.VACCINATION_API_SERVER, formData);
+  }
+
 }
