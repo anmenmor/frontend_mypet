@@ -49,12 +49,10 @@ export class VaccinationCreateComponent implements OnInit {
     //Get pets
     this.petService.listAllPets(this.clientId).subscribe((data: Pet[]) => {
       this.pets = Object.values(data);
-    })
+    });
   }
 
   onSubmit(formData: Vaccination) {
-    console.log(this.pets);
-    console.log(formData);
     this.vaccinationService.addVaccination(formData).subscribe(
       (data) => (this.htmlMsg = "Vacunación añadida correctamente"),
       (exception) => (this.htmlMsg = exception.error.message)
