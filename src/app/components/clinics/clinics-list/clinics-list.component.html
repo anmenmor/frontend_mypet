@@ -1,28 +1,35 @@
-<h1>Componente info clinicas test</h1>
-<br><br>
-<p>Listar todas las clínicas:</p>
-<button (click)="listAllClinics()">Mostrar datos</button>
+<h2>Listado de clínicas</h2>
 <br /><br />
-<p>Búsqueda por ID:</p>
-<input type="number" [(ngModel)]="clinicId" />
-<br /><br />
-<button (click)="listSingleClinic(clinicId)">Mostrar datos</button>
 
-<ul *ngFor="let item of clinics">
-  <li>Nombre: {{ item.name }}</li>
-  <li>Ciudad: {{ item.city }}</li>
-  <li>Dirección: {{ item.address }}</li>
-  <li>Teléfono: {{ item.phone }}</li>
-  <li>Email: {{ item.email }}</li>
-</ul>
-
-<ul *ngIf="clinic.name != null;else noClinic">
-  <li>Nombre: {{ clinic.name }}</li>
-  <li>Ciudad: {{ clinic.city }}</li>
-  <li>Dirección: {{ clinic.address }}</li>
-  <li>Teléfono: {{ clinic.phone }}</li>
-  <li>Email: {{ clinic.email }}</li>
-</ul>
-
-<ng-template #noClinic><br><br>Ingresa un ID válido para ver los datos de la clínica</ng-template>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>Nombre</td>
+      <td>Ciudad</td>
+      <td>Dirección</td>
+      <td>Teléfono</td>
+      <td>Correo electrónico</td>
+      <td>Acción</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of clinics"
+      [routerLink]="['/clinics/updateClinic']"
+      [queryParams]="{ id: item.id }"
+    >
+      <td>{{ item.name }}</td>
+      <td>{{ item.city }}</td>
+      <td>{{ item.address }}</td>
+      <td>{{ item.phone }}</td>
+      <td>{{ item.email }}</td>
+      <button
+        type="button"
+        [routerLink]="['/clinics/updateClinic', item.id]"
+      >
+        Modificar datos
+      </button>
+    </tr>
+  </tbody>
+</table>
 

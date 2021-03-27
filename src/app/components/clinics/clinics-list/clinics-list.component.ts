@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { Clinic } from "src/app/models/clinic.model";
 import { ClinicsDataService } from "../../../services/clinics-data.service";
 
 @Component({
@@ -6,18 +7,19 @@ import { ClinicsDataService } from "../../../services/clinics-data.service";
   templateUrl: "./clinics-list.component.html",
   styleUrls: ["./clinics-list.component.css"],
 })
-export class ClinicsListComponent {
-  clinics = [] as any;
-  clinic = [] as any;
+export class ClinicsListComponent implements OnInit {
+  clinics: Array<Clinic> = [];
+  clinic = new Clinic;
   clinicId = 0;
 
   constructor(private clinicsDataService: ClinicsDataService) {}
 
-  listAllClinics() {
+  ngOnInit() {
     this.clearPreviousValues();
     this.clinicsDataService.listAllClinics().subscribe((data) => {
       for (const d of data as any) {
         this.clinics.push({
+          id: d.id,
           name: d.name,
           city: d.city,
           address: d.address,
@@ -33,6 +35,7 @@ export class ClinicsListComponent {
     this.clinicsDataService.listSingleClinic(clinicId).subscribe(
       (data) =>
         (this.clinic = {
+          id: (data as any).id,
           name: (data as any).name,
           city: (data as any).city,
           address: (data as any).address,
@@ -43,7 +46,7 @@ export class ClinicsListComponent {
   }
 
   clearPreviousValues(){
-    this.clinic = [];
+    this.clinic = new Clinic;
     this.clinics = [];
   }
 }

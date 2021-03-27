@@ -21,8 +21,9 @@ import { EmployeesUpdateComponent} from  './components/employees/employees-updat
 const routes: Routes = [
   {path: 'loginEmployee', component:EmployeesLoginComponent, pathMatch: 'full'},
   {path: 'registerEmployee', component:EmployeesRegisterComponent, pathMatch: 'full'},
-  {path: 'clinicsList', component:ClinicsListComponent, pathMatch: 'full'},
-  {path: 'clinicsUpdate', component:ClinicsUpdateComponent, pathMatch: 'full'},
+  {path: 'clinics', component:ClinicsListComponent, pathMatch: 'full'},
+  {path: 'clinics/updateClinic', component:ClinicsUpdateComponent, pathMatch: 'full'},
+  {path: 'clinics/updateClinic/:id', component:ClinicsUpdateComponent, pathMatch: 'full'},
   {path: 'employees', component:EmployeesListComponent, pathMatch: 'full'},
   {path: 'vaccines', component:VaccinesComponent, pathMatch: 'full'},
   {path: 'clients/:clientId/pets/createPet', component: CreatePetComponent, pathMatch: 'full'},
