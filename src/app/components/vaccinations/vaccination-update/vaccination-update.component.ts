@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from '@angular/common';
 import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -20,6 +21,7 @@ export class VaccinationUpdateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private _location: Location,
     private formBuilder: FormBuilder,
     private vaccinationService: VaccinationsService
   ) {
@@ -55,5 +57,9 @@ export class VaccinationUpdateComponent implements OnInit {
         (this.htmlMsg = "Estado de la vacunación modificado correctamente"),
       (exception) => (this.htmlMsg = exception.error.message)
     );
+  }
+
+  return(){
+    this._location.back();
   }
 }
