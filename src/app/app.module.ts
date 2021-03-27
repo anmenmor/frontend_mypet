@@ -26,6 +26,7 @@ import { VaccinationsComponent } from './components/vaccinations/vaccination-lis
 import { VaccinationUpdateComponent } from './components/vaccinations/vaccination-update/vaccination-update.component';
 import { EmployeesUpdateComponent } from './components/employees/employees-update/employees-update.component';
 import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
+import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/side-navbar-clinics.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { VaccinationCreateComponent } from './components/vaccinations/vaccinatio
     EmployeesUpdateComponent,
     VaccinationUpdateComponent,
     VaccinationCreateComponent,
+    SideNavbarClinicsComponent,
   ],
   imports: [
     BrowserModule,

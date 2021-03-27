@@ -6,16 +6,18 @@ import { TokenClientsService } from "../shared/token-clients.service";
 @Injectable()
 
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private tokenService: TokenEmployeeService,private tokensService: TokenClientsService) { }
+    constructor(private employeeTokenService: TokenEmployeeService,private clientTokenService: TokenClientsService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        const accessToken = this.tokenService.getToken();
-        const accesToken = this.tokensService.getToken();
+        let accessToken = this.employeeTokenService.getToken();
+
+        if(!accessToken){
+            accessToken = this.clientTokenService.getToken();
+        }
+        
         req = req.clone({
             setHeaders: {
-                Authorization: "Bearer " + {accessToken , accesToken},
-                            
-                
+                Authorization: "Bearer " + accessToken           
             },
             
         });

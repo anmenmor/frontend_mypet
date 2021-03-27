@@ -1,0 +1,22 @@
+<div class="d-flex" id="wrapper" style="background-color: rgb(105, 206, 172);">
+    <!-- Sidebar -->
+    <div class="bg-light border-left" id="sidebar-wrapper">
+      <div class="sidebar-heading">CLINICA DOGGY </div>
+      <div class="list-group list-group-flush">
+        <a routerLink="/" class="list-group-item list-group-item-action bg-light">Datos de mi clinica</a>
+        <a (click)="employeesShow()" class="list-group-item list-group-item-action bg-light">Empleados</a>
+        <a routerLink="/clients" class="list-group-item list-group-item-action bg-light">Clientes</a>
+        <a routerLink="#" class="list-group-item list-group-item-action bg-light">Angenda de consultas</a>
+        <a routerLink="/vaccinations" class="list-group-item list-group-item-action bg-light">Vacunaciones</a>
+      </div>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <app-employees-list *ngIf="employees"></app-employees-list>
+            <h1 class="mt-4">Clínica Doggy</h1>
+            <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration.</p>
+          </div>
+        </div>
+  </div>
+  <!-- /#wrapper -->
