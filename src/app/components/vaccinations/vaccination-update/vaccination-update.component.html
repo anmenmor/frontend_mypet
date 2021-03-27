@@ -1,6 +1,6 @@
 
 <div *ngIf="vaccinations" class="container">
-  <h2>Modificar estado vacunanación</h2>
+  <h2>Modificar estado vacunación</h2>
   <br /><br />
 
   <form
@@ -28,7 +28,8 @@
       ><br /><br />
     </div>
 
-    <button class="btn btn-primary" type="submit">Modificar estado</button>
+    <button class="btn btn-primary" type="submit">Modificar estado</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-secondary" type="button" [routerLink]="['/vaccinations']">Listado de vacunaciones</button>
   </form>
   <br /><br />
 
