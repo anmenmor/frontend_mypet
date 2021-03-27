@@ -10,7 +10,6 @@
   <div class="form-group">
     <label for="id">Elige la vacunación a modificar</label>
     <select class="custom-select" (change)="onChange($event.target.value)">
-      <option value="">Selecciona...</option>
       <option
         *ngFor="let vaccination of vaccinations"
         value="{{ vaccination.id }}"
