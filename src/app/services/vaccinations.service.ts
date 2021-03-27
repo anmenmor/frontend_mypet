@@ -16,7 +16,7 @@ export class VaccinationsService {
   }
 
   listVaccinationByPetId(petId: number) {
-    return this.http.get<Vaccination>(this.VACCINATION_API_SERVER + petId);
+    return this.http.get<Vaccination>(this.VACCINATION_API_SERVER + "pet/" + petId);
   }
 
   listVaccinationById(id: number) {
