@@ -1,27 +1,27 @@
 <h1>Componente mostrar vacunaciones test</h1>
 <br><br>
-<p>Listar todas las vacunaciones:</p>
-<button (click)="listAllVaccinations()">Mostrar datos</button>
-<br /><br />
-<p>Búsqueda por ID de la mascota:</p>
-<input type="number" [(ngModel)]="petId" />
-<br /><br />
-<button (click)="listVaccinationByPetId(petId)">Mostrar datos</button>
 
-<ul *ngFor="let item of vaccinations">
-    <br>
-  <li>Fecha de vacunación: {{ item.date }}</li>
-  <li>¿Ha sido vacunado?: {{ item.done }}</li>
-  <li>ID de la mascota: {{ item.pet_id }}</li>
-  <li>ID de la vacuna: {{ item.vaccine_id }}</li>
-</ul>
-
-<ul *ngIf="vaccination.pet_id != null;else noVaccination">
-    <br>
-  <li>Fecha de vacunación: {{ vaccination.date }}</li>
-  <li>¿Ha sido vacunado?: {{ vaccination.done }}</li>
-  <li>ID de la mascota: {{ vaccination.pet_id }}</li>
-  <li>ID de la vacuna: {{ vaccination.vaccine_id }}</li>
-</ul>
 
 <ng-template #noVaccination><br><br>Ingresa un ID de mascota válido para ver los datos de la vacunación</ng-template>
+
+<table class="table table-hover">
+  <thead>
+      <tr>
+          <td>Fecha</td>
+          <td>¿Realizado?</td>
+          <td>ID Mascota</td>
+          <td>ID Vacuna</td>
+          <td>Acción</td>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of vaccinations" [routerLink]="['/vaccinations/updateVaccination']" [queryParams]="{ id: item.id }">
+          <td>{{item.date}}</td>
+          <td>{{item.done}}</td>
+          <td>{{item.pet_id}}</td>
+          <td>{{item.vaccine_id}}</td>
+          <button type="button" [routerLink]="['/vaccinations/updateVaccination', item.id]">
+            Modificar estado</button>
+      </tr>
+  </tbody>
+</table> 

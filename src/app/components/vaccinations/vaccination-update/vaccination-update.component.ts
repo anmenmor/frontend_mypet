@@ -10,7 +10,7 @@ import { VaccinationsService } from "src/app/services/vaccinations.service";
   templateUrl: "./vaccination-update.component.html",
   styleUrls: ["./vaccination-update.component.css"],
 })
-export class VaccinationUpdateComponent implements OnInit{
+export class VaccinationUpdateComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
   petId!: number;
   id!: number;
@@ -18,29 +18,42 @@ export class VaccinationUpdateComponent implements OnInit{
   vaccinations: any;
   htmlMsg!: String;
 
-  constructor(private route: ActivatedRoute,private formBuilder: FormBuilder,private vaccinationService: VaccinationsService) {
+  constructor(
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private vaccinationService: VaccinationsService
+  ) {
     this.updateVaccination = this.formBuilder.group({
       done: false,
     });
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.routeSub = this.route.params.subscribe((params) => {
+      this.id = params["id"];
       this.petId = params["petId"];
     });
-    this.vaccinationService.listVaccinationByPetId(this.petId).subscribe((data) => (this.vaccinations = data));
+    if (this.petId) {
+      this.vaccinationService
+        .listVaccinationByPetId(this.petId)
+        .subscribe((data) => (this.vaccinations = data));
+    }
+    if (this.id) {
+      this.vaccinationService
+        .listVaccinationById(this.id)
+        .subscribe((data) => (this.vaccinations = data));
+    }
   }
 
-  onChange(id:number) {
+  onChange(id: number) {
     this.id = id;
-}
+  }
 
-  onSubmit(done:boolean) {
-    this.vaccinationService
-      .updateVaccinationStatus(this.id,done)
-      .subscribe(
-        (data) => (this.htmlMsg = "Estado de la vacunación modificado correctamente"),
-        (exception) => (this.htmlMsg = exception.error.message)
-      );
+  onSubmit(done: boolean) {
+    this.vaccinationService.updateVaccinationStatus(this.id, done).subscribe(
+      (data) =>
+        (this.htmlMsg = "Estado de la vacunación modificado correctamente"),
+      (exception) => (this.htmlMsg = exception.error.message)
+    );
   }
 }
