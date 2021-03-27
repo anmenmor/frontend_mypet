@@ -1,27 +1,37 @@
-<h1>Componente mostrar vacunaciones test</h1>
-<br><br>
+<h2>Listado de vacunaciones</h2>
+<br /><br />
 
-
-<ng-template #noVaccination><br><br>Ingresa un ID de mascota válido para ver los datos de la vacunación</ng-template>
+<ng-template #noVaccination
+  ><br /><br />Ingresa un ID de mascota válido para ver los datos de la
+  vacunación</ng-template
+>
 
 <table class="table table-hover">
   <thead>
-      <tr>
-          <td>Fecha</td>
-          <td>¿Realizado?</td>
-          <td>ID Mascota</td>
-          <td>ID Vacuna</td>
-          <td>Acción</td>
-      </tr>
+    <tr>
+      <td>Fecha</td>
+      <td>¿Realizado?</td>
+      <td>ID Mascota</td>
+      <td>ID Vacuna</td>
+      <td>Acción</td>
+    </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let item of vaccinations" [routerLink]="['/vaccinations/updateVaccination']" [queryParams]="{ id: item.id }">
-          <td>{{item.date}}</td>
-          <td>{{item.done}}</td>
-          <td>{{item.pet_id}}</td>
-          <td>{{item.vaccine_id}}</td>
-          <button type="button" [routerLink]="['/vaccinations/updateVaccination', item.id]">
-            Modificar estado</button>
-      </tr>
+    <tr
+      *ngFor="let item of vaccinations"
+      [routerLink]="['/vaccinations/updateVaccination']"
+      [queryParams]="{ id: item.id }"
+    >
+      <td>{{ item.date }}</td>
+      <td>{{ item.done ? "Sí" : "No" }}</td>
+      <td>{{ item.pet_id }}</td>
+      <td>{{ item.vaccine_id }}</td>
+      <button
+        type="button"
+        [routerLink]="['/vaccinations/updateVaccination', item.id]"
+      >
+        Modificar estado
+      </button>
+    </tr>
   </tbody>
-</table> 
+</table>
