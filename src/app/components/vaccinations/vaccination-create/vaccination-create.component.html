@@ -1,37 +1,30 @@
-<div class="container">
-  <h2>Añadir vacunación test</h2><br><br>
+<div *ngIf="valid" class="container">
+  <h2>Añadir vacunación test</h2>
+  <br /><br />
 
   <form
     [formGroup]="addVaccination"
     (ngSubmit)="onSubmit(addVaccination.value)"
   >
+    <div *ngIf="clients.length > 0 && pet_id == null" class="form-group">
+      <label for="client_id">Elige al propietario de la mascota</label>
+      <select class="custom-select" (change)="updateId($event.target.value)">
+        <option value="">Selecciona...</option>
+        <option *ngFor="let client of clients" value="{{ client.id }}">
+          {{ client.name }}
+        </option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="client_id">Elige al propietario de la mascota</label>
-    <select class="custom-select" (change)="onChange($event.target.value)">
-      <option value="">Selecciona...</option>
-      <option
-        *ngFor="let client of clients"
-        value="{{ client.id }}"
-      >
-        {{ client.name }}
-      </option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="pet_id">Elige la mascota a vacunar </label>
-    <select
-      class="custom-select"
-      formControlName="pet_id"
-      [value]="pet_id"
-    >
-      <option value="">Selecciona...</option>
-      <option *ngFor="let pet of pets" value="{{pet.id}}">
-        {{ pet.name }}
-      </option>
-    </select>
-  </div>
+    <div *ngIf="pets.length > 0" class="form-group">
+      <label for="pet_id">Elige la mascota a vacunar </label>
+      <select class="custom-select" formControlName="pet_id" [value]="pet_id">
+        <option value="">Selecciona...</option>
+        <option *ngFor="let pet of pets" value="{{ pet.id }}">
+          {{ pet.name }}
+        </option>
+      </select>
+    </div>
 
     <div class="form-group">
       <label for="date">Fecha de vacunación</label>
@@ -51,7 +44,7 @@
         [value]="vaccine_id"
       >
         <option value="">Selecciona...</option>
-        <option *ngFor="let vaccine of vaccines" value="{{vaccine.id}}">
+        <option *ngFor="let vaccine of vaccines" value="{{ vaccine.id }}">
           {{ vaccine.name }}
         </option>
       </select>

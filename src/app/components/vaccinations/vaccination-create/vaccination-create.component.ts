@@ -17,10 +17,13 @@ import { VaccinesService } from "src/app/services/vaccines.service";
   styleUrls: ["./vaccination-create.component.css"],
 })
 export class VaccinationCreateComponent implements OnInit {
+  // Valid: The form will show up if the component is called without any url params, but if it's called with a client ID, it'll only show if it's a valid id (has pets)
+
   private routeSub: Subscription = Subscription.EMPTY;
-  client_id: number = -1;
-  vaccine_id: number = -1;
-  pet_id: number = -1;
+  client_id!: number;
+  vaccine_id!: number;
+  pet_id!: number;
+  valid: boolean = false;
   addVaccination: any;
   clients: Clients[] = [];
   vaccines: Vaccine[] = [];
@@ -44,28 +47,52 @@ export class VaccinationCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Get clients
-    this.clientsListService.listClients().subscribe((data: Clients[]) => {
-      this.clients = Object.values(data);
+    //Get url params
+    this.routeSub = this.route.params.subscribe((params) => {
+      this.client_id = params["clientId"];
+      this.pet_id = params["petId"];
     });
+    //Pet ID sent already via button?
+    if (this.pet_id !== null) {
+      this.valid = true;
+      this.addVaccination.controls["pet_id"].setValue(this.pet_id);
+    }
+    //Client ID sent already via button?
+    if (this.client_id == null) {
+      this.valid = true;
+      this.clientsListService.listClients().subscribe((data: Clients[]) => {
+        this.clients = Object.values(data);
+      });
+    } else {
+      this.updateId(this.client_id);
+    }
     //Get vaccines
     this.vaccinesService
       .listAllVaccines()
       .subscribe((data: Vaccine[]) => (this.vaccines = data));
   }
 
-  onChange(client_id: number) {
-    this.client_id = client_id;
+  updateId(client_id: number) {
     //Get pets
+    this.client_id = client_id;
     this.petService.listAllPets(this.client_id).subscribe((data: Pet[]) => {
       this.pets = Object.values(data);
+      if (this.pets.length > 0) {
+        this.valid = true;
+        this.htmlMsg = '';
+      } else {
+        this.htmlMsg = "El cliente seleccionado no dispone de mascotas dadas de alta";
+      }
     });
   }
 
   onSubmit(formData: Vaccination) {
     this.vaccinationService.addVaccination(formData).subscribe(
       (data) => (this.htmlMsg = "Vacunación añadida correctamente"),
-      (exception) => (this.htmlMsg = exception.error.message)
+      (exception) =>
+        (this.htmlMsg =
+          "Se ha producido el siguiente error: <br><br>" +
+          exception.error.message)
     );
   }
 }
