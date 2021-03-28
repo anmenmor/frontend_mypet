@@ -20,7 +20,7 @@ export class CreatePetComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public fb: FormBuilder,
-    private PetService: PetService,
+    private petService: PetService,
     ) { }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class CreatePetComponent implements OnInit {
       && !controls.age.errors && !controls.species.errors &&
       !controls.breed.errors){
        const pet: Pet = this.petForm.value;
-       this.PetService.createPet(pet, this.clientId).subscribe((data: Pet) =>
+       this.petService.createPet(pet, this.clientId).subscribe((data: Pet) =>
         alert("La mascota ha sido añadida correctamente")
        )
     }
