@@ -12,6 +12,9 @@ import { throwError } from 'rxjs/internal/observable/throwError';
   export class AuthClientsService {
   
     private REGISTER_CLIENTS_API_SERVER="http://127.0.0.1:8000/api/registerClients";
+    private LOGIN_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/loginClients";
+    private LIST_CLIENTS_API_SERVER ="http://localhost:8000/api/clientsList";
+    private UPDATE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/update/"
     constructor(private http: HttpClient) { }
   
     // Registro
@@ -60,12 +63,28 @@ import { throwError } from 'rxjs/internal/observable/throwError';
       );  
     }
   
-    // Cliente usuario
-    profileClients(): Observable<any> {
-      return this.http.get('http://127.0.0.1:8000/api/userClients');
-    }
-  
+    //CLientes listado
+  profileClients(): Observable<any> {
+    return this.http.get('http://127.0.0.1:8000/api/clientsList');
   }
 
+  //list Employees
+  listClients(): Observable<Clients[]> {
+    return this.http.get<Clients[]>(this.LIST_CLIENTS_API_SERVER);
+  }
 
+  //Update employee
+  updateClients(clients: Clients): Observable<Clients> {
+    console.log("Actualizando cliente:" + clients.id);
+    console.log(clients);
+    return this.http.put<Clients>(this.UPDATE_CLIENTS_API_SERVER+clients.id, clients)
+    .pipe(
+      catchError((error: HttpErrorResponse) => { 
+        return throwError('Something bad happend, please try again later');
+      })
+    )
+     
+  }
+
+  }
 
