@@ -3,5 +3,6 @@
     <li *ngFor = "let pet of pets">
         {{pet.name}}
         {{pet.species}}
+        <a routerLink="./{{pet.id}}">ver detalles</a>
     </li>
 </ul>
