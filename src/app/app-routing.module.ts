@@ -15,7 +15,7 @@ import { VaccinationsComponent } from './components/vaccinations/vaccination-lis
 import { VaccinationUpdateComponent } from './components/vaccinations/vaccination-update/vaccination-update.component';
 import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
 import { EmployeesUpdateComponent} from  './components/employees/employees-update/employees-update.component';
-
+import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
 
 
 const routes: Routes = [
@@ -28,6 +28,7 @@ const routes: Routes = [
   {path: 'vaccines', component:VaccinesComponent, pathMatch: 'full'},
   {path: 'clients/:clientId/pets/createPet', component: CreatePetComponent, pathMatch: 'full'},
   {path: 'clients/:clientId/pets', component: ListPetsComponent, pathMatch: 'full'},
+  {path: 'clients/:clientId/pets/:petId', component: PetDetailComponent, pathMatch: 'full'},
   {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
   {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
   {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},

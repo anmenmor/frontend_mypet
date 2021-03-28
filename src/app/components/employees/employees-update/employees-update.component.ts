@@ -63,7 +63,7 @@ export class EmployeesUpdateComponent implements OnInit {
 
       of(this.getWorkShift()).subscribe(workShifts => {
         this.workShifts = workShifts;
-        workShifts.forEach(element => {
+        workShifts.forEach((element: any) => {
           if(element.name == this.employeeDetails.workShifts){
             this.updateForm.controls.workShifts.patchValue(element.name);
           }
@@ -71,7 +71,7 @@ export class EmployeesUpdateComponent implements OnInit {
       });
 
       this.getSpecility().then(specialities => {
-        specialities.forEach(element => {
+        specialities.forEach((element : any) => {
           if(element.id === this.employeeDetails.specialities){
             this.updateForm.controls.specialities.patchValue(element.id);
           }
