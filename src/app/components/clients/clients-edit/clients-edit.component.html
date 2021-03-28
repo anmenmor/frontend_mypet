@@ -1,1 +1,27 @@
-<p>clients-edit works!</p>
+<div *ngIf="clientsDetails && edit" class="card w-50">
+    <form [formGroup]="updateForm" (ngSubmit)="update()">
+        <h4 class="card-header">Editar cliente:</h4>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input class="form-control" type="text" formControlName="name" value="{{ clientsDetails.name }}" />
+        </div>
+        <div class="form-group">
+            <label>Apellidos</label>
+            <input class="form-control" type="text" formControlName="surname" value="{{ clientsDetails.surname }}" />
+        </div>
+        <div class="form-group">
+            <label>Correo electronico</label>
+            <input class="form-control" type="email" formControlName="email" value="{{ clientsDetails.email }}" />
+        </div >
+        <div class="form-group">
+            <label>Teléfono</label>
+            <input class="form-control" type="number" formControlName="phone" value="{{ clientsDetails.phone }}" />
+        </div>
+       
+        
+
+        <button>Guardar actualización</button>
+        <br />
+        <br />
+    </form>
+</div>

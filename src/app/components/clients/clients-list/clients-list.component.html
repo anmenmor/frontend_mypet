@@ -1,8 +1,9 @@
+<app-clients-edit [clientsSelected]="clientsSelected"></app-clients-edit>
 <h1>Listado de Clientes</h1>
 <button (click)="listClients()">Mostrar clientes</button>
 <br /><br />
 <table>
-    <tr>
+    <tr *ngIf ="submitted">
         <th>ID</th>
         <th>Complete name</th>
         <th>Email</th>
@@ -14,6 +15,10 @@
         <td>{{client.name}} {{client.surname}}</td>
         <td>{{client.email}}</td>
         <td>{{client.phone}}</td>
-       
+        <td>
+        <button>Eliminar</button>
+        <button (click)="sendSelected(clients)">Editar</button> 
+        </td>
     </tr>
 </table>
+
