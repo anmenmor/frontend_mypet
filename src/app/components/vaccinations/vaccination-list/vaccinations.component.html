@@ -14,8 +14,6 @@
   <tbody>
     <tr
       *ngFor="let item of vaccinations"
-      [routerLink]="['/vaccinations/updateVaccination']"
-      [queryParams]="{ id: item.id }"
     >
       <td>{{ item.date }}</td>
       <td>{{ item.done ? "Sí" : "No" }}</td>
