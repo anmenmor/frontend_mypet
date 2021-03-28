@@ -8,7 +8,7 @@
   >
     <div *ngIf="clients.length > 0 && pet_id == null" class="form-group">
       <label for="client_id">Elige al propietario de la mascota</label>
-      <select class="custom-select" (change)="updateId($event.target.value)">
+      <select class="custom-select" (change)="updateId($any($event.target).value)">
         <option value="">Selecciona...</option>
         <option *ngFor="let client of clients" value="{{ client.id }}">
           {{ client.name }}
