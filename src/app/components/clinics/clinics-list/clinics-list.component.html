@@ -15,8 +15,6 @@
   <tbody>
     <tr
       *ngFor="let item of clinics"
-      [routerLink]="['/clinics/updateClinic']"
-      [queryParams]="{ id: item.id }"
     >
       <td>{{ item.name }}</td>
       <td>{{ item.city }}</td>

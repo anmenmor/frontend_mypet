@@ -17,6 +17,8 @@ import { VaccinesService } from "src/app/services/vaccines.service";
 export class VaccinationCreateComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
   clientId: number = -1;
+  vaccine_id: number = -1;
+  pet_id: number = -1;
   addVaccination: any;
   vaccines: Vaccine[] = [];
   pets: Pet[] = [];
