@@ -32,7 +32,7 @@
         <select
           class="custom-select"
           formControlName="pet_id"
-          [ngValue]="pet_id"
+          [value]="pet_id"
         >
           <option value="">Selecciona...</option>
           <option *ngFor="let pet of pets" value="{{pet.id}}">
@@ -46,7 +46,7 @@
       <select
         class="custom-select"
         formControlName="vaccine_id"
-        [ngValue]="vaccine_id"
+        [value]="vaccine_id"
       >
         <option value="">Selecciona...</option>
         <option *ngFor="let vaccine of vaccines" value="{{vaccine.id}}">
