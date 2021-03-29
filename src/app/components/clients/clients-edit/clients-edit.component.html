@@ -10,7 +10,7 @@
             <input class="form-control" type="text" formControlName="surname" value="{{ clientsDetails.surname }}" />
         </div>
         <div class="form-group">
-            <label>Correo electronico</label>
+            <label>Email</label>
             <input class="form-control" type="email" formControlName="email" value="{{ clientsDetails.email }}" />
         </div >
         <div class="form-group">
@@ -18,9 +18,8 @@
             <input class="form-control" type="number" formControlName="phone" value="{{ clientsDetails.phone }}" />
         </div>
        
-        
-
-        <button>Guardar actualización</button>
+         <button>Guardar actualización</button>
+         <button class="btn btn-secondary" type="button" (click)="return()">Volver atrás</button>
         <br />
         <br />
     </form>

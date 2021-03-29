@@ -14,7 +14,7 @@ export class ClientsListComponent implements OnInit {
   clientsSelectedList: Clients | any;
   submitted = false;
   
-  // Añadido import: EventEmmiter y Output
+  
   
   @Output() clientsSelectedEvent = new EventEmitter<Clients>();
 
