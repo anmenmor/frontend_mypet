@@ -1,24 +1,32 @@
-<app-clients-edit [clientsSelected]="clientsSelected"></app-clients-edit>
-<h1>Listado de Clientes</h1>
-<button (click)="listClients()">Mostrar clientes</button>
+<app-clients-edit [clientsSelected]='clientsSelectedList'></app-clients-edit>
+<h1>Listado de clientes</h1>
 <br /><br />
-<table>
-    <tr *ngIf ="submitted">
-        <th>ID</th>
-        <th>Complete name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        
-    </tr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+          <td>Id</td>
+          <td>Nombre</td>
+          <td>Apellido</td>
+          <td>Email</td>
+          <td>Password</td>
+          <td>Teléfono</td>
+          
+        </tr>
+      </thead>
+      <tbody>
     <tr *ngFor="let client of clients">
         <td>{{client.id}}</td>
-        <td>{{client.name}} {{client.surname}}</td>
+        <td>{{client.name}} </td>
+        <td>{{client.surname}}</td>
         <td>{{client.email}}</td>
+        <td>{{client.password}}</td>
         <td>{{client.phone}}</td>
         <td>
         <button>Eliminar</button>
-        <button (click)="sendSelected(clients)">Editar</button> 
+        <button (click)="sendSelected(client)">Editar</button> 
         </td>
     </tr>
 </table>
+
+
 
