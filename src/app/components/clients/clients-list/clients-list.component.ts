@@ -11,39 +11,44 @@ import { AuthClientsService } from '../../../shared/auth-clients.service';
 
 export class ClientsListComponent implements OnInit {
   clients: Clients[] | any;
-  clientsSelected: Clients | any;
+  clientsSelectedList: Clients | any;
   submitted = false;
   
-  // Añadido import: EventEmmiter y Output
+  
   
   @Output() clientsSelectedEvent = new EventEmitter<Clients>();
 
-  constructor(private clientsListService: AuthClientsService) { }
+  constructor(private clientsService: AuthClientsService) { }
 
   ngOnInit(): void {
     this.clients = [];
-    this.listClients;
+    this.listClients();
   }
 
   // Se comenta el contenido del método listClients para que no de error de compilación
 
   listClients(): void {
     this.submitted = true;
-    //this.clientsListService.listClients().subscribe(data=>
-      //this.clients = Object.values(data)
-      //  .map(clientsDB => new Clients(clientsDB));
-    };
+    this.clientsService.listClients().subscribe(data=>
+     {
+        this.clients = Object.values(data).map(clientsDB => new Clients(clientsDB));
+    });
+  }
 
-// Eliminado un } aquí que hacía terminar el componente 
+
 
   sendSelected(clients: Clients): void{
     console.log(clients);
   
-    this.clientsSelected =  clients;
+    this.clientsSelectedList =  clients;
     this.clientsSelectedEvent.emit(clients);
   }
  
 
 }
+
+
+
+
 
   

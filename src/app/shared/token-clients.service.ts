@@ -36,6 +36,8 @@ export class TokenClientsService {
      }
   }
 
+  
+
   payload(token: any) {
     const jwtPayload = token.split('.')[1];
     return JSON.parse(atob(jwtPayload));

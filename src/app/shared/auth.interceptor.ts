@@ -10,7 +10,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         let accessToken = this.employeeTokenService.getToken();
-
         if(!accessToken){
             accessToken = this.clientTokenService.getToken();
         }
