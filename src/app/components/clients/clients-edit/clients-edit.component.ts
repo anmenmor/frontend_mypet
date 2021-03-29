@@ -39,7 +39,7 @@ export class ClientsEditComponent implements OnInit {
     // Añadido this. a las variables que daban error 
     
     @Input()
-    set clientsSelected(employeeSelected: Clients){
+    set clientsSelected(clientsSelected: Clients){
       if(this.clientsSelected){
         this.edit = true;
         this.clientsDetails = this.clientsSelected;
@@ -80,8 +80,9 @@ export class ClientsEditComponent implements OnInit {
       this.clientsDetails.phone  = this.updateForm.value.phone;
       console.log(this.clientsDetails);
       this.clientsService.updateClients(this.clientsDetails).subscribe(
-        data => {this.clientsDetails = new Clients(data);
-          alert('Cliente actualizado!'); }  );
+       // data => {this.clientsDetails = new Clients(data);
+         // alert('Cliente actualizado!'); }  
+         );
   
     }
   
