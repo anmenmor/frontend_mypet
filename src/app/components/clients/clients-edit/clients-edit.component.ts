@@ -80,8 +80,8 @@ export class ClientsEditComponent implements OnInit {
       this.clientsDetails.phone  = this.updateForm.value.phone;
       console.log(this.clientsDetails);
       this.clientsService.updateClients(this.clientsDetails).subscribe(
-       // data => {this.clientsDetails = new Clients(data);
-         // alert('Cliente actualizado!'); }  
+        data => {this.clientsDetails = new Clients(data);
+          alert('Cliente actualizado!'); }  
          );
   
     }

@@ -65,7 +65,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
   
     //CLientes listado
   profileClients(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/clientsList');
+    return this.http.get('http://127.0.0.1:8000/api/userClients');
   }
 
   //list Employees
