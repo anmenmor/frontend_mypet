@@ -51,7 +51,7 @@ export class EmployeesLoginComponent implements OnInit {
         },() => {
           this.authState.setAuthState(true);
           this.loginForm.reset()
-          this.router.navigate(['employees']);
+          this.router.navigate(['clinics/main']);
         }
       );
     }

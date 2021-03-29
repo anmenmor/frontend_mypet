@@ -1,0 +1,22 @@
+<div class="d-flex" id="wrapper" style="background-color: rgb(105, 206, 172);">
+    <!-- Sidebar -->
+    <div class="bg-light border-left" id="sidebar-wrapper">
+      <div class="sidebar-heading">CLINICA DOGGY </div>
+      <div class="list-group list-group-flush">
+        <a routerLink="/" class="list-group-item list-group-item-action bg-light">Datos de mi clinica</a>
+        <a (click)="employeesShow()" class="list-group-item list-group-item-action bg-light">Empleados</a>
+        <a (click)="clientsShow()" class="list-group-item list-group-item-action bg-light">Clientes</a>
+        <a routerLink="#" class="list-group-item list-group-item-action bg-light">Angenda de consultas</a>
+        <a (click)="vaccinationsShow()" class="list-group-item list-group-item-action bg-light">Vacunaciones</a>
+      </div>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <app-employees-list *ngIf="employees"></app-employees-list>
+            <app-clients-list *ngIf="clients"></app-clients-list>
+            <app-vaccinations *ngIf="vaccination"></app-vaccinations>
+            <h1 class="mt-4">Clínica Doggy</h1>
+          </div>
+        </div>
+  </div>
+  <!-- /#wrapper -->

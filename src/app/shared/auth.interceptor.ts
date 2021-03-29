@@ -11,13 +11,12 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         let accessToken = this.employeeTokenService.getToken();
         if(!accessToken){
-            accessToken= this.clientTokenService.getToken();
+            accessToken = this.clientTokenService.getToken();
         }
+        
         req = req.clone({
             setHeaders: {
-                Authorization: "Bearer " + accessToken
-                            
-                
+                Authorization: "Bearer " + accessToken           
             },
             
         });

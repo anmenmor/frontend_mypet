@@ -65,8 +65,8 @@ export class AuthEmployeeService {
     );  
   }
 
-  // Access employee profile
-  profileEmployee(): Observable<any> {
+  // Get employee authenticated
+  getAuthenticateUser(): Observable<any> {
     return this.http.get('http://127.0.0.1:8000/api/employee');
   }
 

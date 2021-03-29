@@ -50,7 +50,7 @@ export class EmployeesUpdateComponent implements OnInit {
       this.updateForm = this.fb.group({
         name: [this.employeeDetails.name, [Validators.compose([
           Validators.required,
-          Validators.pattern('[a-zA-Z]+')])]],
+          Validators.pattern('[a-zA-Z ]+')])]],
         surname: [this.employeeDetails.surname, [Validators.compose([
           Validators.required,
           Validators.pattern('[a-zA-Z ]+')])]],

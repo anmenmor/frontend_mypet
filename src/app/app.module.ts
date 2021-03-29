@@ -29,6 +29,7 @@ import { VaccinationCreateComponent } from './components/vaccinations/vaccinatio
 import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/side-navbar-clinics.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { FooterComponent } from './components/footer/footer.component';
     PetDetailComponent,
     HomeComponent,
     FooterComponent,
+    SideNavbarClinicsComponent,
   ],
   imports: [
     BrowserModule,
