@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {Clients } from 'src/app/models/clients';
 import { AuthClientsService } from 'src/app/shared/auth-clients.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
+// Añadido import de Input
 
 @Component({
   selector: 'app-clients-edit',
@@ -13,10 +14,11 @@ import { of } from 'rxjs';
 })
 export class ClientsEditComponent implements OnInit {
 
- 
-    updateForm: FormGroup;
+    //Añadido ! a variables no inicializadas para que no salte error
+    
+    updateForm!: FormGroup;
     clientsDetails: Clients | any;
-    edit: boolean;
+    edit!: boolean;
     
   
     constructor(
@@ -33,15 +35,18 @@ export class ClientsEditComponent implements OnInit {
       
     }
     //Recibe uncliente de la lista
+
+    // Añadido this. a las variables que daban error 
+    
     @Input()
     set clientsSelected(employeeSelected: Clients){
-      if(clientsSelected){
+      if(this.clientsSelected){
         this.edit = true;
-        this.clientsDetails = clientsSelected;
+        this.clientsDetails = this.clientsSelected;
         console.log("update component");
-        console.log(clientsSelected);
+        console.log(this.clientsSelected);
         try {
-          this.clientsDetails = clientsSelected;
+          this.clientsDetails = this.clientsSelected;
         } catch (e){
           console.log(e.status, e.message);
         }
