@@ -16,7 +16,7 @@
         El nombre es obligatorio
       </div>
       <div *ngIf="registerForm.controls.name.errors.pattern">
-        El nombre sólo debe contener letras
+        El nombre sólo debe contener letras.
       </div>
     </div>
 
@@ -26,10 +26,10 @@
     </div>
     <div *ngIf="submitted && registerForm.controls.surname.errors" class="alert alert-danger" role="alert">
         <div *ngIf="registerForm.controls.surname.errors.required">
-          Los apellidos son obligatorios
+          Los apellidos son obligatorios.
         </div>
         <div *ngIf="registerForm.controls.surname.errors.pattern">
-            Los apellidos deben tener un formato válido
+            Los apellidos deben tener un formato válido.
           </div>
     
       </div>
@@ -39,7 +39,10 @@
     </div>
     <div *ngIf="submitted && registerForm.controls.email.errors" class="alert alert-danger" role="alert">
         <div *ngIf="registerForm.controls.email.errors.required">
-          El correo electrónico es obligatorio
+          El correo electrónico es obligatorio.
+        </div>
+        <div *ngIf="registerForm.controls.email.errors.email">
+          El correo electrónico no es válido.
         </div>
       </div>
     <div class="form-group">
@@ -48,7 +51,7 @@
     </div>
     <div *ngIf="submitted && registerForm.controls.password.errors" class="alert alert-danger" role="alert">
         <div *ngIf="registerForm.controls.password.errors.required">
-        La contraseña es obligatoria
+        La contraseña es obligatoria.
         </div>
         <div *ngIf="registerForm.controls.password.errors.pattern">
         La contraseña debe tener un mínimo de 6 caracteres (al menos una letra mayúscula, una minúscula y un número)
@@ -66,7 +69,7 @@
       </div>
       <div *ngIf="submitted && registerForm.controls.admin.errors" class="alert alert-danger" role="alert">
         <div *ngIf="registerForm.controls.admin.errors.required">
-          Debe seleccionar una opción
+          Debe seleccionar una opción.
         </div>
       </div>
 
