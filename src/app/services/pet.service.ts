@@ -32,6 +32,10 @@ export class PetService {
   getPetDetail(petId: number): Observable<Pet>{
     return this.http.get<Pet>(this.PETS_API_SERVER + '/' + petId);
   }
+
+  getCompletePetList(): Observable<Pet>{
+    return this.http.get<Pet>(this.PETS_API_SERVER);
+  }
   
   updatePet(updateData: Pet, petId: number): Observable<Pet>{
     const body = {'name': updateData.name, 'sex': updateData.sex, 'weight': updateData.weight, 'age': updateData.age, 
