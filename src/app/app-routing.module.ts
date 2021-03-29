@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 import { EmployeesLoginComponent } from './components/employees/employees-login/employees-login.component';
 import { EmployeesRegisterComponent } from  './components/employees/employees-register/employees-register.component';
 import { ClinicsListComponent } from './components/clinics/clinics-list/clinics-list.component';
@@ -19,6 +20,8 @@ import { PetDetailComponent } from './components/pet-detail/pet-detail.component
 
 
 const routes: Routes = [
+  
+  {path: '',component:HomeComponent, pathMatch:'full'},
   {path: 'loginEmployee', component:EmployeesLoginComponent, pathMatch: 'full'},
   {path: 'registerEmployee', component:EmployeesRegisterComponent, pathMatch: 'full'},
   {path: 'clinics', component:ClinicsListComponent, pathMatch: 'full'},

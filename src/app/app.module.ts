@@ -27,6 +27,8 @@ import { VaccinationUpdateComponent } from './components/vaccinations/vaccinatio
 import { EmployeesUpdateComponent } from './components/employees/employees-update/employees-update.component';
 import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
 import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
+import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import { PetDetailComponent } from './components/pet-detail/pet-detail.component
     VaccinationUpdateComponent,
     VaccinationCreateComponent,
     PetDetailComponent,
+    HomeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
