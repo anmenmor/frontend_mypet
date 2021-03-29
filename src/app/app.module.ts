@@ -26,6 +26,9 @@ import { VaccinationsComponent } from './components/vaccinations/vaccination-lis
 import { VaccinationUpdateComponent } from './components/vaccinations/vaccination-update/vaccination-update.component';
 import { EmployeesUpdateComponent } from './components/employees/employees-update/employees-update.component';
 import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
+import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
+import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/side-navbar-clinics.component';
 
 
@@ -49,6 +52,9 @@ import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/sid
     EmployeesUpdateComponent,
     VaccinationUpdateComponent,
     VaccinationCreateComponent,
+    PetDetailComponent,
+    HomeComponent,
+    FooterComponent,
     SideNavbarClinicsComponent,
   ],
   imports: [

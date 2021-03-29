@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 import { EmployeesLoginComponent } from './components/employees/employees-login/employees-login.component';
 import { EmployeesRegisterComponent } from  './components/employees/employees-register/employees-register.component';
 import { ClinicsListComponent } from './components/clinics/clinics-list/clinics-list.component';
@@ -15,11 +16,14 @@ import { VaccinationsComponent } from './components/vaccinations/vaccination-lis
 import { VaccinationUpdateComponent } from './components/vaccinations/vaccination-update/vaccination-update.component';
 import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
 import { EmployeesUpdateComponent} from  './components/employees/employees-update/employees-update.component';
+import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
 import { SideNavbarClinicsComponent} from './components/side-navbar-clinics/side-navbar-clinics.component';
 
 
 
 const routes: Routes = [
+  
+  {path: '',component:HomeComponent, pathMatch:'full'},
   {path: 'loginEmployee', component:EmployeesLoginComponent, pathMatch: 'full'},
   {path: 'registerEmployee', component:EmployeesRegisterComponent, pathMatch: 'full'},
   {path: 'clinics', component:ClinicsListComponent, pathMatch: 'full'},
@@ -29,11 +33,14 @@ const routes: Routes = [
   {path: 'vaccines', component:VaccinesComponent, pathMatch: 'full'},
   {path: 'clients/:clientId/pets/createPet', component: CreatePetComponent, pathMatch: 'full'},
   {path: 'clients/:clientId/pets', component: ListPetsComponent, pathMatch: 'full'},
+  {path: 'clients/:clientId/pets/:petId', component: PetDetailComponent, pathMatch: 'full'},
   {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
   {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
   {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},
   {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
-  {path: 'vaccinations/addVaccination/:clientId', component:VaccinationCreateComponent, pathMatch: 'full'},
+  {path: 'vaccinations/addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
+  {path: 'vaccinations/addVaccination/clients/:clientId', component:VaccinationCreateComponent, pathMatch: 'full'},
+  {path: 'vaccinations/addVaccination/pets/:petId', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/updateVaccination/:id', component:VaccinationUpdateComponent, pathMatch: 'full'},
   {path: 'vaccinations/updateVaccination/pets/:petId', component:VaccinationUpdateComponent, pathMatch: 'full'},
   {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},

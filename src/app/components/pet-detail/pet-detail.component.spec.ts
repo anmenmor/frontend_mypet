@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClientsListComponent } from './clients-list.component';
+import { PetDetailComponent } from './pet-detail.component';
 
-describe('ClientsListComponent', () => {
-  let component: ClientsListComponent;
-  let fixture: ComponentFixture<ClientsListComponent>;
+describe('PetDetailComponent', () => {
+  let component: PetDetailComponent;
+  let fixture: ComponentFixture<PetDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClientsListComponent ]
+      declarations: [ PetDetailComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClientsListComponent);
+    fixture = TestBed.createComponent(PetDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,5 +23,3 @@ describe('ClientsListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-

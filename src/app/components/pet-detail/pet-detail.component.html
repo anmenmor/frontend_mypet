@@ -1,0 +1,34 @@
+<h2>Detalle de la mascota:</h2>
+<a routerLink="../">volver</a>
+<form [formGroup]="petDetailForm" (ngSubmit)="updatePet()">
+    <label>Nombre</label><br>
+    <input type="text" formControlName="name"><br><br>
+        <div *ngIf="petDetailForm.controls.name.errors">
+          El nombre es obligatorio
+        </div>
+    <label>Sexo</label><br>
+    <input type="radio" value='Male' formControlName="sex" >Male
+    <input type="radio" value='Female' formControlName="sex">Female<br><br>
+    <label>Peso</label><br>
+    <input type="number" formControlName="weight" ><br>
+    <div *ngIf="petDetailForm.controls.weight.errors">
+        El peso es obligatorio
+      </div>
+    <label>Edad</label><br>
+    <input type="number" formControlName="age"><br>
+    <div *ngIf="petDetailForm.controls.age.errors">
+        La edad es obligatoria
+      </div>
+    <label>Especie</label><br>
+    <input type="text" formControlName="species"><br>
+    <div *ngIf="petDetailForm.controls.species.errors">
+        La especie es obligatoria
+      </div>
+    <label>Raza</label><br>
+    <input type="text" formControlName="breed"><br><br>
+    <div *ngIf="petDetailForm.controls.breed.errors">
+        La raza es obligatoria
+      </div>
+    <button type="submit">Actualizar</button><br>
+</form>
+
