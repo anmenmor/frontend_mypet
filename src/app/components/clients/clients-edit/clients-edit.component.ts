@@ -3,6 +3,7 @@ import {Clients } from 'src/app/models/clients';
 import { AuthClientsService } from 'src/app/shared/auth-clients.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { of } from 'rxjs';
 
 // Añadido import de Input
@@ -16,14 +17,15 @@ export class ClientsEditComponent implements OnInit {
 
     //Añadido ! a variables no inicializadas para que no salte error
     
-    updateForm!: FormGroup;
+    updateForm: FormGroup;
     clientsDetails: Clients | any;
-    edit!: boolean;
+    edit: boolean;
     
   
     constructor(
       public router: Router,
       public fb: FormBuilder,
+      private _location: Location,
       private clientsService: AuthClientsService) 
       {
        
@@ -31,7 +33,7 @@ export class ClientsEditComponent implements OnInit {
        
     ngOnInit(): void {
       this.edit = false;
-      console.log("Invoco ON init");
+      
       
     }
     //Recibe uncliente de la lista
@@ -78,12 +80,16 @@ export class ClientsEditComponent implements OnInit {
       this.clientsDetails.surname = this.updateForm.value.surname;
       this.clientsDetails.email = this.updateForm.value.email;
       this.clientsDetails.phone  = this.updateForm.value.phone;
-      console.log(this.clientsDetails);
+   
       this.clientsService.updateClients(this.clientsDetails).subscribe(
         data => {this.clientsDetails = new Clients(data);
           alert('Cliente actualizado!'); }  
          );
   
+    }
+
+    return(){
+      this._location.back();
     }
   
     
