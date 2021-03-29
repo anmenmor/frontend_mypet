@@ -51,7 +51,8 @@ export class ClinicsUpdateComponent implements OnInit {
     }
   }
 
-  onChange(e: number) {      
+  onChange(e: number) {
+    this.clinicId = e;    
     this.clinicsDataService
     .listSingleClinic(e)
     .subscribe((data) => (this.clinic = data));
