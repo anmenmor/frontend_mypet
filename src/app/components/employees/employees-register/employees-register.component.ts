@@ -33,7 +33,7 @@ export class EmployeesRegisterComponent implements OnInit {
       this.registerForm = this.fb.group({
         name: ['', [Validators.compose([
           Validators.required,
-          Validators.pattern('[a-zA-Z]+')])]],
+          Validators.pattern('[a-zA-Z ]+')])]],
         surname: ['', [Validators.compose([
           Validators.required,
           Validators.pattern('[a-zA-Z ]+')])]],

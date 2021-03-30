@@ -1,7 +1,7 @@
 <div class="card w-50 mx-auto">
 <h6 class="card-header">Registro de empleado</h6>
 <div class="card-body">
-    <div *ngIf="submitted" class="alert alert-danger">
+    <div *ngIf="submitted && error" class="alert alert-danger">
        <p *ngFor=" let error of errors;">
         {{error}}
        </p> 
