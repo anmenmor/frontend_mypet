@@ -1,5 +1,5 @@
 export class Clinic {
-    id: Number;
+    id: number;
     name: String;
     city: String;
     address: String;
