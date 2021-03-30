@@ -31,6 +31,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/side-navbar-clinics.component';
 import { DatesComponent } from './components/dates/dates.component';
+import { CreateDateComponent } from './components/dates/create-date/create-date.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { DatesComponent } from './components/dates/dates.component';
     FooterComponent,
     SideNavbarClinicsComponent,
     DatesComponent,
+    CreateDateComponent,
   ],
   imports: [
     BrowserModule,
