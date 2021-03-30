@@ -53,9 +53,18 @@ export class CreateDateComponent implements OnInit {
       this.pet_id = params["petId"];
     });
     //Pet ID sent already via button?
-    if (this.pet_id !== null) {
-      this.valid = true;
-      this.addDate.controls["pet_id"].setValue(this.pet_id);
+    if (this.pet_id != null) {
+      this.petService.getPetDetail(this.pet_id).subscribe(
+        (data) => {
+          this.valid = true;
+          this.addDate.controls["pet_id"].setValue(this.pet_id);
+        },
+        (exception) => {
+          this.htmlMsg =
+            "No existe ninguna mascota con el ID proporcionado";
+          this.valid = false;
+        }
+      );
     }
     //Client ID sent already via button?
     if (this.client_id == null) {
@@ -96,6 +105,7 @@ export class CreateDateComponent implements OnInit {
       } else {
         this.htmlMsg =
           "El cliente seleccionado no dispone de mascotas dadas de alta";
+          this.valid = false;
       }
     });
   }
