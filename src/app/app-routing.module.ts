@@ -18,6 +18,7 @@ import { VaccinationCreateComponent } from './components/vaccinations/vaccinatio
 import { EmployeesUpdateComponent} from  './components/employees/employees-update/employees-update.component';
 import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
 import { SideNavbarClinicsComponent} from './components/side-navbar-clinics/side-navbar-clinics.component';
+import { DatesComponent } from './components/dates/dates.component';
 
 
 
@@ -45,6 +46,7 @@ const routes: Routes = [
   {path: 'vaccinations/updateVaccination/pets/:petId', component:VaccinationUpdateComponent, pathMatch: 'full'},
   {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},
   {path: 'clinics/main', component: SideNavbarClinicsComponent, pathMatch: 'full'},
+  {path: 'dates', component: DatesComponent, pathMatch: 'full'},
 ];
 
 @NgModule({
