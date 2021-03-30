@@ -97,10 +97,11 @@ export class EmployeesUpdateComponent implements OnInit {
     this.employeeDetails.workShifts = this.updateForm.value.workShifts;
     this.employeeDetails.specialities = this.updateForm.value.specialities;
     console.log(this.employeeDetails);
+    if(!this.updateForm.invalid){
     this.employeeService.updateEmployee(this.employeeDetails).subscribe(
       data => {this.employeeDetails = new Employee(data);
         alert('Empleado actualizado!'); }  );
-
+      }
   }
 
   getSpecility(): Promise<any> {
@@ -117,6 +118,9 @@ export class EmployeesUpdateComponent implements OnInit {
 
       );
     });
+  }
+  cancel(){
+    this.employeeDetails = undefined;
   }
 
 }

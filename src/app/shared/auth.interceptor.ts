@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpInterceptor, HttpRequest, HttpHandler } from "@angular/common/http";
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from "@angular/common/http";
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { TokenEmployeeService } from "../shared/token-employee.service";
 import { TokenClientsService } from "../shared/token-clients.service";
+import { Observable } from "rxjs";
 
 @Injectable()
 
@@ -20,7 +23,21 @@ export class AuthInterceptor implements HttpInterceptor {
             },
             
         });
-        return next.handle(req);
+        return next.handle(req).pipe(
+            catchError((error: HttpErrorResponse) => {
+                console.log(error);
+                if( error instanceof HttpErrorResponse){
+                    console.log(error.status);
+                    console.log(error.statusText);
+                    if (error.status === 401 || error.status === 403){
+                        window.location.href = "/loginEmployee";
+                    }
+    
+                }
+                return throwError;
+            })
+        )
+       
     }
 
     

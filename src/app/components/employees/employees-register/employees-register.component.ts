@@ -19,6 +19,7 @@ export class EmployeesRegisterComponent implements OnInit {
     // specialities: {id: string, name: string}[]=[];
     specialities: Specialities[] | any;
     submitted = false;
+
   
     constructor(
       public router: Router,
@@ -61,23 +62,24 @@ export class EmployeesRegisterComponent implements OnInit {
   
     onSubmit(): void {
       this.submitted = true;
-      this.authEmployeeService.register(this.registerForm.value).subscribe(
-        result => {
-          alert('El empleado ha sido registrado correctamente!');
-        },
-        error => {
-          if(error.status == 409){
-              this.errors.push('El email introducido ya existe.');
-          }else{
-            console.log(error);
-            this.errors.push(error.error.message[0]);
+      if(!this.registerForm.invalid){
+        this.authEmployeeService.register(this.registerForm.value).subscribe(
+          result => {
+            alert('El empleado ha sido registrado correctamente!');
+          },
+          error => {
+            if(error.status == 409){
+                this.errors.push('El email introducido ya existe.');
+            }else{
+              console.log(error);
+              this.errors.push(error.error.message[0]);
+            }
+          },
+          () => {
+            this.registerForm.reset();
           }
-        },
-        () => {
-          this.registerForm.reset();
-          this.router.navigate(['loginEmployee']);
-        }
-      )
+        );
+      }
     }
 
     getWorkShift(): any {
@@ -106,7 +108,8 @@ export class EmployeesRegisterComponent implements OnInit {
     }
 
     onReset(){
-      this.submitted =false;
+      this.submitted = false;
+      // this.show = false;
       this.registerForm.reset();
     }
     // handleError(error){

@@ -1,7 +1,7 @@
 <div class="card w-50 mx-auto">
 <h6 class="card-header">Registro de empleado</h6>
 <div class="card-body">
-    <div *ngIf="submitted && error" class="alert alert-danger">
+    <div *ngIf="submitted && errors.length >0" class="alert alert-danger">
        <p *ngFor=" let error of errors;">
         {{error}}
        </p> 
@@ -91,14 +91,13 @@
     </div>
     <div>
       <button class="btn btn-block btn-primary2">Register Employee</button>
-      <button
-        class="btn btn-block btn-secondary"
-        type="reset"
-        (click)="onReset()"
-      >
+      <button class="btn btn-block btn-secondary" type="reset" (click)="onReset()">
         Cancel
       </button>
     </div>
   </form>
 </div>
 </div>
+
+<br />
+<br />

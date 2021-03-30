@@ -13,18 +13,18 @@
           <a class="nav-link" *ngIf="!isSignedIn" routerLink="/loginClients">Log in clients</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/registerClients">Register clients</a>
+          <a class="nav-link" *ngIf="isSignedIn" routerLink="/registerClients">Register clients</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="!isSignedIn" routerLink="/loginEmployee">Log in</a>
+          <a class="nav-link" *ngIf="!isSignedIn" routerLink="/loginEmployee">Log in empleados</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" *ngIf="isSignedIn" (click)="signOut()">Log out</a>
       </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/registerEmployee">Register</a>
-        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" *ngIf="isSignedIn" routerLink="/registerEmployee">Register</a>
+        </li> -->
       </ul>
     </div>
   </nav>

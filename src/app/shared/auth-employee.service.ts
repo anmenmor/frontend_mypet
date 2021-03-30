@@ -16,6 +16,7 @@ export class AuthEmployeeService {
   private LIST_EMPLOYEE_API_SERVER ="http://localhost:8000/api/employees";
   private LOGIN_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/loginEmployee";
   private UPDATE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
+  private DELETE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
 
   constructor(private http: HttpClient) { }
 
@@ -66,8 +67,8 @@ export class AuthEmployeeService {
   }
 
   // Get employee authenticated
-  getAuthenticateUser(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/employee');
+  getAuthenticateUser(): Observable<Employee> {
+    return this.http.get<Employee>('http://127.0.0.1:8000/api/employee');
   }
 
   //list Employees
@@ -86,6 +87,16 @@ export class AuthEmployeeService {
       })
     )
      
+  }
+
+  deleteEmployee(id: number): Observable<any>{
+    console.log("Eliminando empleado "+ id);
+    return this.http.delete<Employee>(this.DELETE_EMPLOYEE_API_SERVER+id)
+    .pipe(
+      catchError((error: HttpErrorResponse)=>
+      {return throwError('Something bad happend, please try again later');}
+      )
+    )
   }
 
 }
