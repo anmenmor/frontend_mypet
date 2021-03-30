@@ -19,6 +19,7 @@ import { EmployeesUpdateComponent} from  './components/employees/employees-updat
 import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
 import { SideNavbarClinicsComponent} from './components/side-navbar-clinics/side-navbar-clinics.component';
 import { DatesComponent } from './components/dates/dates.component';
+import { CreateDateComponent } from './components/dates/create-date/create-date.component';
 
 
 
@@ -47,6 +48,9 @@ const routes: Routes = [
   {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},
   {path: 'clinics/main', component: SideNavbarClinicsComponent, pathMatch: 'full'},
   {path: 'dates', component: DatesComponent, pathMatch: 'full'},
+  {path: 'dates/addDate', component: CreateDateComponent, pathMatch: 'full'},
+  {path: 'dates/addDate/clients/:clientId', component:CreateDateComponent, pathMatch: 'full'},
+  {path: 'dates/addDate/pets/:petId', component: CreateDateComponent, pathMatch: 'full'},
 ];
 
 @NgModule({

@@ -5,29 +5,28 @@ import { Location } from "@angular/common";
 import { Subscription } from "rxjs";
 import { Clients } from "src/app/models/clients";
 import { Pet } from "src/app/models/pet";
-import { Vaccination } from "src/app/models/vaccination.model";
-import { Vaccine } from "src/app/models/vaccine";
 import { ClientsListService } from "src/app/services/clients-list.service";
 import { PetService } from "src/app/services/pet.service";
-import { VaccinationsService } from "src/app/services/vaccinations.service";
-import { VaccinesService } from "src/app/services/vaccines.service";
+import { DateService } from "src/app/services/date.service";
+import { Date } from "src/app/models/date.model";
+import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
+import { Employee } from "src/app/models/Employee"
 
 @Component({
-  selector: "app-vaccination-create",
-  templateUrl: "./vaccination-create.component.html",
-  styleUrls: ["./vaccination-create.component.css"],
+  selector: "app-create-date",
+  templateUrl: "./create-date.component.html",
+  styleUrls: ["./create-date.component.css"],
 })
-export class VaccinationCreateComponent implements OnInit {
-  // Valid: The form will show up if the component is called without any url params, but if it's called with a client ID, it'll only show if it's a valid id (has pets)
-
+export class CreateDateComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
-  client_id!: number;
-  vaccine_id!: number;
   pet_id!: number;
   valid: boolean = false;
-  addVaccination: any;
+  addDate: any;
   clients: Clients[] = [];
-  vaccines: Vaccine[] = [];
+  employees: Employee[] = [];
+  employee_id!: number;
+  client_id!: number;
+  dates: Date[] = [];
   pets: Pet[] = [];
   htmlMsg!: String;
 
@@ -35,20 +34,19 @@ export class VaccinationCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private _location: Location,
     private formBuilder: FormBuilder,
-    private vaccinationService: VaccinationsService,
+    private dateService: DateService,
     private clientsListService: ClientsListService,
-    private vaccinesService: VaccinesService,
-    private petService: PetService
+    private petService: PetService,
+    private employeeService: AuthEmployeeService
   ) {
-    this.addVaccination = this.formBuilder.group({
-      date: "",
-      done: false,
+    this.addDate = this.formBuilder.group({
+      date_time: "",
       pet_id: "",
-      vaccine_id: "",
+      employee_id: "",
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     //Get url params
     this.routeSub = this.route.params.subscribe((params) => {
       this.client_id = params["clientId"];
@@ -57,7 +55,7 @@ export class VaccinationCreateComponent implements OnInit {
     //Pet ID sent already via button?
     if (this.pet_id !== null) {
       this.valid = true;
-      this.addVaccination.controls["pet_id"].setValue(this.pet_id);
+      this.addDate.controls["pet_id"].setValue(this.pet_id);
     }
     //Client ID sent already via button?
     if (this.client_id == null) {
@@ -68,10 +66,23 @@ export class VaccinationCreateComponent implements OnInit {
     } else {
       this.updateId(this.client_id);
     }
-    //Get vaccines
-    this.vaccinesService
-      .listAllVaccines()
-      .subscribe((data: Vaccine[]) => (this.vaccines = data));
+    //Get dates
+    this.dateService.listAllDates().subscribe((data) => {
+      for (const d of data as any) {
+        this.dates.push({
+          id: d.id,
+          date_time: d.date_time,
+          pet_id: d.pet_id,
+          employee_id: d.employee_id,
+        });
+      }
+    });
+    //Get employees
+    this.employeeService.listAllEmployees().subscribe((data) => {
+      this.employees = Object.values(data).map(
+        (employeeDB) => new Employee(employeeDB)
+      );
+    });
   }
 
   updateId(client_id: number) {
@@ -81,22 +92,24 @@ export class VaccinationCreateComponent implements OnInit {
       this.pets = Object.values(data);
       if (this.pets.length > 0) {
         this.valid = true;
-        this.htmlMsg = '';
+        this.htmlMsg = "";
       } else {
-        this.htmlMsg = "El cliente seleccionado no dispone de mascotas dadas de alta";
+        this.htmlMsg =
+          "El cliente seleccionado no dispone de mascotas dadas de alta";
       }
     });
   }
 
-  onSubmit(formData: Vaccination) {
-    this.vaccinationService.addVaccination(formData).subscribe(
-      (data) => (this.htmlMsg = "Vacunación añadida correctamente"),
+  onSubmit(formData: Date) {
+    this.dateService.addDate(formData).subscribe(
+      (data) => (this.htmlMsg = "Cita añadida correctamente"),
       (exception) =>
         (this.htmlMsg =
           "Se ha producido el siguiente error: <br><br>" +
           exception.error.message)
     );
   }
+
   return() {
     this._location.back();
   }
