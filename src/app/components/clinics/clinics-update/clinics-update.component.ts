@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs";
 import { Clinic } from "src/app/models/clinic.model";
@@ -21,6 +21,7 @@ export class ClinicsUpdateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
     private _location: Location,
     private formBuilder: FormBuilder,
     private clinicsDataService: ClinicsDataService
@@ -58,8 +59,8 @@ export class ClinicsUpdateComponent implements OnInit {
   onChange(e: number) {
     if (e > 0) {
       this.clinicsDataService.listSingleClinic(e).subscribe((data: any) => {
-        console.log(data);
         this.clinic = data;
+        this.cdr.detectChanges();
         this.updateForm(data[0]);
       });
     }
@@ -73,7 +74,6 @@ export class ClinicsUpdateComponent implements OnInit {
   }
 
   updateForm(data: Clinic) {
-    console.log(data);
     this.clinicUpdate.patchValue({
       id: data.id,
       name: data.name,

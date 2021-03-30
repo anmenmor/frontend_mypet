@@ -5,7 +5,10 @@
   <form [formGroup]="clinicUpdate" (ngSubmit)="onSubmit(clinicUpdate.value)">
     <div class="form-group">
       <label for="id">Elige la clínica a modificar</label>
-      <select class="custom-select" (change)="onChange($any($event.currentTarget).value)">
+      <select
+        class="custom-select"
+        (change)="onChange($any($event.currentTarget).value)"
+      >
         <option *ngFor="let item of clinics" value="{{ item.id }}">
           {{ item.name }}
         </option>
@@ -63,8 +66,11 @@
         />
       </div>
 
-      <button class="btn btn-primary" type="submit">Modificar datos</button>&nbsp;&nbsp;&nbsp;
-      <button class="btn btn-secondary" type="button" (click)="return()">Volver atrás</button>
+      <button class="btn btn-primary" type="submit">Modificar datos</button
+      >&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-secondary" type="button" (click)="return()">
+        Volver atrás
+      </button>
     </div>
   </form>
   <br /><br />
