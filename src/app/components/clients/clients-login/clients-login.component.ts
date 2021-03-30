@@ -5,13 +5,15 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TokenClientsService } from '../../../shared/token-clients.service';
 import { AuthStateService } from '../../../shared/auth-state.service';
 
+
+
 @Component({
   selector: 'app-clients-login',
   templateUrl: './clients-login.component.html',
   styleUrls: ['./clients-login.component.css']
 })
 export class ClientsLoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm : FormGroup;
   errors = [];
   submitted = false;
   serverError = false;
@@ -23,12 +25,9 @@ export class ClientsLoginComponent implements OnInit {
     private tokenClients: TokenClientsService,
     private authState: AuthStateService,
   ) {
-    // this.loginForm = this.fb.group({
-    //   email: [],
-    //   password: []
-    // })
+    
   }
-
+  
   ngOnInit():void {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -38,7 +37,7 @@ export class ClientsLoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.loginForm.value);
+    
     if(this.loginForm.value.email.length > 0 && this.loginForm.value.password.length > 0 ){
        this.authClientsService.signin(this.loginForm.value).subscribe(
         result => {
@@ -51,7 +50,7 @@ export class ClientsLoginComponent implements OnInit {
         },() => {
           this.authState.setAuthState(true);
           this.loginForm.reset()
-          this.router.navigate(['clients']);
+          this.router.navigate(['clients/main']);
         }
       );
     }
@@ -64,3 +63,8 @@ export class ClientsLoginComponent implements OnInit {
   }
 
 }
+
+
+
+
+  

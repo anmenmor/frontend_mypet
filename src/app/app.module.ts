@@ -30,6 +30,7 @@ import { PetDetailComponent } from './components/pet-detail/pet-detail.component
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/side-navbar-clinics.component';
+import { SideNavbarClientsComponent } from './components/side-navbar-clients/side-navbar-clients.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/sid
     HomeComponent,
     FooterComponent,
     SideNavbarClinicsComponent,
+    SideNavbarClientsComponent,
   ],
   imports: [
     BrowserModule,
