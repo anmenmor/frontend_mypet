@@ -32,11 +32,11 @@ export class DatesComponent implements OnInit {
       this.pets = Object.values(data);
     });
     //Get employees
-    this.employeeService.listAllEmployees().subscribe(data=>
-      {
-        this.employees = Object.values(data)
-        .map(employeeDB => new Employee(employeeDB));
-      });
+    this.employeeService.listAllEmployees().subscribe((data) => {
+      this.employees = Object.values(data).map(
+        (employeeDB) => new Employee(employeeDB)
+      );
+    });
     //Get dates
     this.dateService.listAllDates().subscribe((data) => {
       for (const d of data as any) {
@@ -55,7 +55,8 @@ export class DatesComponent implements OnInit {
   }
 
   getEmployeeById(id: any) {
-    return this.employees.filter((employee: Employee) => employee.id == id)[0].name;
+    return this.employees.filter((employee: Employee) => employee.id == id)[0]
+      .name;
   }
 
   deleteDate(dateId: number) {
