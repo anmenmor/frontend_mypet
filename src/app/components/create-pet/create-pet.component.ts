@@ -49,9 +49,10 @@ export class CreatePetComponent implements OnInit {
       && !controls.age.errors && !controls.species.errors &&
       !controls.breed.errors){
        const pet: Pet = this.petForm.value;
-       this.petService.createPet(pet, this.clientId).subscribe((data: Pet) =>
-        alert("La mascota ha sido añadida correctamente")
-       )
+       this.petService.createPet(pet, this.clientId).subscribe((data: Pet) => {
+        alert("La mascota ha sido añadida correctamente");
+        history.back();
+       })
     }
     
     
