@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthEmployeeService } from '../../../shared/auth-employee.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { of } from 'rxjs';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 import { Specialities } from '../../../models/Specialities';
+
 
 @Component({
   selector: 'app-employees-register',
@@ -16,9 +17,10 @@ export class EmployeesRegisterComponent implements OnInit {
     registerForm: FormGroup;
     errors: string [] = [];
     workShifts: {id: string, name: string}[]=[];
-    // specialities: {id: string, name: string}[]=[];
     specialities: Specialities[] | any;
     submitted = false;
+    @Output() buttonRegisterClick = new EventEmitter<void>();
+
   
     constructor(
       public router: Router,
@@ -33,10 +35,10 @@ export class EmployeesRegisterComponent implements OnInit {
       this.registerForm = this.fb.group({
         name: ['', [Validators.compose([
           Validators.required,
-          Validators.pattern('[a-zA-Z]+')])]],
+          Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
         surname: ['', [Validators.compose([
           Validators.required,
-          Validators.pattern('[a-zA-Z ]+')])]],
+          Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
         email: ['',  [Validators.compose([
           Validators.required,
           Validators.email])]],
@@ -61,23 +63,26 @@ export class EmployeesRegisterComponent implements OnInit {
   
     onSubmit(): void {
       this.submitted = true;
-      this.authEmployeeService.register(this.registerForm.value).subscribe(
-        result => {
-          alert('El empleado ha sido registrado correctamente!');
-        },
-        error => {
-          if(error.status == 409){
-              this.errors.push('El email introducido ya existe.');
-          }else{
+      if(!this.registerForm.invalid){
+        this.authEmployeeService.register(this.registerForm.value).subscribe(
+          result => {
+            alert('El empleado ha sido registrado correctamente!');
+          },
+          error => {
             console.log(error);
-            this.errors.push(error.error.message[0]);
+            if(error.status == 409){
+                this.errors.push('El email introducido ya existe.');
+            }else{
+              console.log(error);
+              this.errors.push(error.error.message[0]);
+            }
+          },
+          () => {
+            this.registerForm.reset();
+            this.hideComponent();
           }
-        },
-        () => {
-          this.registerForm.reset();
-          this.router.navigate(['loginEmployee']);
-        }
-      )
+        );
+      }
     }
 
     getWorkShift(): any {
@@ -106,14 +111,20 @@ export class EmployeesRegisterComponent implements OnInit {
     }
 
     onReset(){
-      this.submitted =false;
+      this.submitted = false;
       this.registerForm.reset();
     }
     // handleError(error){
     //   this.error = error.error.errors;
     // }
+
+    hideComponent(){
+      this.buttonRegisterClick.emit();
+    }
   
-  }
+}
+
+ 
 
 
 

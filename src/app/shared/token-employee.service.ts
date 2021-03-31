@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class TokenEmployeeService {
 
   private issuer = {
-    login: 'http://127.0.0.1:8000/api/auth/loginEmployee',
-    register: 'http://127.0.0.1:8000/api/auth/registerEmployee'
+    loginEmployee: 'http://127.0.0.1:8000/api/loginEmployee',
+    loginClient: 'http://127.0.0.1:8000/api/loginClients',
   }
 
   constructor() { }
@@ -26,11 +26,18 @@ export class TokenEmployeeService {
      const token = this.getToken();
       // CAMBIO LINEA 28: De undefined a null por problemas - Fran
      if(token !== null){
+       console.log('hay token');
+       console.log(token);
        const payload = this.payload(token);
        if(payload){
+        console.log(payload);
          return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
-       }else return false;
+       }else{
+        console.log("no hay payload");
+         return false;
+       } 
      } else {
+      console.log("no hay token");
         return false;
      }
   }

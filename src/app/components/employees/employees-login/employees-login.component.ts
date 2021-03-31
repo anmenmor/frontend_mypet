@@ -4,6 +4,7 @@ import { AuthEmployeeService } from '../../../shared/auth-employee.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TokenEmployeeService } from '../../../shared/token-employee.service';
 import { AuthStateService } from '../../../shared/auth-state.service';
+import { Employee } from 'src/app/models/Employee';
 
 @Component({
   selector: 'app-employees-login',
@@ -15,6 +16,8 @@ export class EmployeesLoginComponent implements OnInit {
   errors = [];
   submitted = false;
   serverError = false;
+  // admin = false;
+  employeAuthenticated: Employee | any;
 
   constructor(
     public router: Router,
@@ -38,6 +41,7 @@ export class EmployeesLoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+   
     console.log(this.loginForm.value);
     if(this.loginForm.value.email.length > 0 && this.loginForm.value.password.length > 0 ){
        this.authEmployeeService.signin(this.loginForm.value).subscribe(
@@ -52,6 +56,7 @@ export class EmployeesLoginComponent implements OnInit {
           this.authState.setAuthState(true);
           this.loginForm.reset()
           this.router.navigate(['clinics/main']);
+          // this.isAdmin();
         }
       );
     }
@@ -63,4 +68,20 @@ export class EmployeesLoginComponent implements OnInit {
     this.tokenEmployee.handleData(data.token);
   }
 
+  // isAdmin(): void{
+  //    this.authEmployeeService.getAuthenticateUser().subscribe(
+  //     (data)=>{
+  //         console.log(data);
+  //     this.employeAuthenticated = Object.values(data)
+  //     .map(employeeDB => new Employee(employeeDB)
+  //     )
+  //     console.log(this.employeAuthenticated[0].admin);
+  //     return this.employeAuthenticated[0].admin;
+  //     }
+    
+  //   );
+    
+
+   
+  // }
 }
