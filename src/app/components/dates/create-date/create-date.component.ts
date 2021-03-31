@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs";
 import { Clients } from "src/app/models/clients";
@@ -10,7 +10,8 @@ import { PetService } from "src/app/services/pet.service";
 import { DateService } from "src/app/services/date.service";
 import { Date } from "src/app/models/date.model";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
-import { Employee } from "src/app/models/Employee"
+import { Employee } from "src/app/models/Employee";
+import { LogHelper } from "src/app/services/log-helper.service";
 
 @Component({
   selector: "app-create-date",
@@ -28,11 +29,15 @@ export class CreateDateComponent implements OnInit {
   client_id!: number;
   dates: Date[] = [];
   pets: Pet[] = [];
+  validSession: boolean = false;
+  loggedUser: any;
   htmlMsg!: String;
 
   constructor(
     private route: ActivatedRoute,
     private _location: Location,
+    private logHelper: LogHelper,
+    private router: Router,
     private formBuilder: FormBuilder,
     private dateService: DateService,
     private clientsListService: ClientsListService,
@@ -47,6 +52,14 @@ export class CreateDateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Get logged user
+    this.loggedUser = this.logHelper.getLoggedUser();
+    if (this.loggedUser) {
+      this.validSession = true;
+    } else {
+      alert("Por favor, registrate o inicia sesión");
+      this.router.navigate(["/"]);
+    }
     //Get url params
     this.routeSub = this.route.params.subscribe((params) => {
       this.client_id = params["clientId"];
@@ -60,8 +73,7 @@ export class CreateDateComponent implements OnInit {
           this.addDate.controls["pet_id"].setValue(this.pet_id);
         },
         (exception) => {
-          this.htmlMsg =
-            "No existe ninguna mascota con el ID proporcionado";
+          this.htmlMsg = "No existe ninguna mascota con el ID proporcionado";
           this.valid = false;
         }
       );
@@ -105,7 +117,7 @@ export class CreateDateComponent implements OnInit {
       } else {
         this.htmlMsg =
           "El cliente seleccionado no dispone de mascotas dadas de alta";
-          this.valid = false;
+        this.valid = false;
       }
     });
   }
