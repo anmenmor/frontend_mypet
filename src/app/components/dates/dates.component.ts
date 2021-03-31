@@ -5,6 +5,8 @@ import { PetService } from "src/app/services/pet.service";
 import { Employee } from "src/app/models/Employee";
 import { DateService } from "src/app/services/date.service";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
+import { Router } from "@angular/router";
+import { LogHelper } from "src/app/services/log-helper.service";
 
 @Component({
   selector: "app-dates",
@@ -18,15 +20,27 @@ export class DatesComponent implements OnInit {
   employees: Employee[] = [];
   employeeId = 0;
   petId = 0;
+  validSession: boolean = false;
+  loggedUser: any;
   htmlMsg!: String;
 
   constructor(
+    private logHelper: LogHelper,
+    private router: Router,
     private dateService: DateService,
     private petService: PetService,
     private employeeService: AuthEmployeeService
   ) {}
 
   ngOnInit(): void {
+    //Get logged user
+    this.loggedUser = this.logHelper.getLoggedUser();
+    if (this.loggedUser){
+      this.validSession = true;
+    } else {
+      alert("Por favor, registrate o inicia sesión");
+      this.router.navigate(["/"]);
+    }
     //Get pets
     this.petService.getCompletePetList().subscribe((data: Pet) => {
       this.pets = Object.values(data);

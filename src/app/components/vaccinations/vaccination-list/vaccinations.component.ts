@@ -5,6 +5,8 @@ import { Vaccination } from "src/app/models/vaccination.model";
 import { Vaccine } from "src/app/models/vaccine";
 import { VaccinesService } from "src/app/services/vaccines.service";
 import { VaccinationsService } from "src/app/services/vaccinations.service";
+import { LogHelper } from "src/app/services/log-helper.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-vaccinations",
@@ -18,14 +20,26 @@ export class VaccinationsComponent implements OnInit {
   vaccines: Vaccine[] = [];
   vaccineId = 0;
   petId = 0;
+  validSession: boolean = false;
+  loggedUser: any;
 
   constructor(
+    private logHelper: LogHelper,
+    private router: Router,
     private vaccinationService: VaccinationsService,
     private petService: PetService,
     private vaccinesService: VaccinesService
   ) {}
 
   ngOnInit() {
+    //Get logged user
+    this.loggedUser = this.logHelper.getLoggedUser();
+    if (this.loggedUser) {
+      this.validSession = true;
+    } else {
+      alert("Por favor, registrate o inicia sesión");
+      this.router.navigate(["/"]);
+    }
     //Get pets
     this.petService.getCompletePetList().subscribe((data: Pet) => {
       this.pets = Object.values(data);

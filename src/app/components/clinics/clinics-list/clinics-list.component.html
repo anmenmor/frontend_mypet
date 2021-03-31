@@ -1,33 +1,30 @@
-<h2>Listado de clínicas</h2>
-<br /><br />
+<div *ngIf="validSessioN">
+  <h2>Listado de clínicas</h2>
+  <br /><br />
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <td>Nombre</td>
-      <td>Ciudad</td>
-      <td>Dirección</td>
-      <td>Teléfono</td>
-      <td>Correo electrónico</td>
-      <td>Acción</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let item of clinics"
-    >
-      <td>{{ item.name }}</td>
-      <td>{{ item.city }}</td>
-      <td>{{ item.address }}</td>
-      <td>{{ item.phone }}</td>
-      <td>{{ item.email }}</td>
-      <button
-        type="button"
-        [routerLink]="['/clinics/updateClinic', item.id]"
-      >
-        Modificar datos
-      </button>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td>Nombre</td>
+        <td>Ciudad</td>
+        <td>Dirección</td>
+        <td>Teléfono</td>
+        <td>Correo electrónico</td>
+        <td>Acción</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of clinics">
+        <td>{{ item.name }}</td>
+        <td>{{ item.city }}</td>
+        <td>{{ item.address }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.email }}</td>
+        <button type="button" [routerLink]="['/clinics/updateClinic', item.id]">
+          Modificar datos
+        </button>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
