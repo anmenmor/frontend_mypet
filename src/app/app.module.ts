@@ -30,7 +30,12 @@ import { PetDetailComponent } from './components/pet-detail/pet-detail.component
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/side-navbar-clinics.component';
+<<<<<<< HEAD
 import { SideNavbarClientsComponent } from './components/side-navbar-clients/side-navbar-clients.component';
+=======
+import { DatesComponent } from './components/dates/dates.component';
+import { CreateDateComponent } from './components/dates/create-date/create-date.component';
+>>>>>>> 0d1925bf49ef00a2abd606708f2f029a15f956e9
 
 
 @NgModule({
@@ -57,7 +62,12 @@ import { SideNavbarClientsComponent } from './components/side-navbar-clients/sid
     HomeComponent,
     FooterComponent,
     SideNavbarClinicsComponent,
+<<<<<<< HEAD
     SideNavbarClientsComponent,
+=======
+    DatesComponent,
+    CreateDateComponent,
+>>>>>>> 0d1925bf49ef00a2abd606708f2f029a15f956e9
   ],
   imports: [
     BrowserModule,

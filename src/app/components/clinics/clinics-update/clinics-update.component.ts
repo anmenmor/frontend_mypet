@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Subscription } from "rxjs";
 import { Clinic } from "src/app/models/clinic.model";
@@ -13,15 +13,15 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ClinicsUpdateComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
-  postBody = new Clinic();
   clinicUpdate;
-  clinics:any;
+  clinics: any;
   clinic: any;
   clinicId = 0;
   htmlMsg!: String;
 
   constructor(
     private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
     private _location: Location,
     private formBuilder: FormBuilder,
     private clinicsDataService: ClinicsDataService
@@ -43,29 +43,45 @@ export class ClinicsUpdateComponent implements OnInit {
     if (this.clinicId) {
       this.clinicsDataService
         .listSingleClinic(this.clinicId)
-        .subscribe((data) => (this.clinic, this.clinics = data));
+        .subscribe((data: any) => {
+          this.clinic = data;
+          this.clinics = data;
+          this.updateForm(data[0]);
+        });
     } else {
-      this.clinicsDataService
-        .listAllClinics()
-        .subscribe((data) => (this.clinics = data));
+      this.clinicsDataService.listAllClinics().subscribe((data: any) => {
+        this.clinics = data;
+        this.updateForm(data[0]);
+      });
     }
   }
 
   onChange(e: number) {
-    this.clinicId = e;    
-    this.clinicsDataService
-    .listSingleClinic(e)
-    .subscribe((data) => (this.clinic = data));
+    if (e > 0) {
+      this.clinicsDataService.listSingleClinic(e).subscribe((data: any) => {
+        this.clinic = data;
+        this.cdr.detectChanges();
+        this.updateForm(data[0]);
+      });
+    }
   }
 
   onSubmit(data: Clinic) {
-    this.postBody = data;
-    this.clinicsDataService
-      .updateClinic(this.clinicId, this.postBody)
-      .subscribe(
-        (data) => (this.htmlMsg = "Datos de clinica modificados correctamente"),
-        (exception) => (this.htmlMsg = exception.error.message)
-      );
+    this.clinicsDataService.updateClinic(data.id, data).subscribe(
+      (data) => (this.htmlMsg = "Datos de clinica modificados correctamente"),
+      (exception) => (this.htmlMsg = exception.error.message)
+    );
+  }
+
+  updateForm(data: Clinic) {
+    this.clinicUpdate.patchValue({
+      id: data.id,
+      name: data.name,
+      city: data.city,
+      address: data.address,
+      phone: data.phone,
+      email: data.email,
+    });
   }
   return() {
     this._location.back();
