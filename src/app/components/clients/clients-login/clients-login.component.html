@@ -2,7 +2,8 @@
   <div class="card w-50 mx-auto">
     <h6 class="card-header">Iniciar sesión</h6>
     <div class="card-body">
-     
+      <div *ngIf="submitted && serverError && !loginForm.controls.email.errors && !loginForm.controls.password.errors" class="alert alert-danger" >
+        {{errors}} </div>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
               <label>Email</label>
@@ -25,5 +26,9 @@
           <button class="btn btn-block btn-primary2">Iniciar sesión</button>
       </form>
     </div>
+
+
+    
+       
 
 

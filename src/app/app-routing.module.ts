@@ -12,6 +12,8 @@ import { ListPetsComponent } from './components/list-pets/list-pets.component';
 import { ClientsLoginComponent } from './components/clients/clients-login/clients-login.component';
 import { ClientsRegisterComponent } from  './components/clients/clients-register/clients-register.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
+import { ClientsEditComponent } from './components/clients/clients-edit/clients-edit.component';
+import { SideNavbarClientsComponent} from './components/side-navbar-clients/side-navbar-clients.component';
 import { VaccinationsComponent } from './components/vaccinations/vaccination-list/vaccinations.component';
 import { VaccinationUpdateComponent } from './components/vaccinations/vaccination-update/vaccination-update.component';
 import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
@@ -39,6 +41,8 @@ const routes: Routes = [
   {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
   {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
   {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},
+  {path: 'clients/:clientsId/update', component:ClientsEditComponent, pathMatch: 'full'},
+  {path: 'clients/main', component: SideNavbarClientsComponent, pathMatch: 'full'},
   {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination/clients/:clientId', component:VaccinationCreateComponent, pathMatch: 'full'},
