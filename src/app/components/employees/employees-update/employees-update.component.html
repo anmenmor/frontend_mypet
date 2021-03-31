@@ -1,4 +1,8 @@
-<div *ngIf="employeeDetails && edit" class="card w-50 mx-auto">
+
+<div class="card w-50 mx-auto">
+<!-- <div *ngIf="employeeDetails && edit" class="card w-50 mx-auto"> -->
+
+  <!--  -->
    <h4 class="card-header">Editar empleado:</h4>
       <div class="card-body">
         <form [formGroup]="updateForm" (ngSubmit)="update()">
@@ -55,7 +59,8 @@
             </select>
         </div>
         <button class="btn btn-block btn-primary2">Guardar cambios</button>
-        <button class="btn btn-block btn-secondary" type="reset" (click)="cancel()">
+        <button class="btn btn-block btn-secondary" type="reset"  (click)="hideComponent()">
+          <!-- <button class="btn btn-block btn-secondary" type="reset"  (click)="buttonClick.emit()" (click)="cancel()"> -->
           Cancel
         </button>
         <!-- <button>Guardar cambios</button> -->

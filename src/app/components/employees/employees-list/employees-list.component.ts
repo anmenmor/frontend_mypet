@@ -16,8 +16,10 @@ export class EmployeesListComponent implements OnInit{
   employeeSelectedInList: Employee | any;
   submitted = false;
   specialities: Specialities[] | any;
-  add = false;
+  
   employeeAdmin: boolean =false;
+  registerChild: boolean = false;
+  updateChild: boolean = false;
   @Output() employeeSelectedEvent = new EventEmitter<Employee>();
 
   constructor(private employeeService: AuthEmployeeService, private adminService: AdminServiceService, private specialitiesService: SpecialitiesService) { }
@@ -44,6 +46,7 @@ export class EmployeesListComponent implements OnInit{
   }
 
   sendSelected(employee: Employee): void{
+    this.updateChild = true;
     this.employeeSelectedInList =  employee;
     this.employeeSelectedEvent.emit(employee);
 
@@ -65,7 +68,7 @@ export class EmployeesListComponent implements OnInit{
     } 
 
     addEmployee(): void{
-      this.add = true;
+      this.registerChild = true;
     }
 
     deleteEmployee(id: number): void{
@@ -74,9 +77,17 @@ export class EmployeesListComponent implements OnInit{
           let index: number = this.employees.findIndex((employee : Employee) => employee.id === data.id);
           if (index !== -1){
             this.employees.splice(index,1);
-            alert('El empleado ha' + data.name+ 'sido eliminado correctamente');
+            alert('El empleado ' + data.name+ ' sido eliminado correctamente');
           }
          });
+    }
+
+    hideRegisterChild(){
+      this.registerChild = false;
+    }
+
+    hideUpdateChild(){
+      this.updateChild = false;
     }
 
 }

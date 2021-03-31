@@ -26,6 +26,7 @@ export class AuthEmployeeService {
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status == 409) {
+          console.log("Error del servicio");
           // console.error(
           //   `Backend returned code ${error.status}, ` +
           //   `body was: ${error}`);
@@ -83,7 +84,7 @@ export class AuthEmployeeService {
     return this.http.put<Employee>(this.UPDATE_EMPLOYEE_API_SERVER+employee.id, employee)
     .pipe(
       catchError((error: HttpErrorResponse) => { 
-        return throwError('Something bad happend, please try again later');
+        return throwError(error);
       })
     )
      

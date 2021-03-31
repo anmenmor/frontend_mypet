@@ -16,7 +16,7 @@ export class EmployeesLoginComponent implements OnInit {
   errors = [];
   submitted = false;
   serverError = false;
-  admin = false;
+  // admin = false;
   employeAuthenticated: Employee | any;
 
   constructor(
@@ -56,7 +56,7 @@ export class EmployeesLoginComponent implements OnInit {
           this.authState.setAuthState(true);
           this.loginForm.reset()
           this.router.navigate(['clinics/main']);
-          this.isAdmin();
+          // this.isAdmin();
         }
       );
     }
@@ -68,20 +68,20 @@ export class EmployeesLoginComponent implements OnInit {
     this.tokenEmployee.handleData(data.token);
   }
 
-  isAdmin(): void{
-     this.authEmployeeService.getAuthenticateUser().subscribe(
-      (data)=>{
-          console.log(data);
-      this.employeAuthenticated = Object.values(data)
-      .map(employeeDB => new Employee(employeeDB)
-      )
-      console.log(this.employeAuthenticated[0].admin);
-      return this.employeAuthenticated[0].admin;
-      }
+  // isAdmin(): void{
+  //    this.authEmployeeService.getAuthenticateUser().subscribe(
+  //     (data)=>{
+  //         console.log(data);
+  //     this.employeAuthenticated = Object.values(data)
+  //     .map(employeeDB => new Employee(employeeDB)
+  //     )
+  //     console.log(this.employeAuthenticated[0].admin);
+  //     return this.employeAuthenticated[0].admin;
+  //     }
     
-    );
+  //   );
     
 
    
-  }
+  // }
 }

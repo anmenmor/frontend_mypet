@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Employee } from 'src/app/models/Employee';
 import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -15,9 +15,10 @@ import { of } from 'rxjs';
 export class EmployeesUpdateComponent implements OnInit {
   updateForm: FormGroup;
   employeeDetails: Employee | any;
-  edit: boolean;
+  edit: boolean = false;
   specialities: Specialities[] | any;
   workShifts: {id: string, name: string}[]=[];
+  @Output() buttonUpdateClick = new EventEmitter<void>();
  
 
   constructor(
@@ -50,14 +51,14 @@ export class EmployeesUpdateComponent implements OnInit {
       this.updateForm = this.fb.group({
         name: [this.employeeDetails.name, [Validators.compose([
           Validators.required,
-          Validators.pattern('[a-zA-Z ]+')])]],
+          Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
         surname: [this.employeeDetails.surname, [Validators.compose([
           Validators.required,
-          Validators.pattern('[a-zA-Z ]+')])]],
+          Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
         email: [this.employeeDetails.email,  [Validators.compose([
           Validators.required,
           Validators.email])]],
-        admin: ['', Validators.required],
+        admin: [this.employeeDetails.admin, Validators.required],
         workShifts: [''],
         specialities: ['']
       });
@@ -90,6 +91,7 @@ export class EmployeesUpdateComponent implements OnInit {
   }
 
   update(): void{
+    this.edit = true;
     console.log(this.updateForm.value);
     this.employeeDetails.name = this.updateForm.value.name;
     this.employeeDetails.surname = this.updateForm.value.surname;
@@ -97,11 +99,16 @@ export class EmployeesUpdateComponent implements OnInit {
     this.employeeDetails.workShifts = this.updateForm.value.workShifts;
     this.employeeDetails.specialities = this.updateForm.value.specialities;
     console.log(this.employeeDetails);
+    console.log(this.updateForm.status);
     if(!this.updateForm.invalid){
     this.employeeService.updateEmployee(this.employeeDetails).subscribe(
       data => {this.employeeDetails = new Employee(data);
-        alert('Empleado actualizado!'); }  );
-      }
+        alert('Empleado actualizado!'); 
+        this.hideComponent();
+      });
+    }else{
+      console.log('form erroneo');
+    }
   }
 
   getSpecility(): Promise<any> {
@@ -119,8 +126,12 @@ export class EmployeesUpdateComponent implements OnInit {
       );
     });
   }
-  cancel(){
-    this.employeeDetails = undefined;
+
+  hideComponent(){
+    this.buttonUpdateClick.emit();
   }
+  // cancel(){
+  //   this.employeeDetails = undefined;
+  // }
 
 }
