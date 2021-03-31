@@ -14,9 +14,7 @@ export class ClientsListComponent implements OnInit {
   clientsSelectedList: Clients | any;
   submitted = false;
   
-  
-  
-  @Output() clientsSelectedEvent = new EventEmitter<Clients>();
+   @Output() clientsSelectedEvent = new EventEmitter<Clients>();
 
   constructor(private clientsService: AuthClientsService) { }
 
@@ -42,6 +40,21 @@ export class ClientsListComponent implements OnInit {
   
     this.clientsSelectedList =  clients;
     this.clientsSelectedEvent.emit(clients);
+  }
+
+  deleteClients(id : number): void{
+    this.clientsService.deleteClients(id).subscribe(
+      (data)=>{
+        let index: number = this.clients.findIndex((clients : Clients)=> clients.id === data.id);
+        if(index !== -1){
+            this.clients.splice(index,1);
+            alert('usuario eliminado');
+        }
+      }
+      );
+
+    
+
   }
  
 

@@ -14,7 +14,9 @@ import { throwError } from 'rxjs/internal/observable/throwError';
     private REGISTER_CLIENTS_API_SERVER="http://127.0.0.1:8000/api/registerClients";
     private LOGIN_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/loginClients";
     private LIST_CLIENTS_API_SERVER ="http://localhost:8000/api/clientsList";
-    private UPDATE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/update/"
+    private UPDATE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/update/{id}";
+    private DELETE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/delete/{id}";
+
     constructor(private http: HttpClient) { }
   
     // Registro
@@ -40,7 +42,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
   
     // Login
     signin(clients: Clients): Observable<Clients> {
-      return this.http.post<Clients>('http://127.0.0.1:8000/api/loginClients', clients)
+      return this.http.post<Clients>(this.LOGIN_CLIENTS_API_SERVER, clients)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status == 400) {
@@ -63,12 +65,12 @@ import { throwError } from 'rxjs/internal/observable/throwError';
       );  
     }
   
-    //CLientes listado
+    //CLientes id
   profileClients(): Observable<any> {
     return this.http.get('http://127.0.0.1:8000/api/userClients');
   }
 
-  //list Employees
+  //list clients
   listClients(): Observable<Clients[]> {
     return this.http.get<Clients[]>(this.LIST_CLIENTS_API_SERVER);
   }
@@ -82,9 +84,18 @@ import { throwError } from 'rxjs/internal/observable/throwError';
       catchError((error: HttpErrorResponse) => { 
         return throwError('Something bad happend, please try again later');
       })
-    )
+    );
      
   }
 
+  deleteClients(id: number): Observable<any>{
+    return this.http.delete<Clients>(this.DELETE_CLIENTS_API_SERVER+id)
+    .pipe(
+      catchError((error: HttpErrorResponse) => { 
+        return throwError('Something bad happend, please try again later');
+      })
+    );
+
   }
 
+  }

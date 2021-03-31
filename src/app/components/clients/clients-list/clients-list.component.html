@@ -1,4 +1,5 @@
 <app-clients-edit [clientsSelected]='clientsSelectedList'></app-clients-edit>
+
 <h1>Listado de clientes</h1>
 <br /><br />
 <table class="table table-hover">
@@ -6,9 +7,11 @@
         <tr *ngIf ="submitted">
           <td>Id</td>
           <td>Nombre</td>
-          <td>Apellido</td>
+          <td>Apellidos</td>
           <td>Email</td>
           <td>Teléfono</td>
+          <td></td>
+          <td></td>
           </tr>
       </thead>
       <tbody>
@@ -18,10 +21,11 @@
         <td>{{client.surname}}</td>
         <td>{{client.email}}</td>
         <td>{{client.phone}}</td>
-        <td>
-        <button>Eliminar</button>
-        <button (click)="sendSelected(client)">Editar</button> 
-        </td>
+        
+        <td><button  (click)="sendSelected(client)" class="btn btn-primary2">Editar</button> </td>
+        <td><button  (click)="deleteClients(client.id)" class="btn btn-danger">Eliminar</button></td> 
+        
+      
     </tr>
     </tbody>
 </table>
