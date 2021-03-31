@@ -12,6 +12,12 @@ export class LogHelper {
   ) {}
 
   getLoggedUser(): any {
+
+    //Codigo provisional, funcionalidad no implementada
+
+    return true;
+
+    /*
     this.clientLogin.profileClients().subscribe(
       (data) => {
         return data.user;
@@ -21,6 +27,6 @@ export class LogHelper {
           return data.user;
         });
       }
-    );
+    );*/
   }
 }
