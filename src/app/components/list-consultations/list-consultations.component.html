@@ -1,0 +1,11 @@
+<app-pets-navbar></app-pets-navbar>
+<h2>Listado de consultas:</h2>
+<ul >
+    <li *ngFor = "let consultation of consultations">
+        {{consultation.date_time}}
+        {{consultation.speciality}}
+        <button (click)="onSelect(consultation.id)">Detalle</button>
+        <app-consultation-detail [consultation]="consultation"></app-consultation-detail>
+        
+    </li>
+</ul>

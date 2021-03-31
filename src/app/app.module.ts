@@ -32,6 +32,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SideNavbarClinicsComponent } from './components/side-navbar-clinics/side-navbar-clinics.component';
 import { DatesComponent } from './components/dates/dates.component';
 import { CreateDateComponent } from './components/dates/create-date/create-date.component';
+import { ListConsultationsComponent } from './components/list-consultations/list-consultations.component';
+import { PetsNavbarComponent } from './components/pets-navbar/pets-navbar.component';
+import { ConsultationDetailComponent } from './components/consultation-detail/consultation-detail.component';
 
 
 @NgModule({
@@ -60,6 +63,9 @@ import { CreateDateComponent } from './components/dates/create-date/create-date.
     SideNavbarClinicsComponent,
     DatesComponent,
     CreateDateComponent,
+    ListConsultationsComponent,
+    PetsNavbarComponent,
+    ConsultationDetailComponent,
   ],
   imports: [
     BrowserModule,

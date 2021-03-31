@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Consultation } from '../models/consultation';
 import { Pet } from '../models/pet';
 
 @Injectable({
@@ -50,5 +51,9 @@ export class PetService {
                 return throwError('Something bad happened; please try again later.');
       })
     )
+  }
+
+  getConsultations(petId: number): Observable<Consultation[]>{
+    return this.http.get<Consultation[]>(this.PETS_API_SERVER + '/' + petId + '/consultations' )
   }
 }

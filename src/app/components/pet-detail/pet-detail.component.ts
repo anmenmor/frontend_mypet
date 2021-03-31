@@ -26,6 +26,15 @@ export class PetDetailComponent implements OnInit {
       this.petId = params['petId'];
   })
 
+  this.petDetailForm = this.fb.group({
+    name: ['', Validators.required],
+    sex: ['', Validators.required],
+    weight: ['', Validators.required],
+    age: ['', Validators.required], 
+    species: ['', Validators.required],
+    breed: ['', Validators.required],
+  });
+
   this.petService.getPetDetail(this.petId).subscribe((data:Pet) => {
     let pet = data
     this.petDetailForm = this.fb.group({
