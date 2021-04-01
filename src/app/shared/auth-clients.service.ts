@@ -66,8 +66,9 @@ import { throwError } from 'rxjs/internal/observable/throwError';
     }
   
     //CLientes id
-  profileClients(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/userClients');
+  
+  getAuthenticateUser(): Observable<Clients> {
+    return this.http.get<Clients>('http://127.0.0.1:8000/api/userClients');
   }
 
   //list clients

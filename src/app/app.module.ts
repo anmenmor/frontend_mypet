@@ -4,8 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from "./shared/auth.interceptor";
-
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { EmployeesLoginComponent } from "./components/employees/employees-login/employees-login.component";
@@ -57,6 +55,7 @@ import { CreateDateComponent } from "./components/dates/create-date/create-date.
     HomeComponent,
     FooterComponent,
     SideNavbarClinicsComponent,
+    SideNavbarClientsComponent,
     DatesComponent,
     CreateDateComponent,
   ],

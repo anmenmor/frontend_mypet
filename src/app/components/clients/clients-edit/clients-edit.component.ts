@@ -20,7 +20,7 @@ export class ClientsEditComponent implements OnInit {
     updateForm: FormGroup;
     clientsDetails: Clients | any;
     edit: boolean;
-    
+    htmlMsg!: String;
   
     constructor(
       public router: Router,
@@ -38,15 +38,14 @@ export class ClientsEditComponent implements OnInit {
     }
     //Recibe uncliente de la lista
 
-    // Añadido this. a las variables que daban error 
+    
     
     @Input()
     set clientsSelected(clientsSelected: Clients){
       if(this.clientsSelected){
         this.edit = true;
         this.clientsDetails = this.clientsSelected;
-        console.log("update component");
-        console.log(this.clientsSelected);
+       
         try {
           this.clientsDetails = this.clientsSelected;
         } catch (e){
@@ -75,7 +74,7 @@ export class ClientsEditComponent implements OnInit {
    
   
     update(): void{
-      console.log(this.updateForm.value);
+      
       this.clientsDetails.name = this.updateForm.value.name;
       this.clientsDetails.surname = this.updateForm.value.surname;
       this.clientsDetails.email = this.updateForm.value.email;
