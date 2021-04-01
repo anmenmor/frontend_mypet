@@ -1,6 +1,8 @@
-<div  class="card w-50">
+<div  class="card w-50 mx-auto">
+  <h4 class="card-header">Actualizar datos:</h4>
+  <div class="card-body">
     <form [formGroup]="updateForm" (ngSubmit)="update()">
-        <h4 class="card-header">Actualizar datos:</h4>
+       
         <div class="form-group">
             <label>Nombre</label>
             <input class="form-control" type="text" formControlName="name" value="{{ clientsDetails.name }}" />
@@ -49,10 +51,11 @@
                 El teléfono debe tener un formato válido.
               </div>
           </div>
-         <button>Guardar actualización</button>
-         <button class="btn btn-secondary" type="button" (click)="return()">Volver atrás</button>
+         <button class="btn btn-block btn-primary2">Guardar actualización</button>
+         <button class="btn btn-block btn-secondary" type="button" (click)="return()">Volver atrás</button>
         <br />
         <br />
     </form>
     <p [innerHTML]="htmlMsg"></p>
+   </div>
 </div>

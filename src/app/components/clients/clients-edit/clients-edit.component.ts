@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter,Input, OnInit, Output } from '@angular/core';
 import {Clients } from 'src/app/models/clients';
 import { AuthClientsService } from 'src/app/shared/auth-clients.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -20,7 +20,9 @@ export class ClientsEditComponent implements OnInit {
     updateForm: FormGroup;
     clientsDetails: Clients | any;
     edit: boolean;
-    htmlMsg!: String;
+    htmlMsg: String;
+
+    @Output() buttonUpdateClick = new EventEmitter<void>();
   
     constructor(
       public router: Router,
@@ -33,9 +35,7 @@ export class ClientsEditComponent implements OnInit {
        
     ngOnInit(): void {
       this.edit = false;
-      
-      
-    }
+      }
     //Recibe uncliente de la lista
 
     
@@ -44,10 +44,10 @@ export class ClientsEditComponent implements OnInit {
     set clientsSelected(clientsSelected: Clients){
       if(this.clientsSelected){
         this.edit = true;
-        this.clientsDetails = this.clientsSelected;
+        this.clientsDetails = clientsSelected;
        
         try {
-          this.clientsDetails = this.clientsSelected;
+          this.clientsDetails = clientsSelected;
         } catch (e){
           console.log(e.status, e.message);
         }
@@ -74,17 +74,19 @@ export class ClientsEditComponent implements OnInit {
    
   
     update(): void{
-      
+      this.edit=true;
       this.clientsDetails.name = this.updateForm.value.name;
       this.clientsDetails.surname = this.updateForm.value.surname;
       this.clientsDetails.email = this.updateForm.value.email;
       this.clientsDetails.phone  = this.updateForm.value.phone;
    
-      this.clientsService.updateClients(this.clientsDetails).subscribe(
-        data => {this.clientsDetails = new Clients(data);
-          alert('Cliente actualizado!'); }  
-         );
-  
+      if(!this.updateForm.invalid){
+        this.clientsService.updateClients(this.clientsDetails).subscribe(
+          data => {this.clientsDetails = new Clients(data); }  
+           );
+    
+      }
+      
     }
 
     return(){
