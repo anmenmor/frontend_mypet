@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Consultation } from 'src/app/models/consultation';
@@ -13,6 +13,7 @@ export class ListConsultationsComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
   consultations: Consultation[] = [];
   petId: number = -1;
+  showCreateComponent: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +38,6 @@ export class ListConsultationsComponent implements OnInit {
   }
 
   onSelect(id: number): void {
-    console.log(id);
     this.consultations = this.consultations.map(function(cons) {
       if(cons.id == id) {
         cons.visibility = !cons.visibility;
@@ -45,8 +45,15 @@ export class ListConsultationsComponent implements OnInit {
       return cons
     }
     ) 
+  }
 
-    
+  showComponent() {
+    this.showCreateComponent = true;
+  }
+
+  createHandler(): void {
+    this.showCreateComponent = false;
+    this.getConsultations();
   }
 
 }

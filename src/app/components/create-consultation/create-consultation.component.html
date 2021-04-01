@@ -1,0 +1,10 @@
+<div *ngIf="showComponent">
+<h2>Descripción de la consulta:</h2>
+<form [formGroup]="consultationForm" (ngSubmit)="createConsultation()">
+<textarea name="comments" formControlName="comments" rows="10" cols="50"></textarea>
+<div *ngIf="submitted && consultationForm.controls.comments.errors">
+    Los detalles de la consulta no pueden estar vacíos
+  </div><br>
+<button type="submit">Añadir</button><br>
+</form>
+</div>

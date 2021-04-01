@@ -56,4 +56,18 @@ export class PetService {
   getConsultations(petId: number): Observable<Consultation[]>{
     return this.http.get<Consultation[]>(this.PETS_API_SERVER + '/' + petId + '/consultations' )
   }
+
+  createConsultation(petId: number, employeeId: number, comments: string): Observable<Consultation> {
+      const body = {'date_time': new Date().toISOString().slice(0, 19).replace('T', ' '), 'comments': comments,'employee_id': employeeId};
+      return this.http.post<Consultation>(this.PETS_API_SERVER + '/' + petId + '/consultations', body)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          alert("Algo ha ido mal, intentelo de nuevo mas tarde");
+                console.error(
+                  `Backend returned code ${error.status}, ` +
+                  `body was: ${error.error}`);
+                  return throwError('Something bad happened; please try again later.');
+        })
+      )
+  }
 }

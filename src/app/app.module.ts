@@ -35,6 +35,7 @@ import { CreateDateComponent } from './components/dates/create-date/create-date.
 import { ListConsultationsComponent } from './components/list-consultations/list-consultations.component';
 import { PetsNavbarComponent } from './components/pets-navbar/pets-navbar.component';
 import { ConsultationDetailComponent } from './components/consultation-detail/consultation-detail.component';
+import { CreateConsultationComponent } from './components/create-consultation/create-consultation.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { ConsultationDetailComponent } from './components/consultation-detail/co
     ListConsultationsComponent,
     PetsNavbarComponent,
     ConsultationDetailComponent,
+    CreateConsultationComponent,
   ],
   imports: [
     BrowserModule,
