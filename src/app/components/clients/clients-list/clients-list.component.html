@@ -23,7 +23,7 @@
         <td>{{client.email}}</td>
         <td>{{client.phone}}</td>
     
-        <td><button  [routerLink]="['/clients/update', client.id]" class="btn btn-primary2">Editar</button> </td>
+        <td><button  (click)="sendSelected(client)" class="btn btn-primary2">Editar</button> </td>
         <td><button  (click)="deleteClients(client.id)" class="btn btn-danger">Eliminar</button></td> 
         
       

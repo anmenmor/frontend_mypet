@@ -17,10 +17,10 @@ export class ClientsEditComponent implements OnInit {
 
     //Añadido ! a variables no inicializadas para que no salte error
     
-    updateForm: FormGroup;
+    updateForm!: FormGroup;
     clientsDetails: Clients | any;
-    edit: boolean;
-    htmlMsg: String;
+    edit: boolean = false;
+    htmlMsg!: String;
 
     @Output() buttonUpdateClick = new EventEmitter<void>();
   
@@ -42,7 +42,7 @@ export class ClientsEditComponent implements OnInit {
     
     @Input()
     set clientsSelected(clientsSelected: Clients){
-      if(this.clientsSelected){
+      if(clientsSelected){
         this.edit = true;
         this.clientsDetails = clientsSelected;
        
@@ -54,10 +54,10 @@ export class ClientsEditComponent implements OnInit {
         this.updateForm = this.fb.group({
           name: [this.clientsDetails.name, [Validators.compose([
             Validators.required,
-            Validators.pattern('[a-zA-Z]+')])]],
+            Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
           surname: [this.clientsDetails.surname, [Validators.compose([
             Validators.required,
-            Validators.pattern('[a-zA-Z ]+')])]],
+            Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
           email: [this.clientsDetails.email,  [Validators.compose([
             Validators.required,
             Validators.email])]],
@@ -82,7 +82,8 @@ export class ClientsEditComponent implements OnInit {
    
       if(!this.updateForm.invalid){
         this.clientsService.updateClients(this.clientsDetails).subscribe(
-          data => {this.clientsDetails = new Clients(data); }  
+          data => {this.clientsDetails = new Clients(data);
+                   this.htmlMsg = "Datos de clinica modificados correctamente" }  
            );
     
       }
