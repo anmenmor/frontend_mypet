@@ -10,7 +10,7 @@ import { AuthClientsService } from '../../../shared/auth-clients.service';
 })
 
 export class ClientsListComponent implements OnInit {
-  clients: Clients[] | any;
+  clients: Clients[] = [];
   clientsSelectedList: Clients | any;
   submitted = false;
   updateChild: boolean = false;

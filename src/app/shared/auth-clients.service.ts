@@ -14,8 +14,8 @@ import { throwError } from 'rxjs/internal/observable/throwError';
     private REGISTER_CLIENTS_API_SERVER="http://127.0.0.1:8000/api/registerClients";
     private LOGIN_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/loginClients";
     private LIST_CLIENTS_API_SERVER ="http://localhost:8000/api/clientsList";
-    private UPDATE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/update/{id}";
-    private DELETE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/delete/{id}";
+    private UPDATE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/update/";
+    private DELETE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/delete/";
 
     constructor(private http: HttpClient) { }
   
@@ -78,8 +78,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 
   //Update employee
   updateClients(clients: Clients): Observable<Clients> {
-    console.log("Actualizando cliente:" + clients.id);
-    console.log(clients);
+    
     return this.http.put<Clients>(this.UPDATE_CLIENTS_API_SERVER+clients.id, clients)
     .pipe(
       catchError((error: HttpErrorResponse) => { 
