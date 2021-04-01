@@ -16,7 +16,7 @@
           <td>{{ item.date_time }}</td>
           <td>{{ getPetById(item.pet_id) }}</td>
           <td>{{ getEmployeeById(item.employee_id) }}</td>
-          <button type="button" (click)="deleteDate(item.id)">
+          <button type="button" class="btn btn-info" (click)="deleteDate(item.id)">
             Eliminar cita
           </button>
         </tr>

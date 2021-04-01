@@ -69,8 +69,11 @@ export class DatesComponent implements OnInit {
   }
 
   getEmployeeById(id: any) {
-    return this.employees.filter((employee: Employee) => employee.id == id)[0]
-      .name;
+    let employeeFiltered = this.employees.filter((employee: Employee) => employee.id == id);
+    if (employeeFiltered.length > 0){
+      return employeeFiltered[0].name;
+    }
+    return 'No disponible';
   }
 
   deleteDate(dateId: number) {
