@@ -1,9 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './shared/auth.interceptor';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "./shared/auth.interceptor";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +36,6 @@ import { ListConsultationsComponent } from './components/list-consultations/list
 import { PetsNavbarComponent } from './components/pets-navbar/pets-navbar.component';
 import { ConsultationDetailComponent } from './components/consultation-detail/consultation-detail.component';
 import { CreateConsultationComponent } from './components/create-consultation/create-consultation.component';
-
 
 @NgModule({
   declarations: [
@@ -75,16 +74,15 @@ import { CreateConsultationComponent } from './components/create-consultation/cr
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-  
   ],
   providers: [
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     },
-    ClinicsDataService
-],
+    ClinicsDataService,
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

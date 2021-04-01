@@ -1,5 +1,5 @@
 
-<div *ngIf="vaccinations" class="container">
+<div *ngIf="validSession"><div *ngIf="vaccinations" class="container">
   <h2>Modificar estado vacunación</h2>
   <br /><br />
 
@@ -34,3 +34,4 @@
   
 </div>
 <p style="text-align:center" [innerHTML]="htmlMsg"></p>
+</div>

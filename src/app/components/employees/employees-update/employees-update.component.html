@@ -1,6 +1,11 @@
-<div *ngIf="employeeDetails && edit" class="card w-50">
-    <form [formGroup]="updateForm" (ngSubmit)="update()">
-        <h4 class="card-header">Editar empleado:</h4>
+
+<div class="card w-50 mx-auto">
+<!-- <div *ngIf="employeeDetails && edit" class="card w-50 mx-auto"> -->
+
+  <!--  -->
+   <h4 class="card-header">Editar empleado:</h4>
+      <div class="card-body">
+        <form [formGroup]="updateForm" (ngSubmit)="update()">
         <div class="form-group">
             <label>Nombre</label>
             <input class="form-control" type="text" formControlName="name" value="{{ employeeDetails.name }}" />
@@ -53,9 +58,15 @@
               </option>
             </select>
         </div>
-
-        <button>Guardar cambios</button>
-        <br />
-        <br />
+        <button class="btn btn-block btn-primary2">Guardar cambios</button>
+        <button class="btn btn-block btn-secondary" type="reset"  (click)="hideComponent()">
+          <!-- <button class="btn btn-block btn-secondary" type="reset"  (click)="buttonClick.emit()" (click)="cancel()"> -->
+          Cancel
+        </button>
+        <!-- <button>Guardar cambios</button> -->
+      
     </form>
+    </div>
 </div>
+<br />
+<br />

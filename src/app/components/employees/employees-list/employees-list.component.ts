@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Employee } from 'src/app/models/Employee';
 import { Specialities } from 'src/app/models/Specialities';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 import { AuthEmployeeService } from '../../../shared/auth-employee.service';
 
@@ -10,20 +11,31 @@ import { AuthEmployeeService } from '../../../shared/auth-employee.service';
   templateUrl: './employees-list.component.html',
   styleUrls: ['./employees-list.component.css']
 })
-export class EmployeesListComponent implements OnInit {
+export class EmployeesListComponent implements OnInit{
   employees: Employee[] | any;
   employeeSelectedInList: Employee | any;
   submitted = false;
   specialities: Specialities[] | any;
+  
+  employeeAdmin: boolean =false;
+  registerChild: boolean = false;
+  updateChild: boolean = false;
   @Output() employeeSelectedEvent = new EventEmitter<Employee>();
 
-  constructor(private employeeService: AuthEmployeeService, private specialitiesService: SpecialitiesService) { }
+  constructor(private employeeService: AuthEmployeeService, private adminService: AdminServiceService, private specialitiesService: SpecialitiesService) { }
 
   ngOnInit(): void {
     this.employees = [];
-    this.listAllEmployees;
+    this.listAllEmployees();
     this.getSpecility();
+    this.adminService.checkIsAdmin().then(isAdmin =>{
+      this.employeeAdmin = isAdmin;
+    }
+
+    );
+    console.log("Admin en el componente " + this.employeeAdmin);
   }
+
   listAllEmployees(): void {
     this.submitted = true;
     this.employeeService.listAllEmployees().subscribe(data=>
@@ -34,8 +46,7 @@ export class EmployeesListComponent implements OnInit {
   }
 
   sendSelected(employee: Employee): void{
-    console.log(employee);
-  
+    this.updateChild = true;
     this.employeeSelectedInList =  employee;
     this.employeeSelectedEvent.emit(employee);
 
@@ -55,5 +66,28 @@ export class EmployeesListComponent implements OnInit {
     getSpecialitybyId(id: string): any{
       return this.specialities.filter( (specialty: Specialities) => specialty.id == id)[0].name;    
     } 
+
+    addEmployee(): void{
+      this.registerChild = true;
+    }
+
+    deleteEmployee(id: number): void{
+      this.employeeService.deleteEmployee(id).subscribe(
+        (data)=> {
+          let index: number = this.employees.findIndex((employee : Employee) => employee.id === data.id);
+          if (index !== -1){
+            this.employees.splice(index,1);
+            alert('El empleado ' + data.name+ ' sido eliminado correctamente');
+          }
+         });
+    }
+
+    hideRegisterChild(){
+      this.registerChild = false;
+    }
+
+    hideUpdateChild(){
+      this.updateChild = false;
+    }
 
 }
