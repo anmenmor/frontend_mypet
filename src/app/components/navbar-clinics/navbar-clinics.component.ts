@@ -11,10 +11,12 @@ import { TokenClientsService } from 'src/app/shared/token-clients.service';
 })
 export class NavbarClinicsComponent implements OnInit {
   isSignedIn: boolean | any;
+  isSignedEmployee: boolean = false;
+  isSignedClient: boolean = false;
 
   constructor(
     private auth: AuthStateService,
-    private auths: AuthStateService,
+    // private auths: AuthStateService,
     public router: Router,
     public tokenEmployee: TokenEmployeeService,
     public tokenClients: TokenClientsService,
@@ -22,13 +24,23 @@ export class NavbarClinicsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('ngOninit');
     this.isSignedIn = false;
     this.auth.userAuthState.subscribe(val => {
+        console.log(val);
         this.isSignedIn = val;
+        if(!val) {
+          console.log('redirigiendo');
+          this.router.navigate(["/"]);
+        }
     });
-    this.auths.usersAuthState.subscribe(val => {
-      this.isSignedIn = val;
-  });
+    console.log('fin ngOninit');
+    // this.auths.usersAuthState.subscribe(val => {
+    //   console.log(val);
+    //   this.isSignedIn = val;
+    //   if(!val) {this.router.navigate(["/loginClient"]);}
+    // });
+  
   }
 
   // Signout
