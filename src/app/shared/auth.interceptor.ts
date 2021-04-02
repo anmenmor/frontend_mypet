@@ -30,6 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     console.log(error.status);
                     console.log(error.statusText);
                     if (error.status === 401 || error.status === 403){
+                        this.employeeTokenService.removeToken();
                         window.location.href = "/loginEmployee";
                     }
     
