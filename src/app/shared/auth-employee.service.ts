@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Employee } from '../models/Employee';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
@@ -73,9 +73,15 @@ export class AuthEmployeeService {
   }
 
   //list Employees
+  listAllEmployeesPagination(numPage: number = 1): Observable<any> {
+    return this.http.get<any>(this.LIST_EMPLOYEE_API_SERVER, {params: {page:numPage.toString()}});
+  }
+
+  //list Employees
   listAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.LIST_EMPLOYEE_API_SERVER);
   }
+
 
   //Update employee
   updateEmployee(employee: Employee): Observable<Employee> {

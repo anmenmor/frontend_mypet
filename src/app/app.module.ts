@@ -31,6 +31,7 @@ import { SideNavbarClinicsComponent } from "./components/side-navbar-clinics/sid
 import { SideNavbarClientsComponent } from "./components/side-navbar-clients/side-navbar-clients.component";
 import { DatesComponent } from "./components/dates/dates.component";
 import { CreateDateComponent } from "./components/dates/create-date/create-date.component";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { CreateDateComponent } from "./components/dates/create-date/create-date.
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [
     {

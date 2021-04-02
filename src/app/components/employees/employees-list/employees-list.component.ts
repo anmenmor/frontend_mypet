@@ -4,12 +4,18 @@ import { Specialities } from 'src/app/models/Specialities';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 import { AuthEmployeeService } from '../../../shared/auth-employee.service';
+import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap'; 
+import { stringify } from '@angular/compiler/src/util';
+
+
 
 
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
-  styleUrls: ['./employees-list.component.css']
+  styleUrls: ['./employees-list.component.css'],
+  providers: [NgbPaginationConfig]
+
 })
 export class EmployeesListComponent implements OnInit{
   employees: Employee[] | any;
@@ -17,6 +23,11 @@ export class EmployeesListComponent implements OnInit{
   submitted = false;
   specialities: Specialities[] | any;
   
+  totalItems: number = 0;
+  page: number = 0;
+  previousPage: number = 0;
+  showPagination: boolean =false;
+
   employeeAdmin: boolean =false;
   registerChild: boolean = false;
   updateChild: boolean = false;
@@ -25,8 +36,10 @@ export class EmployeesListComponent implements OnInit{
   constructor(private employeeService: AuthEmployeeService, private adminService: AdminServiceService, private specialitiesService: SpecialitiesService) { }
 
   ngOnInit(): void {
+    this.page =1;
+	  this.previousPage =1;
     this.employees = [];
-    this.listAllEmployees();
+    this.listAllEmployeesPagination(this.page);
     this.getSpecility();
     this.adminService.checkIsAdmin().then(isAdmin =>{
       this.employeeAdmin = isAdmin;
@@ -36,15 +49,30 @@ export class EmployeesListComponent implements OnInit{
     console.log("Admin en el componente " + this.employeeAdmin);
   }
 
-  listAllEmployees(): void {
+  listAllEmployeesPagination(page: number): void {
     this.submitted = true;
-    this.employeeService.listAllEmployees().subscribe(data=>
-      {
-        this.employees = Object.values(data)
-        .map(employeeDB => new Employee(employeeDB));
+    this.employeeService.listAllEmployeesPagination(page).subscribe(
+      response =>{
+        if ((!response && !response.data) || (response && response.data && response.data.length == 0)) {
+          this.employees = [];
+          this.showPagination = false;
+        }
+        else {
+          this.employees = Object.values(response.data)
+          .map(employeeDB => new Employee(employeeDB));
+          this.totalItems = response.total;
+          this.showPagination = true;
+        }
+
+
       });
   }
-
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.listAllEmployeesPagination(this.page);
+    }
+  }
   sendSelected(employee: Employee): void{
     this.updateChild = true;
     this.registerChild = false;
@@ -65,7 +93,11 @@ export class EmployeesListComponent implements OnInit{
 
     //this.specialities tiene cargado el listado de especialidades al llamarse en el OnInit
     getSpecialitybyId(id: string): any{
-      return this.specialities.filter( (specialty: Specialities) => specialty.id == id)[0].name;    
+      let specialitiesFilter = this.specialities.filter( (specialty: Specialities) => specialty.id == id)
+      if (specialitiesFilter.length > 0) {
+        return specialitiesFilter[0].name.charAt(0).toUpperCase() + specialitiesFilter[0].name.slice(1);
+      }
+      return "No disponible";    
     } 
 
     addEmployee(): void{
