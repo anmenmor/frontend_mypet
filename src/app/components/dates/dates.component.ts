@@ -35,7 +35,7 @@ export class DatesComponent implements OnInit {
   ngOnInit(): void {
     //Get logged user
     this.loggedUser = this.logHelper.getLoggedUser();
-    if (this.loggedUser){
+    if (this.loggedUser) {
       this.validSession = true;
     } else {
       alert("Por favor, registrate o inicia sesión");
@@ -53,37 +53,33 @@ export class DatesComponent implements OnInit {
     });
     //Get dates
     this.dateService.listAllDates().subscribe((data) => {
-      for (const d of data as any) {
-        this.dates.push({
-          id: d.id,
-          date_time: d.date_time,
-          pet_id: d.pet_id,
-          employee_id: d.employee_id,
-        });
-      }
+      this.dates = Object.values(data);
     });
   }
 
   getPetById(id: number) {
-    return this.pets.filter((pet: Pet) => pet.id == id)[0].name;
+    let petFiltered = this.pets.filter((pet: Pet) => pet.id == id);
+    if (petFiltered.length > 0) {
+      return petFiltered[0].name;
+    }
+    return "No disponible";
   }
 
   getEmployeeById(id: any) {
-    let employeeFiltered = this.employees.filter((employee: Employee) => employee.id == id);
-    if (employeeFiltered.length > 0){
+    let employeeFiltered = this.employees.filter(
+      (employee: Employee) => employee.id == id
+    );
+    if (employeeFiltered.length > 0) {
       return employeeFiltered[0].name;
     }
-    return 'No disponible';
+    return "No disponible";
   }
 
   deleteDate(dateId: number) {
     let index: number = this.dates.findIndex(({ id }) => id === dateId);
     if (index !== -1) {
-      console.log(this.dates);
       this.dates.splice(index, 1);
-      console.log(this.dates);
     }
-
     this.dateService.deleteDate(dateId).subscribe(
       (data) => (this.htmlMsg = "Cita eliminada correctamente"),
       (exception) => (this.htmlMsg = exception.error.message)
