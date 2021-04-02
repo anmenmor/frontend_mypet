@@ -37,7 +37,6 @@ export class ClientsListComponent implements OnInit {
 
   sendSelected(clients: Clients): void{
     this.updateChild = true;
-  
     this.clientsSelectedList =  clients;
     this.clientsSelectedEvent.emit(clients);
   }
