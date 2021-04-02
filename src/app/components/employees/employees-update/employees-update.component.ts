@@ -31,7 +31,7 @@ export class EmployeesUpdateComponent implements OnInit {
      }
      
   ngOnInit(): void {
-    this.edit = false;
+    this.edit = true;
     console.log("Invoco ON init");
     
   }
@@ -91,16 +91,13 @@ export class EmployeesUpdateComponent implements OnInit {
   }
 
   update(): void{
-    this.edit = true;
-    console.log(this.updateForm.value);
-    this.employeeDetails.name = this.updateForm.value.name;
-    this.employeeDetails.surname = this.updateForm.value.surname;
-    this.employeeDetails.email = this.updateForm.value.email;
-    this.employeeDetails.workShifts = this.updateForm.value.workShifts;
-    this.employeeDetails.specialities = this.updateForm.value.specialities;
-    console.log(this.employeeDetails);
-    console.log(this.updateForm.status);
+    // this.edit = true;
     if(!this.updateForm.invalid){
+      this.employeeDetails.name = this.updateForm.value.name;
+      this.employeeDetails.surname = this.updateForm.value.surname;
+      this.employeeDetails.email = this.updateForm.value.email;
+      this.employeeDetails.workShifts = this.updateForm.value.workShifts;
+      this.employeeDetails.specialities = this.updateForm.value.specialities;
     this.employeeService.updateEmployee(this.employeeDetails).subscribe(
       data => {this.employeeDetails = new Employee(data);
         alert('Empleado actualizado!'); 
