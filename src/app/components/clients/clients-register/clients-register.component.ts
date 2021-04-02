@@ -51,7 +51,7 @@ ngOnInit(): void {
       this.submitted = true;
       this.authClientsService.register(this.registerForm.value).subscribe(
         result => {
-          alert('El cliente ha sido registrado correctamente!')
+         
         },
         error => {
           if(error.status == 409){

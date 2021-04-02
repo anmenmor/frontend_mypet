@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter,Input, OnInit, Output } from '@angular/core';
 import {Clients } from 'src/app/models/clients';
 import { AuthClientsService } from 'src/app/shared/auth-clients.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -17,10 +17,12 @@ export class ClientsEditComponent implements OnInit {
 
     //Añadido ! a variables no inicializadas para que no salte error
     
-    updateForm: FormGroup;
+    updateForm!: FormGroup;
     clientsDetails: Clients | any;
-    edit: boolean;
-    
+    edit: boolean = false;
+    htmlMsg!: String;
+
+    @Output() buttonUpdateClick = new EventEmitter<void>();
   
     constructor(
       public router: Router,
@@ -33,32 +35,29 @@ export class ClientsEditComponent implements OnInit {
        
     ngOnInit(): void {
       this.edit = false;
-      
-      
-    }
+      }
     //Recibe uncliente de la lista
 
-    // Añadido this. a las variables que daban error 
+    
     
     @Input()
     set clientsSelected(clientsSelected: Clients){
-      if(this.clientsSelected){
+      if(clientsSelected){
         this.edit = true;
-        this.clientsDetails = this.clientsSelected;
-        console.log("update component");
-        console.log(this.clientsSelected);
+        this.clientsDetails = clientsSelected;
+       
         try {
-          this.clientsDetails = this.clientsSelected;
+          this.clientsDetails = clientsSelected;
         } catch (e){
           console.log(e.status, e.message);
         }
         this.updateForm = this.fb.group({
           name: [this.clientsDetails.name, [Validators.compose([
             Validators.required,
-            Validators.pattern('[a-zA-Z]+')])]],
+            Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
           surname: [this.clientsDetails.surname, [Validators.compose([
             Validators.required,
-            Validators.pattern('[a-zA-Z ]+')])]],
+            Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
           email: [this.clientsDetails.email,  [Validators.compose([
             Validators.required,
             Validators.email])]],
@@ -75,17 +74,20 @@ export class ClientsEditComponent implements OnInit {
    
   
     update(): void{
-      console.log(this.updateForm.value);
+      this.edit=true;
       this.clientsDetails.name = this.updateForm.value.name;
       this.clientsDetails.surname = this.updateForm.value.surname;
       this.clientsDetails.email = this.updateForm.value.email;
       this.clientsDetails.phone  = this.updateForm.value.phone;
    
-      this.clientsService.updateClients(this.clientsDetails).subscribe(
-        data => {this.clientsDetails = new Clients(data);
-          alert('Cliente actualizado!'); }  
-         );
-  
+      if(!this.updateForm.invalid){
+        this.clientsService.updateClients(this.clientsDetails).subscribe(
+          data => {this.clientsDetails = new Clients(data);
+                   this.htmlMsg = "Datos de clinica modificados correctamente" }  
+           );
+    
+      }
+      
     }
 
     return(){

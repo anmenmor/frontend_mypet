@@ -1,6 +1,8 @@
-<div *ngIf="clientsDetails && edit" class="card w-50">
+<div  class="card w-50 mx-auto">
+  <h4 class="card-header">Actualizar datos:</h4>
+  <div class="card-body">
     <form [formGroup]="updateForm" (ngSubmit)="update()">
-        <h4 class="card-header">Editar cliente:</h4>
+       
         <div class="form-group">
             <label>Nombre</label>
             <input class="form-control" type="text" formControlName="name" value="{{ clientsDetails.name }}" />
@@ -31,10 +33,10 @@
         </div >
         <div *ngIf="edit && updateForm.controls.email.errors" class="alert alert-danger" role="alert">
             <div *ngIf="updateForm.controls.email.errors.required">
-              El correo electrónico es obligatorio.
+              El email es obligatorio.
             </div>
             <div *ngIf="updateForm.controls.email.errors.email">
-              El correo electrónico no es válido.
+              El email no es válido.
             </div>
           </div>
         <div class="form-group">
@@ -43,15 +45,17 @@
         </div>
         <div *ngIf="edit && updateForm.controls.phone.errors" class="alert alert-danger" role="alert">
             <div *ngIf="updateForm.controls.phone.errors.required">
-              Los apellidos son obligatorios.
+              El teléfono es obligatorio.
             </div>
             <div *ngIf="updateForm.controls.phone.errors.pattern">
-                Los apellidos deben tener un formato válido.
+                El teléfono debe tener un formato válido.
               </div>
           </div>
-         <button>Guardar actualización</button>
-         <button class="btn btn-secondary" type="button" (click)="return()">Volver atrás</button>
+         <button class="btn btn-block btn-primary2">Guardar actualización</button>
+         <button class="btn btn-block btn-secondary" type="button" (click)="return()">Volver atrás</button>
         <br />
         <br />
     </form>
+    <p [innerHTML]="htmlMsg"></p>
+   </div>
 </div>

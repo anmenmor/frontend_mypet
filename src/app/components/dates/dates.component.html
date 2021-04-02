@@ -1,6 +1,8 @@
 <div *ngIf="validSession">
-  <div *ngIf="dates.length > 0; else noDates" class="container">
+  <div *ngIf="dates.length > 0; else noDates" class="container"><br>
     <h2>Listado de citas</h2>
+    <hr>
+    <button type="button" class="btn btn-primary" style="text-align:center"[routerLink]="['/dates/addDate']">Añadir nueva cita</button>
     <br /><br />
     <table class="table table-hover" style="text-align: center">
       <thead>
@@ -16,7 +18,7 @@
           <td>{{ item.date_time }}</td>
           <td>{{ getPetById(item.pet_id) }}</td>
           <td>{{ getEmployeeById(item.employee_id) }}</td>
-          <button type="button" (click)="deleteDate(item.id)">
+          <button type="button" class="btn btn-info" (click)="deleteDate(item.id)">
             Eliminar cita
           </button>
         </tr>

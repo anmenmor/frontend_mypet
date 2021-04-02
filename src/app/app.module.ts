@@ -4,8 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from "./shared/auth.interceptor";
-
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { EmployeesLoginComponent } from "./components/employees/employees-login/employees-login.component";
@@ -30,6 +28,7 @@ import { PetDetailComponent } from "./components/pet-detail/pet-detail.component
 import { HomeComponent } from "./components/home/home.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { SideNavbarClinicsComponent } from "./components/side-navbar-clinics/side-navbar-clinics.component";
+import { SideNavbarClientsComponent } from "./components/side-navbar-clients/side-navbar-clients.component";
 import { DatesComponent } from "./components/dates/dates.component";
 import { CreateDateComponent } from "./components/dates/create-date/create-date.component";
 
@@ -57,6 +56,7 @@ import { CreateDateComponent } from "./components/dates/create-date/create-date.
     HomeComponent,
     FooterComponent,
     SideNavbarClinicsComponent,
+    SideNavbarClientsComponent,
     DatesComponent,
     CreateDateComponent,
   ],

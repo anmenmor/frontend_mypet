@@ -89,14 +89,7 @@ export class CreateDateComponent implements OnInit {
     }
     //Get dates
     this.dateService.listAllDates().subscribe((data) => {
-      for (const d of data as any) {
-        this.dates.push({
-          id: d.id,
-          date_time: d.date_time,
-          pet_id: d.pet_id,
-          employee_id: d.employee_id,
-        });
-      }
+      this.dates = Object.values(data);
     });
     //Get employees
     this.employeeService.listAllEmployees().subscribe((data) => {
@@ -116,7 +109,7 @@ export class CreateDateComponent implements OnInit {
         this.htmlMsg = "";
       } else {
         this.htmlMsg =
-          "El cliente seleccionado no dispone de mascotas dadas de alta";
+          "El cliente seleccionado no dispone de mascotas dadas de alta ";
         this.valid = false;
       }
     });
