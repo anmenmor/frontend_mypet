@@ -8,7 +8,7 @@
         
 <!-- <button type="button" class="btn btn-secondary" (click)="listAllEmployees()">Mostrar empleados</button>
 <br><br> -->
-<button type="button" class="btn btn-light" *ngIf="employeeAdmin" (click)="addEmployee()">Añadir empleado</button>
+<button type="button" class="btn btn-block btn-primary2" *ngIf="employeeAdmin" (click)="addEmployee()">Añadir empleado</button>
 <br /><br />
 <table class="table table-hover">
     <tr *ngIf ="submitted">
@@ -28,9 +28,14 @@
         <td>{{employee.workShifts}}</td>
         <td > {{getSpecialitybyId(employee.specialities)}}</td>
         <td>
-        <button *ngIf="employeeAdmin" (click)="deleteEmployee(employee.id)">Eliminar</button>
-        <button *ngIf="employeeAdmin" (click)="sendSelected(employee)">Editar</button> 
+            <button *ngIf="employeeAdmin" (click)="sendSelected(employee)" class="btn btn-primary2">Editar</button> 
         </td>
+        <td>
+        <button class="btn btn-danger" *ngIf="employeeAdmin" (click)="deleteEmployee(employee.id)">Eliminar</button>
+    </td>
+  
+    
+        
     </tr>
    
 </table>
