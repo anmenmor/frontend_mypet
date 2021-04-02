@@ -47,6 +47,7 @@ export class EmployeesListComponent implements OnInit{
 
   sendSelected(employee: Employee): void{
     this.updateChild = true;
+    this.registerChild = false;
     this.employeeSelectedInList =  employee;
     this.employeeSelectedEvent.emit(employee);
 
@@ -69,6 +70,7 @@ export class EmployeesListComponent implements OnInit{
 
     addEmployee(): void{
       this.registerChild = true;
+      this.updateChild = false;
     }
 
     deleteEmployee(id: number): void{
