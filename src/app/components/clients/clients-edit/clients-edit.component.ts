@@ -83,7 +83,9 @@ export class ClientsEditComponent implements OnInit {
       if(!this.updateForm.invalid){
         this.clientsService.updateClients(this.clientsDetails).subscribe(
           data => {this.clientsDetails = new Clients(data);
-                   this.htmlMsg = "Datos de clinica modificados correctamente" }  
+                   this.htmlMsg = "Datos de clinica modificados correctamente";
+                   this.hideComponent(); }  
+                  
            );
     
       }
@@ -94,7 +96,9 @@ export class ClientsEditComponent implements OnInit {
       this._location.back();
     }
   
-    
+    hideComponent(){
+      this.buttonUpdateClick.emit();
+    }
   
   }
   
