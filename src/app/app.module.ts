@@ -32,6 +32,7 @@ import { SideNavbarClientsComponent } from "./components/side-navbar-clients/sid
 import { DatesComponent } from "./components/dates/dates.component";
 import { CreateDateComponent } from "./components/dates/create-date/create-date.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SideNavbarClientsComponent,
     DatesComponent,
     CreateDateComponent,
+    ClinicsProfileComponent,
   ],
   imports: [
     BrowserModule,

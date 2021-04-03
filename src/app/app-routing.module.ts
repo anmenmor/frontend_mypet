@@ -22,6 +22,7 @@ import { PetDetailComponent } from './components/pet-detail/pet-detail.component
 import { SideNavbarClinicsComponent} from './components/side-navbar-clinics/side-navbar-clinics.component';
 import { DatesComponent } from './components/dates/dates.component';
 import { CreateDateComponent } from './components/dates/create-date/create-date.component';
+import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
 
 
 
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path: '',component:HomeComponent, pathMatch:'full'},
   {path: 'loginEmployee', component:EmployeesLoginComponent, pathMatch: 'full'},
   {path: 'registerEmployee', component:EmployeesRegisterComponent, pathMatch: 'full'},
-  {path: 'clinics', component:ClinicsListComponent, pathMatch: 'full'},
+  {path: 'clinics', component:ClinicsProfileComponent, pathMatch: 'full'},
+  {path: 'clinics/list', component:ClinicsListComponent, pathMatch: 'full'},
   {path: 'clinics/updateClinic', component:ClinicsUpdateComponent, pathMatch: 'full'},
   {path: 'clinics/updateClinic/:id', component:ClinicsUpdateComponent, pathMatch: 'full'},
   {path: 'employees', component:EmployeesListComponent, pathMatch: 'full'},
