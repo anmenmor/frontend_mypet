@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Clinic } from "src/app/models/clinic.model";
+import { AdminServiceService } from "src/app/services/admin-service.service";
 import { ClinicsDataService } from "src/app/services/clinics-data.service";
 
 @Component({
@@ -9,8 +10,12 @@ import { ClinicsDataService } from "src/app/services/clinics-data.service";
 })
 export class ClinicsProfileComponent implements OnInit {
   clinic = new Clinic();
+  isAdmin: boolean = false;
 
-  constructor(private clinicsDataService: ClinicsDataService) {}
+  constructor(
+    private clinicsDataService: ClinicsDataService,
+    private adminService: AdminServiceService
+  ) {}
 
   ngOnInit(): void {
     //Get Clinic
@@ -21,7 +26,9 @@ export class ClinicsProfileComponent implements OnInit {
       this.clinic.city = data[0].city;
       this.clinic.phone = data[0].phone;
       this.clinic.email = data[0].email;
-      console.log(this.clinic);
+      this.adminService.checkIsAdmin().then((isAdmin) => {
+        this.isAdmin = isAdmin;
+      });
     });
   }
 }

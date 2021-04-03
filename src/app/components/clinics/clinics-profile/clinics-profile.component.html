@@ -24,7 +24,7 @@
               />
               <div class="mt-4">
                 <h4>{{clinic.name}}</h4>
-                <button class="btn btn-primary" [routerLink]="['/clinics/updateClinic', clinic.id]">Editar mi perfil</button>
+                <button *ngIf="isAdmin" class="btn btn-primary" [routerLink]="['/clinics/updateClinic', clinic.id]">Editar mi perfil</button>
               </div>
             </div>
           </div>
