@@ -101,7 +101,7 @@ export class AuthEmployeeService {
     return this.http.delete<Employee>(this.DELETE_EMPLOYEE_API_SERVER+id)
     .pipe(
       catchError((error: HttpErrorResponse)=>
-      {return throwError('Something bad happend, please try again later');}
+      {return throwError(error);}
       )
     )
   }

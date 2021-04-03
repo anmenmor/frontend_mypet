@@ -32,9 +32,8 @@ export class EmployeesUpdateComponent implements OnInit {
      
   ngOnInit(): void {
     this.edit = true;
-    console.log("Invoco ON init");
-    
   }
+
   //Recibe un empleado de employees-list
   @Input()
   set employeeSelected(employeeSelected: Employee){
@@ -85,8 +84,8 @@ export class EmployeesUpdateComponent implements OnInit {
   }
   getWorkShift(): any {
     return [
-      { name: 'mañana' },
-      { name: 'tarde' },
+      { name: 'Mañana' },
+      { name: 'Tarde' },
     ];
   }
 
@@ -119,7 +118,6 @@ export class EmployeesUpdateComponent implements OnInit {
           
           resolve(this.specialities);
         }
-
       );
     });
   }

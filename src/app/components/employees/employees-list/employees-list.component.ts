@@ -55,6 +55,9 @@ export class EmployeesListComponent implements OnInit{
   close(alert: Alert) {
     this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
+  getAlertRegister($event) {
+    this.alerts.push($event);
+  }
 
   listAllEmployeesPagination(page: number): void {
     this.submitted = true;
@@ -121,12 +124,18 @@ export class EmployeesListComponent implements OnInit{
           if (index !== -1){
             this.employees.splice(index,1);
             this.alerts.push({
-              type: 'success',
+              type: 'sucess',
               message: 'Empleado: ' +data.name+' borrado exitosamente',
             });
-            console.log(this.alerts);
           }
-         });
+         },
+         error => {
+              this.alerts.push({
+                type: 'danger',
+                message: 'No se ha podido elimninar, el empleado no se encuentra en la base de datos.',
+              });
+        },
+         );
     }
 
     hideRegisterChild(){

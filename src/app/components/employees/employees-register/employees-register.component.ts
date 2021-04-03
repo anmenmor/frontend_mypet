@@ -20,6 +20,7 @@ export class EmployeesRegisterComponent implements OnInit {
     specialities: Specialities[] | any;
     submitted = false;
     @Output() buttonRegisterClick = new EventEmitter<void>();
+    @Output() alertOk = new EventEmitter<any>();
 
   
     constructor(
@@ -66,7 +67,11 @@ export class EmployeesRegisterComponent implements OnInit {
       if(!this.registerForm.invalid){
         this.authEmployeeService.register(this.registerForm.value).subscribe(
           result => {
-            alert('El empleado ha sido registrado correctamente!');
+            this.alertOk.emit({
+              type: 'success',
+              message: 'Empleado añadido correctamente.',
+            }) ;
+            // alert('El empleado ha sido registrado correctamente!');
           },
           error => {
             console.log(error);
