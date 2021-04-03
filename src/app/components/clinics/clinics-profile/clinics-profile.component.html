@@ -1,16 +1,15 @@
 <div *ngIf="clinic" class="container">
   <div class="main-body">
-    <!-- Breadcrumb -->
+    <!-- Barra ubicacion -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">
-          Mi perfil de clínica
+          Perfil de mi clínica
         </li>
       </ol>
     </nav>
-    <!-- /Breadcrumb -->
-
+    <!-- / Barra ubicacion -->
     <div class="row gutters-sm">
       <div class="col-md-4 mb-3">
         <div class="card">
@@ -23,8 +22,14 @@
                 width="150"
               />
               <div class="mt-4">
-                <h4>{{clinic.name}}</h4>
-                <button *ngIf="isAdmin" class="btn btn-primary" [routerLink]="['/clinics/updateClinic', clinic.id]">Editar mi perfil</button>
+                <h4>{{ clinic.name }}</h4>
+                <button
+                  *ngIf="isAdmin"
+                  class="btn btn-primary"
+                  [routerLink]="['/clinics/updateClinic', clinic.id]"
+                >
+                  Editar mi perfil
+                </button>
               </div>
             </div>
           </div>
@@ -37,28 +42,28 @@
               <div class="col-sm-3">
                 <h6 class="mb-0">Nombre</h6>
               </div>
-              <div class="col-sm-9 text-secondary">{{clinic.name}}</div>
+              <div class="col-sm-9 text-secondary">{{ clinic.name }}</div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Ciudad</h6>
               </div>
-              <div class="col-sm-9 text-secondary">{{clinic.city}}</div>
+              <div class="col-sm-9 text-secondary">{{ clinic.city }}</div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Dirección</h6>
               </div>
-              <div class="col-sm-9 text-secondary">{{clinic.address}}</div>
+              <div class="col-sm-9 text-secondary">{{ clinic.address }}</div>
             </div>
             <hr />
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Teléfono</h6>
               </div>
-              <div class="col-sm-9 text-secondary">{{clinic.phone}}</div>
+              <div class="col-sm-9 text-secondary">{{ clinic.phone }}</div>
             </div>
             <hr />
             <div class="row">
@@ -66,7 +71,7 @@
                 <h6 class="mb-0">Correo electrónico</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{clinic.email}}
+                {{ clinic.email }}
               </div>
             </div>
           </div>
