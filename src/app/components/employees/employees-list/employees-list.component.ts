@@ -5,11 +5,11 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 import { AuthEmployeeService } from '../../../shared/auth-employee.service';
 import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap'; 
-import { stringify } from '@angular/compiler/src/util';
 
-
-
-
+interface Alert {
+  type: string;
+  message: string;
+}
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
@@ -18,15 +18,18 @@ import { stringify } from '@angular/compiler/src/util';
 
 })
 export class EmployeesListComponent implements OnInit{
+  alerts: Alert[] =[];
   employees: Employee[] | any;
   employeeSelectedInList: Employee | any;
   submitted = false;
-  specialities: Specialities[] | any;
-  
+  specialities: Specialities[] | any = [];
+
+//Paginacion  
   totalItems: number = 0;
   page: number = 0;
   previousPage: number = 0;
   showPagination: boolean =false;
+  pageSize: number = 0;
 
   employeeAdmin: boolean =false;
   registerChild: boolean = false;
@@ -49,6 +52,10 @@ export class EmployeesListComponent implements OnInit{
     console.log("Admin en el componente " + this.employeeAdmin);
   }
 
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
+
   listAllEmployeesPagination(page: number): void {
     this.submitted = true;
     this.employeeService.listAllEmployeesPagination(page).subscribe(
@@ -60,7 +67,9 @@ export class EmployeesListComponent implements OnInit{
         else {
           this.employees = Object.values(response.data)
           .map(employeeDB => new Employee(employeeDB));
+          console.log(response.total);
           this.totalItems = response.total;
+          this.pageSize = response.per_page;
           this.showPagination = true;
         }
 
@@ -111,7 +120,11 @@ export class EmployeesListComponent implements OnInit{
           let index: number = this.employees.findIndex((employee : Employee) => employee.id === data.id);
           if (index !== -1){
             this.employees.splice(index,1);
-            alert('El empleado ' + data.name+ ' sido eliminado correctamente');
+            this.alerts.push({
+              type: 'success',
+              message: 'Empleado: ' +data.name+' borrado exitosamente',
+            });
+            console.log(this.alerts);
           }
          });
     }
