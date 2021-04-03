@@ -2,8 +2,18 @@
 <app-employees-update *ngIf="updateChild" [employeeSelected]="employeeSelectedInList" (buttonUpdateClick)="hideUpdateChild()"></app-employees-update>
 </div>
 <app-employees-register *ngIf="registerChild" (buttonRegisterClick)="hideRegisterChild()"></app-employees-register>
+<br>
+<div class="main-body">
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Listado de empleados
+      </li>
+    </ol>
+  </nav>
 <div class="card w-auto mx-auto">
-    <h6 class="card-header">Lista de empleados</h6>
+    <!-- <h6 class="card-header">Lista de empleados</h6> -->
     <div class="card-body">
 <button type="button" class="btn btn-block btn-info" *ngIf="employeeAdmin" (click)="addEmployee()">Añadir empleado</button>
 <br>
@@ -51,6 +61,7 @@
 <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
 (pageChange)="loadPage($event)"></ngb-pagination>
     </div>
+</div>
 </div>
 
 
