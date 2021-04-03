@@ -1,18 +1,26 @@
-<div class="d-flex" id="wrapper" style="background-color: rgb(105, 206, 172);">
+<div class="d-flex margin" id="wrapper" style="background-color: rgb(105, 206, 172);">
     <!-- Sidebar -->
     <div class="bg-light border-left" id="sidebar-wrapper">
       <div class="sidebar-heading">CLINICA DOGGY </div>
       <div class="list-group list-group-flush">
-        <a  class="list-group-item list-group-item-action bg-light">Mi perfil</a>
-        <a  class="list-group-item list-group-item-action bg-light">Mis mascotas</a>
-        <a  class="list-group-item list-group-item-action bg-light">Mis Citas</a>
+        <a  (click)="clientsUserShow()" class="list-group-item list-group-item-action bg-light">Mi perfil</a>
+        <a  (click)="clientsPetShow()" class="list-group-item list-group-item-action bg-light">Mis mascotas</a>
+        <a  (click)="clientsDatesShow()" class="list-group-item list-group-item-action bg-light">Mis Citas</a>
         
       </div>
     </div>
+
     <div id="page-content-wrapper">
         <div class="container-fluid">
             
-            <h1 class="mt-4">Clínica Doggy</h1>
+            <h1>BIENVENIDOS</h1>
+            <div><br><br><br></div>
+            <app-clients-edit *ngIf="clients"></app-clients-edit>
+            <app-list-pets *ngIf="pets"></app-list-pets>
+            <app-dates *ngIf="dates"></app-dates>
+             
+           
+          
           </div>
         </div>
   </div>

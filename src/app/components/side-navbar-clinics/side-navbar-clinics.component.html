@@ -1,9 +1,9 @@
-<div class="d-flex" id="wrapper" style="background-color: rgb(178, 221, 207);">
+<div class="d-flex margin" id="wrapper" style="background-color: rgb(105, 206, 172);">
     <!-- Sidebar -->
     <div class="bg-light border-left" id="sidebar-wrapper">
-      <div class="sidebar-heading">CLINICA DOGGY </div>
+      <div class="sidebar-heading">CLINICA VETERINARIA</div>
       <div class="list-group list-group-flush">
-        <a routerLink="/" class="list-group-item list-group-item-action bg-light">Datos de mi clinica</a>
+        <a (click)="clinicShow()" class="list-group-item list-group-item-action bg-light">Datos de mi clinica</a>
         <a (click)="employeesShow()" class="list-group-item list-group-item-action bg-light">Empleados</a>
         <a (click)="clientsShow()" class="list-group-item list-group-item-action bg-light">Clientes</a>
         <a (click)="datesShow()" class="list-group-item list-group-item-action bg-light">Angenda de consultas</a>
@@ -12,11 +12,12 @@
     </div>
     <div id="page-content-wrapper">
         <div class="container-fluid">
+          <app-clinics-profile *ngIf="clinic"></app-clinics-profile>
             <app-employees-list *ngIf="employees"></app-employees-list>
             <app-clients-list *ngIf="clients"></app-clients-list>
             <app-vaccinations *ngIf="vaccination"></app-vaccinations>
             <app-dates *ngIf="dates"></app-dates>
-            <h1 class="mt-4">Clínica Doggy</h1>
+            <!-- <h1 class="mt-4">Clínica Doggy</h1> -->
           </div>
         </div>
   </div>

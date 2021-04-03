@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Consultation } from 'src/app/models/consultation';
 import { PetService } from 'src/app/services/pet.service';
+import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
 
 @Component({
   selector: 'app-create-consultation',
@@ -17,12 +18,13 @@ export class CreateConsultationComponent implements OnInit {
   submitted = false;
   @Input() showComponent: boolean = false;
   @Output() creationEvent = new EventEmitter();
-  employeeId: number = 61;
+  employeeId: string = "";
 
   constructor(
     private route: ActivatedRoute,
     public fb: FormBuilder,
     private petService: PetService,
+    private authEmployeeService: AuthEmployeeService
   ) { }
 
 
@@ -34,6 +36,7 @@ export class CreateConsultationComponent implements OnInit {
       this.consultationForm = this.fb.group({
         comments: ['', Validators.required],
       });
+      this.employeeId = this.authEmployeeService.currentEmployee.id
   }
 
   ngOnDestroy() {

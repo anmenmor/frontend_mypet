@@ -4,19 +4,33 @@ import { Specialities } from 'src/app/models/Specialities';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { SpecialitiesService } from 'src/app/services/specialities.service';
 import { AuthEmployeeService } from '../../../shared/auth-employee.service';
+import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap'; 
 
-
+interface Alert {
+  type: string;
+  message: string;
+}
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
-  styleUrls: ['./employees-list.component.css']
+  styleUrls: ['./employees-list.component.css'],
+  providers: [NgbPaginationConfig]
+
 })
 export class EmployeesListComponent implements OnInit{
+  alerts: Alert[] =[];
   employees: Employee[] | any;
   employeeSelectedInList: Employee | any;
   submitted = false;
-  specialities: Specialities[] | any;
-  
+  specialities: Specialities[] | any = [];
+
+//Paginacion  
+  totalItems: number = 0;
+  page: number = 0;
+  previousPage: number = 0;
+  showPagination: boolean =false;
+  pageSize: number = 0;
+
   employeeAdmin: boolean =false;
   registerChild: boolean = false;
   updateChild: boolean = false;
@@ -25,8 +39,10 @@ export class EmployeesListComponent implements OnInit{
   constructor(private employeeService: AuthEmployeeService, private adminService: AdminServiceService, private specialitiesService: SpecialitiesService) { }
 
   ngOnInit(): void {
+    this.page =1;
+	  this.previousPage =1;
     this.employees = [];
-    this.listAllEmployees();
+    this.listAllEmployeesPagination(this.page);
     this.getSpecility();
     this.adminService.checkIsAdmin().then(isAdmin =>{
       this.employeeAdmin = isAdmin;
@@ -36,17 +52,39 @@ export class EmployeesListComponent implements OnInit{
     console.log("Admin en el componente " + this.employeeAdmin);
   }
 
-  listAllEmployees(): void {
-    this.submitted = true;
-    this.employeeService.listAllEmployees().subscribe(data=>
-      {
-        this.employees = Object.values(data)
-        .map(employeeDB => new Employee(employeeDB));
-      });
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 
+  listAllEmployeesPagination(page: number): void {
+    this.submitted = true;
+    this.employeeService.listAllEmployeesPagination(page).subscribe(
+      response =>{
+        if ((!response && !response.data) || (response && response.data && response.data.length == 0)) {
+          this.employees = [];
+          this.showPagination = false;
+        }
+        else {
+          this.employees = Object.values(response.data)
+          .map(employeeDB => new Employee(employeeDB));
+          console.log(response.total);
+          this.totalItems = response.total;
+          this.pageSize = response.per_page;
+          this.showPagination = true;
+        }
+
+
+      });
+  }
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.listAllEmployeesPagination(this.page);
+    }
+  }
   sendSelected(employee: Employee): void{
     this.updateChild = true;
+    this.registerChild = false;
     this.employeeSelectedInList =  employee;
     this.employeeSelectedEvent.emit(employee);
 
@@ -64,11 +102,16 @@ export class EmployeesListComponent implements OnInit{
 
     //this.specialities tiene cargado el listado de especialidades al llamarse en el OnInit
     getSpecialitybyId(id: string): any{
-      return this.specialities.filter( (specialty: Specialities) => specialty.id == id)[0].name;    
+      let specialitiesFilter = this.specialities.filter( (specialty: Specialities) => specialty.id == id)
+      if (specialitiesFilter.length > 0) {
+        return specialitiesFilter[0].name.charAt(0).toUpperCase() + specialitiesFilter[0].name.slice(1);
+      }
+      return "No disponible";    
     } 
 
     addEmployee(): void{
       this.registerChild = true;
+      this.updateChild = false;
     }
 
     deleteEmployee(id: number): void{
@@ -77,7 +120,11 @@ export class EmployeesListComponent implements OnInit{
           let index: number = this.employees.findIndex((employee : Employee) => employee.id === data.id);
           if (index !== -1){
             this.employees.splice(index,1);
-            alert('El empleado ' + data.name+ ' sido eliminado correctamente');
+            this.alerts.push({
+              type: 'success',
+              message: 'Empleado: ' +data.name+' borrado exitosamente',
+            });
+            console.log(this.alerts);
           }
          });
     }

@@ -10,10 +10,10 @@ import { AuthClientsService } from '../../../shared/auth-clients.service';
 })
 
 export class ClientsListComponent implements OnInit {
-  clients: Clients[] | any;
+  clients: Clients[] = [];
   clientsSelectedList: Clients | any;
   submitted = false;
-  
+  updateChild: boolean = false;
    @Output() clientsSelectedEvent = new EventEmitter<Clients>();
 
   constructor(private clientsService: AuthClientsService) { }
@@ -36,8 +36,7 @@ export class ClientsListComponent implements OnInit {
 
 
   sendSelected(clients: Clients): void{
-    console.log(clients);
-  
+    this.updateChild = true;
     this.clientsSelectedList =  clients;
     this.clientsSelectedEvent.emit(clients);
   }
@@ -53,11 +52,11 @@ export class ClientsListComponent implements OnInit {
       }
       );
 
-    
-
-  }
+     }
  
-
+  hideUpdateChild(){
+    this.updateChild = false;
+  }
 }
 
 

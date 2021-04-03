@@ -1,5 +1,8 @@
 <app-pets-navbar></app-pets-navbar>
-<button (click)="showComponent()">Crear consulta</button>
+<div *ngIf="authEmployeeService.currentEmployee">
+    <button (click)="showComponent()">Crear consulta</button>
+</div>
+
 <app-create-consultation [showComponent]="showCreateComponent" (creationEvent)="createHandler()"></app-create-consultation>
 <h2>Listado de consultas:</h2>
 <ul >

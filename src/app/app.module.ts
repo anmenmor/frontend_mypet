@@ -4,8 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from "./shared/auth.interceptor";
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeesLoginComponent } from './components/employees/employees-login/employees-login.component';
@@ -36,6 +34,10 @@ import { ListConsultationsComponent } from './components/list-consultations/list
 import { PetsNavbarComponent } from './components/pets-navbar/pets-navbar.component';
 import { ConsultationDetailComponent } from './components/consultation-detail/consultation-detail.component';
 import { CreateConsultationComponent } from './components/create-consultation/create-consultation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
+import { SideNavbarClientsComponent } from "./components/side-navbar-clients/side-navbar-clients.component";
+
 
 @NgModule({
   declarations: [
@@ -61,12 +63,14 @@ import { CreateConsultationComponent } from './components/create-consultation/cr
     HomeComponent,
     FooterComponent,
     SideNavbarClinicsComponent,
+    SideNavbarClientsComponent,
     DatesComponent,
     CreateDateComponent,
     ListConsultationsComponent,
     PetsNavbarComponent,
     ConsultationDetailComponent,
     CreateConsultationComponent,
+    ClinicsProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,7 @@ import { CreateConsultationComponent } from './components/create-consultation/cr
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [
     {

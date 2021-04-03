@@ -1,8 +1,11 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Clients } from 'src/app/models/clients';
 import { Consultation } from 'src/app/models/consultation';
+import { Employee } from 'src/app/models/Employee';
 import { PetService } from 'src/app/services/pet.service';
+import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
 
 @Component({
   selector: 'app-list-consultations',
@@ -18,6 +21,7 @@ export class ListConsultationsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private petService: PetService,
+    public authEmployeeService: AuthEmployeeService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +42,7 @@ export class ListConsultationsComponent implements OnInit {
   }
 
   onSelect(id: number): void {
+    console.log("FOO", this.authEmployeeService.currentEmployee)
     this.consultations = this.consultations.map(function(cons) {
       if(cons.id == id) {
         cons.visibility = !cons.visibility;
