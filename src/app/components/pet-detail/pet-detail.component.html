@@ -1,7 +1,8 @@
+<app-pets-navbar></app-pets-navbar> 
+
 <h2>Detalle de la mascota:</h2>
-<a routerLink="../">volver</a>
 <form [formGroup]="petDetailForm" (ngSubmit)="updatePet()">
-    <label>Nombre</label><br>
+  <label>Nombre</label><br>
     <input type="text" formControlName="name"><br><br>
         <div *ngIf="petDetailForm.controls.name.errors">
           El nombre es obligatorio
@@ -31,4 +32,6 @@
       </div>
     <button type="submit">Actualizar</button><br>
 </form>
+
+
 
