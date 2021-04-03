@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Employee } from '../models/Employee';
+import { AuthEmployeeService } from './auth-employee.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,13 @@ export class TokenEmployeeService {
     loginClient: 'http://127.0.0.1:8000/api/loginClients',
   }
 
-  constructor() { }
+  constructor(private authEmployeeService: AuthEmployeeService) { }
 
   handleData(token: any){
     localStorage.setItem('auth_token', token);
+    this.authEmployeeService.getAuthenticateUser().subscribe((employee: Employee) => {
+      this.authEmployeeService.currentEmployee = employee
+    })
   }
 
   getToken(){
@@ -55,6 +60,7 @@ export class TokenEmployeeService {
   // Remove token
   removeToken(){
     localStorage.removeItem('auth_token');
+    this.authEmployeeService.currentEmployee = null
   }
 
 }

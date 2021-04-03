@@ -3,6 +3,7 @@ import { Pet } from 'src/app/models/pet';
 import { PetService } from 'src/app/services/pet.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
 
 @Component({
   selector: 'app-list-pets',
@@ -18,6 +19,7 @@ export class ListPetsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private petService: PetService,
+    private authEmployeeService: AuthEmployeeService
   ) { }
 
   ngOnInit(): void {
