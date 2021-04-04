@@ -12,7 +12,7 @@
     <!-- <h6 class="card-header">Lista de empleados</h6> -->
     <div class="card-body">
         <div class="container-fluid">
-            <app-employees-update *ngIf="updateChild" [employeeSelected]="employeeSelectedInList" (buttonUpdateClick)="hideUpdateChild()"></app-employees-update>
+            <app-employees-update *ngIf="updateChild" (alertUpdated)="getAlertUpdated($event)" [employeeSelected]="employeeSelectedInList" (buttonUpdateClick)="hideUpdateChild()"></app-employees-update>
         </div>
         <div class="container-fluid">
         <app-employees-register *ngIf="registerChild" (alertOk)="getAlertRegister($event)" (buttonRegisterClick)="hideRegisterChild()"></app-employees-register>
@@ -22,17 +22,17 @@
    <ngb-alert [type]="alert.type" (closed)="close(alert)">{{alert.message}}</ngb-alert> 
 </p>
 <br />
-<button type="button" class="btn btn-primary" style="margin-left: 2em;" *ngIf="employeeAdmin" (click)="addEmployee()">Añadir empleado</button>
-<table *ngIf="!updateChild || !registerChild" class="table table-hover">
+<button type="button" class="btn btn-primary" style="margin-left: 2em;" *ngIf="employeeAdmin && !updateChild && !registerChild" (click)="addEmployee()">Añadir empleado</button>
+<table *ngIf="!updateChild && !registerChild" class="table table-hover">
     <thead>
     <tr *ngIf ="submitted">
         <th>ID</th>
         <th>Nombre</th>
         <th>Apellidos</th>
-        <th>Correo electronico</th>
+        <th>Correo electrónico</th>
         <th>Turno de trabajo</th>
-        <th>Especialidad id</th>
-        <th *ngIf="employeeAdmin">Accion</th>
+        <th>Especialidad</th>
+        <th *ngIf="employeeAdmin">Acción</th>
     </tr>
 </thead>
     <tbody>
@@ -53,12 +53,9 @@
     
         
     </tr>  
-    </tbody>
-  
- 
-   
+    </tbody>  
 </table>
-<ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
+<ngb-pagination *ngIf="showPagination && !updateChild && !registerChild" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
 (pageChange)="loadPage($event)"></ngb-pagination>
     </div>
 </div>
