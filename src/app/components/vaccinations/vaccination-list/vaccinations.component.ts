@@ -69,7 +69,6 @@ export class VaccinationsComponent implements OnInit {
         for (const i of d as any) {
           if (i.id) {
             this.pets.push(i);
-            console.log(i.id);
             this.getVaccinationsByPetId(i.id);
           }
         }
