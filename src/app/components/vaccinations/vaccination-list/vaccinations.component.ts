@@ -6,7 +6,6 @@ import { Vaccination } from "src/app/models/vaccination.model";
 import { Vaccine } from "src/app/models/vaccine";
 import { VaccinesService } from "src/app/services/vaccines.service";
 import { VaccinationsService } from "src/app/services/vaccinations.service";
-import { LogHelper } from "src/app/services/log-helper.service";
 import { Router } from "@angular/router";
 import { AuthClientsService } from "src/app/shared/auth-clients.service";
 
@@ -27,7 +26,6 @@ export class VaccinationsComponent implements OnInit {
   isEmployee: boolean = false;
 
   constructor(
-    private logHelper: LogHelper,
     private _location: Location,
     private router: Router,
     private vaccinationService: VaccinationsService,
@@ -37,14 +35,6 @@ export class VaccinationsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //Get logged user
-    this.loggedUser = this.logHelper.getLoggedUser();
-    if (this.loggedUser) {
-      this.validSession = true;
-    } else {
-      alert("Por favor, registrate o inicia sesión");
-      this.router.navigate(["/"]);
-    }
     //If client, get his vaccinations. If employee, get everyone's
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
@@ -54,6 +44,7 @@ export class VaccinationsComponent implements OnInit {
         this.isEmployee = true;
         this.vaccinationService.listAllVaccinations().subscribe((data: any) => {
           this.vaccinations = data;
+          this.validSession = true;
         });
       }
     );
@@ -90,6 +81,7 @@ export class VaccinationsComponent implements OnInit {
           pet_id: d.pet_id,
           vaccine_id: d.vaccine_id,
         });
+        this.validSession = true;
       }
     });
   }

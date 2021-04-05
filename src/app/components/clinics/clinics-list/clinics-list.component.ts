@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Clinic } from "src/app/models/clinic.model";
-import { LogHelper } from "src/app/services/log-helper.service";
 import { ClinicsDataService } from "../../../services/clinics-data.service";
 
 @Component({
@@ -13,24 +12,14 @@ export class ClinicsListComponent implements OnInit {
   clinics: Array<Clinic> = [];
   clinic = new Clinic();
   clinicId = 0;
-  validSession: boolean = false;
   loggedUser: any;
 
   constructor(
-    private logHelper: LogHelper,
     private router: Router,
     private clinicsDataService: ClinicsDataService
   ) {}
 
   ngOnInit() {
-    //Get logged user
-    this.loggedUser = this.logHelper.getLoggedUser();
-    if (this.loggedUser) {
-      this.validSession = true;
-    } else {
-      alert("Por favor, registrate o inicia sesión");
-      this.router.navigate(["/"]);
-    }
     this.clearPreviousValues();
     this.clinicsDataService.listAllClinics().subscribe((data) => {
       for (const d of data as any) {
