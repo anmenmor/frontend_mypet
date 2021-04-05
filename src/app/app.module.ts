@@ -37,6 +37,7 @@ import { CreateConsultationComponent } from './components/create-consultation/cr
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
 import { SideNavbarClientsComponent } from "./components/side-navbar-clients/side-navbar-clients.component";
+import { DatePipe } from "@angular/common";
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { SideNavbarClientsComponent } from "./components/side-navbar-clients/sid
       multi: true,
     },
     ClinicsDataService,
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

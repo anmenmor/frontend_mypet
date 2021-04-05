@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Date } from "src/app/models/date.model";
+import { DatePipe } from "@angular/common";
+import { Dates } from "src/app/models/dates.model";
 import { Pet } from "src/app/models/pet";
 import { PetService } from "src/app/services/pet.service";
 import { Employee } from "src/app/models/Employee";
@@ -15,8 +16,10 @@ import { AuthClientsService } from "src/app/shared/auth-clients.service";
   styleUrls: ["./dates.component.css"],
 })
 export class DatesComponent implements OnInit {
-  dates: Array<Date> = [];
-  date = new Date();
+  currentDate = new Date();
+  formattedDate!: any;
+  dates: Array<Dates> = [];
+  date = new Dates();
   pets: Pet[] = [];
   employees: Employee[] = [];
   employeeId = 0;
@@ -27,12 +30,18 @@ export class DatesComponent implements OnInit {
 
   constructor(
     private logHelper: LogHelper,
+    private datePipe: DatePipe,
     private router: Router,
     private dateService: DateService,
     private petService: PetService,
     private employeeService: AuthEmployeeService,
     private clientsService: AuthClientsService
-  ) {}
+  ) {
+    this.formattedDate = this.datePipe.transform(
+      this.currentDate,
+      "yyyy-MM-dd"
+    );
+  }
 
   ngOnInit(): void {
     //Get logged user
@@ -82,12 +91,14 @@ export class DatesComponent implements OnInit {
   getDatesByPetId(petId: number) {
     this.dateService.listDateByPetId(petId).subscribe((data) => {
       for (const d of data as any) {
-        this.dates.push({
-          id: d.id,
-          date_time: d.date_time,
-          pet_id: d.pet_id,
-          employee_id: d.employee_id,
-        });
+        if (d.date_time > this.formattedDate) {
+          this.dates.push({
+            id: d.id,
+            date_time: d.date_time,
+            pet_id: d.pet_id,
+            employee_id: d.employee_id,
+          });
+        }
       }
     });
   }
