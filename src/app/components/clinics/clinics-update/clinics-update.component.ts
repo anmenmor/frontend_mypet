@@ -5,7 +5,6 @@ import { Clinic } from "src/app/models/clinic.model";
 import { ClinicsDataService } from "../../../services/clinics-data.service";
 import { FormBuilder, FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { LogHelper } from "src/app/services/log-helper.service";
 
 @Component({
   selector: "app-clinics-update",
@@ -18,12 +17,10 @@ export class ClinicsUpdateComponent implements OnInit {
   clinics: any;
   clinic: any;
   clinicId = 0;
-  validSession: boolean = false;
   loggedUser: any;
   htmlMsg!: String;
 
   constructor(
-    private logHelper: LogHelper,
     private router: Router,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
@@ -42,14 +39,6 @@ export class ClinicsUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Get logged user
-    this.loggedUser = this.logHelper.getLoggedUser();
-    if (this.loggedUser) {
-      this.validSession = true;
-    } else {
-      alert("Por favor, registrate o inicia sesión");
-      this.router.navigate(["/"]);
-    }
     this.routeSub = this.route.params.subscribe((params) => {
       this.clinicId = params["id"];
     });

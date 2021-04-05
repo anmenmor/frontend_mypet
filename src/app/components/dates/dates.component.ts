@@ -8,7 +8,6 @@ import { Employee } from "src/app/models/Employee";
 import { DateService } from "src/app/services/date.service";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 import { Router } from "@angular/router";
-import { LogHelper } from "src/app/services/log-helper.service";
 import { AuthClientsService } from "src/app/shared/auth-clients.service";
 
 @Component({
@@ -30,7 +29,6 @@ export class DatesComponent implements OnInit {
   htmlMsg!: String;
 
   constructor(
-    private logHelper: LogHelper,
     private _location: Location,
     private datePipe: DatePipe,
     private router: Router,
@@ -46,14 +44,6 @@ export class DatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //Get logged user
-    this.loggedUser = this.logHelper.getLoggedUser();
-    if (this.loggedUser) {
-      this.validSession = true;
-    } else {
-      alert("Por favor, registrate o inicia sesión");
-      this.router.navigate(["/"]);
-    }
     //If client, get his dates. If employee, get everyone's
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
@@ -62,6 +52,7 @@ export class DatesComponent implements OnInit {
       (exception) => {
         this.dateService.listAllDates().subscribe((data) => {
           this.dates = Object.values(data);
+          this.validSession = true;
         });
       }
     );
@@ -100,6 +91,7 @@ export class DatesComponent implements OnInit {
             pet_id: d.pet_id,
             employee_id: d.employee_id,
           });
+          this.validSession = true;
         }
       }
     });

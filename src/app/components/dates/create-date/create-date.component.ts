@@ -11,7 +11,6 @@ import { DateService } from "src/app/services/date.service";
 import { Dates } from "src/app/models/dates.model";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 import { Employee } from "src/app/models/Employee";
-import { LogHelper } from "src/app/services/log-helper.service";
 
 @Component({
   selector: "app-create-date",
@@ -29,14 +28,12 @@ export class CreateDateComponent implements OnInit {
   client_id!: number;
   dates: Dates[] = [];
   pets: Pet[] = [];
-  validSession: boolean = false;
   loggedUser: any;
   htmlMsg!: String;
 
   constructor(
     private route: ActivatedRoute,
     private _location: Location,
-    private logHelper: LogHelper,
     private router: Router,
     private formBuilder: FormBuilder,
     private dateService: DateService,
@@ -52,14 +49,6 @@ export class CreateDateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //Get logged user
-    this.loggedUser = this.logHelper.getLoggedUser();
-    if (this.loggedUser) {
-      this.validSession = true;
-    } else {
-      alert("Por favor, registrate o inicia sesión");
-      this.router.navigate(["/"]);
-    }
     //Get url params
     this.routeSub = this.route.params.subscribe((params) => {
       this.client_id = params["clientId"];
