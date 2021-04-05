@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Vaccination } from "src/app/models/vaccination.model";
 import { VaccinationsService } from "src/app/services/vaccinations.service";
-import { LogHelper } from "src/app/services/log-helper.service";
 
 @Component({
   selector: "app-vaccination-update",
@@ -18,12 +17,10 @@ export class VaccinationUpdateComponent implements OnInit {
   id!: number;
   updateVaccination: any;
   vaccinations: any;
-  validSession: boolean = false;
   loggedUser: any;
   htmlMsg!: String;
 
   constructor(
-    private logHelper: LogHelper,
     private router: Router,
     private route: ActivatedRoute,
     private _location: Location,
@@ -36,14 +33,7 @@ export class VaccinationUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Get logged user
-    this.loggedUser = this.logHelper.getLoggedUser();
-    if (this.loggedUser) {
-      this.validSession = true;
-    } else {
-      alert("Por favor, registrate o inicia sesión");
-      this.router.navigate(["/"]);
-    }
+
     this.routeSub = this.route.params.subscribe((params) => {
       this.id = params["id"];
       this.petId = params["petId"];

@@ -1,4 +1,4 @@
-export class Date {
+export class Dates {
     id: number;
     date_time: string;
     pet_id: number;
