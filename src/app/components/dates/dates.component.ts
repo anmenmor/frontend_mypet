@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { DatePipe } from "@angular/common";
 import { Dates } from "src/app/models/dates.model";
 import { Pet } from "src/app/models/pet";
@@ -30,6 +31,7 @@ export class DatesComponent implements OnInit {
 
   constructor(
     private logHelper: LogHelper,
+    private _location: Location,
     private datePipe: DatePipe,
     private router: Router,
     private dateService: DateService,
@@ -134,5 +136,9 @@ export class DatesComponent implements OnInit {
 
   tracker(item: any, index: any) {
     return `${item.id}-${index}`;
+  }
+
+  return() {
+    this._location.back();
   }
 }
