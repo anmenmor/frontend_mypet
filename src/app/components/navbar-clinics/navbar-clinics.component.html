@@ -25,7 +25,7 @@
         <a class="nav-link" *ngIf="isSignedIn && employeeService.currentEmployee">Bienvenido {{employeeService.currentEmployee.name}} </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="isSignedIn && clientService.currentEmployee">Bienvenido {{clientService.currentClient.name}} </a>
+        <a class="nav-link" *ngIf="isSignedIn && clientService.currentClient">Bienvenido {{clientService.currentClient.name}} </a>
       </li>
 
         <!-- <li class="nav-item">
