@@ -8,7 +8,7 @@ import { Pet } from "src/app/models/pet";
 import { ClientsListService } from "src/app/services/clients-list.service";
 import { PetService } from "src/app/services/pet.service";
 import { DateService } from "src/app/services/date.service";
-import { Date } from "src/app/models/date.model";
+import { Dates } from "src/app/models/dates.model";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 import { Employee } from "src/app/models/Employee";
 import { LogHelper } from "src/app/services/log-helper.service";
@@ -27,7 +27,7 @@ export class CreateDateComponent implements OnInit {
   employees: Employee[] = [];
   employee_id!: number;
   client_id!: number;
-  dates: Date[] = [];
+  dates: Dates[] = [];
   pets: Pet[] = [];
   validSession: boolean = false;
   loggedUser: any;
@@ -115,7 +115,7 @@ export class CreateDateComponent implements OnInit {
     });
   }
 
-  onSubmit(formData: Date) {
+  onSubmit(formData: Dates) {
     this.dateService.addDate(formData).subscribe(
       (data) => (this.htmlMsg = "Cita añadida correctamente"),
       (exception) =>
