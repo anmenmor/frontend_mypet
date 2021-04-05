@@ -13,6 +13,7 @@ export class SideNavbarClinicsComponent implements OnInit {
   vaccination: any = false;
   dates: any = false;
   clinic: any = false;
+  pet: any = false;
 
   constructor() { }
 
@@ -25,6 +26,7 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.vaccination = false;
     this.dates = false;
     this.clinic = false;
+    this.pet = false;
   }
 
   clientsShow(){
@@ -33,6 +35,16 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.employees = false;
     this.dates = false;
     this.clinic = false;
+    this.pet = false;
+  }
+
+  petsShow(){
+    this.pet = true;
+    this.clinic = false;
+    this.dates = false;
+    this.employees = false;
+    this.clients = false;
+    this.vaccination = false;
   }
 
   vaccinationsShow(){
@@ -41,6 +53,7 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.clients = false;
     this.dates = false;
     this.clinic = false;
+    this.pet = false;
   }
 
   datesShow(){
@@ -49,6 +62,7 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.clients = false;
     this.vaccination = false;
     this.clinic = false;
+    this.pet = false;
   }
 
   clinicShow(){
@@ -57,5 +71,6 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.employees = false;
     this.clients = false;
     this.vaccination = false;
+    this.pet = false;
   }
 }
