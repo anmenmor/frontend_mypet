@@ -1,38 +1,38 @@
-<div class="container-fluid">
-<app-employees-update *ngIf="updateChild" [employeeSelected]="employeeSelectedInList" (buttonUpdateClick)="hideUpdateChild()"></app-employees-update>
-</div>
-<app-employees-register *ngIf="registerChild" (buttonRegisterClick)="hideRegisterChild()"></app-employees-register>
 <br>
-<div class="main-body">
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">
-        Listado de empleados
+        <strong>Listado de empleados</strong>
       </li>
     </ol>
   </nav>
+<div class="main-body">
 <div class="card w-auto mx-auto">
     <!-- <h6 class="card-header">Lista de empleados</h6> -->
     <div class="card-body">
-<button type="button" class="btn btn-block btn-info" *ngIf="employeeAdmin" (click)="addEmployee()">Añadir empleado</button>
+        <div class="container-fluid">
+            <app-employees-update *ngIf="updateChild" (alertUpdated)="getAlertUpdated($event)" [employeeSelected]="employeeSelectedInList" (buttonUpdateClick)="hideUpdateChild()"></app-employees-update>
+        </div>
+        <div class="container-fluid">
+        <app-employees-register *ngIf="registerChild" (alertOk)="getAlertRegister($event)" (buttonRegisterClick)="hideRegisterChild()"></app-employees-register>
+        </div>
 <br>
 <p *ngFor="let alert of alerts">
-   <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message}}</ngb-alert> 
+   <ngb-alert [type]="alert.type" (closed)="close(alert)">{{alert.message}}</ngb-alert> 
 </p>
-
-<br /><br />
-
-<table class="table table-hover">
+<br />
+<button type="button" class="btn btn-primary" style="margin-left: 2em;" *ngIf="employeeAdmin && !updateChild && !registerChild" (click)="addEmployee()">Añadir empleado</button>
+<table *ngIf="!updateChild && !registerChild" class="table table-hover">
     <thead>
     <tr *ngIf ="submitted">
         <th>ID</th>
         <th>Nombre</th>
         <th>Apellidos</th>
-        <th>Correo electronico</th>
+        <th>Correo electrónico</th>
         <th>Turno de trabajo</th>
-        <th>Especialidad id</th>
-        <th *ngIf="employeeAdmin">Accion</th>
+        <th>Especialidad</th>
+        <th *ngIf="employeeAdmin">Acción</th>
     </tr>
 </thead>
     <tbody>
@@ -42,7 +42,7 @@
         <td>{{employee.surname}}</td>
         <td>{{employee.email}}</td>
         <td>{{employee.workShifts}}</td>
-        <td > {{getSpecialitybyId(employee.specialities)}}</td>
+        <td>{{getSpecialitybyId(employee.specialities)}}</td>
         <td>
             <button *ngIf="employeeAdmin" (click)="sendSelected(employee)" class="btn btn-primary2">Editar</button> 
         </td>
@@ -53,12 +53,9 @@
     
         
     </tr>  
-    </tbody>
-  
- 
-   
+    </tbody>  
 </table>
-<ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
+<ngb-pagination *ngIf="showPagination && !updateChild && !registerChild" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
 (pageChange)="loadPage($event)"></ngb-pagination>
     </div>
 </div>

@@ -31,7 +31,7 @@ export class EmployeesListComponent implements OnInit{
   showPagination: boolean =false;
   pageSize: number = 0;
 
-  employeeAdmin: boolean =false;
+  employeeAdmin: boolean = false;
   registerChild: boolean = false;
   updateChild: boolean = false;
   @Output() employeeSelectedEvent = new EventEmitter<Employee>();
@@ -44,17 +44,26 @@ export class EmployeesListComponent implements OnInit{
     this.employees = [];
     this.listAllEmployeesPagination(this.page);
     this.getSpecility();
-    this.adminService.checkIsAdmin().then(isAdmin =>{
-      this.employeeAdmin = isAdmin;
-    }
-
-    );
+    // this.adminService.checkIsAdmin().then(isAdmin =>{
+    //   this.employeeAdmin = isAdmin;
+    // }
+    // );
+    this.employeeAdmin = this.employeeService.currentEmployee? this.employeeService.currentEmployee.admin: false;
     console.log("Admin en el componente " + this.employeeAdmin);
   }
 
+  //Alertas
   close(alert: Alert) {
     this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
+
+  getAlertRegister($event) {
+    this.alerts.push($event);
+  }
+
+  getAlertUpdated($event){
+    this.alerts.push($event);
+  } 
 
   listAllEmployeesPagination(page: number): void {
     this.submitted = true;
@@ -124,9 +133,15 @@ export class EmployeesListComponent implements OnInit{
               type: 'success',
               message: 'Empleado: ' +data.name+' borrado exitosamente',
             });
-            console.log(this.alerts);
           }
-         });
+         },
+         error => {
+              this.alerts.push({
+                type: 'danger',
+                message: 'No se ha podido eliminar, el empleado no se encuentra en la base de datos.',
+              });
+        },
+         );
     }
 
     hideRegisterChild(){

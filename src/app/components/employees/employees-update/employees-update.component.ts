@@ -19,6 +19,7 @@ export class EmployeesUpdateComponent implements OnInit {
   specialities: Specialities[] | any;
   workShifts: {id: string, name: string}[]=[];
   @Output() buttonUpdateClick = new EventEmitter<void>();
+  @Output() alertUpdated = new EventEmitter<any>();
  
 
   constructor(
@@ -32,9 +33,8 @@ export class EmployeesUpdateComponent implements OnInit {
      
   ngOnInit(): void {
     this.edit = true;
-    console.log("Invoco ON init");
-    
   }
+
   //Recibe un empleado de employees-list
   @Input()
   set employeeSelected(employeeSelected: Employee){
@@ -85,8 +85,8 @@ export class EmployeesUpdateComponent implements OnInit {
   }
   getWorkShift(): any {
     return [
-      { name: 'mañana' },
-      { name: 'tarde' },
+      { name: 'Mañana' },
+      { name: 'Tarde' },
     ];
   }
 
@@ -100,7 +100,11 @@ export class EmployeesUpdateComponent implements OnInit {
       this.employeeDetails.specialities = this.updateForm.value.specialities;
     this.employeeService.updateEmployee(this.employeeDetails).subscribe(
       data => {this.employeeDetails = new Employee(data);
-        alert('Empleado actualizado!'); 
+        // alert('Empleado actualizado!'); 
+        this.alertUpdated.emit({
+          type: 'success',
+          message: 'Empleado actualizado correctamente.',
+        }) ;
         this.hideComponent();
       });
     }else{
@@ -112,14 +116,10 @@ export class EmployeesUpdateComponent implements OnInit {
     return new Promise( resolve=> {
       this.specialitiesService.specialities().subscribe(
         data=>{
-          console.log(data);
           this.specialities = Object.values(data)
           .map(specialitiesDB => new Specialities(specialitiesDB));
-          console.log(this.specialities);
-          
           resolve(this.specialities);
         }
-
       );
     });
   }
