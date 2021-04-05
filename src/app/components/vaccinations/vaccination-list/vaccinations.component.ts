@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { Pet } from "src/app/models/pet";
 import { PetService } from "src/app/services/pet.service";
 import { Vaccination } from "src/app/models/vaccination.model";
@@ -23,9 +24,11 @@ export class VaccinationsComponent implements OnInit {
   petId = 0;
   validSession: boolean = false;
   loggedUser: any;
+  isEmployee: boolean = false;
 
   constructor(
     private logHelper: LogHelper,
+    private _location: Location,
     private router: Router,
     private vaccinationService: VaccinationsService,
     private petService: PetService,
@@ -48,6 +51,7 @@ export class VaccinationsComponent implements OnInit {
         this.displayByPets(data.user.id);
       },
       (exception) => {
+        this.isEmployee = true;
         this.vaccinationService.listAllVaccinations().subscribe((data: any) => {
           this.vaccinations = data;
         });
@@ -96,5 +100,9 @@ export class VaccinationsComponent implements OnInit {
 
   getVaccineById(id: number) {
     return this.vaccines.filter((vaccine: Vaccine) => vaccine.id == id)[0].name;
+  }
+
+  return() {
+    this._location.back();
   }
 }
