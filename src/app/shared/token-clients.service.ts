@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Clients } from '../models/clients';
+import { ClientsRaw } from '../models/clients.raw';
+import { Payload } from '../models/payload';
 import { AuthClientsService } from './auth-clients.service';
 
 @Injectable({
@@ -17,8 +19,8 @@ export class TokenClientsService {
 
   handleData(token: any){
     localStorage.setItem('auth_token', token);
-    this.authClientsService.getAuthenticateUser().subscribe((client: Clients) => {
-      this.authClientsService.setCurrentClientValue(client)
+    this.authClientsService.getAuthenticateUser().subscribe((client: ClientsRaw) => {
+      this.authClientsService.setCurrentClientValue(client.user)
     })
   }
 
@@ -27,23 +29,29 @@ export class TokenClientsService {
   }
 
   // Verify the token
+  
   isValidToken(){
-     const token = this.getToken();
-      // CAMBIO LINEA 28: De undefined a null por problemas - Fran
-     if(token !== null){
-       const payload = this.payload(token);
-       if(payload){
-         return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
-       }else return false;
-     } else {
-       console.log("if else");
-        return false;
-     }
+    const payload = this.payload();
+    if(payload){
+     console.log(payload);
+      return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
+    }else{
+     console.log("no hay payload");
+      return false;
+    } 
   }
 
-  payload(token: any) {
+
+  payload(): Payload | null {
+  const token = this.getToken()
+  if (token) {
     const jwtPayload = token.split('.')[1];
-    return JSON.parse(atob(jwtPayload));
+  return JSON.parse(atob(jwtPayload));
+
+  } else {
+    console.log("no hay token")
+    return null
+  }
   }
 
   // User state based on valid token

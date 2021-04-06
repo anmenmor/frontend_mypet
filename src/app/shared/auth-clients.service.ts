@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Clients } from '../models/clients';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { ClientsRaw } from '../models/clients.raw';
 
 @Injectable({
     providedIn: 'root'
@@ -75,8 +76,8 @@ import { throwError } from 'rxjs/internal/observable/throwError';
   
     //CLientes id
   
-  getAuthenticateUser(): Observable<Clients> {
-    return this.http.get<Clients>('http://127.0.0.1:8000/api/userClients');
+  getAuthenticateUser(): Observable<ClientsRaw> {
+    return this.http.get<ClientsRaw>('http://127.0.0.1:8000/api/userClients');
   }
 
   //list clients
