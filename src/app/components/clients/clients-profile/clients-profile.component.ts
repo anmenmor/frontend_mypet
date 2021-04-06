@@ -36,19 +36,19 @@ export class ClientsProfileComponent implements OnInit {
      {   
       this.clientUser = Object.values(data).map(clientsDB => new Clients(clientsDB));
       this.clients =true;
-      console.log(this.clientUser);
+      console.log(clientUser);
       
   });
      
   }
 
 
-  @Input()
+ @Input()
   set clientsSelected(clientsSelected: Clients){
     if(clientsSelected){
       this.edit = true;
       this.clientUser = clientsSelected;
-     
+     console.log('Holaaaa');
       try {
         this.clientUser = clientsSelected;
       } catch (e){
@@ -67,19 +67,20 @@ export class ClientsProfileComponent implements OnInit {
         phone: [this.clientUser.phone, [Validators.compose([
             Validators.required,
             Validators.pattern('[0-9 ]+')])]],
+           
        
       });
-
-    
-    }
+      
+}
     
   }
+
   update(){
     this.edit=true;
-    this.clientUser.name = this.updateForm.value.name;
-    this.clientUser.surname = this.updateForm.value.surname;
-    this.clientUser.email = this.updateForm.value.email;
-    this.clientUser.phone  = this.updateForm.value.phone;
+    this.clientUser[0].name = this.updateForm.value.name;
+    this.clientUser[0].surname = this.updateForm.value.surname;
+    this.clientUser[0].email = this.updateForm.value.email;
+    this.clientUser[0].phone  = this.updateForm.value.phone;
  
     if(!this.updateForm.invalid){
       this.clientsService.updateClients(this.clientUser).subscribe(
