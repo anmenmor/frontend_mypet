@@ -2,3 +2,6 @@
     background-color:  rgb(105, 206, 172);
     color:white;
 }
+.rounded-circle{
+    background-size: cover;
+}
