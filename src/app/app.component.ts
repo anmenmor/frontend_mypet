@@ -7,6 +7,7 @@ import { Employee } from './models/Employee';
 import { AuthClientsService } from './shared/auth-clients.service';
 import { Clients } from './models/clients';
 import { TokenClientsService } from './shared/token-clients.service';
+import { ClientsRaw } from './models/clients.raw';
 
 @Component({
   selector: 'app-root',
@@ -28,14 +29,15 @@ export class AppComponent implements OnInit {
    }
 
   ngOnInit() {
-    if (this.tokenEmployee.getToken()) {
+    const currentPayload = this.tokenEmployee.payload()
+    const loginUrl: String = currentPayload ? currentPayload.iss : ""
+    if (loginUrl.endsWith("loginEmployee")) {
       this.authEmployeeService.getAuthenticateUser().subscribe((employee: Employee) => {
         this.authEmployeeService.setCurrentEmployeeValue(employee)
     }) 
-    }
-    if (this.tokenClient.getToken()) {
-      this.authClientsService.getAuthenticateUser().subscribe((client: Clients) => {
-        this.authClientsService.setCurrentClientValue(client)
+    } else if (loginUrl.endsWith("loginClients")) {
+      this.authClientsService.getAuthenticateUser().subscribe((client: ClientsRaw) => {
+        this.authClientsService.setCurrentClientValue(client.user)
     }) 
     }
 
