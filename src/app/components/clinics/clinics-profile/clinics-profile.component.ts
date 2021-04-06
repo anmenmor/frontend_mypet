@@ -36,7 +36,11 @@ export class ClinicsProfileComponent implements OnInit {
       // this.adminService.checkIsAdmin().then((isAdmin) => {
       //   this.isAdmin = isAdmin;
       //  });
-      this.isAdmin = this.employeeService.currentEmployee?.admin;
+      this.employeeService.getCurrentEmployeeValue().subscribe((data)=>{
+        if (data?.admin){
+          this.isAdmin = data.admin;
+        }
+      });
     });
   }
 }
