@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Employee } from '../models/Employee';
 import { catchError, tap } from 'rxjs/operators';
@@ -17,9 +17,16 @@ export class AuthEmployeeService {
   private LOGIN_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/loginEmployee";
   private UPDATE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
   private DELETE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
-  currentEmployee: Employee | null = null;
+  private currentEmployee: BehaviorSubject<Employee|null> = new BehaviorSubject<Employee|null>(null);
 
   constructor(private http: HttpClient) { }
+
+  getCurrentEmployeeValue(): Observable<Employee|null> {
+    return this.currentEmployee.asObservable();
+  }
+  setCurrentEmployeeValue(newValue: Employee|null): void {
+    this.currentEmployee.next(newValue);
+  }
 
   // Employee registration
   register(employee: Employee): Observable<Employee> {

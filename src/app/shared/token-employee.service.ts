@@ -18,7 +18,7 @@ export class TokenEmployeeService {
   handleData(token: any){
     localStorage.setItem('auth_token', token);
     this.authEmployeeService.getAuthenticateUser().subscribe((employee: Employee) => {
-      this.authEmployeeService.currentEmployee = employee
+      this.authEmployeeService.setCurrentEmployeeValue(employee)
     })
   }
 
@@ -60,7 +60,7 @@ export class TokenEmployeeService {
   // Remove token
   removeToken(){
     localStorage.removeItem('auth_token');
-    this.authEmployeeService.currentEmployee = null
+    this.authEmployeeService.setCurrentEmployeeValue(null);
   }
 
 }

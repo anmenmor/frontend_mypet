@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Clients } from '../models/clients';
+import { AuthClientsService } from './auth-clients.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,13 @@ export class TokenClientsService {
     register: 'http://127.0.0.1:8000/api/auth/registerClients'
   }
 
-  constructor() { }
+  constructor( private authClientsService: AuthClientsService) { }
 
   handleData(token: any){
     localStorage.setItem('auth_token', token);
+    this.authClientsService.getAuthenticateUser().subscribe((client: Clients) => {
+      this.authClientsService.setCurrentClientValue(client)
+    })
   }
 
   getToken(){
@@ -36,8 +41,6 @@ export class TokenClientsService {
      }
   }
 
-  
-
   payload(token: any) {
     const jwtPayload = token.split('.')[1];
     return JSON.parse(atob(jwtPayload));
@@ -51,6 +54,7 @@ export class TokenClientsService {
   // Remove token
   removeToken(){
     localStorage.removeItem('auth_token');
+    this.authClientsService.setCurrentClientValue(null)
   }
 
 }
