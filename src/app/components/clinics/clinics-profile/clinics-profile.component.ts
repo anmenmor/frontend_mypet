@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Clinic } from "src/app/models/clinic.model";
 import { AdminServiceService } from "src/app/services/admin-service.service";
 import { ClinicsDataService } from "src/app/services/clinics-data.service";
@@ -11,13 +12,17 @@ import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 })
 export class ClinicsProfileComponent implements OnInit {
   clinic = new Clinic();
-  isAdmin:any;
+  isAdmin: any;
+  isHome: boolean = false;
 
   constructor(
     private clinicsDataService: ClinicsDataService,
     private adminService: AdminServiceService,
-    private employeeService: AuthEmployeeService
-  ) {}
+    private employeeService: AuthEmployeeService,
+    private route: Router
+  ) {
+    this.isHome = this.route.url == "/";
+  }
 
   ngOnInit(): void {
     //Get Clinic
@@ -28,10 +33,10 @@ export class ClinicsProfileComponent implements OnInit {
       this.clinic.city = data[0].city;
       this.clinic.phone = data[0].phone;
       this.clinic.email = data[0].email;
-     // this.adminService.checkIsAdmin().then((isAdmin) => {
-     //   this.isAdmin = isAdmin;
-    //  });
-    this.isAdmin = this.employeeService.currentEmployee?.admin;
+      // this.adminService.checkIsAdmin().then((isAdmin) => {
+      //   this.isAdmin = isAdmin;
+      //  });
+      this.isAdmin = this.employeeService.currentEmployee?.admin;
     });
   }
 }
