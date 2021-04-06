@@ -39,6 +39,7 @@ import { ClinicsProfileComponent } from './components/clinics/clinics-profile/cl
 import { SideNavbarClientsComponent } from "./components/side-navbar-clients/side-navbar-clients.component";
 import { DatePipe } from "@angular/common";
 import { ClientsProfileComponent } from './components/clients/clients-profile/clients-profile.component';
+import  { CommonModule } from '@angular/common'; 
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { ClientsProfileComponent } from './components/clients/clients-profile/cl
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    CommonModule
   ],
   providers: [
     {
