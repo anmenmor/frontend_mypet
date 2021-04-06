@@ -1,4 +1,4 @@
-<div   *ngIf="clients" class="card w-50 mx-auto">
+<div   *ngIf="clientUser" class="card w-50 mx-auto">
               
     <h4 class="card-header">Actualizar datos:</h4>
     <div    class="card-body">
@@ -6,7 +6,7 @@
          
           <div class="form-group">
               <label>Nombre</label>
-              <input class="form-control" type="text" formControlName="name" value="{{ clientsUser.name }}" />
+              <input class="form-control" type="text" formControlName="name" value="{{ clientUser[0].name }}" />
           </div>
           <div *ngIf="edit && updateForm.controls.name.errors" class="alert alert-danger" role="alert">
               <div *ngIf="updateForm.controls.name.errors.required">

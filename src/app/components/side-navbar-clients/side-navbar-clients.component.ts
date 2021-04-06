@@ -41,6 +41,7 @@ export class SideNavbarClientsComponent implements OnInit {
 
   clientsUserShow(){
     this.clientsLogged= this.clients;
+    
     this.pets = false;
     this.dates = false;
     this.client = true;
