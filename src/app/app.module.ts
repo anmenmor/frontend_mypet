@@ -38,6 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
 import { SideNavbarClientsComponent } from "./components/side-navbar-clients/side-navbar-clients.component";
 import { DatePipe } from "@angular/common";
+import { ClientsProfileComponent } from './components/clients/clients-profile/clients-profile.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { DatePipe } from "@angular/common";
     ClientsRegisterComponent,
     ClientsListComponent,
     ClientsEditComponent,
+    ClientsProfileComponent,
     VaccinationsComponent,
     EmployeesUpdateComponent,
     VaccinationUpdateComponent,
@@ -72,6 +74,7 @@ import { DatePipe } from "@angular/common";
     ConsultationDetailComponent,
     CreateConsultationComponent,
     ClinicsProfileComponent,
+    
   ],
   imports: [
     BrowserModule,

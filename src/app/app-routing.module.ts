@@ -24,6 +24,7 @@ import { DatesComponent } from './components/dates/dates.component';
 import { CreateDateComponent } from './components/dates/create-date/create-date.component';
 import { ListConsultationsComponent} from './components/list-consultations/list-consultations.component';
 import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
+import { ClientsProfileComponent } from './components/clients/clients-profile/clients-profile.component';
 
 
 
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'clients/update', component:ClientsEditComponent, pathMatch: 'full'},
   {path: 'clients/update/:id', component:ClientsEditComponent, pathMatch: 'full'},
   {path: 'clients/main', component: SideNavbarClientsComponent, pathMatch: 'full'},
+  {path: 'clientsProfile', component:ClientsProfileComponent, pathMatch: 'full'},
   {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination/clients/:clientId', component:VaccinationCreateComponent, pathMatch: 'full'},
