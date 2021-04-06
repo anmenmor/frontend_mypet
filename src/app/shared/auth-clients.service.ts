@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Clients } from '../models/clients';
 import { catchError } from 'rxjs/operators';
@@ -16,6 +16,14 @@ import { throwError } from 'rxjs/internal/observable/throwError';
     private LIST_CLIENTS_API_SERVER ="http://localhost:8000/api/clientsList";
     private UPDATE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/update/";
     private DELETE_CLIENTS_API_SERVER = "http://127.0.0.1:8000/api/clients/delete/";
+    private currentClient: BehaviorSubject<Clients|null> = new BehaviorSubject<Clients|null>(null);
+
+    getCurrentClientValue(): Observable<Clients|null> {
+      return this.currentClient.asObservable();
+    }
+    setCurrentClientValue(newValue: Clients|null): void {
+      this.currentClient.next(newValue);
+    }
 
     constructor(private http: HttpClient) { }
   

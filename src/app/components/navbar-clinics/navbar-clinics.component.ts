@@ -6,6 +6,7 @@ import { TokenClientsService } from 'src/app/shared/token-clients.service';
 import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
 import { Employee } from 'src/app/models/Employee';
 import { AuthClientsService } from 'src/app/shared/auth-clients.service';
+import { Clients } from 'src/app/models/clients';
 
 @Component({
   selector: 'app-navbar-clinics',
@@ -16,13 +17,13 @@ export class NavbarClinicsComponent implements OnInit {
   isSignedIn: boolean | any;
   isSignedEmployee: boolean = false;
   isSignedClient: boolean = false;
-  // employeeName: string = " ";
-  employeeName: any = " ";
+  currentEmployee: Employee | null = null;
+  currentClient: Clients | null = null;
 
   constructor(
     private auth: AuthStateService,
-    private employeeService: AuthEmployeeService,
-    private clientService: AuthClientsService,
+    public employeeService: AuthEmployeeService,
+    public clientService: AuthClientsService,
     // private auths: AuthStateService,
     public router: Router,
     public tokenEmployee: TokenEmployeeService,
@@ -34,6 +35,12 @@ export class NavbarClinicsComponent implements OnInit {
   ngOnInit() {
     console.log('ngOninit');
     this.isSignedIn = false;
+    this.clientService.getCurrentClientValue().subscribe((client : Clients|null) => {
+      this.currentClient = client
+  })
+  this.employeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
+    this.currentEmployee = employee
+})
     this.auth.userAuthState.subscribe(val => {  
         console.log(val);
         this.isSignedIn = val;
