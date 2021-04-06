@@ -1,5 +1,5 @@
 <app-pets-navbar></app-pets-navbar>
-<div *ngIf="authEmployeeService.currentEmployee">
+<div *ngIf="employee">
     <button (click)="showComponent()">Crear consulta</button>
 </div>
 
@@ -10,7 +10,6 @@
         {{consultation.date_time}}
         {{consultation.speciality}}
         <button (click)="onSelect(consultation.id)">Detalle</button>
-        <app-consultation-detail [consultation]="consultation"></app-consultation-detail>
-        
+        <app-consultation-detail [consultationData]="consultation"></app-consultation-detail>
     </li>
 </ul>

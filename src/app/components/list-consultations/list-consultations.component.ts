@@ -17,6 +17,7 @@ export class ListConsultationsComponent implements OnInit {
   consultations: Consultation[] = [];
   petId: number = -1;
   showCreateComponent: boolean = false;
+  employee: Employee|null = null
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,10 @@ export class ListConsultationsComponent implements OnInit {
       this.petId = params['petId'];
   })
     this.getConsultations();
+
+    this.authEmployeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
+        this.employee = employee
+    })
   }
 
   ngOnDestroy() {
@@ -42,7 +47,6 @@ export class ListConsultationsComponent implements OnInit {
   }
 
   onSelect(id: number): void {
-    console.log("FOO", this.authEmployeeService.currentEmployee)
     this.consultations = this.consultations.map(function(cons) {
       if(cons.id == id) {
         cons.visibility = !cons.visibility;

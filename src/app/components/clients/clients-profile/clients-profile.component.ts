@@ -34,7 +34,7 @@ export class ClientsProfileComponent implements OnInit {
 
   getAuthenticateUser():void{
     
-    this.clientsService. getAuthenticateUser().subscribe(data=>
+    this.clientsService.getAuthenticateUser().subscribe(data=>
      {   
       this.clientUser = Object.values(data).map(clientsDB => new Clients(clientsDB));
       this.clients =true;

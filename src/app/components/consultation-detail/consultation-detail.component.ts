@@ -7,7 +7,7 @@ import { Consultation } from 'src/app/models/consultation';
   styleUrls: ['./consultation-detail.component.css']
 })
 export class ConsultationDetailComponent implements OnInit {
-  @Input() consultation: Consultation;
+  @Input() consultationData: Consultation;
 
   constructor() { }
 

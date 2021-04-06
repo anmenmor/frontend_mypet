@@ -44,12 +44,10 @@ export class EmployeesListComponent implements OnInit{
     this.employees = [];
     this.listAllEmployeesPagination(this.page);
     this.getSpecility();
-    // this.adminService.checkIsAdmin().then(isAdmin =>{
-    //   this.employeeAdmin = isAdmin;
-    // }
-    // );
-    this.employeeAdmin = this.employeeService.currentEmployee? this.employeeService.currentEmployee.admin: false;
-    console.log("Admin en el componente " + this.employeeAdmin);
+    this.employeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
+      this.employeeAdmin = employee? employee.admin : false;
+      console.log("Admin en el componente " + this.employeeAdmin);
+    }) 
   }
 
   //Alertas
@@ -57,12 +55,12 @@ export class EmployeesListComponent implements OnInit{
     this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 
-  getAlertRegister($event) {
-    this.alerts.push($event);
+  getAlertRegister(event: Alert) {
+    this.alerts.push(event);
   }
 
-  getAlertUpdated($event){
-    this.alerts.push($event);
+  getAlertUpdated(event: Alert){
+    this.alerts.push(event);
   } 
 
   listAllEmployeesPagination(page: number): void {
