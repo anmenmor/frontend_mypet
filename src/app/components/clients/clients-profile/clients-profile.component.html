@@ -1,4 +1,4 @@
-<div   *ngIf="clientUser" class="card w-50 mx-auto">
+<!-- <div   *ngIf="clientUser" class="card w-50 mx-auto">
               
     <h4 class="card-header">Actualizar datos:</h4>
     <div    class="card-body">
@@ -60,4 +60,75 @@
       </form>
       <p [innerHTML]="htmlMsg"></p>
      </div>
+  </div> -->
+
+  <div *ngIf="clientUser" class="container">
+    <div class="main-body">
+      <!-- Barra ubicacion -->
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Mi perfil
+          </li>
+        </ol>
+      </nav>
+      <app-clients-edit *ngIf="clientEdit" (buttonUpdateClick)="hideUpdateChild()" [clientsSelected]="clientUser[0]"></app-clients-edit>
+      <!-- / Barra ubicacion -->
+      <div *ngIf="!clientEdit" class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img
+                  src="../../../../assets/logos/mascotas (1).png"
+                  alt="Defailt clinic logo"
+                  class="rounded-circle"
+                  width="150"
+                />
+                <div class="mt-4">
+                  <h4>{{ clientUser[0].name }}</h4>
+                  <button class="btn btn-primary" (click)="sendSelected(clientUser[0])" >Editar mi perfil</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Nombre</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].name }}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Apellidos</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].surname }}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Correo electrónico</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].email }}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Teléfono</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].phone }}</div>
+              </div>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  

@@ -17,8 +17,10 @@ export class ClientsProfileComponent implements OnInit {
   clientUser: Clients | any;
   edit: boolean = false;
   htmlMsg!: String;
+  clientEdit = false;
 
-  @Output() buttonUpdateClick = new EventEmitter<void>();
+  // @Output() buttonUpdateClick = new EventEmitter<void>();
+  @Output() clientUserEvent = new EventEmitter<Clients>();
 
   constructor( public router: Router,
     public fb: FormBuilder,
@@ -36,73 +38,80 @@ export class ClientsProfileComponent implements OnInit {
      {   
       this.clientUser = Object.values(data).map(clientsDB => new Clients(clientsDB));
       this.clients =true;
-      console.log(clientUser);
+      console.log(this.clientUser);
       
   });
      
   }
 
+  sendSelected(client: Clients){
+    this.clientEdit = true;
+    this.clientUserEvent.emit(client);
 
- @Input()
-  set clientsSelected(clientsSelected: Clients){
-    if(clientsSelected){
-      this.edit = true;
-      this.clientUser = clientsSelected;
-     console.log('Holaaaa');
-      try {
-        this.clientUser = clientsSelected;
-      } catch (e){
-        console.log(e.status, e.message);
-      }
-      this.updateForm = this.fb.group({
-        name: [this.clientUser.name, [Validators.compose([
-          Validators.required,
-          Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
-        surname: [this.clientUser.surname, [Validators.compose([
-          Validators.required,
-          Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
-        email: [this.clientUser.email,  [Validators.compose([
-          Validators.required,
-          Validators.email])]],
-        phone: [this.clientUser.phone, [Validators.compose([
-            Validators.required,
-            Validators.pattern('[0-9 ]+')])]],
+  }
+
+  hideUpdateChild(){
+    this.clientEdit = false;
+  }
+
+
+//  @Input()
+//   set clientsSelected(clientsSelected: Clients){
+//     if(clientsSelected){
+//       this.edit = true;
+//       this.clientUser = clientsSelected;
+//      console.log('Holaaaa');
+//       try {
+//         this.clientUser = clientsSelected;
+//       } catch (e){
+//         console.log(e.status, e.message);
+//       }
+//       this.updateForm = this.fb.group({
+//         name: [this.clientUser.name, [Validators.compose([
+//           Validators.required,
+//           Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
+//         surname: [this.clientUser.surname, [Validators.compose([
+//           Validators.required,
+//           Validators.pattern('[a-zA-ZÀ-ÿ \u00f1\u00d1]+')])]],
+//         email: [this.clientUser.email,  [Validators.compose([
+//           Validators.required,
+//           Validators.email])]],
+//         phone: [this.clientUser.phone, [Validators.compose([
+//             Validators.required,
+//             Validators.pattern('[0-9 ]+')])]],
            
        
-      });
+//       });
       
-}
+// }
     
-  }
+//   }
 
-  update(){
-    this.edit=true;
-    this.clientUser[0].name = this.updateForm.value.name;
-    this.clientUser[0].surname = this.updateForm.value.surname;
-    this.clientUser[0].email = this.updateForm.value.email;
-    this.clientUser[0].phone  = this.updateForm.value.phone;
+  // update(){
+  //   this.edit=true;
+  //   this.clientUser[0].name = this.updateForm.value.name;
+  //   this.clientUser[0].surname = this.updateForm.value.surname;
+  //   this.clientUser[0].email = this.updateForm.value.email;
+  //   this.clientUser[0].phone  = this.updateForm.value.phone;
  
-    if(!this.updateForm.invalid){
-      this.clientsService.updateClients(this.clientUser).subscribe(
-        data => {this.clientUser = new Clients(data);
-                 this.htmlMsg = "Datos de clinica modificados correctamente";
-        }
+  //   if(!this.updateForm.invalid){
+  //     this.clientsService.updateClients(this.clientUser).subscribe(
+  //       data => {this.clientUser = new Clients(data);
+  //                this.htmlMsg = "Datos de clinica modificados correctamente";
+  //       }
                 
-         );
+  //        );
   
-    }
+  //   }
 
     
   
-    }
-    
+    // }
   
 
-  return(){
-    this._location.back();
-  }
-  
-
+  // return(){
+  //   this._location.back();
+  // }
   
 
 }
