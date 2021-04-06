@@ -68,6 +68,7 @@ export class NavbarClinicsComponent implements OnInit {
     });
   }
 
+ 
   // Signout
   signOut() {
     this.auth.setAuthState(false);
