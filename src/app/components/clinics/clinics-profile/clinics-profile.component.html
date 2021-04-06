@@ -1,7 +1,7 @@
 <div *ngIf="clinic" class="container">
   <div class="main-body">
     <!-- Barra ubicacion -->
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
+    <nav *ngIf="!isHome"aria-label="breadcrumb" class="main-breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -19,12 +19,12 @@
                 src="../../../../assets/default_clinic.png"
                 alt="Defailt clinic logo"
                 class="rounded-circle"
-                width="150"
+                width="57%"
               />
               <div class="mt-4">
                 <h4>{{ clinic.name }}</h4>
                 <button
-                  *ngIf="isAdmin"
+                  *ngIf="isAdmin && !isHome"
                   class="btn btn-primary"
                   [routerLink]="['/clinics/updateClinic', clinic.id]"
                 >
