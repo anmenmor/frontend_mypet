@@ -44,16 +44,39 @@ export class DatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //If client, get his dates. If employee, get everyone's
+    //If client, get his dates. If non-admin employee, get his dates. If admin employee, get everyone's
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
         this.displayByPets(data.user.id);
       },
       (exception) => {
-        this.dateService.listAllDates().subscribe((data) => {
-          this.dates = Object.values(data);
-          this.validSession = true;
-        });
+        this.employeeService
+          .getCurrentEmployeeValue()
+          .subscribe((data: any) => {
+            if (data?.admin) {
+              this.dateService.listAllDates().subscribe((data) => {
+                this.dates = Object.values(data);
+                this.validSession = true;
+              });
+            } else if (!data?.admin) {
+              this.dateService
+                .listDateByEmployeeId(data.id)
+                .subscribe((data) => {
+                  for (const d of data as any) {
+                    console.log(d);
+                    if (d.date_time > this.formattedDate) {
+                      this.dates.push({
+                        id: d.id,
+                        date_time: d.date_time,
+                        pet_id: d.pet_id,
+                        employee_id: d.employee_id,
+                      });
+                      this.validSession = true;
+                    }
+                  }
+                });
+            }
+          });
       }
     );
     //Get pets
