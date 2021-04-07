@@ -138,10 +138,10 @@ export class DatesComponent implements OnInit {
   }
 
   addDate() {
-    if (this.clientId > 0){
-      this.router.navigate(['dates/addDate/clients/', this.clientId]);
-    } else if (this.employeeId > 0){
-      this.router.navigate(['dates/addDate']);
+    if (this.clientId > 0) {
+      this.router.navigate(["dates/addDate/clients/", this.clientId]);
+    } else if (this.employeeId > 0) {
+      this.router.navigate(["dates/addDate"]);
     }
   }
 
