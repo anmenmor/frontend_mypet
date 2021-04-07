@@ -19,6 +19,7 @@ export class ListPetsComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
   pets: Pet[] = [];
   clientId: number = -1;
+  loggedClient: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +38,7 @@ export class ListPetsComponent implements OnInit {
     })
     this.authClientService.getCurrentClientValue().subscribe((client : Clients|null) => {
       if(client) {
+          this.loggedClient = true;
           this.clientId = client.id;
           this.listAllPets()
     }})

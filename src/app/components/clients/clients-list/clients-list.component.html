@@ -24,9 +24,9 @@
         <td>{{client.phone}}</td>
     
         <td><button  (click)="sendSelected(client)" class="btn btn-primary2">Editar</button> </td>
+        <td> <a routerLink="./clients/{{client.id}}/pets"><button class="btn btn-primary2">Mascotas</button></a></td> 
         <td><button  (click)="deleteClients(client.id)" class="btn btn-danger">Eliminar</button></td> 
         
-      
     </tr>
     </tbody>
 </table>
