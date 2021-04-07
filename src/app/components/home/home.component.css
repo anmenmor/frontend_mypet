@@ -1,3 +1,15 @@
+body{
+  font-family: Montserrat, sans-serif;
+}
+.titulo{
+  font-size: 2em;
+  color: rgb(60, 122, 151);
+}
+h4{
+  color: rgb(49, 117, 148);
+}
+
+
 .navbar-brand {
   color: white;
   font-size: 2em;
@@ -26,6 +38,7 @@
   font-size: 2rem;
   font-weight: bold;
   transition: all 0.8s ease;
+  margin:3em auto;
 }
 
 .logo {
@@ -55,4 +68,8 @@
   100% {
     transform: translateY(0px) scale(1);
   }
+}
+
+.card{
+  margin-top: 2em;
 }
