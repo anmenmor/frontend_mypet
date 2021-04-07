@@ -22,9 +22,9 @@ export class DatesComponent implements OnInit {
   date = new Dates();
   pets: Pet[] = [];
   employees: Employee[] = [];
+  clientId = 0;
   employeeId = 0;
   petId = 0;
-  validSession: boolean = false;
   loggedUser: any;
   htmlMsg!: String;
 
@@ -44,16 +44,39 @@ export class DatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //If client, get his dates. If employee, get everyone's
+    //If client, get his dates. If non-admin employee, get his dates. If admin employee, get everyone's
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
+        this.clientId = data.user.id;
         this.displayByPets(data.user.id);
       },
       (exception) => {
-        this.dateService.listAllDates().subscribe((data) => {
-          this.dates = Object.values(data);
-          this.validSession = true;
-        });
+        this.employeeService
+          .getCurrentEmployeeValue()
+          .subscribe((data: any) => {
+            if (data?.admin) {
+              this.dateService.listAllDates().subscribe((data) => {
+                this.dates = Object.values(data);
+              });
+            } else if (!data?.admin) {
+              this.employeeId = data.id;
+              this.dateService
+                .listDateByEmployeeId(data.id)
+                .subscribe((data) => {
+                  for (const d of data as any) {
+                    console.log(d);
+                    if (d.date_time > this.formattedDate) {
+                      this.dates.push({
+                        id: d.id,
+                        date_time: d.date_time,
+                        pet_id: d.pet_id,
+                        employee_id: d.employee_id,
+                      });
+                    }
+                  }
+                });
+            }
+          });
       }
     );
     //Get pets
@@ -91,7 +114,6 @@ export class DatesComponent implements OnInit {
             pet_id: d.pet_id,
             employee_id: d.employee_id,
           });
-          this.validSession = true;
         }
       }
     });
@@ -113,6 +135,14 @@ export class DatesComponent implements OnInit {
       return employeeFiltered[0].name;
     }
     return "No disponible";
+  }
+
+  addDate() {
+    if (this.clientId > 0) {
+      this.router.navigate(["dates/addDate/clients/", this.clientId]);
+    } else if (this.employeeId > 0) {
+      this.router.navigate(["dates/addDate"]);
+    }
   }
 
   deleteDate(dateId: number) {
