@@ -7,8 +7,8 @@ import { ClinicsListComponent } from './components/clinics/clinics-list/clinics-
 import { ClinicsUpdateComponent } from './components/clinics/clinics-update/clinics-update.component';
 import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
 import { VaccinesComponent } from './components/vaccines/vaccines.component';
-import { CreatePetComponent } from './components/create-pet/create-pet.component';
-import { ListPetsComponent } from './components/list-pets/list-pets.component';
+import { CreatePetComponent } from './components/pets/create-pet/create-pet.component';
+import { ListPetsComponent } from './components/pets/list-pets/list-pets.component';
 import { ClientsLoginComponent } from './components/clients/clients-login/clients-login.component';
 import { ClientsRegisterComponent } from  './components/clients/clients-register/clients-register.component';
 import { ClientsListComponent } from './components/clients/clients-list/clients-list.component';
@@ -18,11 +18,11 @@ import { VaccinationsComponent } from './components/vaccinations/vaccination-lis
 import { VaccinationUpdateComponent } from './components/vaccinations/vaccination-update/vaccination-update.component';
 import { VaccinationCreateComponent } from './components/vaccinations/vaccination-create/vaccination-create.component';
 import { EmployeesUpdateComponent} from  './components/employees/employees-update/employees-update.component';
-import { PetDetailComponent } from './components/pet-detail/pet-detail.component';
+import { PetDetailComponent } from './components/pets/pet-detail/pet-detail.component';
 import { SideNavbarClinicsComponent} from './components/side-navbar-clinics/side-navbar-clinics.component';
 import { DatesComponent } from './components/dates/dates.component';
 import { CreateDateComponent } from './components/dates/create-date/create-date.component';
-import { ListConsultationsComponent} from './components/list-consultations/list-consultations.component';
+import { ListConsultationsComponent} from './components/consultations/list-consultations/list-consultations.component';
 import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
 import { ClientsProfileComponent } from './components/clients/clients-profile/clients-profile.component';
 
@@ -52,7 +52,8 @@ const routes: Routes = [
   {path: 'clients/update/:id', component:ClientsEditComponent, pathMatch: 'full'},
   {path: 'clients/main', component: SideNavbarClientsComponent, pathMatch: 'full'},
   {path: 'clientsProfile', component:ClientsProfileComponent, pathMatch: 'full'},
-  {path: 'vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
+  {path: 'clinics/main/clients/:clientId/pets/:petId/vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
+  {path: 'clients/main/:petId/vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination/clients/:clientId', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination/pets/:petId', component:VaccinationCreateComponent, pathMatch: 'full'},

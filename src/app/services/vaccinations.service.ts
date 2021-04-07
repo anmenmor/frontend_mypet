@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Vaccination } from "../models/vaccination.model";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class VaccinationsService {
     return this.http.get<Vaccination>(this.VACCINATION_API_SERVER);
   }
 
-  listVaccinationByPetId(petId: number) {
-    return this.http.get<Vaccination>(this.VACCINATION_API_SERVER + "pet/" + petId);
+  listVaccinationByPetId(petId: number): Observable<Vaccination[]> {
+    return this.http.get<Vaccination[]>(this.VACCINATION_API_SERVER + "pet/" + petId);
   }
 
   listVaccinationById(id: number) {
