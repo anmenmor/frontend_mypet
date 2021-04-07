@@ -22,6 +22,7 @@ export class DatesComponent implements OnInit {
   date = new Dates();
   pets: Pet[] = [];
   employees: Employee[] = [];
+  clientId = 0;
   employeeId = 0;
   petId = 0;
   loggedUser: any;
@@ -46,6 +47,7 @@ export class DatesComponent implements OnInit {
     //If client, get his dates. If non-admin employee, get his dates. If admin employee, get everyone's
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
+        this.clientId = data.user.id;
         this.displayByPets(data.user.id);
       },
       (exception) => {
@@ -57,6 +59,7 @@ export class DatesComponent implements OnInit {
                 this.dates = Object.values(data);
               });
             } else if (!data?.admin) {
+              this.employeeId = data.id;
               this.dateService
                 .listDateByEmployeeId(data.id)
                 .subscribe((data) => {
@@ -132,6 +135,14 @@ export class DatesComponent implements OnInit {
       return employeeFiltered[0].name;
     }
     return "No disponible";
+  }
+
+  addDate() {
+    if (this.clientId > 0){
+      this.router.navigate(['dates/addDate/clients/', this.clientId]);
+    } else if (this.employeeId > 0){
+      this.router.navigate(['dates/addDate']);
+    }
   }
 
   deleteDate(dateId: number) {
