@@ -3,4 +3,10 @@
     font-size:2em;
    
 }
+ul li .nav-link {
+    color:white;
+}
+ul li .nav-link:hover {
+    color: rgb(49, 117, 148);
+}
 
