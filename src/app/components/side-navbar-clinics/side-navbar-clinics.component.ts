@@ -10,7 +10,6 @@ import { Router} from '@angular/router';
 export class SideNavbarClinicsComponent implements OnInit {
   employees: any = false;
   clients: any = false;
-  vaccination: any = false;
   dates: any = false;
   clinic: any = false;
 
@@ -22,21 +21,18 @@ export class SideNavbarClinicsComponent implements OnInit {
   employeesShow(){
     this.employees = true;
     this.clients = false;
-    this.vaccination = false;
     this.dates = false;
     this.clinic = false;
   }
 
   clientsShow(){
     this.clients = true;
-    this.vaccination = false;
     this.employees = false;
     this.dates = false;
     this.clinic = false;
   }
 
   vaccinationsShow(){
-    this.vaccination = true;
     this.employees = false;
     this.clients = false;
     this.dates = false;
@@ -47,7 +43,6 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.dates = true;
     this.employees = false;
     this.clients = false;
-    this.vaccination = false;
     this.clinic = false;
   }
 
@@ -56,6 +51,5 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.dates = false;
     this.employees = false;
     this.clients = false;
-    this.vaccination = false;
   }
 }
