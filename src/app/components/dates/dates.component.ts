@@ -24,7 +24,6 @@ export class DatesComponent implements OnInit {
   employees: Employee[] = [];
   employeeId = 0;
   petId = 0;
-  validSession: boolean = false;
   loggedUser: any;
   htmlMsg!: String;
 
@@ -56,7 +55,6 @@ export class DatesComponent implements OnInit {
             if (data?.admin) {
               this.dateService.listAllDates().subscribe((data) => {
                 this.dates = Object.values(data);
-                this.validSession = true;
               });
             } else if (!data?.admin) {
               this.dateService
@@ -71,7 +69,6 @@ export class DatesComponent implements OnInit {
                         pet_id: d.pet_id,
                         employee_id: d.employee_id,
                       });
-                      this.validSession = true;
                     }
                   }
                 });
@@ -114,7 +111,6 @@ export class DatesComponent implements OnInit {
             pet_id: d.pet_id,
             employee_id: d.employee_id,
           });
-          this.validSession = true;
         }
       }
     });
