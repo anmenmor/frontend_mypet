@@ -24,6 +24,7 @@ export class SideNavbarClinicsComponent implements OnInit {
     this.clients = false;
     this.dates = false;
     this.clinic = false;
+    this.vaccines = false;
   }
 
   clientsShow(){
