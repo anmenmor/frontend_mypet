@@ -1,37 +1,55 @@
-<app-pets-navbar></app-pets-navbar> 
 
+
+<div class="container">
+  <nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li  class="breadcrumb-item active" aria-current="page"><app-pets-navbar></app-pets-navbar></li>
+    </ol>
+  </nav>
 <h2>Detalle de la mascota:</h2>
 <form [formGroup]="petDetailForm" (ngSubmit)="updatePet()">
-  <label>Nombre</label><br>
-    <input type="text" formControlName="name"><br><br>
-        <div *ngIf="petDetailForm.controls.name.errors">
-          El nombre es obligatorio
-        </div>
+  <div class="form-group">
+    <label>Nombre</label><br>
+    <input type="text" class="form-control" formControlName="name">
+  </div>
+  <div *ngIf="petDetailForm.controls.name.errors">
+    El nombre es obligatorio
+  </div>
+  <div class="form-group">
     <label>Sexo</label><br>
-    <input type="radio" value='Male' formControlName="sex" >Male
-    <input type="radio" value='Female' formControlName="sex">Female<br><br>
+    <input type="radio" value='Male' formControlName="sex">Male
+    <input type="radio" value='Female' formControlName="sex">Female
+  </div>
+  <div class="form-group">
     <label>Peso</label><br>
-    <input type="number" formControlName="weight" ><br>
-    <div *ngIf="petDetailForm.controls.weight.errors">
-        El peso es obligatorio
-      </div>
+    <input type="number" class="form-control" formControlName="weight">
+  </div>
+  <div *ngIf="petDetailForm.controls.weight.errors">
+    El peso es obligatorio
+  </div>
+  <div class="form-group">
     <label>Edad</label><br>
-    <input type="number" formControlName="age"><br>
-    <div *ngIf="petDetailForm.controls.age.errors">
-        La edad es obligatoria
-      </div>
+    <input type="number" class="form-control" formControlName="age">
+  </div>
+  <div *ngIf="petDetailForm.controls.age.errors">
+    La edad es obligatoria
+  </div>
+  <div class="form-group">
     <label>Especie</label><br>
-    <input type="text" formControlName="species"><br>
-    <div *ngIf="petDetailForm.controls.species.errors">
-        La especie es obligatoria
-      </div>
+    <input type="text" class="form-control" formControlName="species">
+  </div>
+  <div *ngIf="petDetailForm.controls.species.errors">
+    La especie es obligatoria
+  </div>
+  <div class="form-group">
     <label>Raza</label><br>
-    <input type="text" formControlName="breed"><br><br>
-    <div *ngIf="petDetailForm.controls.breed.errors">
-        La raza es obligatoria
-      </div>
-    <button type="submit" class="btn btn-primary2">Actualizar</button><br>
+    <input type="text" class="form-control" formControlName="breed">
+  </div>
+  <div *ngIf="petDetailForm.controls.breed.errors">
+    La raza es obligatoria
+  </div>
+  <button type="submit" class="btn btn-block btn-primary2">Añadir</button>
+  <button class="btn btn-block btn-secondary" type="button" routerLink="/">Volver atrás</button>
 </form>
-
-
-
+</div>

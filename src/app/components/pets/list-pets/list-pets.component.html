@@ -1,10 +1,20 @@
-<a routerLink="../../../"><button class="btn btn-primary2">Volver</button></a><br><br>
+<div class="container">
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Listado de mascotas</li>
+    </ol>
+  </nav>
 
 <h2>Listado de mascotas:</h2>
+<br /><br />
 <table class="table table-hover">
     <thead>
+        <tr>
          <td>Nombre</td>
           <td>Raza</td>
+          <td></td>
+        </tr>
     </thead>
     <tbody>
         <tr *ngFor = "let pet of pets">
@@ -16,6 +26,7 @@
 </table><br>
 
 <div *ngIf="loggedClient">
-    <a routerLink="./createPet"><button class="btn btn-primary2">Crear mascota</button></a>
+    <a routerLink="./createPet"><button class="btn btn-block btn-info">Crear mascota</button></a>
 </div>
 
+</div>
