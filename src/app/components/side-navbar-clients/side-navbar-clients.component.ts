@@ -1,81 +1,70 @@
-import { Component, EventEmitter,Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router} from '@angular/router';
-import { Clients } from 'src/app/models/clients';
-import { AuthClientsService } from '../../shared/auth-clients.service';
-import { Location } from '@angular/common';
-import { Pet } from '../../models/pet';
-import { PetService } from 'src/app/services/pet.service';
-
-
-
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { Clients } from "src/app/models/clients";
+import { AuthClientsService } from "../../shared/auth-clients.service";
+import { Location } from "@angular/common";
+import { Pet } from "../../models/pet";
+import { PetService } from "src/app/services/pet.service";
 
 @Component({
-  selector: 'app-side-navbar-clients',
-  templateUrl: './side-navbar-clients.component.html',
-  styleUrls: ['./side-navbar-clients.component.css']
+  selector: "app-side-navbar-clients",
+  templateUrl: "./side-navbar-clients.component.html",
+  styleUrls: ["./side-navbar-clients.component.css"],
 })
 export class SideNavbarClientsComponent implements OnInit {
-  client: any = false ;
+  client: any = false;
+  clinic: any = false;
   pets: any = false;
   dates: any = false;
-  clientsLogged:Clients | any;
+  clientsLogged: Clients | any;
   clients: Clients[] = [];
-  
-  
 
   @Output() clientsSelectedEvent = new EventEmitter<Clients>();
 
-  constructor(public router: Router,
+  constructor(
+    public router: Router,
     public fb: FormBuilder,
     private _location: Location,
     private clientsService: AuthClientsService,
-    private petService: PetService,) { }
+    private petService: PetService
+  ) {}
 
- 
   ngOnInit() {
-   
-    this.client = false;
-    
+    this.clinic = true;
   }
 
-  clientsUserShow(){
-    this.clientsLogged= this.clients;
-    
+  clientsUserShow() {
+    this.clientsLogged = this.clients;
+    this.clinic = false;
     this.pets = false;
     this.dates = false;
     this.client = true;
   }
 
-  clientsPetShow(){
-  
+  clientsPetShow() {
     this.pets = true;
     this.client = false;
     this.dates = false;
+    this.clinic = false;
   }
 
-  clientsDatesShow(){
+  clientsDatesShow() {
     this.dates = true;
+    this.client = false;
+    this.pets = false;
+    this.clinic = false;
+  }
+
+  clientsClinicShow() {
+    this.clinic = true;
+    this.dates = false;
     this.client = false;
     this.pets = false;
   }
 
-  
-  clientsSelected(clients: Clients):void{
-    
-    this.clientsLogged =  clients;
+  clientsSelected(clients: Clients): void {
+    this.clientsLogged = clients;
     this.clientsSelectedEvent.emit(clients);
   }
-
-  
-
-
-
-
-
-
-
-
-
-
 }
