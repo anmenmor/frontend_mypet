@@ -1,15 +1,21 @@
-<a routerLink="../../../"><button>Volver</button></a><br><br>
+<a routerLink="../../../"><button class="btn btn-primary2">Volver</button></a><br><br>
 
 <h2>Listado de mascotas:</h2>
-<ul >
-    <li *ngFor = "let pet of pets">
-        {{pet.name}}
-        {{pet.species}}
-        <a routerLink="./{{pet.id}}/details">ver detalles</a>
-    </li>
-</ul><br>
+<table class="table table-hover">
+    <thead>
+         <td>Nombre</td>
+          <td>Raza</td>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let pet of pets">
+            <td>{{pet.name}}</td>
+            <td>{{pet.species}}</td>
+            <td><a routerLink="./{{pet.id}}/details"><button class="btn btn-primary3">Detalles</button></a></td>
+        </tr>
+    </tbody>
+</table><br>
 
 <div *ngIf="loggedClient">
-    <a routerLink="./createPet"><button>Crear mascota</button></a>
+    <a routerLink="./createPet"><button class="btn btn-primary2">Crear mascota</button></a>
 </div>
 

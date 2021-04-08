@@ -57,7 +57,7 @@ export class ListConsultationsComponent implements OnInit {
   }
 
   showComponent() {
-    this.showCreateComponent = true;
+    this.showCreateComponent = !this.showCreateComponent;
   }
 
   createHandler(): void {
