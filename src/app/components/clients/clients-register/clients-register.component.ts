@@ -71,6 +71,7 @@ ngOnInit(): void {
     onReset(){
       this.submitted =false;
       this.registerForm.reset();
+      this.router.navigate(['/']);
     }
     
   

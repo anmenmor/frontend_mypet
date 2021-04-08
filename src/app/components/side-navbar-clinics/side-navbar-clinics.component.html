@@ -7,6 +7,7 @@
         <a (click)="employeesShow()" class="list-group-item list-group-item-action bg-light">Empleados</a>
         <a (click)="clientsShow()" class="list-group-item list-group-item-action bg-light">Clientes</a>
         <a (click)="datesShow()" class="list-group-item list-group-item-action bg-light">Angenda de consultas</a>
+        <a (click)="vaccinesShow()" class="list-group-item list-group-item-action bg-light">Vacunas</a>
 
       </div>
     </div>
@@ -16,6 +17,7 @@
             <app-employees-list *ngIf="employees"></app-employees-list>
             <app-clients-list *ngIf="clients"></app-clients-list>
             <app-dates *ngIf="dates"></app-dates>
+            <app-vaccines *ngIf="vaccines"></app-vaccines>
             <!-- <h1 class="mt-4">Clínica Doggy</h1> -->
           </div>
         </div>
