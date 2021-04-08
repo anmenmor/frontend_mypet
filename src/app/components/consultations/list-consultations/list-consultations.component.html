@@ -1,15 +1,23 @@
 <app-pets-navbar></app-pets-navbar>
 <div *ngIf="employee">
-    <button (click)="showComponent()">Crear consulta</button>
+    <button class="btn btn-primary2" (click)="showComponent()">Crear consulta</button>
 </div>
 
 <app-create-consultation [showComponent]="showCreateComponent" (creationEvent)="createHandler()"></app-create-consultation>
 <h2>Listado de consultas:</h2>
-<ul >
-    <li *ngFor = "let consultation of consultations">
-        {{consultation.date_time}}
-        {{consultation.speciality}}
-        <button (click)="onSelect(consultation.id)">Detalle</button>
-        <app-consultation-detail [consultationData]="consultation"></app-consultation-detail>
-    </li>
-</ul>
+<table class="table table-hover">
+    
+    
+    <tbody>
+    <tr *ngFor = "let consultation of consultations">
+        <div>
+            <td>{{consultation.date_time}}</td>
+            <td>{{consultation.speciality}}</td>
+            <button class="btn btn-primary3" (click)="onSelect(consultation.id)">Detalle</button>
+        </div>
+        <div>
+            <app-consultation-detail [consultationData]="consultation"></app-consultation-detail> 
+        </div>
+    </tr>
+    </tbody>    
+</table>
