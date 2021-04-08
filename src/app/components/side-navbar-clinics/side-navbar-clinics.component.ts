@@ -11,7 +11,7 @@ export class SideNavbarClinicsComponent implements OnInit {
   employees: any = false;
   clients: any = false;
   dates: any = false;
-  clinic: any = false;
+  clinic: any = true;
   vaccines: any = false;
 
   constructor() { }
