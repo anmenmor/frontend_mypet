@@ -21,25 +21,40 @@ export class VaccinationsComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
   vaccinations: Array<Vaccination> = [];
   currentEmployee: Employee | null = null;
+  petId = 0;
+  clientId = 0;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private vaccinationService: VaccinationsService,
     private authEmployeeService: AuthEmployeeService
   ) {}
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.getVaccinationsByPetId(params['petId']);
-  })
-  this.authEmployeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
-    this.currentEmployee = employee;
-  }) 
+    this.routeSub = this.route.params.subscribe((params) => {
+      this.petId = params["petId"];
+      this.clientId = params["clientId"];
+      this.getVaccinationsByPetId(this.petId);
+    });
+    this.authEmployeeService
+      .getCurrentEmployeeValue()
+      .subscribe((employee: Employee | null) => {
+        this.currentEmployee = employee;
+      });
   }
 
   getVaccinationsByPetId(petId: number) {
     this.vaccinationService.listVaccinationByPetId(petId).subscribe((data) => {
       this.vaccinations = data;
     });
+  }
+
+  addVaccination() {
+    if (this.petId > 0){
+      this.router.navigate(['vaccinations/addVaccination/pets/', this.petId]);
+    } else if (this.clientId > 0){
+      this.router.navigate(['vaccinations/addVaccination/clients/', this.clientId]);
+  }
   }
 }
