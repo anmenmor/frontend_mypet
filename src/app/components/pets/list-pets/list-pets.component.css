@@ -14,3 +14,9 @@ h2{
     background-color:  rgb(29, 95, 73);
     margin: 2em;
 }
+thead{
+    font-weight: bold;
+}
+table td{
+    vertical-align: middle;
+}
