@@ -1,19 +1,20 @@
 <app-pets-navbar></app-pets-navbar>
 
-<div>
-  <div *ngIf="vaccinations.length > 0; else noVaccinations" class="container">
-    <br />
-    <h2>Listado de vacunaciones</h2>
-    <button
-      *ngIf="currentEmployee"
-      type="button"
-      class="btn btn-block btn-info"
-      style="text-align: center"
-      (click)="addVaccination()"
-    >
-      Añadir nueva vacunación
-    </button>
-    <br /><br />
+<div class="container">
+  <br />
+  <h2>Listado de vacunaciones</h2>
+  <br />
+  <button
+    *ngIf="currentEmployee"
+    type="button"
+    class="btn btn-block btn-info"
+    style="text-align: center"
+    (click)="addVaccination()"
+  >
+    Añadir nueva vacunación
+  </button>
+  <br /><br />
+  <div *ngIf="vaccinations.length > 0; else noVaccinations">
     <div class="card w-auto mx-auto">
       <table class="table table-hover" style="text-align: center">
         <thead>
@@ -44,11 +45,12 @@
   </div>
   <ng-template #noVaccinations>
     <div class="container">
-      <h2>Listado de vacunaciones</h2>
-      <br /><br />
       <table class="table table-hover" style="text-align: center">
-        <p>No hay vacunaciones para mostrar</p>
+        <p>No hay vacunaciones pendientes</p>
         <br /><br />
+        <button class="btn btn-secondary" type="button" (click)="return()">
+          Volver atrás
+        </button>
       </table>
     </div>
   </ng-template>

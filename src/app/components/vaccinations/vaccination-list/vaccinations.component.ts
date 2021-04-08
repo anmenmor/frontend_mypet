@@ -25,6 +25,7 @@ export class VaccinationsComponent implements OnInit {
   clientId = 0;
 
   constructor(
+    private _location: Location,
     private route: ActivatedRoute,
     private router: Router,
     private vaccinationService: VaccinationsService,
@@ -51,10 +52,17 @@ export class VaccinationsComponent implements OnInit {
   }
 
   addVaccination() {
-    if (this.petId > 0){
-      this.router.navigate(['vaccinations/addVaccination/pets/', this.petId]);
-    } else if (this.clientId > 0){
-      this.router.navigate(['vaccinations/addVaccination/clients/', this.clientId]);
+    if (this.petId > 0) {
+      this.router.navigate(["vaccinations/addVaccination/pets/", this.petId]);
+    } else if (this.clientId > 0) {
+      this.router.navigate([
+        "vaccinations/addVaccination/clients/",
+        this.clientId,
+      ]);
+    }
   }
+
+  return() {
+    this._location.back();
   }
 }
