@@ -1,7 +1,7 @@
 <app-pets-navbar></app-pets-navbar>
 
 <div>
-  <div *ngIf="vaccinations.length > 0" class="container">
+  <div *ngIf="vaccinations.length > 0;else noVaccinations" class="container">
     <br />
     <hr />
     <button
