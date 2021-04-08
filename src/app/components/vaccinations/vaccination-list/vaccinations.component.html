@@ -1,43 +1,55 @@
-<app-pets-navbar></app-pets-navbar> 
+<app-pets-navbar></app-pets-navbar>
 
-<div><div *ngIf="vaccinations.length>0; else noVaccinations" class="container"><br>
-  <hr>
-  <button *ngIf="currentEmployee" type="button" class="btn btn-block btn-info" style="text-align:center"[routerLink]="['/vaccinations/addVaccination']">Añadir nueva vacunación</button>
-  <br /><br />
-  <table class="table table-hover" style="text-align: center">
-    <thead>
-      <tr>
-        <td>Fecha de vacunación</td>
-        <td>Vacuna</td>
-        <td>¿Administrada?</td>
-        <td>Acción</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of vaccinations">
-        <td>{{ item.date }}</td>
-        <td>{{ item.vaccine_name }}</td>
-        <td>{{ item.done ? "Sí" : "No" }}</td>
-        
-        <button
-          type="button"
-          class="btn btn-info"
-          [routerLink]="['/vaccinations/updateVaccination', item.id]"
-        >
-          Modificar estado
-        </button>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<ng-template #noVaccinations>
-  <div class="container">
-    <h2>Listado de vacunaciones</h2>
+<div>
+  <div *ngIf="vaccinations.length > 0; else noVaccinations" class="container">
+    <br />
+    <hr />
+    <button
+      *ngIf="currentEmployee"
+      type="button"
+      class="btn btn-block btn-info"
+      style="text-align: center"
+      [routerLink]="['/vaccinations/addVaccination']"
+    >
+      Añadir nueva vacunación
+    </button>
     <br /><br />
-    <table class="table table-hover" style="text-align: center">
-      <p>No hay vacunaciones para mostrar</p>
-      <br><br>
-    </table>
+    <div class="card w-auto mx-auto">
+      <table class="table table-hover" style="text-align: center">
+        <thead>
+          <tr>
+            <td>Fecha de vacunación</td>
+            <td>Vacuna</td>
+            <td>¿Administrada?</td>
+            <td>Acción</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of vaccinations">
+            <td>{{ item.date }}</td>
+            <td>{{ item.vaccine_name }}</td>
+            <td>{{ item.done ? "Sí" : "No" }}</td>
+
+            <button
+              type="button"
+              class="btn btn-info"
+              [routerLink]="['/vaccinations/updateVaccination', item.id]"
+            >
+              Modificar estado
+            </button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noVaccinations>
+      <div class="container">
+        <h2>Listado de vacunaciones</h2>
+        <br /><br />
+        <table class="table table-hover" style="text-align: center">
+          <p>No hay vacunaciones para mostrar</p>
+          <br /><br />
+        </table>
+      </div>
+    </ng-template>
   </div>
-</ng-template>
 </div>

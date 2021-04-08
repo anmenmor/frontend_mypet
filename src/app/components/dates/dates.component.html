@@ -18,41 +18,43 @@
 </button>
 <br /><br />
 <div *ngIf="dates.length > 0; else noDates" class="container">
-  <table class="table table-hover" style="text-align: center">
-    <thead>
-      <tr>
-        <td>Fecha programada</td>
-        <td>Mascota</td>
-        <td>Encargado</td>
-        <td>Acción</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of dates; trackBy: tracker">
-        <td>{{ item.date_time }}</td>
-        <td>{{ getPetById(item.pet_id) }}</td>
-        <td>{{ getEmployeeById(item.employee_id) }}</td>
-        <button
-          type="button"
-          class="btn btn-info"
-          (click)="deleteDate(item.id)"
-        >
-          Eliminar cita
-        </button>
-      </tr>
-    </tbody>
-  </table>
-  <p [innerHTML]="htmlMsg"></p>
-</div>
-
-<ng-template #noDates>
-  <div class="container">
+  <div class="card w-auto mx-auto">
     <table class="table table-hover" style="text-align: center">
-      <p>No hay citas para mostrar</p>
-      <br /><br />
-      <button class="btn btn-secondary" type="button" (click)="return()">
-        Volver atrás
-      </button>
+      <thead>
+        <tr>
+          <td>Fecha programada</td>
+          <td>Mascota</td>
+          <td>Encargado</td>
+          <td>Acción</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dates; trackBy: tracker">
+          <td>{{ item.date_time }}</td>
+          <td>{{ getPetById(item.pet_id) }}</td>
+          <td>{{ getEmployeeById(item.employee_id) }}</td>
+          <button
+            type="button"
+            class="btn btn-info"
+            (click)="deleteDate(item.id)"
+          >
+            Eliminar cita
+          </button>
+        </tr>
+      </tbody>
     </table>
+    <p [innerHTML]="htmlMsg"></p>
   </div>
-</ng-template>
+
+  <ng-template #noDates>
+    <div class="container">
+      <table class="table table-hover" style="text-align: center">
+        <p>No hay citas para mostrar</p>
+        <br /><br />
+        <button class="btn btn-secondary" type="button" (click)="return()">
+          Volver atrás
+        </button>
+      </table>
+    </div>
+  </ng-template>
+</div>
