@@ -55,6 +55,7 @@ export class DatesComponent implements OnInit {
           .getCurrentEmployeeValue()
           .subscribe((data: any) => {
             if (data?.admin) {
+              this.employeeId = data.id;
               this.dateService.listAllDates().subscribe((data) => {
                 this.dates = Object.values(data);
               });
@@ -138,6 +139,7 @@ export class DatesComponent implements OnInit {
   }
 
   addDate() {
+    console.log(this.employeeId);
     if (this.clientId > 0) {
       this.router.navigate(["dates/addDate/clients/", this.clientId]);
     } else if (this.employeeId > 0) {
