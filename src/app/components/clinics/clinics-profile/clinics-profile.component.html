@@ -1,11 +1,11 @@
 <div *ngIf="clinic" class="container">
   <div class="main-body">
     <!-- Barra ubicacion -->
-    <nav *ngIf="!isHome"aria-label="breadcrumb" class="main-breadcrumb">
+    <nav *ngIf="!isHome" aria-label="breadcrumb" class="main-breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">
-          Perfil de mi clínica
+          Datos de mi clínica
         </li>
       </ol>
     </nav>
@@ -63,7 +63,9 @@
               <div class="col-sm-3">
                 <h6 class="mb-0">Teléfono</h6>
               </div>
-              <div class="col-sm-9 text-secondary">{{ clinic.phone }}</div>
+              <div class="col-sm-9 text-secondary">
+                <a href="tel: {{ clinic.phone }}">{{ clinic.phone }}</a>
+              </div>
             </div>
             <hr />
             <div class="row">
@@ -71,7 +73,7 @@
                 <h6 class="mb-0">Correo electrónico</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ clinic.email }}
+                <a href="mailto: {{ clinic.email }}">{{ clinic.email }}</a>
               </div>
             </div>
           </div>

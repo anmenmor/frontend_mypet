@@ -6,8 +6,11 @@ import { Vaccination } from "src/app/models/vaccination.model";
 import { Vaccine } from "src/app/models/vaccine";
 import { VaccinesService } from "src/app/services/vaccines.service";
 import { VaccinationsService } from "src/app/services/vaccinations.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthClientsService } from "src/app/shared/auth-clients.service";
+import { Subscription } from "rxjs";
+import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
+import { Employee } from "src/app/models/Employee";
 
 @Component({
   selector: "app-vaccinations",
@@ -15,86 +18,43 @@ import { AuthClientsService } from "src/app/shared/auth-clients.service";
   styleUrls: ["./vaccinations.component.css"],
 })
 export class VaccinationsComponent implements OnInit {
+  private routeSub: Subscription = Subscription.EMPTY;
   vaccinations: Array<Vaccination> = [];
-  vaccination = new Vaccination();
-  pets: Pet[] = [];
-  vaccines: Vaccine[] = [];
-  vaccineId = 0;
+  currentEmployee: Employee | null = null;
   petId = 0;
-  validSession: boolean = false;
-  loggedUser: any;
-  isEmployee: boolean = false;
+  clientId = 0;
 
   constructor(
-    private _location: Location,
+    private route: ActivatedRoute,
     private router: Router,
     private vaccinationService: VaccinationsService,
-    private petService: PetService,
-    private vaccinesService: VaccinesService,
-    private clientsService: AuthClientsService
+    private authEmployeeService: AuthEmployeeService
   ) {}
 
   ngOnInit() {
-    //If client, get his vaccinations. If employee, get everyone's
-    this.clientsService.getAuthenticateUser().subscribe(
-      (data: any) => {
-        this.displayByPets(data.user.id);
-      },
-      (exception) => {
-        this.isEmployee = true;
-        this.vaccinationService.listAllVaccinations().subscribe((data: any) => {
-          this.vaccinations = data;
-          this.validSession = true;
-        });
-      }
-    );
-    //Get vaccines
-    this.vaccinesService
-      .listAllVaccines()
-      .subscribe((data: Vaccine[]) => (this.vaccines = data));
-    //Get pets
-    this.petService.getCompletePetList().subscribe((data: Pet) => {
-      this.pets = Object.values(data);
+    this.routeSub = this.route.params.subscribe((params) => {
+      this.petId = params["petId"];
+      this.clientId = params["clientId"];
+      this.getVaccinationsByPetId(this.petId);
     });
-  }
-
-  displayByPets(id: number) {
-    this.petService.listAllPets(id).subscribe((data: Pet[]) => {
-      for (const d of Object.entries(data)) {
-        for (const i of d as any) {
-          if (i.id) {
-            this.pets.push(i);
-            this.getVaccinationsByPetId(i.id);
-          }
-        }
-      }
-    });
+    this.authEmployeeService
+      .getCurrentEmployeeValue()
+      .subscribe((employee: Employee | null) => {
+        this.currentEmployee = employee;
+      });
   }
 
   getVaccinationsByPetId(petId: number) {
     this.vaccinationService.listVaccinationByPetId(petId).subscribe((data) => {
-      for (const d of data as any) {
-        this.vaccinations.push({
-          id: d.id,
-          date: d.date,
-          done: d.done,
-          pet_id: d.pet_id,
-          vaccine_id: d.vaccine_id,
-        });
-        this.validSession = true;
-      }
+      this.vaccinations = data;
     });
   }
 
-  getPetById(id: number) {
-    return this.pets.filter((pet: Pet) => pet.id == id)[0].name;
+  addVaccination() {
+    if (this.petId > 0){
+      this.router.navigate(['vaccinations/addVaccination/pets/', this.petId]);
+    } else if (this.clientId > 0){
+      this.router.navigate(['vaccinations/addVaccination/clients/', this.clientId]);
   }
-
-  getVaccineById(id: number) {
-    return this.vaccines.filter((vaccine: Vaccine) => vaccine.id == id)[0].name;
-  }
-
-  return() {
-    this._location.back();
   }
 }

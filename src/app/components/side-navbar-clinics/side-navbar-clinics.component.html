@@ -3,11 +3,11 @@
     <div class="bg-light border-left" id="sidebar-wrapper">
       <div class="sidebar-heading">CLINICA VETERINARIA</div>
       <div class="list-group list-group-flush">
-        <a (click)="clinicShow()" class="list-group-item list-group-item-action bg-light">Datos de mi clinica</a>
+        <a (click)="clinicShow()" class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
         <a (click)="employeesShow()" class="list-group-item list-group-item-action bg-light">Empleados</a>
         <a (click)="clientsShow()" class="list-group-item list-group-item-action bg-light">Clientes</a>
-        <a (click)="datesShow()" class="list-group-item list-group-item-action bg-light">Angenda de consultas</a>
-        <a (click)="vaccinationsShow()" class="list-group-item list-group-item-action bg-light">Vacunaciones</a>
+        <a (click)="datesShow()" class="list-group-item list-group-item-action bg-light">Citas</a>
+        <a (click)="vaccinesShow()" class="list-group-item list-group-item-action bg-light">Vacunas</a>
 
       </div>
     </div>
@@ -16,8 +16,8 @@
             <app-clinics-profile *ngIf="clinic"></app-clinics-profile>
             <app-employees-list *ngIf="employees"></app-employees-list>
             <app-clients-list *ngIf="clients"></app-clients-list>
-            <app-vaccinations *ngIf="vaccination"></app-vaccinations>
             <app-dates *ngIf="dates"></app-dates>
+            <app-vaccines *ngIf="vaccines"></app-vaccines>
             <!-- <h1 class="mt-4">Clínica Doggy</h1> -->
           </div>
         </div>
