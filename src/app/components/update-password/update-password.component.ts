@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthClientsService } from '../../shared/auth-clients.service';
 import { PasswordService } from 'src/app/shared/password.service';
 
+
 @Component({
   selector: 'app-update-password',
   templateUrl: './update-password.component.html',
@@ -53,6 +54,7 @@ export class UpdatePasswordComponent implements OnInit {
       } else {
           errorMsg = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
+      console.log(errorMsg);
       return throwError(errorMsg);
   }
 

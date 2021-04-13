@@ -12,7 +12,7 @@ export class ResetPasswordComponent implements OnInit {
 
   myForm: FormGroup;
   err = null;
-  msg = null;
+  mssg = null;
 
   constructor(
     public fb: FormBuilder,
@@ -29,7 +29,7 @@ export class ResetPasswordComponent implements OnInit {
   onSubmit(){
     this.passwordService.reqPasswordReset(this.myForm.value).subscribe(
       (res) => {
-        this.msg = res;
+        this.mssg = res;
       },(error) => {
         this.err = error.error.message;
       })
