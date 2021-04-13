@@ -4,6 +4,7 @@ import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AuthClientsService } from '../../shared/auth-clients.service';
 
+
 @Component({
   selector: 'app-update-password',
   templateUrl: './update-password.component.html',
@@ -51,6 +52,7 @@ export class UpdatePasswordComponent implements OnInit {
       } else {
           errorMsg = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
+      console.log(errorMsg);
       return throwError(errorMsg);
   }
 
