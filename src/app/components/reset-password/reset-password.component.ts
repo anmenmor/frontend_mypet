@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthClientsService } from '../../shared/auth-clients.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { PasswordService } from 'src/app/shared/password.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -15,7 +16,8 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    public jwtService: AuthClientsService
+    // public jwtService: AuthClientsService
+    public passwordService: PasswordService
   ) {
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
@@ -25,7 +27,7 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit(){
-    this.jwtService.reqPasswordReset(this.myForm.value).subscribe(
+    this.passwordService.reqPasswordReset(this.myForm.value).subscribe(
       (res) => {
         this.msg = res;
       },(error) => {
