@@ -25,6 +25,8 @@ import { CreateDateComponent } from './components/dates/create-date/create-date.
 import { ListConsultationsComponent} from './components/consultations/list-consultations/list-consultations.component';
 import { ClinicsProfileComponent } from './components/clinics/clinics-profile/clinics-profile.component';
 import { ClientsProfileComponent } from './components/clients/clients-profile/clients-profile.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 
 
@@ -47,6 +49,8 @@ const routes: Routes = [
   {path: 'clients/main/createPet', component: CreatePetComponent, pathMatch: 'full'},
   {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
   {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
+  {path: 'resetPass', component:ResetPasswordComponent, pathMatch: 'full'},
+  {path: 'updatePass', component:UpdatePasswordComponent, pathMatch: 'full'},
   {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},
   {path: 'clients/update', component:ClientsEditComponent, pathMatch: 'full'},
   {path: 'clients/update/:id', component:ClientsEditComponent, pathMatch: 'full'},
