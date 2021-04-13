@@ -108,13 +108,13 @@ import { ClientsRaw } from '../models/clients.raw';
   }
 
   // req-password-reset
-  reqPasswordReset(data) {
-    return this.http.post('http://127.0.0.1:8000/api/resetPass', data)
-  }  
+  // reqPasswordReset(data) {
+  //   return this.http.post('http://127.0.0.1:8000/api/resetPass', data)
+  // }  
 
   // update password
-  updatePassword(data) {
-    return this.http.post('http://127.0.0.1:8000/api/updatePass', data)
-  }
+  // updatePassword(data) {
+  //   return this.http.post('http://127.0.0.1:8000/api/updatePass', data)
+  // }
 
   }
