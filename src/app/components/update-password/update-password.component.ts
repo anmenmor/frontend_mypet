@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AuthClientsService } from '../../shared/auth-clients.service';
@@ -13,6 +13,8 @@ import { PasswordService } from 'src/app/shared/password.service';
 export class UpdatePasswordComponent implements OnInit {
   updatePwd: FormGroup;
   errors = null;
+  mssg = null;
+  submitted = false;
 
   constructor(
     public fb: FormBuilder,
@@ -21,29 +23,37 @@ export class UpdatePasswordComponent implements OnInit {
     public passwordService: PasswordService
   ) {
     this.updatePwd = this.fb.group({
-      email: [''],
-      password: [''],
-      password_confirmation: [''],
+      email: ['', Validators.required],
+      password: ['', [Validators.compose([
+        Validators.required,
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,10}$')])]],
+      password_confirmation: ['',Validators.required],
       passwordToken: ['']
-    })
+    });
     activatedRoute.queryParams.subscribe((params) => {
       this.updatePwd.controls['passwordToken'].setValue(params['token']);
-    })
+    });
+    console.log(this.updatePwd);
   }
 
   ngOnInit(): void { }
 
-  onSubmit(){
+  onSubmit(){ 
+    if(!this.updatePwd.invalid && this.updatePwd.controls.password_confirmation.value == this.updatePwd.controls.password.value){
+    this.submitted = true;
     this.passwordService.updatePassword(this.updatePwd.value).subscribe(
-      result => {
-        alert('Password updated successfully');
+      data => {
+        this.mssg = data;
+        console.log(data);
         console.log(this.updatePwd.value)
         this.updatePwd.reset();
+        this.submitted = false;
       },
       error => {
         this.handleError(error);
-      }
+      },
     );
+    }
   }
 
   handleError(error: any) {

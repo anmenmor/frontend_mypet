@@ -12,7 +12,8 @@ export class ResetPasswordComponent implements OnInit {
 
   myForm: FormGroup;
   err = null;
-  msg = null;
+  mssg = null;
+  submitted = false;
 
   constructor(
     public fb: FormBuilder,
@@ -27,12 +28,15 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit(){
+    this.submitted = true;
+    if(!this.myForm.invalid){
     this.passwordService.reqPasswordReset(this.myForm.value).subscribe(
       (res) => {
-        this.msg = res;
+        this.mssg = res;
       },(error) => {
         this.err = error.error.message;
       })
   }
+}
 
 }
