@@ -55,21 +55,6 @@ export class AuthEmployeeService {
     return this.http.post<Employee>(this.LOGIN_EMPLOYEE_API_SERVER, employee)
     .pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status == 400) {
-          console.log(error);
-          console.error(
-            `Backend returned code ${error.status}, ` +
-            `body was: ${error}`);
-          }else if(error.status == 500){
-            console.error(
-              `Backend returned code ${error.status}, ` +
-              `body was: ${error}`);
-        } else {
-          alert("Algo ha ido mal, intentelo de nuevo mas tarde");
-          console.error(
-            `Backend returned code ${error.status}, ` +
-            `body was: ${error.error}`);
-        }
         return throwError(error.error);
       })
     )  
