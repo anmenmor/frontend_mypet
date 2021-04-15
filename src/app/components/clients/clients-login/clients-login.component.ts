@@ -4,7 +4,7 @@ import { AuthClientsService } from '../../../shared/auth-clients.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TokenClientsService } from '../../../shared/token-clients.service';
 import { AuthStateService } from '../../../shared/auth-state.service';
-
+import { Clients } from 'src/app/models/clients';
 
 
 @Component({
@@ -17,6 +17,7 @@ export class ClientsLoginComponent implements OnInit {
   errors = [];
   submitted = false;
   serverError = false;
+  clientsAuthenticated: Clients | any;
 
   constructor(
     public router: Router,
