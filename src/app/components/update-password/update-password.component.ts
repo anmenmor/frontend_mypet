@@ -13,8 +13,8 @@ import { PasswordService } from 'src/app/shared/password.service';
 })
 export class UpdatePasswordComponent implements OnInit {
   updatePwd: FormGroup;
-  errors = null;
-  mssg = null;
+  errors!: any;
+  mssg!: any;
   submitted = false;
 
   constructor(

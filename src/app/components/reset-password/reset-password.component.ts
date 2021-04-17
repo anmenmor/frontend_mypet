@@ -11,8 +11,8 @@ import { PasswordService } from 'src/app/shared/password.service';
 export class ResetPasswordComponent implements OnInit {
 
   myForm: FormGroup;
-  err = null;
-  mssg = null;
+  err! : any;
+  mssg!: any;
   submitted = false;
 
 
