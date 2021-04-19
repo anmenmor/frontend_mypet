@@ -1,23 +1,52 @@
-<app-pets-navbar></app-pets-navbar>
-<div *ngIf="employee">
-    <button class="btn btn-primary2" (click)="showComponent()">Crear consulta</button>
-</div>
+<div class="d-flex margin" id="wrapper" style="background-color: rgb(105, 206, 172);">
+    <!-- Sidebar -->
+    <div class="bg-light border-left" id="sidebar-wrapper">
+      <div class="sidebar-heading">CLINICA DOGGY </div>
+      <div class="list-group list-group-flush">
+        <a  routerLink='../../' class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
+        <a  [routerLink]="['../../']" [queryParams]="{view: 'user'}" class="list-group-item list-group-item-action bg-light">Mi Perfil</a>
+        <a  [routerLink]="['../../']" [queryParams]="{view: 'pets'}" class="list-group-item list-group-item-action bg-light">Mis Mascotas</a>
+        <a  [routerLink]="['../../']" [queryParams]="{view: 'dates'}" class="list-group-item list-group-item-action bg-light">Mis Citas</a>
+        
+      </div>
+    </div>
+    
 
-<app-create-consultation [showComponent]="showCreateComponent" (creationEvent)="createHandler()"></app-create-consultation>
-<h2>Listado de consultas:</h2>
-<table class="table table-hover">
-    
-    
-    <tbody>
-    <tr *ngFor = "let consultation of consultations">
-        <div>
-            <td>{{consultation.date_time}}</td>
-            <td>{{consultation.speciality}}</td>
-            <button class="btn btn-primary3" (click)="onSelect(consultation.id)">Detalle</button>
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li  class="breadcrumb-item active" aria-current="page"><app-pets-navbar></app-pets-navbar></li>
+        </ol>
+      </nav>
+        <div *ngIf="employee">
+        <button class="btn btn-primary2" (click)="showComponent()">Crear consulta</button>
         </div>
-        <div>
-            <app-consultation-detail [consultationData]="consultation"></app-consultation-detail> 
-        </div>
-    </tr>
-    </tbody>    
-</table>
+
+        <app-create-consultation [showComponent]="showCreateComponent" (creationEvent)="createHandler()"></app-create-consultation>
+        <h2>Listado de consultas:</h2>
+        <table class="table table-hover">
+
+
+        <tbody>
+        <tr *ngFor = "let consultation of consultations">
+            <div>
+                <td>{{consultation.date_time}}</td>
+                <td>{{consultation.speciality}}</td>
+                <button class="btn btn-primary3" (click)="onSelect(consultation.id)">Detalle</button>
+            </div>
+            <div>
+                <app-consultation-detail [consultationData]="consultation"></app-consultation-detail> 
+            </div>
+        </tr>
+        </tbody>    
+        </table>
+    
+  
+ 
+             
+    
+  </div>
+  
+  
+
+
+

@@ -20,6 +20,7 @@ export class ListPetsComponent implements OnInit {
   pets: Pet[] = [];
   clientId: number = -1;
   loggedClient: boolean = false;
+  employee: Employee | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +32,7 @@ export class ListPetsComponent implements OnInit {
   ngOnInit(): void {
     this.authEmployeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
       if(employee) {
+        this.employee = employee;
         this.routeSub = this.route.params.subscribe(params => {
           this.clientId = params['clientId'];
           this.listAllPets()
@@ -40,7 +42,7 @@ export class ListPetsComponent implements OnInit {
       if(client) {
           this.loggedClient = true;
           this.clientId = client.id;
-          this.listAllPets()
+          this.listAvailablePets()
     }})
   }
 
@@ -55,8 +57,13 @@ ngOnDestroy() {
 listAllPets():void {
   this.petService.listAllPets(this.clientId).subscribe((data: Pet[]) => {
     this.pets = Object.values(data);
-  })
-  
+  }) 
+}
+
+listAvailablePets():void {
+  this.petService.listAvailablePets(this.clientId).subscribe((data: Pet[]) => {
+    this.pets = Object.values(data);
+  }) 
 }
 
 }

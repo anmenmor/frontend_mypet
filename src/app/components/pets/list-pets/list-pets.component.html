@@ -21,6 +21,7 @@
             <td>{{pet.name}}</td>
             <td>{{pet.species}}</td>
             <td><a routerLink="./{{pet.id}}/details"><button class="btn btn-primary3">Detalles</button></a></td>
+            <td *ngIf="employee && pet.available == false">No disponible</td>
         </tr>
     </tbody>
 </table><br>

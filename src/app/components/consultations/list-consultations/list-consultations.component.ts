@@ -17,7 +17,7 @@ export class ListConsultationsComponent implements OnInit {
   consultations: Consultation[] = [];
   petId: number = -1;
   showCreateComponent: boolean = false;
-  employee: Employee|null = null
+  employee: Employee|null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +32,7 @@ export class ListConsultationsComponent implements OnInit {
     this.getConsultations();
 
     this.authEmployeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
-        this.employee = employee
+        this.employee = employee;
     })
   }
 

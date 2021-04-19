@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Clients } from "src/app/models/clients";
 import { AuthClientsService } from "../../shared/auth-clients.service";
 import { Location } from "@angular/common";
@@ -24,6 +24,7 @@ export class SideNavbarClientsComponent implements OnInit {
 
   constructor(
     public router: Router,
+    private route: ActivatedRoute,
     public fb: FormBuilder,
     private _location: Location,
     private clientsService: AuthClientsService,
@@ -31,7 +32,20 @@ export class SideNavbarClientsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.clinic = true;
+    this.route.queryParams.subscribe(params => {
+      const view = params['view'];
+      switch(view) {
+        case "pets": this.clientsPetShow();
+          break;
+        case "dates": this.clientsDatesShow();
+          break;
+        case "user": this.clientsUserShow();
+          break;
+        default: this.clientsClinicShow();
+          break;
+      }
+      
+  });
   }
 
   clientsUserShow() {
