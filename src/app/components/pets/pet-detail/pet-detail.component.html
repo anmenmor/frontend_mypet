@@ -1,85 +1,159 @@
-<div class="d-flex margin" id="wrapper" style="background-color: rgb(105, 206, 172);">
+<div
+  class="d-flex margin"
+  id="wrapper"
+  style="background-color: rgb(105, 206, 172)"
+>
   <!-- Sidebar -->
-  <div class="bg-light border-left" id="sidebar-wrapper">
-    <div class="sidebar-heading">CLINICA DOGGY </div>
+  <div *ngIf="client" class="bg-light border-left" id="sidebar-wrapper">
+    <div class="sidebar-heading">CLINICA DOGGY</div>
     <div class="list-group list-group-flush">
-      <a  routerLink='../../' class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
-      <a  [routerLink]="['../../']" [queryParams]="{view: 'user'}" class="list-group-item list-group-item-action bg-light">Mi Perfil</a>
-      <a  [routerLink]="['../../']" [queryParams]="{view: 'pets'}" class="list-group-item list-group-item-action bg-light">Mis Mascotas</a>
-      <a  [routerLink]="['../../']" [queryParams]="{view: 'dates'}" class="list-group-item list-group-item-action bg-light">Mis Citas</a>
-      
+      <a
+        routerLink="../../"
+        class="list-group-item list-group-item-action bg-light"
+        >Datos de mi clínica</a
+      >
+      <a
+        [routerLink]="['../../']"
+        [queryParams]="{ view: 'user' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Mi Perfil</a
+      >
+      <a
+        [routerLink]="['../../']"
+        [queryParams]="{ view: 'pets' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Mis Mascotas</a
+      >
+      <a
+        [routerLink]="['../../']"
+        [queryParams]="{ view: 'dates' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Mis Citas</a
+      >
     </div>
   </div>
-  
+
+  <div *ngIf="employee" class="bg-light border-left" id="sidebar-wrapper">
+    <div class="sidebar-heading">CLINICA VETERINARIA</div>
+    <div class="list-group list-group-flush">
+      <a
+        routerLink="../../../../../"
+        class="list-group-item list-group-item-action bg-light"
+        >Datos de mi clínica</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'employees' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Empleados</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'clients' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Clientes</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'dates' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Citas</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'vaccines' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Vacunas</a
+      >
+    </div>
+  </div>
 
   <div id="page-content-wrapper">
-      <div class="container-fluid">
-
-        <div class="container">
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li  class="breadcrumb-item active" aria-current="page"><app-pets-navbar></app-pets-navbar></li>
-            </ol>
-          </nav>
+    <div class="container-fluid">
+      <div class="container">
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <app-pets-navbar></app-pets-navbar>
+            </li>
+          </ol>
+        </nav>
         <h2>Detalle de la mascota:</h2>
         <form [formGroup]="petDetailForm" (ngSubmit)="updatePet()">
           <div class="form-group">
-            <label>Nombre</label><br>
-            <input type="text" class="form-control" formControlName="name">
+            <label>Nombre</label><br />
+            <input type="text" class="form-control" formControlName="name" />
           </div>
           <div *ngIf="petDetailForm.controls.name.errors">
             El nombre es obligatorio
           </div>
           <div class="form-group">
-            <label>Sexo</label><br>
-            <input type="radio" value='Male' formControlName="sex">Male
-            <input type="radio" value='Female' formControlName="sex">Female
+            <label>Sexo</label><br />
+            <input type="radio" value="Male" formControlName="sex" />Male
+            <input type="radio" value="Female" formControlName="sex" />Female
           </div>
           <div class="form-group">
-            <label>Peso</label><br>
-            <input type="number" class="form-control" formControlName="weight">
+            <label>Peso</label><br />
+            <input
+              type="number"
+              class="form-control"
+              formControlName="weight"
+            />
           </div>
           <div *ngIf="petDetailForm.controls.weight.errors">
             El peso es obligatorio
           </div>
           <div class="form-group">
-            <label>Edad</label><br>
-            <input type="number" class="form-control" formControlName="age">
+            <label>Edad</label><br />
+            <input type="number" class="form-control" formControlName="age" />
           </div>
           <div *ngIf="petDetailForm.controls.age.errors">
             La edad es obligatoria
           </div>
           <div class="form-group">
-            <label>Especie</label><br>
-            <input type="text" class="form-control" formControlName="species">
+            <label>Especie</label><br />
+            <input type="text" class="form-control" formControlName="species" />
           </div>
           <div *ngIf="petDetailForm.controls.species.errors">
             La especie es obligatoria
           </div>
           <div class="form-group">
-            <label>Raza</label><br>
-            <input type="text" class="form-control" formControlName="breed">
+            <label>Raza</label><br />
+            <input type="text" class="form-control" formControlName="breed" />
           </div>
           <div *ngIf="petDetailForm.controls.breed.errors">
             La raza es obligatoria
           </div>
-          <div *ngIf= "employee" class="form-group">
-            <label>Estado</label><br>
-            <select formControlName="available" class="form-control"
-                        name="availableOption" 
-                        id="availableOption">
-                      <option *ngFor="let availableOption of availableOptions" [value]="availableOption.value">
-                        <td>{{availableOption.label}}</td><br>
-                      </option>
-                    </select>
+          <div *ngIf="employee" class="form-group">
+            <label>Estado</label><br />
+            <select
+              formControlName="available"
+              class="form-control"
+              name="availableOption"
+              id="availableOption"
+            >
+              <option
+                *ngFor="let availableOption of availableOptions"
+                [value]="availableOption.value"
+              >
+                <td>{{ availableOption.label }}</td>
+                <br />
+              </option>
+            </select>
           </div>
-          
-          <button type="submit" class="btn btn-block btn-primary2">Modificar</button>
-          <button class="btn btn-block btn-secondary" type="button" routerLink="/">Volver atrás</button>
-        </form>
-        </div>
-           
-  
-      </div>
-</div>
 
+          <button type="submit" class="btn btn-block btn-primary2">
+            Modificar
+          </button>
+          <button
+            class="btn btn-block btn-secondary"
+            type="button"
+            routerLink="/"
+          >
+            Volver atrás
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

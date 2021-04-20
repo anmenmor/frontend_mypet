@@ -44,7 +44,6 @@ export class SideNavbarClientsComponent implements OnInit {
         default: this.clientsClinicShow();
           break;
       }
-      
   });
   }
 
