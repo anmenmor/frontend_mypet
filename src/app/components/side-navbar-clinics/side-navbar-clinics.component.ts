@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -31,6 +32,10 @@ export class SideNavbarClinicsComponent implements OnInit {
         default: this.clinicShow();
           break;
       }
+  });
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
   });
   }
 
