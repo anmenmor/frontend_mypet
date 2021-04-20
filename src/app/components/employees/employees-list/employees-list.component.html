@@ -28,6 +28,7 @@
                 </div>
                 <br>
                 <div *ngIf="employees.length > 0;else noEmployees" class="container">
+                        <div class="table-responsive">
                         <table *ngIf="!updateChild && !registerChild" class="table table-hover" style="text-align: center">
                             <thead>
                                 <tr *ngIf="submitted">
@@ -59,6 +60,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
                 </div>
                 <ng-template #noEmployees>
                     <div class="container">
