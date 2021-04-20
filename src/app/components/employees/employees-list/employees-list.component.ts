@@ -23,6 +23,7 @@ export class EmployeesListComponent implements OnInit{
   employeeSelectedInList: Employee | any;
   submitted = false;
   specialities: Specialities[] | any = [];
+  loading = true;
 
 //Paginacion  
   totalItems: number = 0;
@@ -67,6 +68,7 @@ export class EmployeesListComponent implements OnInit{
     this.submitted = true;
     this.employeeService.listAllEmployeesPagination(page).subscribe(
       response =>{
+        this.hideloader();
         if ((!response && !response.data) || (response && response.data && response.data.length == 0)) {
           this.employees = [];
           this.showPagination = false;
@@ -84,6 +86,7 @@ export class EmployeesListComponent implements OnInit{
       });
   }
   loadPage(page: number) {
+    this.loading = true;
     if (page !== this.previousPage) {
       this.previousPage = page;
       this.listAllEmployeesPagination(this.page);
@@ -149,5 +152,9 @@ export class EmployeesListComponent implements OnInit{
     hideUpdateChild(){
       this.updateChild = false;
     }
-
+ 
+    hideloader() {
+      this.loading = false;
+    }
 }
+
