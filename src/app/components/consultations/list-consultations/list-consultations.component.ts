@@ -6,6 +6,7 @@ import { Consultation } from 'src/app/models/consultation';
 import { Employee } from 'src/app/models/Employee';
 import { PetService } from 'src/app/services/pet.service';
 import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
+import { AuthClientsService } from 'src/app/shared/auth-clients.service';
 
 @Component({
   selector: 'app-list-consultations',
@@ -17,12 +18,14 @@ export class ListConsultationsComponent implements OnInit {
   consultations: Consultation[] = [];
   petId: number = -1;
   showCreateComponent: boolean = false;
-  employee: Employee|null = null
+  employee: Employee|null = null;
+  client: Clients|null = null;
 
   constructor(
     private route: ActivatedRoute,
     private petService: PetService,
-    public authEmployeeService: AuthEmployeeService
+    public authEmployeeService: AuthEmployeeService,
+    public authClientService: AuthClientsService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +35,11 @@ export class ListConsultationsComponent implements OnInit {
     this.getConsultations();
 
     this.authEmployeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
-        this.employee = employee
+        this.employee = employee;
+    })
+
+    this.authClientService.getCurrentClientValue().subscribe((client: Clients|null) => {
+      this.client = client;
     })
   }
 

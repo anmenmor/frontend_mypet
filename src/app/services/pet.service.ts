@@ -26,8 +26,12 @@ export class PetService {
     })
   )};
 
-  listAllPets(clientId: number): Observable<Pet[]> {
+  listAvailablePets(clientId: number): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.PETS_API_SERVER, {params: {available: "true", client_id: clientId.toString()}});
+  };
+
+  listAllPets(clientId: number): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.PETS_API_SERVER, {params: {client_id: clientId.toString()}});
   };
 
   getPetDetail(petId: number): Observable<Pet>{
@@ -40,7 +44,7 @@ export class PetService {
   
   updatePet(updateData: Pet, petId: number): Observable<Pet>{
     const body = {'name': updateData.name, 'sex': updateData.sex, 'weight': updateData.weight, 'age': updateData.age, 
-    'species': updateData.species,'breed': updateData.breed};
+    'species': updateData.species,'breed': updateData.breed, 'available': updateData.available};
     return this.http.put<Pet>(this.PETS_API_SERVER + '/' + petId, body)
     .pipe(
       catchError((error: HttpErrorResponse) => {

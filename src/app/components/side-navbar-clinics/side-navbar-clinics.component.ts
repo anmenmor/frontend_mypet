@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -14,10 +14,25 @@ export class SideNavbarClinicsComponent implements OnInit {
   clinic: any = true;
   vaccines: any = false;
 
-  constructor() { }
-
+  constructor(private route: ActivatedRoute,) { }
  
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const view = params['view'];
+      switch(view) {
+        case "employees": this.employeesShow();
+          break;
+        case "clients": this.clientsShow();
+          break;
+        case "vaccines": this.vaccinesShow();
+          break;
+        case "dates": this.datesShow();
+          break;
+        default: this.clinicShow();
+          break;
+      }
+  });
+  }
 
   employeesShow(){
     this.employees = true;
@@ -30,14 +45,6 @@ export class SideNavbarClinicsComponent implements OnInit {
   clientsShow(){
     this.clients = true;
     this.employees = false;
-    this.dates = false;
-    this.clinic = false;
-    this.vaccines = false;
-  }
-
-  vaccinationsShow(){
-    this.employees = false;
-    this.clients = false;
     this.dates = false;
     this.clinic = false;
     this.vaccines = false;

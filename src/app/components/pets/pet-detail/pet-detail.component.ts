@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Clients } from 'src/app/models/clients';
+import { Employee } from 'src/app/models/Employee';
 import { Pet } from 'src/app/models/pet';
 import { PetService } from 'src/app/services/pet.service';
+import { AuthClientsService } from 'src/app/shared/auth-clients.service';
+import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
 
 @Component({
   selector: 'app-pet-detail',
@@ -13,18 +17,33 @@ import { PetService } from 'src/app/services/pet.service';
 export class PetDetailComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
   petDetailForm: FormGroup;
+  availableOptions = [{label: "Disponible", value: true},
+  {label: "No Disponible", value: false}];
+  employee: Employee|null = null;
+  client: Clients|null = null;
   petId: number = -1;
 
   constructor(
     private route: ActivatedRoute,
     public fb: FormBuilder,
     private petService: PetService,
+    public authEmployeeService: AuthEmployeeService,
+    public authClientService: AuthClientsService
   ) { }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       this.petId = params['petId'];
   })
+
+  this.authEmployeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
+    this.employee = employee;
+})
+
+  this.authClientService.getCurrentClientValue().subscribe((client: Clients|null) => {
+    this.client = client;
+  })
+
 
   this.petDetailForm = this.fb.group({
     name: ['', Validators.required],
@@ -33,6 +52,7 @@ export class PetDetailComponent implements OnInit {
     age: ['', Validators.required], 
     species: ['', Validators.required],
     breed: ['', Validators.required],
+    available: ['']
   });
 
   this.petService.getPetDetail(this.petId).subscribe((data:Pet) => {
@@ -44,6 +64,7 @@ export class PetDetailComponent implements OnInit {
       age: [pet.age, Validators.required], 
       species: [pet.species, Validators.required],
       breed: [pet.breed, Validators.required],
+      available: [pet.available]
     });
   });
 }

@@ -1,14 +1,6 @@
 <div *ngIf="clinic" class="container">
   <div class="main-body">
-    <!-- Barra ubicacion -->
-    <nav *ngIf="!isHome" aria-label="breadcrumb" class="main-breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">
-          Datos de mi clínica
-        </li>
-      </ol>
-    </nav>
+    <h2>Datos de mi clínica</h2>
     <!-- / Barra ubicacion -->
     <div class="row gutters-sm">
       <div class="col-md-4 mb-3">
@@ -28,7 +20,7 @@
                   class="btn btn-primary"
                   [routerLink]="['/clinics/updateClinic', clinic.id]"
                 >
-                  Editar mi perfil
+                  Editar clínica
                 </button>
               </div>
             </div>
