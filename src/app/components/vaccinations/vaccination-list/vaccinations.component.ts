@@ -11,6 +11,7 @@ import { AuthClientsService } from "src/app/shared/auth-clients.service";
 import { Subscription } from "rxjs";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 import { Employee } from "src/app/models/Employee";
+import { Clients } from 'src/app/models/clients';
 
 @Component({
   selector: "app-vaccinations",
@@ -21,6 +22,7 @@ export class VaccinationsComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
   vaccinations: Array<Vaccination> = [];
   currentEmployee: Employee | null = null;
+  client: Clients|null = null;
   petId = 0;
   clientId = 0;
 
@@ -29,7 +31,8 @@ export class VaccinationsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private vaccinationService: VaccinationsService,
-    private authEmployeeService: AuthEmployeeService
+    private authEmployeeService: AuthEmployeeService,
+    private authClientService: AuthClientsService
   ) {}
 
   ngOnInit() {
@@ -43,6 +46,10 @@ export class VaccinationsComponent implements OnInit {
       .subscribe((employee: Employee | null) => {
         this.currentEmployee = employee;
       });
+
+      this.authClientService.getCurrentClientValue().subscribe((client: Clients|null) => {
+        this.client = client;
+      })
   }
 
   getVaccinationsByPetId(petId: number) {

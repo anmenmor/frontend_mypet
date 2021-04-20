@@ -1,15 +1,6 @@
-<div class="container">
     <br>
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-                <strong>Listado de empleados</strong>
-            </li>
-        </ol>
-    </nav>
-    <hr />
     <div class="container">
+        <h2>Listado de empleados</h2>
         <div class="card w-auto mx-auto">
             <div class="card-body">
                 <div class="container-fluid">
@@ -26,14 +17,16 @@
                     <ngb-alert [type]="alert.type" (closed)="close(alert)">{{alert.message}}</ngb-alert>
                 </p>
                 <br />
-                <div class="clearfix">
-                    <button type="button" class="btn btn-primary" style="margin-left: 2em;"
+                <div class="text-center">
+                    <button type="button" class="btn btn-block btn-info" style="text-align: center"
                         *ngIf="employeeAdmin && !updateChild && !registerChild" (click)="addEmployee()">Añadir
                         empleado</button>
-                    <div *ngIf="loading" class="spinner-border float-right" role="status">
+                        <br>
+                    <div *ngIf="loading" class="spinner-border" role="status">
                         <span class="sr-only" id="loading">Cargando...</span>
                     </div>
                 </div>
+                <br>
                 <div *ngIf="employees.length > 0;else noEmployees" class="container">
                         <table *ngIf="!updateChild && !registerChild" class="table table-hover" style="text-align: center">
                             <thead>
@@ -44,7 +37,7 @@
                                     <td>Correo electrónico</td>
                                     <td>Turno de trabajo</td>
                                     <td>Especialidad</td>
-                                    <td *ngIf="employeeAdmin">Acción</td>
+                                    <td colspan="2" *ngIf="employeeAdmin">Acción</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,4 +72,3 @@
             </div>
         </div>
     </div>
-</div>
