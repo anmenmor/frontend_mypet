@@ -12,17 +12,18 @@
     </div>
 
     <div id="page-content-wrapper">
-        <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg" style="background-color: rgb(105, 206, 172);">
+        <!-- <button class="btn btn-info" id="menu-toggle">Menú</button> -->
+          <i class="bi bi-list"style="font-size: 2rem; color: cornflowerblack;" aria-hidden="true" id="menu-toggle"></i>
+       </nav>
+      
+      <div class="container-fluid">
             
-           
             <div><br><br><br></div>
             <app-clinics-profile *ngIf="clinic" ></app-clinics-profile>
              <app-clients-profile *ngIf="client" ></app-clients-profile>
              <app-list-pets *ngIf="pets"></app-list-pets>
              <app-dates *ngIf="dates"></app-dates>
            
-           
-          
-          
-        </div>
+      </div>
   </div>
