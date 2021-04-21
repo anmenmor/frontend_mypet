@@ -6,6 +6,7 @@ import { AuthClientsService } from "../../shared/auth-clients.service";
 import { Location } from "@angular/common";
 import { Pet } from "../../models/pet";
 import { PetService } from "src/app/services/pet.service";
+import * as $ from 'jquery';
 
 @Component({
   selector: "app-side-navbar-clients",
@@ -44,6 +45,10 @@ export class SideNavbarClientsComponent implements OnInit {
         default: this.clientsClinicShow();
           break;
       }
+  });
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
   });
   }
 
