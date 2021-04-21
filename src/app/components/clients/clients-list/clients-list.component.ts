@@ -14,6 +14,7 @@ export class ClientsListComponent implements OnInit {
   clients: Clients[] = [];
   clientsSelectedList: Clients | any;
   submitted = false;
+  loading = true;
   updateChild: boolean = false;
    @Output() clientsSelectedEvent = new EventEmitter<Clients>();
 
@@ -30,11 +31,18 @@ export class ClientsListComponent implements OnInit {
     this.submitted = true;
     this.clientsService.listClients().subscribe(data=>
      {
-        this.clients = Object.values(data).map(clientsDB => new Clients(clientsDB));
+      this.hideloader();
+      this.clients = Object.values(data).map(clientsDB => new Clients(clientsDB));
     });
   }
-
-
+  loadPage() {
+    this.loading = true;
+    this.listClients();
+    }
+  
+    hideloader() {
+      this.loading = false;
+    }
 
   sendSelected(clients: Clients): void{
     this.updateChild = true;
