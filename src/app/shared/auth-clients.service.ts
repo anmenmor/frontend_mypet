@@ -77,8 +77,8 @@ import { ClientsRaw } from '../models/clients.raw';
   }
 
   //list clients
-  listClients(): Observable<Clients[]> {
-    return this.http.get<Clients[]>(this.LIST_CLIENTS_API_SERVER);
+  listClients(numPage: number = 1): Observable<any> {
+    return this.http.get<any>(this.LIST_CLIENTS_API_SERVER,{params: {page:numPage.toString()}});
   }
 
   //Update 

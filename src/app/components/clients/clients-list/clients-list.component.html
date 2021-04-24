@@ -45,7 +45,10 @@
         
     </tr>
     </tbody>
+    <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page" (pageChange)="loadPage($event)">
+    </ngb-pagination>
 </table>
+ 
 </div>
 </div>
 
