@@ -17,7 +17,7 @@ export class AuthEmployeeService {
   private LOGIN_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/loginEmployee";
   private UPDATE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
   private DELETE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
-  private currentEmployee: BehaviorSubject<Employee|null> = new BehaviorSubject<Employee|null>(null);
+  public currentEmployee: BehaviorSubject<Employee|null> = new BehaviorSubject<Employee|null>(null);
 
   constructor(private http: HttpClient) { }
 

@@ -19,7 +19,8 @@ export class TokenEmployeeService {
   handleData(token: any){
     localStorage.setItem('auth_token', token);
     this.authEmployeeService.getAuthenticateUser().subscribe((employee: Employee) => {
-      this.authEmployeeService.setCurrentEmployeeValue(employee)
+      this.authEmployeeService.setCurrentEmployeeValue(employee);
+      console.log("Relleno current user");
     })
   }
 

@@ -27,6 +27,8 @@ import { ClinicsProfileComponent } from './components/clinics/clinics-profile/cl
 import { ClientsProfileComponent } from './components/clients/clients-profile/clients-profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { AuthEmployeesGuard } from './auth-employees.guard'
+
 
 
 
@@ -56,7 +58,7 @@ const routes: Routes = [
   {path: 'clients/update/:id', component:ClientsEditComponent, pathMatch: 'full'},
   {path: 'clients/main', component: SideNavbarClientsComponent, pathMatch: 'full'},
   {path: 'clientsProfile', component:ClientsProfileComponent, pathMatch: 'full'},
-  {path: 'clinics/main/clients/:clientId/pets/:petId/vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
+  {path: 'clinics/main/clients/:clientId/pets/:petId/vaccinations', component:VaccinationsComponent,canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
   {path: 'clients/main/:petId/vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination/clients/:clientId', component:VaccinationCreateComponent, pathMatch: 'full'},
@@ -64,7 +66,7 @@ const routes: Routes = [
   {path: 'vaccinations/updateVaccination/:id', component:VaccinationUpdateComponent, pathMatch: 'full'},
   {path: 'vaccinations/updateVaccination/pets/:petId', component:VaccinationUpdateComponent, pathMatch: 'full'},
   {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},
-  {path: 'clinics/main', component: SideNavbarClinicsComponent, pathMatch: 'full'},
+  {path: 'clinics/main', component: SideNavbarClinicsComponent, canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
   {path: 'dates', component: DatesComponent, pathMatch: 'full'},
   {path: 'dates/addDate', component: CreateDateComponent, pathMatch: 'full'},
   {path: 'dates/addDate/clients/:clientId', component:CreateDateComponent, pathMatch: 'full'},
