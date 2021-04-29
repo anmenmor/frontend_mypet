@@ -66,7 +66,7 @@ export class VaccinationsComponent implements OnInit {
   }
 
   getVaccinationsByPetId(petId: number, page: number) {
-    this.vaccinationService.listVaccinationByPetIdPaginate(petId, page).subscribe((data) => {
+    this.vaccinationService.listVaccinationByPetIdPaginate(petId, page).subscribe((data: any) => {
       if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
         this.vaccinations = [];
         this.showPagination = false;

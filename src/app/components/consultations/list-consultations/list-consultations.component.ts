@@ -59,7 +59,7 @@ export class ListConsultationsComponent implements OnInit {
   }
 
   getConsultations(page: number):void {
-    this.petService.getConsultationsPagination(this.petId, page).subscribe((data: Consultation[]) => {
+    this.petService.getConsultationsPagination(this.petId, page).subscribe((data: any) => {
       if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
         this.consultations = [];
         this.showPagination = false;
@@ -97,7 +97,7 @@ export class ListConsultationsComponent implements OnInit {
 
   createHandler(): void {
     this.showCreateComponent = false;
-    this.getConsultations();
+    this.getConsultations(this.page);
   }
 
 }

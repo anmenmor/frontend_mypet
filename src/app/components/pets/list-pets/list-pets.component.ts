@@ -71,7 +71,7 @@ export class ListPetsComponent implements OnInit {
 
   listAllPets(page: number): void {
     console.log('me meto qi');
-    this.petService.listAllPetsPagination(this.clientId, page).subscribe((data: Pet[]) => {
+    this.petService.listAllPetsPagination(this.clientId, page).subscribe((data: any) => {
       console.log(data);
       if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
         this.pets = [];
@@ -87,7 +87,7 @@ export class ListPetsComponent implements OnInit {
   }
 
   listAvailablePets(page: number): void {
-    this.petService.listAvailablePetsPagination(this.clientId, page).subscribe((data: Pet[]) => {
+    this.petService.listAvailablePetsPagination(this.clientId, page).subscribe((data: any) => {
       // this.pets = Object.values(data);
       if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
         this.pets = [];

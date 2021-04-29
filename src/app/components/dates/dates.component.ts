@@ -75,8 +75,19 @@ export class DatesComponent implements OnInit {
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
         this.clientId = data.user.id;
-        this.dateService.listDatesByClientId(data.user.id).subscribe((data) => {
-          this.dates = Object.values(data);
+        this.dateService.listDatesByClientIdPaginate(data.user.id, page).subscribe((data: any) => {
+          if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
+            console.log("if");
+            this.dates = [];
+            this.showPagination = false;
+          }else{
+            console.log(data);
+             this.dates = Object.values(data.data);
+             this.totalItems = data.total;
+             this.pageSize = data.per_page;
+             this.showPagination = true;
+          }
+  
         });
       },
       (exception) => {
@@ -86,7 +97,7 @@ export class DatesComponent implements OnInit {
       
             if (data?.admin) {
               this.employeeId = data.id;
-              this.dateService.listAllDatesPagination(page).subscribe((data) => {
+              this.dateService.listAllDatesPagination(page).subscribe((data: any) => {
                 console.log(data);
                 if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
                   console.log("if");
@@ -104,8 +115,19 @@ export class DatesComponent implements OnInit {
             } else if (!data?.admin) {
               this.employeeId = data.id;
               this.dateService
-                .listDateByEmployeeId(data.id)
-                .subscribe((data) => {
+                .listDateByEmployeeIdPaginate(data.id, page)
+                .subscribe((data: any) => {
+                  if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
+                    console.log("if");
+                    this.dates = [];
+                    this.showPagination = false;
+                  }else{
+                    console.log("data");
+                     this.dates = Object.values(data.data);
+                     this.totalItems = data.total;
+                     this.pageSize = data.per_page;
+                     this.showPagination = true;
+                  }
                   for (const d of data as any) {
                     if (d.date_time > this.formattedDate) {
                       this.dates.push(d);
