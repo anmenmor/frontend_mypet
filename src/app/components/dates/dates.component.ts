@@ -66,14 +66,8 @@ export class DatesComponent implements OnInit {
                 .listDateByEmployeeId(data.id)
                 .subscribe((data) => {
                   for (const d of data as any) {
-                    console.log(d);
                     if (d.date_time > this.formattedDate) {
-                      this.dates.push({
-                        id: d.id,
-                        date_time: d.date_time,
-                        pet_id: d.pet_id,
-                        employee_id: d.employee_id,
-                      });
+                      this.dates.push(d);
                     }
                   }
                 });
