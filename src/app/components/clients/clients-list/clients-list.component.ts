@@ -23,7 +23,7 @@ export class ClientsListComponent implements OnInit {
   totalItems: number = 0;
   page: number = 0;
   previousPage: number = 0;
-  showPagination: boolean =false;
+  showPagination: boolean = false;
   pageSize: number = 0;
 
 
@@ -40,16 +40,17 @@ export class ClientsListComponent implements OnInit {
 
   // Se comenta el contenido del método listClients para que no de error de compilación
 
-  listClients(page:number): void {
+  listClients(page: number): void {
     this.submitted = true;
     this.clientsService.listClients(page).subscribe(data=>
      {
       this.hideloader();
-      if ((!data && !data.result) || (data && data.result && data.result.length ==0)) {
+      if ((!data && !data.result) || (data && data.data && data.data.length == 0)) {
 			  this.clients = [];
 			  this.showPagination = false;
 			}else{
-        this.clients = Object.values(data).map(clientsDB => new Clients(clientsDB));
+        this.clients = Object.values(data.data)
+        .map(clientsDB => new Clients(clientsDB));
         this.totalItems = data.total;
         this.pageSize = data.per_page;
         this.showPagination = true;
