@@ -12,3 +12,12 @@ form{
     color: white;
     background-color:  rgb(105, 206, 172);
 }
+
+
+@media only screen and (max-width: 450px){
+    .container{
+        margin-bottom:90px!important;
+    }
+
+    
+}
