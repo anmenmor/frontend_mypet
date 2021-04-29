@@ -24,7 +24,6 @@ export class DatesComponent implements OnInit {
   employees: Employee[] = [];
   clientId = 0;
   employeeId = 0;
-  petId = 0;
   loggedUser: any;
   htmlMsg!: String;
 
@@ -48,7 +47,9 @@ export class DatesComponent implements OnInit {
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
         this.clientId = data.user.id;
-        this.displayByPets(data.user.id);
+        this.dateService.listDatesByClientId(data.user.id).subscribe((data) => {
+          this.dates = Object.values(data);
+        });
       },
       (exception) => {
         this.employeeService
@@ -65,14 +66,8 @@ export class DatesComponent implements OnInit {
                 .listDateByEmployeeId(data.id)
                 .subscribe((data) => {
                   for (const d of data as any) {
-                    console.log(d);
                     if (d.date_time > this.formattedDate) {
-                      this.dates.push({
-                        id: d.id,
-                        date_time: d.date_time,
-                        pet_id: d.pet_id,
-                        employee_id: d.employee_id,
-                      });
+                      this.dates.push(d);
                     }
                   }
                 });
@@ -89,34 +84,6 @@ export class DatesComponent implements OnInit {
       this.employees = Object.values(data).map(
         (employeeDB) => new Employee(employeeDB)
       );
-    });
-  }
-
-  displayByPets(id: number) {
-    this.petService.listAllPets(id).subscribe((data: Pet[]) => {
-      for (const d of Object.entries(data)) {
-        for (const i of d as any) {
-          if (i.id) {
-            this.pets.push(i);
-            this.getDatesByPetId(i.id);
-          }
-        }
-      }
-    });
-  }
-
-  getDatesByPetId(petId: number) {
-    this.dateService.listDateByPetId(petId).subscribe((data) => {
-      for (const d of data as any) {
-        if (d.date_time > this.formattedDate) {
-          this.dates.push({
-            id: d.id,
-            date_time: d.date_time,
-            pet_id: d.pet_id,
-            employee_id: d.employee_id,
-          });
-        }
-      }
     });
   }
 

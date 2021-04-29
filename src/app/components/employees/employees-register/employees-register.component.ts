@@ -45,7 +45,7 @@ export class EmployeesRegisterComponent implements OnInit {
           Validators.email])]],
         password: ['', [Validators.compose([
           Validators.required,
-          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,10}$')])]],
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$')])]],
         admin: ['', Validators.required],
         workShifts: [''],
         specialities: ['']
