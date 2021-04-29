@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Employee } from '../models/Employee';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { stringify } from '@angular/compiler/src/util';
 
 
 @Injectable({
@@ -55,9 +56,12 @@ export class AuthEmployeeService {
     return this.http.post<Employee>(this.LOGIN_EMPLOYEE_API_SERVER, employee)
     .pipe(
       catchError((error: HttpErrorResponse) => {
+        if (error.status == 0) {
+          return throwError(error);
+        }
         return throwError(error.error);
       })
-    )  
+    );  
   }
 
   // Get employee authenticated

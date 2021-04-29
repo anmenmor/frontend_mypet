@@ -10,12 +10,20 @@ export class DateService {
 
   constructor(private http: HttpClient) {}
 
+  listAllDatesPagination(numPage: number = 1) {
+    return this.http.get<Dates>(this.DATE_API_SERVER, {params: {page:numPage.toString()}});
+  }
+  
   listAllDates() {
     return this.http.get<Dates>(this.DATE_API_SERVER);
   }
 
   listDatesByClientId(clientId: number) {
     return this.http.get<Dates>(this.DATE_API_SERVER + "clients/" + clientId);
+  }
+
+  listDatesByClientIdPaginate(clientId: number,numPage : number = 1 ) {
+    return this.http.get<Dates>(this.DATE_API_SERVER + "clients/" + clientId, {params: {page: numPage.toString()}});
   }
 
   listDateByPetId(petId: number) {
@@ -26,6 +34,10 @@ export class DateService {
     return this.http.get<Dates>(
       this.DATE_API_SERVER + "employees/" + employeeId
     );
+  }
+
+  listDateByEmployeeIdPaginate(employeeId: number, numPage : number = 1) {
+    return this.http.get<Dates>(this.DATE_API_SERVER + "employees/" + employeeId, {params: {page: numPage.toString()}});
   }
 
   listDateById(id: number) {

@@ -1,15 +1,19 @@
 <div class="d-flex margin" id="wrapper" style="background-color: rgb(105, 206, 172);">
     <!-- Sidebar -->
     <div *ngIf="employee" class="bg-light border-left" id="sidebar-wrapper">
-      <div class="sidebar-heading">CLINICA VETERINARIA</div>
-      <div class="list-group list-group-flush">
-        <a routerLink='../../' class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
-        <a [routerLink]="['../../../']" [queryParams]="{view: 'employees'}" class="list-group-item list-group-item-action bg-light">Empleados</a>
-        <a [routerLink]="['../../../']" [queryParams]="{view: 'clients'}"  class="list-group-item list-group-item-action bg-light">Clientes</a>
-        <a [routerLink]="['../../../']" [queryParams]="{view: 'dates'}"  class="list-group-item list-group-item-action bg-light">Citas</a>
-        <a [routerLink]="['../../../']" [queryParams]="{view: 'vaccines'}"  class="list-group-item list-group-item-action bg-light">Vacunas</a>
+        <div class="sidebar-heading">CLINICA VETERINARIA</div>
+        <div class="list-group list-group-flush">
+            <a routerLink='../../' class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
+            <a [routerLink]="['../../../']" [queryParams]="{view: 'employees'}"
+                class="list-group-item list-group-item-action bg-light">Empleados</a>
+            <a [routerLink]="['../../../']" [queryParams]="{view: 'clients'}"
+                class="list-group-item list-group-item-action bg-light">Clientes</a>
+            <a [routerLink]="['../../../']" [queryParams]="{view: 'dates'}"
+                class="list-group-item list-group-item-action bg-light">Citas</a>
+            <a [routerLink]="['../../../']" [queryParams]="{view: 'vaccines'}"
+                class="list-group-item list-group-item-action bg-light">Vacunas</a>
 
-      </div>
+        </div>
     </div>
 
     <div class="container">
@@ -19,13 +23,13 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                 <td>Nombre</td>
-                  <td>Raza</td>
-                  <td></td>
+                    <td>Nombre</td>
+                    <td>Raza</td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor = "let pet of pets">
+                <tr *ngFor="let pet of pets">
                     <td>{{pet.name}}</td>
                     <td>{{pet.species}}</td>
                     <td><a routerLink="./{{pet.id}}/details"><button class="btn btn-primary3">Detalles</button></a></td>
@@ -33,14 +37,14 @@
                 </tr>
             </tbody>
         </table><br>
-    </div>
+        <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
+            (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+
         <div *ngIf="loggedClient">
             <a routerLink="./createPet"><button class="btn btn-block btn-info">Crear mascota</button></a>
         </div>
-        
-        </div>
 
-        
-  </div>
+    </div>
 
-
+</div>

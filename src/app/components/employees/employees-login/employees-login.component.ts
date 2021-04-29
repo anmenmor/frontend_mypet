@@ -13,7 +13,7 @@ import { Employee } from 'src/app/models/Employee';
 })
 export class EmployeesLoginComponent implements OnInit {
   loginForm: FormGroup;
-  errors = [];
+  errors: string[] = [];
   submitted = false;
   serverError = false;
   // admin = false;
@@ -50,8 +50,13 @@ export class EmployeesLoginComponent implements OnInit {
           console.log(result);
         },
         error => {
+          console.log(error);
           this.serverError = true;
-          this.errors = error.error;   
+          if(error.status == 0){
+            this.errors.push("Error al conectar con el servidor");
+          }else {
+             this.errors = error.error;    
+          }
         },() => {
           this.authState.setAuthState(true);
           this.loginForm.reset()

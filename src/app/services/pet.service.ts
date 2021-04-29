@@ -26,6 +26,14 @@ export class PetService {
     })
   )};
 
+  listAvailablePetsPagination(clientId: number, numPage: number = 1): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.PETS_API_SERVER, {params: {page:numPage.toString(), available: "true", client_id: clientId.toString()}});
+  };
+
+  listAllPetsPagination(clientId: number, numPage: number = 1): Observable<Pet[]> {
+    return this.http.get<Pet[]>(this.PETS_API_SERVER, {params: {page:numPage.toString(), client_id: clientId.toString()}});
+  };
+
   listAvailablePets(clientId: number): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.PETS_API_SERVER, {params: {available: "true", client_id: clientId.toString()}});
   };
@@ -33,6 +41,7 @@ export class PetService {
   listAllPets(clientId: number): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.PETS_API_SERVER, {params: {client_id: clientId.toString()}});
   };
+
 
   getPetDetail(petId: number): Observable<Pet>{
     return this.http.get<Pet>(this.PETS_API_SERVER + '/' + petId);
@@ -58,7 +67,11 @@ export class PetService {
   }
 
   getConsultations(petId: number): Observable<Consultation[]>{
-    return this.http.get<Consultation[]>(this.PETS_API_SERVER + '/' + petId + '/consultations' )
+    return this.http.get<Consultation[]>(this.PETS_API_SERVER + '/' + petId + '/consultations' );
+  }
+
+  getConsultationsPagination(petId: number, numPage: number = 1): Observable<Consultation[]>{
+    return this.http.get<Consultation[]>(this.PETS_API_SERVER + '/' + petId + '/consultations', {params: {page:numPage.toString()}} );
   }
 
   createConsultation(petId: number, employeeId: string, comments: string): Observable<Consultation> {
