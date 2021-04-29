@@ -70,7 +70,11 @@ h4{
   }
 }
 
-
+@media only screen and (max-width: 850px) {
+  .btn-group-lg>.btn, .btn-lg{
+   margin-bottom: 5em;
+ }
+}
 @media only screen and (max-width: 450px) {
   .logo, .logo2{
       width: 15% !important;;
