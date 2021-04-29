@@ -17,3 +17,16 @@ h2{
 table{
     margin: 1em 2em;
 }
+
+.breadcrumb{
+    margin: 1em!important;
+}
+
+h2{
+    color: white;
+}
+
+@media only screen and (max-width: 450px){
+    
+    
+}

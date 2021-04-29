@@ -71,3 +71,16 @@ h4{
 }
 
 
+@media only screen and (max-width: 450px) {
+  .logo, .logo2{
+      width: 15% !important;;
+  }
+  .titulo{
+    font-size: 5vw;
+  }
+  .row{
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  
+}

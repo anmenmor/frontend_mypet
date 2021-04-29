@@ -1,0 +1,18 @@
+@media only screen and (max-width: 450px){
+    
+    .navbar{
+        padding: 0rem 0rem!important;
+    }
+    
+    .navbar-nav{
+        display:contents;
+       
+    }
+    .navbar-nav li{
+        margin-left:0.2em;
+    }
+
+    .nav-link{
+        margin-left: 0.05em;
+    }
+}

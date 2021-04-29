@@ -15,6 +15,7 @@
     <div class="container">
         <h2>Listado de mascotas</h2>
         <br /><br />
+        <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -32,7 +33,7 @@
                 </tr>
             </tbody>
         </table><br>
-        
+    </div>
         <div *ngIf="loggedClient">
             <a routerLink="./createPet"><button class="btn btn-block btn-info">Crear mascota</button></a>
         </div>

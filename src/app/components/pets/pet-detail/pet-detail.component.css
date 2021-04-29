@@ -5,10 +5,24 @@ h2{
 
 .btn-primary2{
     color: white;
-    background-color:  rgb(105, 206, 172);
+    background-color:  rgb(58, 166, 238);
 }
 
 form{
     margin: 2em;
     color: rgb(29, 95, 73);
+}
+
+.main-breadcrumb{
+    margin: 1em;
+}
+
+@media only screen and (max-width: 450px){
+    .container{
+        margin-bottom:80px!important;
+    }
+    h2{
+        color: white;
+    }
+    
 }
