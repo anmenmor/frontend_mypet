@@ -1,6 +1,6 @@
 h2{
-    margin: 1em;
-    color: rgb(29, 95, 73);
+    margin: 1em auto;
+    color: white;
 }
 
 .btn-primary2{
@@ -22,4 +22,9 @@ table td{
 }
 table{
     background-color: white;
+}
+
+
+@media only screen and (max-width: 450px){
+   
 }

@@ -1,5 +1,10 @@
 footer{
     background-color:  rgb(88, 204, 166);
     color: white;
-   margin-top: 10em;;
+   margin-top: 10em;
+   position: fixed;
+    height: 3.5rem;
+    bottom: 0;
+    width: 100%;
+    z-index: 1111111;
 }

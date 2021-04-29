@@ -10,3 +10,12 @@
     color:white;
     background-color:rgb(235, 94, 13);
 }
+
+@media only screen and (max-width: 450px){
+    .container{
+        margin-bottom:40px!important;
+    }
+    .row{
+        margin-bottom: 80px!important;
+    }
+}
