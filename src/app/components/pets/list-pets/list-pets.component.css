@@ -1,5 +1,5 @@
 h2{
-    margin: 1em;
+    margin: 1em auto;
     color: white;
 }
 
@@ -26,8 +26,5 @@ table{
 
 
 @media only screen and (max-width: 450px){
-    h2{
-       margin:0px!important;
-       color: white;
-    }
+   
 }
