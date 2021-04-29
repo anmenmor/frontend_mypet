@@ -37,7 +37,7 @@ import { ClientsRaw } from '../models/clients.raw';
             
             
           } else {
-            alert("Datos incorrectos, inténtelo de nuevo más tarde");
+            alert("Email existente, inténtelo de nuevo más tarde");
           
           }
           return throwError(error);
@@ -60,7 +60,7 @@ import { ClientsRaw } from '../models/clients.raw';
                 `Backend returned code ${error.status}, ` +
                 `body was: ${error}`);
           } else {
-            alert("Datos incorrectos, inténtelo de nuevo més tarde");
+            alert("Email existente, inténtelo de nuevo més tarde");
             console.error(
               `Backend returned code ${error.status}, ` +
               `body was: ${error.error}`);
