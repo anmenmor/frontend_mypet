@@ -21,3 +21,17 @@ thead{
 h2{
     color: white;
 }
+
+@media only screen and (max-width: 450px) {
+    .w-50{
+        width: 90%!important;
+    }
+
+    .card{
+        margin-bottom: 80px!important;
+    }
+    .container{
+        margin-bottom: 80px;
+        margin-top: 25px;
+    }
+}
