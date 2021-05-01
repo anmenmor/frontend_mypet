@@ -12,6 +12,7 @@ h2{
 .btn-primary3{
     color: white;
     background-color:  rgb(29, 95, 73);
+    margin-left: 2em;
 }
 
 table{
@@ -26,9 +27,21 @@ h2{
     color: white;
 }
 
-@media only screen and (max-width: 450px){
-    
-    
+.td_style{
+  text-align: center;
+  padding-left: 5rem;
+  padding-right: 5em;
+}
+
+.div_style{
+  display: flex;
+  justify-content: center;
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.margin-left{
+  margin-left: 2rem;
 }
 
 @media only screen and (max-width: 450px){
