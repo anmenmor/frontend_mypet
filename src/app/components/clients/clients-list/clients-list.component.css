@@ -21,10 +21,14 @@ thead{
 h2{
     color: white;
 }
+.w-50{
+    margin-top:20px!important;
+}
 
 @media only screen and (max-width: 450px) {
     .w-50{
         width: 90%!important;
+        
     }
 
     .card{
