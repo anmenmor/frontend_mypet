@@ -90,7 +90,7 @@
       ></app-create-consultation>
 
       <h2>Listado de consultas</h2>
-      <div class="card w-auto mx-auto">
+      <div *ngIf="consultations.length > 0; else noConsultations "class="card w-auto mx-auto">
         <table class="table table-hover" style="text-align: center">
           <tbody>
             <tr *ngFor="let consultation of consultations">
@@ -116,5 +116,13 @@
 [pageSize]="pageSize" [(page)]="page" (pageChange)="loadPage($event)"></ngb-pagination>
       </div>
     </div>
+    <ng-template #noConsultations>
+      <div class="container">
+        <table class="table table-hover" style="text-align: center">
+          <p>No hay consultas</p>
+          <br /><br />
+        </table>
+      </div>
+    </ng-template>
   </div>
 </div>
