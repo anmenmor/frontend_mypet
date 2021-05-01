@@ -90,20 +90,26 @@
       ></app-create-consultation>
 
       <h2>Listado de consultas</h2>
-      <div class="card w-auto mx-auto">
-        <table class="table table-hover" style="text-align: center">
+      <div *ngIf="consultations.length > 0; else noConsultations">
+        <table class="table-responsive table-hover" style="text-align: center">
           <tbody>
             <tr *ngFor="let consultation of consultations">
-              
-                <td>{{ consultation.date_time }}</td>
-                <td>{{ consultation.speciality }}</td>
-                <td><button
-                  class="btn btn-info"
-                  (click)="onSelect(consultation.id)"
-                >
-                  Detalle
-                </button></td>
-              
+              <div class="card w-auto mx-auto">
+                <div class="div_style">
+                  <td class="td_style">{{ consultation.date_time }}</td>
+                  <td class="td_style">{{ consultation.speciality }}</td>
+                  <td class="td_style"><button
+                    class="btn btn-info"
+                    (click)="onSelect(consultation.id)"
+                  >
+                    Detalle
+                  </button></td>
+
+                </div>
+                
+
+              </div>
+                
               <div>
                 <app-consultation-detail
                   [consultationData]="consultation"
@@ -112,9 +118,19 @@
             </tr>
           </tbody>
         </table>
+        <div class="margin-left">
         <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems"
 [pageSize]="pageSize" [(page)]="page" (pageChange)="loadPage($event)"></ngb-pagination>
+</div>
       </div>
     </div>
+    <ng-template #noConsultations>
+      <div class="container">
+        <table class="table table-hover" style="text-align: center">
+          <p>No hay consultas</p>
+          <br /><br />
+        </table>
+      </div>
+    </ng-template>
   </div>
 </div>
