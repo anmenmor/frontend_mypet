@@ -2,15 +2,6 @@
 
   <div *ngIf="clientUser" class="container">
     <div class="main-body">
-      <!-- Barra ubicacion -->
-      <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Mi perfil
-          </li>
-        </ol>
-      </nav>
       <app-clients-edit *ngIf="clientEdit" (buttonUpdateClick)="hideUpdateChild()" [clientsSelected]="clientUser[0]"></app-clients-edit>
       <!-- / Barra ubicacion -->
       <div *ngIf="!clientEdit" class="row gutters-sm">
