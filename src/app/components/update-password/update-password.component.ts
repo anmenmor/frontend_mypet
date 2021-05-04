@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { AuthClientsService } from '../../shared/auth-clients.service';
 import { PasswordService } from 'src/app/shared/password.service';
 
 
@@ -20,7 +18,6 @@ export class UpdatePasswordComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     public activatedRoute: ActivatedRoute,
-    // public authService: AuthClientsService,
     public passwordService: PasswordService
   ) {
     this.updatePwd = this.fb.group({
@@ -40,8 +37,9 @@ export class UpdatePasswordComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit(){ 
-    if(!this.updatePwd.invalid && this.updatePwd.controls.password_confirmation.value == this.updatePwd.controls.password.value){
     this.submitted = true;
+    if(!this.updatePwd.invalid && this.updatePwd.controls.password_confirmation.value == this.updatePwd.controls.password.value){
+    this.submitted = false;
     this.passwordService.updatePassword(this.updatePwd.value).subscribe(
       data => {
         this.mssg = data;
@@ -58,14 +56,11 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   handleError(error: any) {
-      let errorMsg = '';
       if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
+          this.errors = `Error: ${error.error.message}`;
       } else {
-          errorMsg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+          this.errors = error.error.error;
       }
-      console.log(errorMsg);
-      return throwError(errorMsg);
   }
 
 }
