@@ -1,3 +1,5 @@
+<div class="wrap">
+
 <div class="container">
 <h2>Listado de vacunas</h2>
 <form #vaccineForm="ngForm" (ngSubmit)="createVaccine()">
@@ -5,6 +7,7 @@
     <input type="text" [(ngModel)]="newVaccineName" [ngModelOptions]="{standalone: true}" required><br><br>
     <button type="submit" class="btn btn-primary">Añadir</button>
 </form>
+<br>
 <div class="table-responsive">
 <table class="table table-hover">
   <thead>
@@ -30,4 +33,5 @@
   </table>
 </div>
 <br><br>
+</div>
 </div>

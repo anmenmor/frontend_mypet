@@ -5,6 +5,10 @@ h2{
     color: white;
 }
 
+.wrap{
+    min-height: 50em!important;
+}
+
 @media only screen and (max-width: 450px){
     .container{
         margin-bottom:90px!important;
