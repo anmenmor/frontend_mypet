@@ -22,7 +22,9 @@ h2{
    
 }
 
-
+.wrap{
+    min-height: 50em!important;
+}
 @media only screen and (max-width: 450px){
 
     .page-item.active.page-link{
