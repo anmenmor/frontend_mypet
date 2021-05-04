@@ -30,7 +30,9 @@ input[type=text] {
     border-radius: 4px;
   }
 
-
+ .wrap{
+     min-height: 50em!important;
+ }
   @media only screen and (max-width: 450px){
 
    input[type=text] {
