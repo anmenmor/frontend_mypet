@@ -37,9 +37,9 @@ ngOnInit(): void {
         email: ['',  [Validators.compose([
           Validators.required,
           Validators.email])]],
-        password: ['', [Validators.compose([
-          Validators.required,
-          Validators.pattern('[a-zA-Z]+')])]],
+          password: ['', [Validators.compose([
+            Validators.required,
+            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$')])]],
         phone: ['', [Validators.compose([
             Validators.required,
             Validators.pattern('[0-9]+')])]]
