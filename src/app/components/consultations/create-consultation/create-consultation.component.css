@@ -12,3 +12,7 @@ form{
     color: white;
     background-color:  rgb(105, 206, 172);
 }
+
+textarea{
+    width: -webkit-fill-available;
+}
