@@ -74,6 +74,7 @@
 
   <div id="page-content-wrapper">
     <div class="container-fluid">
+      <div class="container">
       <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page">
@@ -125,6 +126,7 @@
             </table>
             <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems"
             [pageSize]="pageSize" [(page)]="page" (pageChange)="loadPage($event)"></ngb-pagination>
+          </div>
           </div>
         </div>
         <ng-template #noVaccinations>
