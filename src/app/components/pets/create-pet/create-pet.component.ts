@@ -6,6 +6,7 @@ import { Clients } from 'src/app/models/clients';
 import { Pet } from 'src/app/models/pet';
 import { PetService } from 'src/app/services/pet.service';
 import { AuthClientsService } from 'src/app/shared/auth-clients.service';
+import { Location } from "@angular/common";
 
 
 @Component({
@@ -23,6 +24,7 @@ export class CreatePetComponent implements OnInit {
     private route: ActivatedRoute,
     public fb: FormBuilder,
     private petService: PetService,
+    private _location: Location,
     private authClientService: AuthClientsService
     ) { }
 
@@ -63,6 +65,10 @@ export class CreatePetComponent implements OnInit {
     }
     
     
+  }
+
+  return() {
+    this._location.back();
   }
 
 }

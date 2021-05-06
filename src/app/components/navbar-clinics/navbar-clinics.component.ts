@@ -86,11 +86,26 @@ export class NavbarClinicsComponent implements OnInit {
  
   // Signout
   signOut() {
+    let loginType =  '';
+    if(this.currentEmployee) {
+      loginType = 'employee'
+    } else if (this.currentClient) {
+      loginType = 'client'
+    }
     this.auth.setAuthState(false);
     this.tokenEmployee.removeToken();
     this.tokenClients.removeToken();
-    this.router.navigate(['loginEmployee']);
-    this.router.navigate(['loginClients']);
+    switch (loginType) {
+      case 'employee': this.router.navigate(['loginEmployee']);
+        break;
+      case 'client': this.router.navigate(['loginClients']);
+        break;
+      default: this.router.navigate(['']);
+        break;
+    }
+    
+    
+    
   }
 
 }

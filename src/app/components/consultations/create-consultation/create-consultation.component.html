@@ -1,3 +1,4 @@
+<div class="container">
 <div *ngIf="showComponent">
   <h2>Descripción de la consulta:</h2>
   <form [formGroup]="consultationForm" (ngSubmit)="createConsultation()">
@@ -13,4 +14,5 @@
     <br />
     <button type="submit" class="btn btn-primary">Añadir</button><br />
   </form>
+</div>
 </div>

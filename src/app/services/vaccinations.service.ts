@@ -20,6 +20,10 @@ export class VaccinationsService {
     return this.http.get<Vaccination[]>(this.VACCINATION_API_SERVER + "pet/" + petId);
   }
 
+  listVaccinationByPetIdPaginate(petId: number, numPage: number = 1): Observable<Vaccination[]> {
+    return this.http.get<Vaccination[]>(this.VACCINATION_API_SERVER + "pet/" + petId, {params: {page:numPage.toString()}});
+  }
+
   listVaccinationById(id: number) {
     return this.http.get<Vaccination>(this.VACCINATION_API_SERVER + id);
   }

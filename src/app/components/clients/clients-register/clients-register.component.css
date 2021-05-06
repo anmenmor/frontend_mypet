@@ -3,3 +3,16 @@
     background-color: rgb(31, 180, 143);
     border-color: rgb(31, 180, 143);
 }
+.container{
+    min-height: 70em!important;
+}
+
+@media only screen and (max-width: 450px) {
+    .w-50{
+        width: 90%!important;
+    }
+
+    .card{
+        margin-bottom: 80px!important;
+    }
+}

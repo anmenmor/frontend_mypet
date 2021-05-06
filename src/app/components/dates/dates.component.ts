@@ -9,11 +9,13 @@ import { DateService } from "src/app/services/date.service";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 import { Router } from "@angular/router";
 import { AuthClientsService } from "src/app/shared/auth-clients.service";
+import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap'; 
 
 @Component({
   selector: "app-dates",
   templateUrl: "./dates.component.html",
   styleUrls: ["./dates.component.css"],
+  providers: [NgbPaginationConfig]
 })
 export class DatesComponent implements OnInit {
   currentDate = new Date();
@@ -24,9 +26,15 @@ export class DatesComponent implements OnInit {
   employees: Employee[] = [];
   clientId = 0;
   employeeId = 0;
-  petId = 0;
   loggedUser: any;
   htmlMsg!: String;
+
+  //Paginacion  
+  totalItems: number = 0;
+  page: number = 0;
+  previousPage: number = 0;
+  showPagination: boolean =false;
+  pageSize: number = 0;
 
   constructor(
     private _location: Location,
@@ -44,42 +52,12 @@ export class DatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //If client, get his dates. If non-admin employee, get his dates. If admin employee, get everyone's
-    this.clientsService.getAuthenticateUser().subscribe(
-      (data: any) => {
-        this.clientId = data.user.id;
-        this.displayByPets(data.user.id);
-      },
-      (exception) => {
-        this.employeeService
-          .getCurrentEmployeeValue()
-          .subscribe((data: any) => {
-            if (data?.admin) {
-              this.employeeId = data.id;
-              this.dateService.listAllDates().subscribe((data) => {
-                this.dates = Object.values(data);
-              });
-            } else if (!data?.admin) {
-              this.employeeId = data.id;
-              this.dateService
-                .listDateByEmployeeId(data.id)
-                .subscribe((data) => {
-                  for (const d of data as any) {
-                    console.log(d);
-                    if (d.date_time > this.formattedDate) {
-                      this.dates.push({
-                        id: d.id,
-                        date_time: d.date_time,
-                        pet_id: d.pet_id,
-                        employee_id: d.employee_id,
-                      });
-                    }
-                  }
-                });
-            }
-          });
-      }
-    );
+    this.page =1;
+	  this.previousPage =1;
+    this.listDates(this.page);
+    this.showPagination = true;
+ 
+
     //Get pets
     this.petService.getCompletePetList().subscribe((data: Pet) => {
       this.pets = Object.values(data);
@@ -92,32 +70,81 @@ export class DatesComponent implements OnInit {
     });
   }
 
-  displayByPets(id: number) {
-    this.petService.listAllPets(id).subscribe((data: Pet[]) => {
-      for (const d of Object.entries(data)) {
-        for (const i of d as any) {
-          if (i.id) {
-            this.pets.push(i);
-            this.getDatesByPetId(i.id);
+  listDates(page: number):void {
+       //If client, get his dates. If non-admin employee, get his dates. If admin employee, get everyone's
+    this.clientsService.getAuthenticateUser().subscribe(
+      (data: any) => {
+        this.clientId = data.user.id;
+        this.dateService.listDatesByClientIdPaginate(data.user.id, page).subscribe((data: any) => {
+          if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
+            console.log("if");
+            this.dates = [];
+            this.showPagination = false;
+          }else{
+            console.log(data);
+             this.dates = Object.values(data.data);
+             this.totalItems = data.total;
+             this.pageSize = data.per_page;
+             this.showPagination = true;
           }
-        }
+  
+        });
+      },
+      (exception) => {
+        this.employeeService
+          .getCurrentEmployeeValue()
+          .subscribe((data: any) => {
+      
+            if (data?.admin) {
+              this.employeeId = data.id;
+              this.dateService.listAllDatesPagination(page).subscribe((data: any) => {
+                console.log(data);
+                if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
+                  console.log("if");
+                  this.dates = [];
+                  this.showPagination = false;
+                }else{
+                  console.log("else");
+                   this.dates = Object.values(data.data);
+                   this.totalItems = data.total;
+                   this.pageSize = data.per_page;
+                   this.showPagination = true;
+                }
+               
+              });
+            } else if (!data?.admin) {
+              this.employeeId = data.id;
+              this.dateService
+                .listDateByEmployeeIdPaginate(data.id, page)
+                .subscribe((data: any) => {
+                  if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
+                    console.log("if");
+                    this.dates = [];
+                    this.showPagination = false;
+                  }else{
+                    console.log("data");
+                     this.dates = Object.values(data.data);
+                     this.totalItems = data.total;
+                     this.pageSize = data.per_page;
+                     this.showPagination = true;
+                  }
+                  for (const d of data as any) {
+                    if (d.date_time > this.formattedDate) {
+                      this.dates.push(d);
+                    }
+                  }
+                });
+            }
+          });
       }
-    });
+    );
   }
 
-  getDatesByPetId(petId: number) {
-    this.dateService.listDateByPetId(petId).subscribe((data) => {
-      for (const d of data as any) {
-        if (d.date_time > this.formattedDate) {
-          this.dates.push({
-            id: d.id,
-            date_time: d.date_time,
-            pet_id: d.pet_id,
-            employee_id: d.employee_id,
-          });
-        }
-      }
-    });
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.listDates(this.page);
+    }
   }
 
   getPetById(id: number) {

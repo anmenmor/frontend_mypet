@@ -12,3 +12,24 @@ h1{
 thead{
     font-weight: bold;
 }
+
+h2{
+    color: white;
+}
+
+.page-item.active.page-link{
+    z-index:0!important;
+   
+}
+
+.wrap{
+    min-height: 50em!important;
+}
+@media only screen and (max-width: 450px){
+
+    .page-item.active.page-link{
+        z-index:0!important;
+       
+    }
+    
+}

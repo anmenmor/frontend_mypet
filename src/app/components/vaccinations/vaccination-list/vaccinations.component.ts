@@ -12,19 +12,29 @@ import { Subscription } from "rxjs";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 import { Employee } from "src/app/models/Employee";
 import { Clients } from 'src/app/models/clients';
+import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap'; 
 
 @Component({
   selector: "app-vaccinations",
   templateUrl: "./vaccinations.component.html",
   styleUrls: ["./vaccinations.component.css"],
+  providers: [NgbPaginationConfig]
 })
 export class VaccinationsComponent implements OnInit {
   private routeSub: Subscription = Subscription.EMPTY;
-  vaccinations: Array<Vaccination> = [];
+  // vaccinations: Array<Vaccination> = [];
+  vaccinations: Vaccination[] = [];
   currentEmployee: Employee | null = null;
   client: Clients|null = null;
   petId = 0;
   clientId = 0;
+
+  //Paginacion  
+  totalItems: number = 0;
+  page: number = 0;
+  previousPage: number = 0;
+  showPagination: boolean =false;
+  pageSize: number = 0;
 
   constructor(
     private _location: Location,
@@ -35,11 +45,14 @@ export class VaccinationsComponent implements OnInit {
     private authClientService: AuthClientsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() :void {
+    this.page =1;
+	  this.previousPage =1;
+    this.vaccinations = [];
     this.routeSub = this.route.params.subscribe((params) => {
       this.petId = params["petId"];
       this.clientId = params["clientId"];
-      this.getVaccinationsByPetId(this.petId);
+      this.getVaccinationsByPetId(this.petId, this.page);
     });
     this.authEmployeeService
       .getCurrentEmployeeValue()
@@ -52,10 +65,29 @@ export class VaccinationsComponent implements OnInit {
       })
   }
 
-  getVaccinationsByPetId(petId: number) {
-    this.vaccinationService.listVaccinationByPetId(petId).subscribe((data) => {
-      this.vaccinations = data;
+  getVaccinationsByPetId(petId: number, page: number) {
+    this.vaccinationService.listVaccinationByPetIdPaginate(petId, page).subscribe((data: any) => {
+      if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
+        this.vaccinations = [];
+        this.showPagination = false;
+      }
+      else {
+        console.log(data);
+        this.vaccinations = data.data;
+        this.totalItems = data.total;
+        this.pageSize = data.per_page;
+        this.showPagination = true;
+      }
+   
     });
+  
+  
+  }
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.getVaccinationsByPetId(this.petId, this.page);
+    }
   }
 
   addVaccination() {

@@ -1,5 +1,6 @@
-<h2>Listado de citas</h2>
+<div class="wrap">
 <div class ="container"><!-- Barra ubicacion -->
+  <h2>Listado de citas</h2>
 <br />
 
 <!-- / Barra ubicacion -->
@@ -15,6 +16,7 @@
 <br /><br />
 <div *ngIf="dates.length > 0;else noDates" class="container">
   <div class="card w-auto mx-auto">
+    <div class="table-responsive">
     <table class="table table-hover" style="text-align: center">
       <thead>
         <tr>
@@ -40,6 +42,7 @@
       </tbody>
     </table>
   </div>
+  </div>
   <p [innerHTML]="htmlMsg"></p>
 </div>
 <ng-template #noDates>
@@ -50,4 +53,8 @@
     </table>
   </div>
 </ng-template>
+
+<ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems"
+[pageSize]="pageSize" [(page)]="page" (pageChange)="loadPage($event)"></ngb-pagination>
+</div>
 </div>

@@ -34,15 +34,11 @@ import { ClientsRaw } from '../models/clients.raw';
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status == 409) {
-            // console.error(
-            //   `Backend returned code ${error.status}, ` +
-            //   `body was: ${error}`);
+            
             
           } else {
-            alert("Algo ha ido mal, intentelo de nuevo mas tarde");
-          //   console.error(
-          //     `Backend returned code ${error.status}, ` +
-          //     `body was: ${error.error}`);
+            alert("Email existente, inténtelo de nuevo más tarde");
+          
           }
           return throwError(error);
         })
@@ -64,7 +60,7 @@ import { ClientsRaw } from '../models/clients.raw';
                 `Backend returned code ${error.status}, ` +
                 `body was: ${error}`);
           } else {
-            alert("Algo ha ido mal, intentelo de nuevo mas tarde");
+            alert("Email existente, inténtelo de nuevo més tarde");
             console.error(
               `Backend returned code ${error.status}, ` +
               `body was: ${error.error}`);
@@ -81,17 +77,17 @@ import { ClientsRaw } from '../models/clients.raw';
   }
 
   //list clients
-  listClients(): Observable<Clients[]> {
-    return this.http.get<Clients[]>(this.LIST_CLIENTS_API_SERVER);
+  listClients(numPage: number = 1): Observable<any> {
+    return this.http.get<any>(this.LIST_CLIENTS_API_SERVER,{params: {page:numPage.toString()}});
   }
 
-  //Update employee
+  //Update 
   updateClients(clients: Clients): Observable<Clients> {
     
     return this.http.put<Clients>(this.UPDATE_CLIENTS_API_SERVER+clients.id, clients)
     .pipe(
       catchError((error: HttpErrorResponse) => { 
-        return throwError('Something bad happend, please try again later');
+        return throwError('Algo ha ido mal, intentelo de nuevo mas tarde');
       })
     );
      
@@ -101,7 +97,7 @@ import { ClientsRaw } from '../models/clients.raw';
     return this.http.delete<Clients>(this.DELETE_CLIENTS_API_SERVER+id)
     .pipe(
       catchError((error: HttpErrorResponse) => { 
-        return throwError('Something bad happend, please try again later');
+        return throwError('Algo ha ido mal, intentelo de nuevo mas tarde');
       })
     );
 
