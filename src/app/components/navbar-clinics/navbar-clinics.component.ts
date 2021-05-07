@@ -39,6 +39,8 @@ export class NavbarClinicsComponent implements OnInit {
       this.currentClient = client
   })
   this.employeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
+    console.log("Seteo current employee");
+    console.log(employee);
     this.currentEmployee = employee
 })
     this.auth.userAuthState.subscribe(val => {  

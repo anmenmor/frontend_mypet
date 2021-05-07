@@ -27,6 +27,9 @@ import { ClinicsProfileComponent } from './components/clinics/clinics-profile/cl
 import { ClientsProfileComponent } from './components/clients/clients-profile/clients-profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { AuthEmployeesGuard } from './auth-employees.guard';
+import { AuthClientsGuard } from './auth-clients.guard';
+
 
 
 
@@ -41,12 +44,12 @@ const routes: Routes = [
   {path: 'clinics/updateClinic/:id', component:ClinicsUpdateComponent, pathMatch: 'full'},
   {path: 'employees', component:EmployeesListComponent, pathMatch: 'full'},
   {path: 'vaccines', component:VaccinesComponent, pathMatch: 'full'},
-  {path: 'clinics/main/clients/:clientId/pets', component: ListPetsComponent, pathMatch: 'full'},
-  {path: 'clinics/main/clients/:clientId/pets/:petId/details', component: PetDetailComponent, pathMatch: 'full'},
-  {path: 'clinics/main/clients/:clientId/pets/:petId/consultations', component: ListConsultationsComponent, pathMatch: 'full'},
-  {path: 'clients/main/:petId/details', component: PetDetailComponent, pathMatch: 'full'},
-  {path: 'clients/main/:petId/consultations', component: ListConsultationsComponent, pathMatch: 'full'},
-  {path: 'clients/main/createPet', component: CreatePetComponent, pathMatch: 'full'},
+  {path: 'clinics/main/clients/:clientId/pets', component: ListPetsComponent, canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
+  {path: 'clinics/main/clients/:clientId/pets/:petId/details', component: PetDetailComponent,canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
+  {path: 'clinics/main/clients/:clientId/pets/:petId/consultations', component: ListConsultationsComponent, canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
+  {path: 'clients/main/:petId/details', component: PetDetailComponent, canActivate: [AuthClientsGuard], pathMatch: 'full'},
+  {path: 'clients/main/:petId/consultations', component: ListConsultationsComponent, canActivate: [AuthClientsGuard], pathMatch: 'full'},
+  {path: 'clients/main/createPet', component: CreatePetComponent, canActivate: [AuthClientsGuard], pathMatch: 'full'},
   {path: 'loginClients', component:ClientsLoginComponent, pathMatch: 'full'},
   {path: 'registerClients', component:ClientsRegisterComponent, pathMatch: 'full'},
   {path: 'resetPass', component:ResetPasswordComponent, pathMatch: 'full'},
@@ -54,17 +57,17 @@ const routes: Routes = [
   {path: 'clientsList', component:ClientsListComponent, pathMatch: 'full'},
   {path: 'clients/update', component:ClientsEditComponent, pathMatch: 'full'},
   {path: 'clients/update/:id', component:ClientsEditComponent, pathMatch: 'full'},
-  {path: 'clients/main', component: SideNavbarClientsComponent, pathMatch: 'full'},
+  {path: 'clients/main', component: SideNavbarClientsComponent, canActivate: [AuthClientsGuard], pathMatch: 'full'},
   {path: 'clientsProfile', component:ClientsProfileComponent, pathMatch: 'full'},
-  {path: 'clinics/main/clients/:clientId/pets/:petId/vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
-  {path: 'clients/main/:petId/vaccinations', component:VaccinationsComponent, pathMatch: 'full'},
+  {path: 'clinics/main/clients/:clientId/pets/:petId/vaccinations', component:VaccinationsComponent,canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
+  {path: 'clients/main/:petId/vaccinations', component:VaccinationsComponent, canActivate: [AuthClientsGuard], pathMatch: 'full'},
   {path: 'vaccinations/addVaccination', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination/clients/:clientId', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/addVaccination/pets/:petId', component:VaccinationCreateComponent, pathMatch: 'full'},
   {path: 'vaccinations/updateVaccination/:id', component:VaccinationUpdateComponent, pathMatch: 'full'},
   {path: 'vaccinations/updateVaccination/pets/:petId', component:VaccinationUpdateComponent, pathMatch: 'full'},
-  {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent, pathMatch: 'full'},
-  {path: 'clinics/main', component: SideNavbarClinicsComponent, pathMatch: 'full'},
+  {path: 'employees/:employeeId/update', component: EmployeesUpdateComponent,canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
+  {path: 'clinics/main', component: SideNavbarClinicsComponent, canActivate: [AuthEmployeesGuard], pathMatch: 'full'},
   {path: 'dates', component: DatesComponent, pathMatch: 'full'},
   {path: 'dates/addDate', component: CreateDateComponent, pathMatch: 'full'},
   {path: 'dates/addDate/clients/:clientId', component:CreateDateComponent, pathMatch: 'full'},
