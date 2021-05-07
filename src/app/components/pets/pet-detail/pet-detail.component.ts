@@ -8,6 +8,7 @@ import { Pet } from 'src/app/models/pet';
 import { PetService } from 'src/app/services/pet.service';
 import { AuthClientsService } from 'src/app/shared/auth-clients.service';
 import { AuthEmployeeService } from 'src/app/shared/auth-employee.service';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-pet-detail',
@@ -28,7 +29,8 @@ export class PetDetailComponent implements OnInit {
     public fb: FormBuilder,
     private petService: PetService,
     public authEmployeeService: AuthEmployeeService,
-    public authClientService: AuthClientsService
+    public authClientService: AuthClientsService,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -99,5 +101,7 @@ export class PetDetailComponent implements OnInit {
        
     }
   }
-
+  return() {
+    this._location.back();
+  }
 }
