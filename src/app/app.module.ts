@@ -42,6 +42,8 @@ import { ClientsProfileComponent } from './components/clients/clients-profile/cl
 import  { CommonModule } from '@angular/common';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component'; 
+import { AuthEmployeesGuard } from "./auth-employees.guard";
+import { AuthClientsGuard } from "./auth-clients.guard";
 
 
 @NgModule({
@@ -98,6 +100,8 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     },
     ClinicsDataService,
     DatePipe,
+    AuthEmployeesGuard,
+    AuthClientsGuard
   ],
   bootstrap: [AppComponent],
 })
