@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Clients } from '../models/clients';
 import { ClientsRaw } from '../models/clients.raw';
 import { Payload } from '../models/payload';
 import { AuthClientsService } from './auth-clients.service';
@@ -15,43 +14,40 @@ export class TokenClientsService {
     register: 'http://127.0.0.1:8000/api/auth/registerClients'
   }
 
-  constructor( private authClientsService: AuthClientsService) { }
+  constructor(private authClientsService: AuthClientsService) { }
 
-  handleData(token: any){
+  handleData(token: any) {
     localStorage.setItem('auth_token', token);
     this.authClientsService.getAuthenticateUser().subscribe((client: ClientsRaw) => {
       this.authClientsService.setCurrentClientValue(client.user)
     })
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('auth_token');
   }
 
   // Verify the token
-  
-  isValidToken(){
+
+  isValidToken() {
     const payload = this.payload();
-    if(payload){
-     console.log(payload);
+    if (payload) {
       return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
-    }else{
-     console.log("no hay payload");
+    } else {
       return false;
-    } 
+    }
   }
 
 
   payload(): Payload | null {
-  const token = this.getToken()
-  if (token) {
-    const jwtPayload = token.split('.')[1];
-  return JSON.parse(atob(jwtPayload));
+    const token = this.getToken()
+    if (token) {
+      const jwtPayload = token.split('.')[1];
+      return JSON.parse(atob(jwtPayload));
 
-  } else {
-    console.log("no hay token")
-    return null
-  }
+    } else {
+      return null
+    }
   }
 
   // User state based on valid token
@@ -60,7 +56,7 @@ export class TokenClientsService {
   }
 
   // Remove token
-  removeToken(){
+  removeToken() {
     localStorage.removeItem('auth_token');
     this.authClientsService.setCurrentClientValue(null)
   }

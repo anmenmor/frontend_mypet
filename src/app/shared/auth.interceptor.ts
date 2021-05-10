@@ -25,15 +25,11 @@ export class AuthInterceptor implements HttpInterceptor {
         });
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
-                console.log(error);
                 if( error instanceof HttpErrorResponse){
-                    console.log(error.status);
-                    console.log(error.statusText);
                     if (error.status === 401 || error.status === 403){
                         this.employeeTokenService.removeToken();
                         window.location.href = "/loginEmployee";
                     }
-    
                 }
                 return throwError(error);
             })

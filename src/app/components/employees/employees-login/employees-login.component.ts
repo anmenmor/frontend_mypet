@@ -26,67 +26,44 @@ export class EmployeesLoginComponent implements OnInit {
     private tokenEmployee: TokenEmployeeService,
     private authState: AuthStateService,
   ) {
-    // this.loginForm = this.fb.group({
-    //   email: [],
-    //   password: []
-    // })
+
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
-   }
+  }
 
   onSubmit() {
     this.submitted = true;
-   
-    console.log(this.loginForm.value);
-    if(this.loginForm.value.email.length > 0 && this.loginForm.value.password.length > 0 ){
-       this.authEmployeeService.signin(this.loginForm.value).subscribe(
+
+    if (this.loginForm.value.email.length > 0 && this.loginForm.value.password.length > 0) {
+      this.authEmployeeService.signin(this.loginForm.value).subscribe(
         result => {
           this.responseHandler(result);
-          console.log(result);
         },
         error => {
-          console.log(error);
           this.serverError = true;
-          if(error.status == 0){
+          if (error.status == 0) {
             this.errors.push("Error al conectar con el servidor");
-          }else {
-             this.errors = error.error;    
+          } else {
+            this.errors = error.error;
           }
-        },() => {
+        }, () => {
           this.authState.setAuthState(true);
           this.loginForm.reset()
           this.router.navigate(['clinics/main']);
-          // this.isAdmin();
         }
       );
     }
-     
+
   }
 
   // Handle response
-  responseHandler(data: any){
+  responseHandler(data: any) {
     this.tokenEmployee.handleData(data.token);
   }
 
-  // isAdmin(): void{
-  //    this.authEmployeeService.getAuthenticateUser().subscribe(
-  //     (data)=>{
-  //         console.log(data);
-  //     this.employeAuthenticated = Object.values(data)
-  //     .map(employeeDB => new Employee(employeeDB)
-  //     )
-  //     console.log(this.employeAuthenticated[0].admin);
-  //     return this.employeAuthenticated[0].admin;
-  //     }
-    
-  //   );
-    
-
-   
-  // }
 }

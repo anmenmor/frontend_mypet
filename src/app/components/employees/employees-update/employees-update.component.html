@@ -1,10 +1,12 @@
 <div class="container">
 <div class="card w-50 mx-auto">
-<!-- <div *ngIf="employeeDetails && edit" class="card w-50 mx-auto"> -->
-
-  <!--  -->
    <h4 class="card-header">Editar empleado:</h4>
       <div class="card-body">
+        <div *ngIf="submitted && errors.length >0" class="alert alert-danger">
+          <p *ngFor=" let error of errors;">
+           {{error}}
+          </p> 
+       </div>
         <form [formGroup]="updateForm" (ngSubmit)="update()">
         <div class="form-group">
             <label>Nombre</label>
@@ -60,10 +62,9 @@
         </div>
         <button class="btn btn-block btn-primary2">Guardar cambios</button>
         <button class="btn btn-block btn-secondary" type="reset"  (click)="hideComponent()">
-          <!-- <button class="btn btn-block btn-secondary" type="reset"  (click)="buttonClick.emit()" (click)="cancel()"> -->
           Volver atrás
         </button>
-        <!-- <button>Guardar cambios</button> -->
+
       
     </form>
     </div>

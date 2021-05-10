@@ -47,8 +47,7 @@ export class EmployeesListComponent implements OnInit{
     this.getSpecility();
     this.employeeService.getCurrentEmployeeValue().subscribe((employee : Employee|null) => {
       this.employeeAdmin = employee? employee.admin : false;
-      console.log("Admin en el componente " + this.employeeAdmin);
-    }) 
+    }); 
   }
 
   //Alertas
@@ -76,7 +75,6 @@ export class EmployeesListComponent implements OnInit{
         else {
           this.employees = Object.values(response.data)
           .map(employeeDB => new Employee(employeeDB));
-          console.log(response.total);
           this.totalItems = response.total;
           this.pageSize = response.per_page;
           this.showPagination = true;
@@ -103,10 +101,8 @@ export class EmployeesListComponent implements OnInit{
   getSpecility(): void {
       this.specialitiesService.specialities().subscribe(
         data=>{
-          console.log(data);
           this.specialities = Object.values(data)
           .map(specialitiesDB => new Specialities(specialitiesDB));
-          console.log(this.specialities);
         });
     }   
 
