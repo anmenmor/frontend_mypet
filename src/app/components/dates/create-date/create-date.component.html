@@ -1,8 +1,15 @@
-<div>
-  <div *ngIf="valid" class="container">
-    <h2>Pedir cita</h2>
-    <br /><br />
-
+<div class="container">
+  <h2>Pedir cita</h2>
+  <br />
+  <div
+    *ngIf="htmlMsg"
+    class="alert alert-primary"
+    style="text-align: center"
+    [innerHTML]="htmlMsg"
+  >
+    <br />
+  </div>
+  <div *ngIf="valid; else back" class="container">
     <form [formGroup]="addDate" (ngSubmit)="onSubmit(addDate.value)">
       <div *ngIf="clients.length > 0 && pet_id == null" class="form-group">
         <label for="client_id">¿Qué cliente ha pedido cita?</label>
@@ -59,6 +66,12 @@
     </form>
     <br /><br />
   </div>
-
-  <div style="text-align: center" [innerHTML]="htmlMsg"></div>
+  <ng-template #back
+    ><br />
+    <div style="text-align: center">
+      <button class="btn btn-secondary" type="button" (click)="return()">
+        Volver atrás
+      </button>
+    </div></ng-template
+  >
 </div>
