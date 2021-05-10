@@ -16,39 +16,35 @@ export class TokenEmployeeService {
 
   constructor(private authEmployeeService: AuthEmployeeService) { }
 
-  handleData(token: any){
+  handleData(token: any) {
     localStorage.setItem('auth_token', token);
     this.authEmployeeService.getAuthenticateUser().subscribe((employee: Employee) => {
       this.authEmployeeService.setCurrentEmployeeValue(employee);
-      console.log("Relleno current user");
     })
   }
 
-  getToken(): string | null{
+  getToken(): string | null {
     return localStorage.getItem('auth_token');
   }
 
   // Verify the token
-  isValidToken(){
-       const payload = this.payload();
-       if(payload){
-        console.log(payload);
-         return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
-       }else{
-        console.log("no hay payload");
-         return false;
-       } 
-     }
-  
+  isValidToken() {
+    const payload = this.payload();
+    if (payload) {
+      return Object.values(this.issuer).indexOf(payload.iss) > -1 ? true : false;
+    } else {
+      return false;
+    }
+  }
+
 
   payload(): Payload | null {
     const token = this.getToken()
     if (token) {
       const jwtPayload = token.split('.')[1];
-    return JSON.parse(atob(jwtPayload));
+      return JSON.parse(atob(jwtPayload));
 
     } else {
-      console.log("no hay token")
       return null
     }
   }
@@ -59,7 +55,7 @@ export class TokenEmployeeService {
   }
 
   // Remove token
-  removeToken(){
+  removeToken() {
     localStorage.removeItem('auth_token');
     this.authEmployeeService.setCurrentEmployeeValue(null);
   }

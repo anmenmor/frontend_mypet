@@ -13,55 +13,38 @@ import { stringify } from '@angular/compiler/src/util';
 
 export class AuthEmployeeService {
 
-  private REGISTER_EMPLOYEE_API_SERVER="http://127.0.0.1:8000/api/registerEmployee";
-  private LIST_EMPLOYEE_API_SERVER ="http://localhost:8000/api/employees";
+  private REGISTER_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/registerEmployee";
+  private LIST_EMPLOYEE_API_SERVER = "http://localhost:8000/api/employees";
   private LOGIN_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/loginEmployee";
   private UPDATE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
   private DELETE_EMPLOYEE_API_SERVER = "http://127.0.0.1:8000/api/employees/"
-  public currentEmployee: BehaviorSubject<Employee|null> = new BehaviorSubject<Employee|null>(null);
+  public currentEmployee: BehaviorSubject<Employee | null> = new BehaviorSubject<Employee | null>(null);
 
   constructor(private http: HttpClient) { }
 
-  getCurrentEmployeeValue(): Observable<Employee|null> {
+  getCurrentEmployeeValue(): Observable<Employee | null> {
     return this.currentEmployee.asObservable();
   }
-  setCurrentEmployeeValue(newValue: Employee|null): void {
+  setCurrentEmployeeValue(newValue: Employee | null): void {
     this.currentEmployee.next(newValue);
   }
 
   // Employee registration
   register(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.REGISTER_EMPLOYEE_API_SERVER, employee)
-    .pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status == 409) {
-          console.log("Error del servicio");
-          // console.error(
-          //   `Backend returned code ${error.status}, ` +
-          //   `body was: ${error}`);
-          
-        } else {
-          alert("Algo ha ido mal, intentelo de nuevo mas tarde");
-        //   console.error(
-        //     `Backend returned code ${error.status}, ` +
-        //     `body was: ${error.error}`);
-        }
-        return throwError(error);
-      })
-    );  
+    return this.http.post<Employee>(this.REGISTER_EMPLOYEE_API_SERVER, employee);
   }
 
   // Login
   signin(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.LOGIN_EMPLOYEE_API_SERVER, employee)
-    .pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status == 0) {
-          return throwError(error);
-        }
-        return throwError(error.error);
-      })
-    );  
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status == 0) {
+            return throwError(error);
+          }
+          return throwError(error.error);
+        })
+      );
   }
 
   // Get employee authenticated
@@ -71,7 +54,7 @@ export class AuthEmployeeService {
 
   //list Employees
   listAllEmployeesPagination(numPage: number = 1): Observable<any> {
-    return this.http.get<any>(this.LIST_EMPLOYEE_API_SERVER, {params: {page:numPage.toString()}});
+    return this.http.get<any>(this.LIST_EMPLOYEE_API_SERVER, { params: { page: numPage.toString() } });
   }
 
   //list Employees
@@ -82,25 +65,21 @@ export class AuthEmployeeService {
 
   //Update employee
   updateEmployee(employee: Employee): Observable<Employee> {
-    console.log("Actualizando empleado:" + employee.id);
-    console.log(employee);
-    return this.http.put<Employee>(this.UPDATE_EMPLOYEE_API_SERVER+employee.id, employee)
-    .pipe(
-      catchError((error: HttpErrorResponse) => { 
-        return throwError(error);
-      })
-    )
-     
+    return this.http.put<Employee>(this.UPDATE_EMPLOYEE_API_SERVER + employee.id, employee)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
+        })
+      )
+
   }
 
-  deleteEmployee(id: number): Observable<any>{
-    console.log("Eliminando empleado "+ id);
-    return this.http.delete<Employee>(this.DELETE_EMPLOYEE_API_SERVER+id)
-    .pipe(
-      catchError((error: HttpErrorResponse)=>
-      {return throwError(error);}
+  deleteEmployee(id: number): Observable<any> {
+    return this.http.delete<Employee>(this.DELETE_EMPLOYEE_API_SERVER + id)
+      .pipe(
+        catchError((error: HttpErrorResponse) => { return throwError(error); }
+        )
       )
-    )
   }
 
 }

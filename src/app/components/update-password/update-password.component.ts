@@ -25,7 +25,7 @@ export class UpdatePasswordComponent implements OnInit {
       password: ['', [Validators.compose([
         Validators.required,
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,10}$')])]],
-      password_confirmation: ['',Validators.required],
+      password_confirmation: ['', Validators.required],
       passwordToken: ['']
     });
     activatedRoute.queryParams.subscribe((params) => {
@@ -36,31 +36,29 @@ export class UpdatePasswordComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onSubmit(){ 
+  onSubmit() {
     this.submitted = true;
-    if(!this.updatePwd.invalid && this.updatePwd.controls.password_confirmation.value == this.updatePwd.controls.password.value){
-    this.submitted = false;
-    this.passwordService.updatePassword(this.updatePwd.value).subscribe(
-      data => {
-        this.mssg = data;
-        console.log(data);
-        console.log(this.updatePwd.value)
-        this.updatePwd.reset();
-        this.submitted = false;
-      },
-      error => {
-        this.handleError(error);
-      },
-    );
+    if (!this.updatePwd.invalid && this.updatePwd.controls.password_confirmation.value == this.updatePwd.controls.password.value) {
+      this.submitted = false;
+      this.passwordService.updatePassword(this.updatePwd.value).subscribe(
+        data => {
+          this.mssg = data;
+          this.updatePwd.reset();
+          this.submitted = false;
+        },
+        error => {
+          this.handleError(error);
+        },
+      );
     }
   }
 
   handleError(error: any) {
-      if (error.error instanceof ErrorEvent) {
-          this.errors = `Error: ${error.error.message}`;
-      } else {
-          this.errors = error.error.error;
-      }
+    if (error.error instanceof ErrorEvent) {
+      this.errors = `Error: ${error.error.message}`;
+    } else {
+      this.errors = error.error.error;
+    }
   }
 
 }
