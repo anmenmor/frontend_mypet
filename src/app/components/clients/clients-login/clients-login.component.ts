@@ -43,7 +43,7 @@ export class ClientsLoginComponent implements OnInit {
        this.authClientsService.signin(this.loginForm.value).subscribe(
         result => {
           this.responseHandler(result);
-          console.log(result);
+         
         },
         error => {
           this.serverError = true;

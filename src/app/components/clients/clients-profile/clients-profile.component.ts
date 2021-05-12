@@ -38,7 +38,7 @@ export class ClientsProfileComponent implements OnInit {
      {   
       this.clientUser = Object.values(data).map(clientsDB => new Clients(clientsDB));
       this.clients =true;
-      console.log(this.clientUser);
+     
       
   });
      
