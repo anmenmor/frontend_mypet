@@ -9,13 +9,13 @@ import { DateService } from "src/app/services/date.service";
 import { AuthEmployeeService } from "src/app/shared/auth-employee.service";
 import { Router } from "@angular/router";
 import { AuthClientsService } from "src/app/shared/auth-clients.service";
-import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbPaginationConfig } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-dates",
   templateUrl: "./dates.component.html",
   styleUrls: ["./dates.component.css"],
-  providers: [NgbPaginationConfig]
+  providers: [NgbPaginationConfig],
 })
 export class DatesComponent implements OnInit {
   currentDate = new Date();
@@ -29,11 +29,11 @@ export class DatesComponent implements OnInit {
   loggedUser: any;
   htmlMsg!: String;
 
-  //Paginacion  
+  //Paginacion
   totalItems: number = 0;
   page: number = 0;
   previousPage: number = 0;
-  showPagination: boolean =false;
+  showPagination: boolean = false;
   pageSize: number = 0;
 
   constructor(
@@ -52,11 +52,10 @@ export class DatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.page =1;
-	  this.previousPage =1;
+    this.page = 1;
+    this.previousPage = 1;
     this.listDates(this.page);
     this.showPagination = true;
- 
 
     //Get pets
     this.petService.getCompletePetList().subscribe((data: Pet) => {
@@ -70,63 +69,66 @@ export class DatesComponent implements OnInit {
     });
   }
 
-  listDates(page: number):void {
-       //If client, get his dates. If non-admin employee, get his dates. If admin employee, get everyone's
+  listDates(page: number): void {
+    //If client, get his dates. If non-admin employee, get his dates. If admin employee, get everyone's
     this.clientsService.getAuthenticateUser().subscribe(
       (data: any) => {
         this.clientId = data.user.id;
-        this.dateService.listDatesByClientIdPaginate(data.user.id, page).subscribe((data: any) => {
-          if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
-            console.log("if");
-            this.dates = [];
-            this.showPagination = false;
-          }else{
-            console.log(data);
-             this.dates = Object.values(data.data);
-             this.totalItems = data.total;
-             this.pageSize = data.per_page;
-             this.showPagination = true;
-          }
-  
-        });
+        this.dateService
+          .listDatesByClientIdPaginate(data.user.id, page)
+          .subscribe((data: any) => {
+            if (
+              (!data && !data.data) ||
+              (data && data.data && data.data.length == 0)
+            ) {
+              this.dates = [];
+              this.showPagination = false;
+            } else {
+              this.dates = Object.values(data.data);
+              this.totalItems = data.total;
+              this.pageSize = data.per_page;
+              this.showPagination = true;
+            }
+          });
       },
       (exception) => {
         this.employeeService
           .getCurrentEmployeeValue()
           .subscribe((data: any) => {
-      
             if (data?.admin) {
               this.employeeId = data.id;
-              this.dateService.listAllDatesPagination(page).subscribe((data: any) => {
-                console.log(data);
-                if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
-                  console.log("if");
-                  this.dates = [];
-                  this.showPagination = false;
-                }else{
-                  console.log("else");
-                   this.dates = Object.values(data.data);
-                   this.totalItems = data.total;
-                   this.pageSize = data.per_page;
-                   this.showPagination = true;
-                }
-               
-              });
+              this.dateService
+                .listAllDatesPagination(page)
+                .subscribe((data: any) => {
+                  if (
+                    (!data && !data.data) ||
+                    (data && data.data && data.data.length == 0)
+                  ) {
+                    this.dates = [];
+                    this.showPagination = false;
+                  } else {
+                    this.dates = Object.values(data.data);
+                    this.totalItems = data.total;
+                    this.pageSize = data.per_page;
+                    this.showPagination = true;
+                  }
+                });
             } else if (!data?.admin) {
               this.employeeId = data.id;
               this.dateService
                 .listDateByEmployeeIdPaginate(data.id, page)
                 .subscribe((data: any) => {
-                  if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
-                    console.log("if");
+                  if (
+                    (!data && !data.data) ||
+                    (data && data.data && data.data.length == 0)
+                  ) {
                     this.dates = [];
                     this.showPagination = false;
-                  }else{
-                    console.log("data");
-                     this.dates = Object.values(data.data);
-                     this.totalItems = data.total;
-                     this.pageSize = data.per_page;
-                     this.showPagination = true;
+                  } else {
+                    this.dates = Object.values(data.data);
+                    this.totalItems = data.total;
+                    this.pageSize = data.per_page;
+                    this.showPagination = true;
                   }
                   for (const d of data as any) {
                     if (d.date_time > this.formattedDate) {
@@ -166,7 +168,6 @@ export class DatesComponent implements OnInit {
   }
 
   addDate() {
-    console.log(this.employeeId);
     if (this.clientId > 0) {
       this.router.navigate(["dates/addDate/clients/", this.clientId]);
     } else if (this.employeeId > 0) {

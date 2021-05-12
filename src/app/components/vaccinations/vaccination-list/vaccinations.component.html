@@ -75,58 +75,66 @@
   <div id="page-content-wrapper">
     <div class="container-fluid">
       <div class="container">
-      <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">
-            <app-pets-navbar></app-pets-navbar>
-          </li>
-        </ol>
-      </nav>
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <app-pets-navbar></app-pets-navbar>
+            </li>
+          </ol>
+        </nav>
 
-      <div class="container">
-        <br />
-        <h2>Listado de vacunaciones</h2>
-        <br />
-        <button
-          *ngIf="currentEmployee"
-          type="button"
-          class="btn btn-block btn-info"
-          style="text-align: center"
-          (click)="addVaccination()"
-        >
-          Añadir nueva vacunación
-        </button>
-        <br /><br />
-        <div *ngIf="vaccinations.length > 0; else noVaccinations">
-          <div class="card w-auto mx-auto">
-            <table class="table table-hover" style="text-align: center">
-              <thead>
-                <tr>
-                  <td>Fecha de vacunación</td>
-                  <td>Vacuna</td>
-                  <td>¿Administrada?</td>
-                  <td>Acción</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of vaccinations">
-                  <td>{{ item.date }}</td>
-                  <td>{{ item.vaccine_name }}</td>
-                  <td>{{ item.done ? "Sí" : "No" }}</td>
+        <div class="container">
+          <br />
+          <h2>Listado de vacunaciones</h2>
+          <br />
+          <button
+            *ngIf="currentEmployee"
+            type="button"
+            class="btn btn-block btn-info"
+            style="text-align: center"
+            (click)="addVaccination()"
+          >
+            Añadir nueva vacunación
+          </button>
+          <br /><br />
+          <div *ngIf="vaccinations.length > 0; else noVaccinations">
+            <div class="card w-auto mx-auto">
+              <table class="table table-hover" style="text-align: center">
+                <thead>
+                  <tr>
+                    <td>Fecha de vacunación</td>
+                    <td>Vacuna</td>
+                    <td>¿Administrada?</td>
+                    <td>Acción</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of vaccinations">
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.vaccine_name }}</td>
+                    <td>{{ item.done ? "Sí" : "No" }}</td>
 
-                  <button
-                    type="button"
-                    class="btn btn-info"
-                    [routerLink]="['/vaccinations/updateVaccination', item.id]"
-                  >
-                    Modificar estado
-                  </button>
-                </tr>
-              </tbody>
-            </table>
-            <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems"
-            [pageSize]="pageSize" [(page)]="page" (pageChange)="loadPage($event)"></ngb-pagination>
-          </div>
+                    <button
+                      type="button"
+                      class="btn btn-info"
+                      [routerLink]="[
+                        '/vaccinations/updateVaccination',
+                        item.id
+                      ]"
+                    >
+                      Modificar estado
+                    </button>
+                  </tr>
+                </tbody>
+              </table>
+              <ngb-pagination
+                *ngIf="showPagination"
+                [collectionSize]="totalItems"
+                [pageSize]="pageSize"
+                [(page)]="page"
+                (pageChange)="loadPage($event)"
+              ></ngb-pagination>
+            </div>
           </div>
         </div>
         <ng-template #noVaccinations>

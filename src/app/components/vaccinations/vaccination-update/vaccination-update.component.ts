@@ -33,7 +33,6 @@ export class VaccinationUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.routeSub = this.route.params.subscribe((params) => {
       this.id = params["id"];
       this.petId = params["petId"];
