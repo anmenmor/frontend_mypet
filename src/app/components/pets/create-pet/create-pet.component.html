@@ -1,10 +1,4 @@
 <div class="container">
-  <nav aria-label="breadcrumb" class="main-breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Añadir mascota</li>
-    </ol>
-  </nav>
   <h2>Creación de mascota:</h2>
   <form [formGroup]="petForm" (ngSubmit)="createPet()">
     <div class="form-group">
@@ -51,9 +45,13 @@
     <div *ngIf="submitted && petForm.controls.breed.errors">
       La raza es obligatoria
     </div>
-
     <button type="submit" class="btn btn-block btn-primary2">Añadir</button>
-    <button class="btn btn-block btn-secondary" type="button" (click)="return()">Volver atrás</button>
+    <button class="btn btn-block btn-secondary" type="button" >
+    <a class="btn btn-block btn-secondary"
+    style="background-color: transparent;"
+        [routerLink]="['../']"
+        [queryParams]="{ view: 'pets' }"
+        >Volver Atras</a></button>
   </form>
-
+<br><br>
 </div>
