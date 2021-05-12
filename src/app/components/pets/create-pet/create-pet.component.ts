@@ -66,7 +66,6 @@ export class CreatePetComponent implements OnInit {
   }
 
   return() {
-    this._location.back();
+    history.back();
   }
-
 }

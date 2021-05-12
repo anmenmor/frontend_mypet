@@ -20,6 +20,10 @@
     <div id="page-content-wrapper">
 
         <div class="container" >
+
+            <div *ngIf="loggedClient">
+                <a routerLink="./createPet"><button class="btn btn-block btn-info">Crear mascota</button></a>
+            </div>
             
             <h2>Listado de mascotas</h2>
             <br /><br />
@@ -44,10 +48,8 @@
             <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page"
                 (pageChange)="loadPage($event)"></ngb-pagination>
             </div>
-    
-            <div *ngIf="loggedClient">
-                <a routerLink="./createPet"><button class="btn btn-block btn-info">Crear mascota</button></a>
-            </div>
+            <br><br>
+           
         </div>
     </div>
 </div>
