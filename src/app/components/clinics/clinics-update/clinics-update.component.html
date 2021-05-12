@@ -1,8 +1,15 @@
-<div>
+<div class="container">
+  <h2>Actualizar datos clínica</h2>
+  <br /><br />
+  <div
+    *ngIf="htmlMsg"
+    class="alert alert-primary"
+    style="text-align: center"
+    [innerHTML]="htmlMsg"
+  >
+    <br />
+  </div>
   <div *ngIf="clinics" class="container">
-    <h2>Actualizar datos clínica</h2>
-    <br /><br />
-
     <form [formGroup]="clinicUpdate" (ngSubmit)="onSubmit(clinicUpdate.value)">
       <div class="form-group">
         <label for="id">Elige la clínica a modificar</label>
@@ -75,7 +82,5 @@
       </div>
     </form>
     <br /><br />
-
-    <p [innerHTML]="htmlMsg"></p>
   </div>
 </div>

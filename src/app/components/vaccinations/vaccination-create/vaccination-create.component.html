@@ -1,8 +1,15 @@
-<div>
+<div class="container">
+  <h2>Añadir vacunación</h2>
+  <br /><br />
+  <div
+    *ngIf="htmlMsg"
+    class="alert alert-primary"
+    style="text-align: center"
+    [innerHTML]="htmlMsg"
+  >
+    <br />
+  </div>
   <div *ngIf="valid" class="container">
-    <h2>Añadir vacunación</h2>
-    <br /><br />
-
     <form
       [formGroup]="addVaccination"
       (ngSubmit)="onSubmit(addVaccination.value)"
@@ -74,5 +81,4 @@
     </form>
     <br /><br />
   </div>
-  <p style="text-align: center" [innerHTML]="htmlMsg"></p>
 </div>

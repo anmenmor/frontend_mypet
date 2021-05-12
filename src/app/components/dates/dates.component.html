@@ -3,6 +3,14 @@
     <!-- Barra ubicacion -->
     <h2>Listado de citas</h2>
     <br />
+    <div
+      *ngIf="htmlMsg"
+      class="alert alert-primary"
+      style="text-align: center"
+      [innerHTML]="htmlMsg"
+    >
+      <br />
+    </div>
 
     <!-- / Barra ubicacion -->
     <hr />
@@ -44,7 +52,6 @@
           </table>
         </div>
       </div>
-      <p [innerHTML]="htmlMsg"></p>
     </div>
     <ng-template #noDates>
       <div class="container">
@@ -54,7 +61,7 @@
         </table>
       </div>
     </ng-template>
-
+    <br><br>
     <ngb-pagination
       *ngIf="showPagination"
       [collectionSize]="totalItems"
