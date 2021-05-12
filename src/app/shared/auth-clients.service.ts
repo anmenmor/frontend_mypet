@@ -51,7 +51,7 @@ import { ClientsRaw } from '../models/clients.raw';
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status == 400) {
-            console.log(error);
+           
             console.error(
               `Backend returned code ${error.status}, ` +
               `body was: ${error}`);

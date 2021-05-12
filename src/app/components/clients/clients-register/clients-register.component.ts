@@ -57,7 +57,7 @@ ngOnInit(): void {
           if(error.status == 409){
               this.errors.push('El email introducido ya existe.');
           }else{
-            console.log(error);
+            
             this.errors.push(error.error.message[0]);
           }
         },

@@ -31,7 +31,7 @@ export class UpdatePasswordComponent implements OnInit {
     activatedRoute.queryParams.subscribe((params) => {
       this.updatePwd.controls['passwordToken'].setValue(params['token']);
     });
-    console.log(this.updatePwd);
+   
   }
 
   ngOnInit(): void { }
