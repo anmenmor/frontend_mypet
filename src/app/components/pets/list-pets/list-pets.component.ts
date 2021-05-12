@@ -62,7 +62,6 @@ export class ListPetsComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("Cambios: ", changes)
   }
 
   ngOnDestroy() {
@@ -70,9 +69,7 @@ export class ListPetsComponent implements OnInit {
   }
 
   listAllPets(page: number): void {
-    console.log('me meto qi');
     this.petService.listAllPetsPagination(this.clientId, page).subscribe((data: any) => {
-      console.log(data);
       if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
         this.pets = [];
         this.showPagination = false;
@@ -82,13 +79,11 @@ export class ListPetsComponent implements OnInit {
         this.pageSize = data.per_page;
         this.showPagination = true;
       }
-      // this.pets = Object.values(data);
     })
   }
 
   listAvailablePets(page: number): void {
     this.petService.listAvailablePetsPagination(this.clientId, page).subscribe((data: any) => {
-      // this.pets = Object.values(data);
       if ((!data && !data.data) || (data && data.data && data.data.length == 0)) {
         this.pets = [];
         this.showPagination = false;
@@ -105,11 +100,9 @@ export class ListPetsComponent implements OnInit {
     if (page !== this.previousPage) {
       this.previousPage = page;
       if(this.employee){
-        console.log('empleado');
         this.listAllPets(this.page);
       }
       if(this.loggedClient){
-        console.log('cliente');
         this.listAvailablePets(this.page);
       }
      
