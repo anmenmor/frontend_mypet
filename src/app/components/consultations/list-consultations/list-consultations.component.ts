@@ -23,7 +23,6 @@ export class ListConsultationsComponent implements OnInit {
   employee: Employee|null = null;
   client: Clients|null = null;
 
-  //Paginacion  
   totalItems: number = 0;
   page: number = 0;
   previousPage: number = 0;
