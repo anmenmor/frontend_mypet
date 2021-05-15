@@ -1,27 +1,32 @@
-# FrontEndMypet
+## Wiki técnica
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+### Repositorios GIT
 
-## Development server
+Backend: https://github.com/daw2lasallefp/backend_mypet.git
+Frontend: https://github.com/daw2lasallefp/frontend_mypet.git
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+###Desplegar backend
 
-## Code scaffolding
+Requisito: Laravel -> https://laravel.com/docs/8.x/installation
+Requisito: XAMPP
+git clone https://github.com/daw2lasallefp/backend_mypet.git
+Crear base de datos "mypets" en PhpMyAdmin
+composer update
+php artisan migrate:refresh --seed
+php artisan serve
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+###Desplegar frontend
 
-## Build
+Requisito: Angular -> https://angular.io/guide/setup-local
+git clone https://github.com/daw2lasallefp/frontend_mypet.git
+npm update
+ng serve
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Hosting
 
-## Running unit tests
+Dominio: http://mypetcare.atwebpages.com/
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Cuenta Admin por defecto MyPet (tras migración y seeding DB)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Email: default@admin.com
+Password: Default_Admin1234
