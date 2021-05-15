@@ -3,10 +3,22 @@
     <div class="bg-light border-left" id="sidebar-wrapper">
       <div class="sidebar-heading">CLINICA DOGGY </div>
       <div class="list-group list-group-flush">
-        <a  (click)="clientsClinicShow()" class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
-        <a  (click)="clientsUserShow()" class="list-group-item list-group-item-action bg-light">Mi Perfil</a>
-        <a  (click)="clientsPetShow()" class="list-group-item list-group-item-action bg-light">Mis Mascotas</a>
-        <a  (click)="clientsDatesShow()" class="list-group-item list-group-item-action bg-light">Mis Citas</a>
+        <a 
+        [routerLink]="['./']"
+        [queryParams]="{ view: '' }" 
+         class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
+        <a  
+        [routerLink]="['./']"
+        [queryParams]="{ view: 'user' }" 
+         class="list-group-item list-group-item-action bg-light">Mi Perfil</a>
+        <a 
+        [routerLink]="['./']"
+        [queryParams]="{ view: 'pets' }" 
+         class="list-group-item list-group-item-action bg-light">Mis Mascotas</a>
+        <a  
+        [routerLink]="['./']"
+        [queryParams]="{ view: 'dates' }"
+         class="list-group-item list-group-item-action bg-light">Mis Citas</a>
         
       </div>
     </div>
