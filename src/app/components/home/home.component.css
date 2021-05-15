@@ -1,0 +1,90 @@
+body{
+  font-family: Montserrat, sans-serif;
+}
+.titulo{
+  font-size: 2.5vw;
+  color: rgb(60, 122, 151);
+}
+h4{
+  color: rgb(49, 117, 148);
+}
+
+
+.navbar-brand {
+  color: white;
+  font-size: 2em;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: -10;
+  background-color: var(--contrast-color);
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: black;
+  background-color: var(--secondary-color);
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: all 0.8s ease;
+  margin-bottom:2em ;
+}
+
+.logo {
+  left: 0;
+  width: 10%;
+  animation: slideUp 1.5s ease-in-out forwards;
+}
+.logo2 {
+  right: 0;
+  width: 10%;
+  animation: slideUp 1.5s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(500px) scale(0.2);
+  }
+  100% {
+    transform: translateX(0px) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(500px) scale(0.2);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .btn-group-lg>.btn, .btn-lg{
+   margin-bottom: 5em;
+ }
+}
+@media only screen and (max-width: 450px) {
+  .logo, .logo2{
+      width: 15% !important;;
+  }
+  .titulo{
+    font-size: 5vw;
+  }
+  .row{
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  
+}

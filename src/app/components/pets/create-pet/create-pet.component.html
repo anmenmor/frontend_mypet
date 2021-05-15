@@ -1,0 +1,57 @@
+<div class="container">
+  <h2>Creación de mascota:</h2>
+  <form [formGroup]="petForm" (ngSubmit)="createPet()">
+    <div class="form-group">
+      <label>Nombre</label><br>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+    <div *ngIf="submitted && petForm.controls.name.errors">
+      El nombre es obligatorio
+    </div>
+    <div class="form-group">
+      <label>Sexo</label><br>
+      <input type="radio" value='Male' formControlName="sex">Male
+      <input type="radio" value='Female' formControlName="sex">Female
+    </div>
+    <div *ngIf="submitted && petForm.controls.sex.errors">
+      Debe seleccionar una opción
+    </div>
+    <div class="form-group">
+      <label>Peso</label><br>
+      <input type="number" class="form-control"  formControlName="weight">
+    </div>
+    <div *ngIf="submitted && petForm.controls.weight.errors">
+      El peso es obligatorio
+    </div>
+    <div class="form-group">
+      <label>Edad</label><br>
+      <input type="number" class="form-control" formControlName="age">
+    </div>
+    <div *ngIf="submitted && petForm.controls.age.errors">
+      La edad es obligatoria
+    </div>
+    <div class="form-group">
+      <label>Especie</label>
+      <input type="text" class="form-control" formControlName="species">
+    </div>
+    <div *ngIf="submitted && petForm.controls.species.errors">
+      La especie es obligatoria
+    </div>
+
+    <div class="form-group">
+      <label>Raza</label><br>
+      <input type="text" class="form-control" formControlName="breed">
+    </div>
+    <div *ngIf="submitted && petForm.controls.breed.errors">
+      La raza es obligatoria
+    </div>
+    <button type="submit" class="btn btn-block btn-primary2">Añadir</button>
+    <button class="btn btn-block btn-secondary" type="button" >
+    <a class="btn btn-block btn-secondary"
+    style="background-color: transparent;"
+        [routerLink]="['../']"
+        [queryParams]="{ view: 'pets' }"
+        >Volver Atras</a></button>
+  </form>
+<br><br>
+</div>

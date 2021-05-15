@@ -1,0 +1,63 @@
+
+
+  <div *ngIf="clientUser" class="container">
+    <div class="main-body">
+      <app-clients-edit *ngIf="clientEdit" (buttonUpdateClick)="hideUpdateChild()" [clientsSelected]="clientUser[0]"></app-clients-edit>
+      <!-- / Barra ubicacion -->
+      <div *ngIf="!clientEdit" class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img
+                  src="../../../../assets/logos/mascotas.svg"
+                  alt="Defailt clinic logo"
+                  class="rounded-circle"
+                  width="150"
+                />
+                <div class="mt-4">
+                  <h4>{{ clientUser[0].name }}</h4>
+                  <button class="btn btn-primary3" (click)="sendSelected(clientUser[0])" >Editar mi perfil</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Nombre</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].name }}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Apellidos</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].surname }}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Correo electrónico</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].email }}</div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Teléfono</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">{{ clientUser[0].phone }}</div>
+              </div>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

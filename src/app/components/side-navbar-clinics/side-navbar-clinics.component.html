@@ -1,0 +1,30 @@
+<div class="d-flex margin" id="wrapper" style="background-color: rgb(105, 206, 172);">
+    <!-- Sidebar -->
+    <div class="bg-light border-left" id="sidebar-wrapper">
+      <div class="sidebar-heading">CLINICA VETERINARIA</div>
+      <div class="list-group list-group-flush">
+        <a (click)="clinicShow()" class="list-group-item list-group-item-action bg-light">Datos de mi clínica</a>
+        <a (click)="employeesShow()" class="list-group-item list-group-item-action bg-light">Empleados</a>
+        <a (click)="clientsShow()" class="list-group-item list-group-item-action bg-light">Clientes</a>
+        <a (click)="datesShow()" class="list-group-item list-group-item-action bg-light">Citas</a>
+        <a (click)="vaccinesShow()" class="list-group-item list-group-item-action bg-light">Vacunas</a>
+
+      </div>
+    </div>
+    
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg" style="background-color: rgb(105, 206, 172);">
+          <i class="bi bi-list"style="font-size: 2rem; color: cornflowerblack;" aria-hidden="true" id="menu-toggle"></i>
+      </nav>
+
+        <div class="container-fluid">
+            <app-clinics-profile *ngIf="clinic"></app-clinics-profile>
+            <app-employees-list *ngIf="employees"></app-employees-list>
+            <app-clients-list *ngIf="clients"></app-clients-list>
+            <app-dates *ngIf="dates"></app-dates>
+            <app-vaccines *ngIf="vaccines"></app-vaccines>
+          </div>
+      
+        </div>
+  </div>

@@ -1,0 +1,45 @@
+.btn-primary2{
+    color: white;
+    background-color:  rgb(105, 206, 172);
+}
+.btn-primary3{
+    color: white;
+    background-color:  rgb(238, 117, 37);
+}
+table{
+    /*margin: 1em 2em;*/
+    background-color: white;
+}
+h1{
+    margin: 1em;
+    color: rgb(29, 95, 73);
+}
+thead{
+    font-weight: bold;
+}
+
+h2{
+    color: white;
+}
+.w-50{
+    margin-top:20px!important;
+}
+
+.wrap{
+    min-height: 50em!important;
+}
+
+@media only screen and (max-width: 450px) {
+    .w-50{
+        width: 90%!important;
+        
+    }
+
+    .card{
+        margin-bottom: 80px!important;
+    }
+    .container{
+        margin-bottom: 80px;
+        margin-top: 25px;
+    }
+}

@@ -1,0 +1,12 @@
+.btn-primary2{
+    color:white;
+    background-color: rgb(31, 180, 143);
+    border-color: rgb(31, 180, 143);
+}
+
+
+@media only screen and (max-width: 450px){
+    .w-50{
+        width:100%!important;
+    }
+}

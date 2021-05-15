@@ -1,0 +1,23 @@
+.btn-primary2{
+    color: white;
+    background-color:  rgb(105, 206, 172);
+}
+table{
+    margin: 1em 2em;
+}
+h1{
+    margin: 1em;
+    color: rgb(29, 95, 73);
+}
+thead{
+    font-weight: bold;
+}
+.container{
+    min-height: 50em!important;
+}
+
+@media only screen and (max-width: 450px){
+    .w-50{
+        width:100%!important;
+    }
+}

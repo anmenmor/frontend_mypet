@@ -1,0 +1,28 @@
+<div class="card w-50 mx-auto">
+<h6 class="card-header">Iniciar sesión (empleados)</h6>
+<div class="card-body">
+  <div *ngIf="submitted && serverError && !loginForm.controls.email.errors && !loginForm.controls.password.errors" class="alert alert-danger">
+    {{errors}} </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" class="form-control" formControlName="email">
+      </div>
+      <div *ngIf="submitted && loginForm.controls.email.errors" class="alert alert-danger" role="alert">
+        <div *ngIf="loginForm.controls.email.errors.required">
+          Por favor, introduzca su correo electrónico
+        </div>
+      </div>
+      <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" class="form-control" formControlName="password">
+      </div>
+      <div *ngIf="submitted && loginForm.controls.password.errors" class="alert alert-danger" role="alert">
+        <div *ngIf="loginForm.controls.password.errors.required">
+          Por favor, introduzca su contraseña 
+        </div>
+      </div>
+      <button class="btn btn-block btn-primary2">Iniciar sesión</button>
+      <button [routerLink]="['/resetPass']" class="btn btn-link">He olvidado mi contraseña</button>
+  </form>
+</div>

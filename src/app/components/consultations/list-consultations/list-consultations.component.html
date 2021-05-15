@@ -1,0 +1,138 @@
+
+<div
+  class="d-flex margin"
+  id="wrapper"
+  style="background-color: rgb(105, 206, 172)"
+>
+  <div *ngIf="client" class="bg-light border-left" id="sidebar-wrapper">
+    <div class="sidebar-heading">CLINICA DOGGY</div>
+    <div class="list-group list-group-flush">
+      <a
+        routerLink="../../"
+        class="list-group-item list-group-item-action bg-light"
+        >Datos de mi clínica</a
+      >
+      <a
+        [routerLink]="['../../']"
+        [queryParams]="{ view: 'user' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Mi Perfil</a
+      >
+      <a
+        [routerLink]="['../../']"
+        [queryParams]="{ view: 'pets' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Mis Mascotas</a
+      >
+      <a
+        [routerLink]="['../../']"
+        [queryParams]="{ view: 'dates' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Mis Citas</a
+      >
+    </div>
+  </div>
+
+  <div *ngIf="employee" class="bg-light border-left" id="sidebar-wrapper">
+    <div class="sidebar-heading">CLINICA VETERINARIA</div>
+    <div class="list-group list-group-flush">
+      <a
+        routerLink="../../../../../"
+        class="list-group-item list-group-item-action bg-light"
+        >Datos de mi clínica</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'employees' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Empleados</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'clients' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Clientes</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'dates' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Citas</a
+      >
+      <a
+        [routerLink]="['../../../../../']"
+        [queryParams]="{ view: 'vaccines' }"
+        class="list-group-item list-group-item-action bg-light"
+        >Vacunas</a
+      >
+    </div>
+  </div>
+
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="container">
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <app-pets-navbar></app-pets-navbar>
+          </li>
+        </ol>
+      </nav>
+
+      <div *ngIf="employee">
+        <button class="btn btn-primary3" (click)="showComponent()">
+          Crear consulta
+        </button>
+      </div>
+
+      <app-create-consultation
+        [showComponent]="showCreateComponent"
+        (creationEvent)="createHandler()"
+      ></app-create-consultation>
+
+      <h2>Listado de consultas</h2>
+      <div *ngIf="consultations.length > 0; else noConsultations">
+        <table class="table-responsive table-hover" style="text-align: center">
+          <tbody>
+            <tr *ngFor="let consultation of consultations">
+              <div class="card w-auto mx-auto">
+                <div class="div_style">
+                  <td class="td_style">{{ consultation.date_time }}</td>
+                  <td class="td_style">{{ consultation.speciality }}</td>
+                  <td class="td_style"><button
+                    class="btn btn-info"
+                    (click)="onSelect(consultation.id)"
+                  >
+                    Detalle
+                  </button></td>
+
+                </div>
+                
+
+              </div>
+                
+              <div>
+                <app-consultation-detail
+                  [consultationData]="consultation"
+                ></app-consultation-detail>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+        <div class="margin-left">
+        <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems"
+[pageSize]="pageSize" [(page)]="page" (pageChange)="loadPage($event)"></ngb-pagination>
+</div>
+      </div>
+    </div>
+    <ng-template #noConsultations>
+      <div class="container">
+        <table class="table table-hover" style="text-align: center">
+          <p>No hay consultas</p>
+          <br /><br />
+        </table>
+      </div>
+    </ng-template>
+  </div>
+</div>
+</div>

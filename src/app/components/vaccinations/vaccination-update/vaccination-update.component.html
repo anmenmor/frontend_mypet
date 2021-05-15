@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>Modificar estado vacunación</h2>
+  <br /><br />
+  <div
+    *ngIf="htmlMsg"
+    class="alert alert-primary"
+    style="text-align: center"
+    [innerHTML]="htmlMsg"
+  >
+    <br />
+  </div>
+  <div *ngIf="vaccinations" class="container">
+    <form
+      [formGroup]="updateVaccination"
+      (ngSubmit)="onSubmit(updateVaccination.value)"
+    >
+      <div class="form-group">
+        <label for="id">Elige la vacunación a modificar</label>
+        <select
+          class="custom-select"
+          (change)="onChange($any($event.target).value)"
+        >
+          <option
+            *ngFor="let vaccination of vaccinations"
+            value="{{ vaccination.id }}"
+          >
+            {{ vaccination.date }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group select">
+        <label for="done">¿Ya ha sido vacunado? </label>
+        <select class="custom-select" formControlName="done" name="done">
+          <option value="1">Sí</option>
+          <option value="0">No</option></select
+        ><br /><br />
+      </div>
+
+      <button class="btn btn-primary" type="submit">Modificar estado</button
+      >&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-secondary" type="button" (click)="return()">
+        Volver atrás
+      </button>
+    </form>
+    <br /><br />
+  </div>
+</div>

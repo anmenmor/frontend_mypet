@@ -1,0 +1,56 @@
+.btn-primary2{
+    color: white;
+    background-color:  rgb(105, 206, 172);
+}
+
+h2{
+    margin: 1em;
+    color: white;
+}
+
+table{
+    margin: 2em;
+    color: rgb(29, 95, 73);
+    background-color: white;
+    width: 90%!important;
+
+}
+
+form{
+    margin: 2em;
+    color: rgb(29, 95, 73);
+}
+
+input[type=text] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+  }
+
+ .wrap{
+     min-height: 50em!important;
+ }
+  @media only screen and (max-width: 450px){
+
+   input[type=text] {
+       width: 100%!important;
+   }
+   table, form{
+       margin: 0px!important;
+   }
+   .container{
+       margin-bottom:40px!important;
+   }
+
+   table{
+    width: 100%!important;
+   }
+   h2{
+       margin: 1em auto;
+   }
+}
+
+  
