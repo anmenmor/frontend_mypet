@@ -6,6 +6,7 @@ export class Clients{
     email: string;
     password: string;
     phone: number;
+    available: boolean;
     
 
     constructor(obj : any){
@@ -15,5 +16,6 @@ export class Clients{
         this.password = obj.password;
         this.email = obj.email;
         this.phone = obj.phone;
+        this.available = obj.available;
     }
 }
